@@ -44,6 +44,15 @@ que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
 - Elimina los rechazados. Avisa cuáles están listos.
 - **La colocación se valida en Printify, no contra nuestros mockups.**
 
+### 2b. Metadata en el draft (ANTES de mockups)
+- Generar el paquete comercial: skill `paquete-listing-etsy` (título SEO,
+  descripción con disclosure IA, 13 tags).
+- En el draft de Printify, poner el **título real del diseño** y la
+  **descripción del paquete** (navegador). Elimina el nombre genérico del
+  blueprint ("Unisex Heavy Blend™ Crewneck Sweatshirt").
+- Regla: el draft en Printify siempre lleva el nombre real del producto.
+  Nombres genéricos = inconsistencia al revisar o vender.
+
 ### 3. Generar mockups (en Printify)
 - En el draft aprobado, generar todos los mockups del catálogo × colores.
 - Descargar los mockups para usar en videos y Pinterest.
@@ -70,6 +79,21 @@ que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
 ### 8. Publicidad (Pinterest)
 - Skill `puerta-pinterest-pin`: valida pins.
 - Crear pins con los mockups de Printify.
+
+## Reglas de seguridad Printify ↔ Etsy (2026-10-15)
+
+- **Editar en Printify NO empuja solo a Etsy.** El listing de Etsy solo
+  cambia cuando se publica/republica explícitamente desde Printify.
+- **PELIGRO: republicar desde Printify SOBRESCRIBE el listing de Etsy**
+  (título, descripción, imágenes, tags) con lo que haya en Printify.
+  Por eso: una vez publicado en Etsy, NUNCA republicar completo desde
+  Printify. Si hay que cambiar el diseño o variantes, usar publicación
+  selectiva (solo los campos necesarios).
+- **Mejoras SEO van en Etsy**, directo en el Shop Manager (tags, ajustes
+  de descripción, videos). No vuelven a Printify.
+- **Modelo de estados**: draft "unpublished" en Printify = NO está en
+  Etsy. Publicado = tiene ID de Etsy (external_id) y título real.
+  La fuente de verdad del estado es `data/registro-listings.json`.
 
 ## Puertas mecánicas
 
