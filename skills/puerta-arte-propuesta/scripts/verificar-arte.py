@@ -23,9 +23,14 @@ Gates mecánicos (código):
   7. aspecto_informativo: se mide h/w pero NO bloquea (corrección suya
      2026-10-15): los diseños altos están permitidos; el criterio va en la
      COLOCACIÓN (scale-to-fit): el diseño debe verse COMPLETO, nada cortado.
+  8. sin_blanco_puro: blanco puro (min RGB>=250, spread<=18) <= 0.3%
+     (método canónico 2026-10-15): el diseño usa crema, nunca blanco puro;
+     blanco puro = fondo sin limpiar en counters y espacios encerrados.
+     Si falla: correr scripts/limpiar-fondo.py y re-verificar.
 
 Reparación: --autotrim --salida <png> recorta al bbox + 4px y verifica
-el resultado (verifier-repair).
+el resultado (verifier-repair). Limpieza: scripts/limpiar-fondo.py
+elimina el blanco puro global (ver método canónico en SKILL.md).
 
 Gate humano (no lo cubre el código):
   - counters: agujeros de letras (a, e, o, P...) sin fondo metido.
@@ -140,6 +145,23 @@ def verificar(im, formato, a):
         med["blanco_requiere_adjudicacion"] = bool(BLANCO_ADJUDICAR < pct <= BLANCO_INTERIOR_MAX)
     gates["sin_blancos_interiores"] = {"pass": g6, "maximo_pct": BLANCO_INTERIOR_MAX}
     violado = violado or (None if g6 else "fondo_sin_limpiar_en_interiores")
+    # G8: sin blanco PURO (2026-10-15, método canónico): el diseño usa crema,
+    # nunca blanco puro (min>=250, spread<=18). Blanco puro = fondo sin limpiar,
+    # incluidos counters y espacios encerrados. Umbral estricto: >0.3% = FAIL.
+    # Si falla, correr scripts/limpiar-fondo.py y re-verificar.
+    if bbox is None:
+        g8, med["blanco_puro_pct"] = False, 0.0
+    else:
+        import numpy as _np
+        arr = _np.array(im)
+        rgb8 = arr[..., :3].astype(int)
+        mn8 = rgb8.min(axis=2); sp8 = rgb8.max(axis=2) - mn8
+        puro = (mn8 >= 250) & (sp8 <= 18) & (arr[..., 3] > 128)
+        pct_puro = float(100 * puro.sum() / (arr.shape[0] * arr.shape[1]))
+        med["blanco_puro_pct"] = round(pct_puro, 3)
+        g8 = bool(pct_puro <= 0.3)
+    gates["sin_blanco_puro"] = {"pass": g8, "maximo_pct": 0.3}
+    violado = violado or (None if g8 else "blanco_puro_fondo_sin_limpiar")
     # G7: aspecto (INFORMATIVO, no bloquea — corrección suya 2026-10-15)
     # Los diseños altos están permitidos; el criterio va en la COLOCACIÓN
     # (scale-to-fit en publicar-printify-etsy): el diseño debe verse
