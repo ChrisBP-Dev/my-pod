@@ -20,8 +20,9 @@ Gates mecánicos (código):
      fondo sin limpiar: p022 mancha entre los elfos, 2026-10-15). Entre 2%
      y 8% se marca para adjudicación visual (puede ser blanco de diseño:
      papel, copos — no se destruye con key global).
-  7. cabe_en_area_impresion: aspecto h/w <= 1.10 (el área Gildan 18000 es
-     1.14; un arte más alto se CORTA al colocarlo — caso 2026-10-15).
+  7. aspecto_informativo: se mide h/w pero NO bloquea (corrección suya
+     2026-10-15): los diseños altos están permitidos; el criterio va en la
+     COLOCACIÓN (scale-to-fit): el diseño debe verse COMPLETO, nada cortado.
 
 Reparación: --autotrim --salida <png> recorta al bbox + 4px y verifica
 el resultado (verifier-repair).
@@ -50,10 +51,7 @@ BLANCO_UMBRAL = 225       # min(R,G,B) >= esto = "casi-blanco" (atrapa también
 BLANCO_SPREAD_MAX = 45     # max-min <= esto (un color saturado no es "blanco")
 BLANCO_INTERIOR_MAX = 8.0  # % del bbox: más que esto = fondo sin limpiar (FAIL)
 BLANCO_ADJUDICAR = 2.0     # % del bbox: entre esto y el max = adjudicación visual
-ASPECTO_MAX = 1.10         # h/w máximo: el área de impresión Gildan 18000 es
-                           # 1.14 (4398/3852 px); con margen queda 1.10.
-                           # Un arte más alto se CORTA al colocarlo al 78% de
-                           # ancho (caso 2026-10-15: ratios hasta 1.93).
+# (ASPECTO_MAX eliminado 2026-10-15: el aspecto no bloquea — corrección suya)
 
 
 def blancos_interiores(im, bbox):
@@ -142,12 +140,14 @@ def verificar(im, formato, a):
         med["blanco_requiere_adjudicacion"] = bool(BLANCO_ADJUDICAR < pct <= BLANCO_INTERIOR_MAX)
     gates["sin_blancos_interiores"] = {"pass": g6, "maximo_pct": BLANCO_INTERIOR_MAX}
     violado = violado or (None if g6 else "fondo_sin_limpiar_en_interiores")
-    # G7: el arte cabe en el área de impresión (no se corta al colocarlo)
+    # G7: aspecto (INFORMATIVO, no bloquea — corrección suya 2026-10-15)
+    # Los diseños altos están permitidos; el criterio va en la COLOCACIÓN
+    # (scale-to-fit en publicar-printify-etsy): el diseño debe verse
+    # COMPLETO en el mockup, nada cortado. El arte no se rechaza por alto.
     aspecto = h / w if w else 0
     med["aspecto_h_w"] = round(aspecto, 3)
-    g7 = aspecto <= ASPECTO_MAX
-    gates["cabe_en_area_impresion"] = {"pass": g7, "maximo": ASPECTO_MAX}
-    violado = violado or (None if g7 else "arte_mas_alto_que_el_area")
+    g7 = True
+    gates["aspecto_informativo"] = {"pass": g7, "valor": round(aspecto, 3)}
     return gates, violado, med
 
 
