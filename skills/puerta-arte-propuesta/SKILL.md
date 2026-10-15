@@ -63,6 +63,27 @@ después de 12 mockups.
 - **Brief de generación (2026-10-15, pedido suyo):** fondo 100% transparente
   sin halo ni resplandor, sin backdrop/papel/viñeta detrás del diseño.
   El diseño debe mostrarse completo visualmente.
+- **Criterios de generación (2026-10-15, de lo aprendido en el rescate):**
+  el generador debe apuntar bien desde el inicio, no depender de la limpieza:
+  1. **Fondo**: transparente real en TODAS partes —incluidos counters de
+     letras (a, e, o, P, R) y espacios encerrados entre letras. Sin blanco
+     ni crema en zonas que no sean elemento del diseño.
+  2. **Disciplina de color**: los elementos claros del diseño usan CREMA /
+     blanco roto cálido (nunca blanco puro #FFFFFF). Así el blanco puro,
+     si aparece, es inconfundiblemente fondo y se elimina sin riesgo.
+  3. **Resolución**: 300 DPI al tamaño de impresión (p. ej. 10" de ancho
+     → ≥3000 px de ancho).
+  4. **Composición completa**: el diseño entero visible, nada cortado en
+     los bordes del PNG. Los diseños altos están permitidos.
+  5. **Texto**: ortografía exacta, letras legibles, sin artefactos.
+  6. **Sin halo**: bordes del diseño limpios, sin resplandor blanco
+     alrededor de los elementos.
+  **Fragmento para el prompt de imagen** (copiar tal cual al generar):
+  > "isolated on a fully transparent background, no backdrop, no paper,
+  > no vignette, no glow or halo around the design; light-colored areas
+  > in warm cream/off-white tones (never pure white); transparent inside
+  > letter counters and enclosed gaps; complete composition, nothing
+  > cropped at the edges"
 - **Gate humano**: counters — agujeros de letras (a, e, o, P...) sin fondo
   metido. El código no distingue un counter limpio de un diseño sin letras;
   va en el checklist del aprobador.
