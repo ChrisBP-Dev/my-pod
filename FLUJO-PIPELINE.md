@@ -32,6 +32,11 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 - **Hero:** casi siempre un lifestyle. El color depende del diseño (White, Sand o Sport Grey). Orden: Lifestyle 2 o 3 primero, última opción Lifestyle 1 o Folded decorado. En propuestas: Jarvis elige una y el dueño valida.
 - Descargar los mockups seleccionados.
 - Puerta: el dueño los revisa en Printify.
+- ⚠️ 2026-10-15 (lección): en Printify, **mockups SELECCIONADOS ≠ vistas
+  descargables**. Solo los mockups con checkbox marcado se sincronizan a Etsy.
+  Para 15 imágenes en Etsy hay que marcar las 15 vistas en el producto ANTES de
+  publicar (o republicar solo-mockups después). Verificar el conteo "N/20
+  selected" en el producto.
 
 ### 5. Videos
 - Descargar mockups de Printify.
