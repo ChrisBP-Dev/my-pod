@@ -57,6 +57,13 @@ Estructura fija (precedente listings #1, #2, #3):
 
 1. **Leer** `data/banco-keywords/<nicho>.md` para keywords y fórmula.
 2. **Recibir** del dueño o del registro: descripción del diseño, colores, tallas, precio.
+   **REGLA DE COHERENCIA (2026-10-14, lección cara):** antes de generar, ABRIR el
+   arte print aprobado y verificar que el concepto/hook/descripción hablen del
+   diseño REAL (sujeto, temporada, elementos). Los conceptos heredados del sistema
+   viejo pueden estar desactualizados respecto al arte final (caso real: p005
+   figuraba "ICU Halloween" cuando el arte ya era un carrito navideño; p004
+   describía "enfermera" cuando el arte era un búho). La puerta mecánica NO detecta
+   esto (solo valida formato) — la coherencia se verifica contra el arte, siempre.
 3. **Generar** el paquete con `scripts/generar-paquete.py`.
 4. **Validar** con `scripts/verificar-paquete.py` (puerta mecánica).
 5. **Presentar** al dueño para aprobación. Sin su dale, no se publica.
