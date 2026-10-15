@@ -29,7 +29,7 @@ base = {
   "descripcion": "Night shift nurse sweatshirt, funny RN crewneck — perfect christmas gift for night shift nurse. Soft crewneck for long shifts.",
   "url_listing": "https://www.etsy.com/listing/4589992085",
   "tablero": "Nurse Gifts",
-  "keywords_fuente": os.path.expanduser("~/workspace/pod-limpio/data/banco-keywords/enfermeria.md"),
+  "keywords_fuente": os.path.expanduser("~/workspace/my-pod/data/banco-keywords/enfermeria.md"),
 }
 json.dump(base, open(sys.argv[1], "w"))
 EOF
