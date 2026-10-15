@@ -29,10 +29,16 @@ ZOOM_EXPR = f"1+0.25*on/{FRAMES}"
 
 
 def build_segment(img_path, out_path):
+    # NOTA 2026-10-15 (hallazgo verificado en producción): Etsy RECHAZA MP4 con
+    # yuvj420p (rango completo) con un error genérico "having trouble uploading".
+    # El script ya pasaba -pix_fmt yuv420p pero el filtro igual emitía yuvj420p.
+    # La conversión explícita out_range=limited + format=yuv420p SÍ produce el
+    # yuv420p de rango limitado que Etsy acepta (verificado: p004-video2).
     vf = (
         f"scale={WORK}:{WORK},"
         f"zoompan=z='{ZOOM_EXPR}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
-        f"d={FRAMES}:s={SIZE}x{SIZE}:fps={FPS}"
+        f"d={FRAMES}:s={SIZE}x{SIZE}:fps={FPS},"
+        f"scale=out_range=limited,format=yuv420p"
     )
     return vf
 

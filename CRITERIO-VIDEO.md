@@ -8,7 +8,12 @@ Script origen: `especialistas-pod/files/disenos/propuestas-2026-10-11/p003/scrat
 ## Formato técnico
 - **Resolución:** 1080×1080 (1:1 cuadrado)
 - **FPS:** 30
-- **Codec:** H.264 (libx264), pix_fmt yuv420p, preset medium
+- **Codec:** H.264 (libx264), pix_fmt yuv420p **rango limitado (tv)**,
+  preset medium
+  - ⚠️ 2026-10-15 (verificado en producción): Etsy RECHAZA yuvj420p (rango
+    completo) con error genérico "having trouble uploading". El flag `-pix_fmt
+    yuv420p` solo NO basta — el filtro debe incluir
+    `scale=out_range=limited,format=yuv420p` (ver `generar-video-listing.py`).
 - **Duración:** 9.5s (3 clips de 3.5s con fades de 0.5s solapados)
 - **Audio:** ninguno (Etsy lo elimina al subir)
 - **Tamaño:** ~1-3 MB (límite Etsy 100 MB)
