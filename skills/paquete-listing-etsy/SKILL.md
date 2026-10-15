@@ -2,7 +2,7 @@ name: "paquete-listing-etsy"
 description: "Genera el paquete completo de listing para Etsy: título SEO, descripción estructurada, 13 tags y copy de anuncio, siguiendo la metodología validada en listings publicados."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   framework_version: "0.8.0"
   regression_suite: "evals/"
 ---
