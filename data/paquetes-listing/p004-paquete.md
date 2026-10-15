@@ -15,7 +15,7 @@ Designed with the assistance of generative AI imagery; composition, typography, 
 
 ⚠️ PLEASE READ — made to order: this sweatshirt is printed just for you after you order, so we can't accept change-of-mind returns or size exchanges. Please check the size chart and message us with any questions before buying. If your item arrives damaged, misprinted, or wrong, we'll replace it free or refund you in full — just send a photo within 7 days. Full details in our Shop Policies & FAQ below.
 
-For the warriors of the night shift. A tired-but-determined nurse clutching her coffee, because 7pm to 7am runs on caffeine and heart. The perfect gift for night shift RNs, LPNs, CNAs, and every healthcare hero who keeps the hospital running while the world sleeps.
+For the warriors of the night shift. A tired-but-determined owl clutching his coffee under a starry winter sky, because 7pm to 7am runs on caffeine and heart. The perfect gift for night shift RNs, LPNs, CNAs, and every healthcare hero who keeps the hospital running while the world sleeps.
 
 ✨ DETAILS
 • Gildan 18000 Heavy Blend™ crewneck (50% cotton / 50% polyester)
