@@ -18,7 +18,7 @@ import os
 import subprocess
 import sys
 
-BASE = os.path.expanduser("~/workspace/pod-limpio")
+BASE = os.path.expanduser("~/workspace/my-pod")
 
 
 def check_arte(diseno):

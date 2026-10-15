@@ -21,6 +21,15 @@ paquete de listing aprobado (dale del dueño).
 
 ## Procedimiento (Printify-First)
 
+### 0. Inicio de sesión (protocolo Google-first, 2026-10-15)
+Antes de pedirle al dueño que inicie sesión manualmente:
+1. Ir a printify.com → "Log in" → "Continue with Google".
+2. La sesión de Google YA está guardada en el navegador: en el selector de
+   cuentas elegir la de la tienda (tudale.pod / Tú Dale POD).
+3. Esto inicia sesión en Printify sin intervención del dueño.
+Solo si Google no ofrece cuenta guardada o el login falla, se le pide a él
+que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
+
 ### 1. Crear propuesta (draft en Printify)
 - Subir el arte a Printify (navegador, el CLI está roto).
 - Crear producto draft: Gildan 18000, provider Printify Choice.

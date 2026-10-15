@@ -1,4 +1,4 @@
-# pod-limpio — aplicación POD (cuarto limpio)
+# my-pod — aplicación POD (cuarto limpio)
 
 App construida con Rameli **v0.8.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de atacar la Fábrica.

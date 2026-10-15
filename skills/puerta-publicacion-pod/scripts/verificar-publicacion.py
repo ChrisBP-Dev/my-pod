@@ -146,10 +146,10 @@ def gate_doblada_placement(args, gates, med):
     """
     prod = "gildan-18000"
     cal_path = os.path.expanduser(
-        f"~/workspace/pod-limpio/data/bases-doblada/{prod}-{args.color}.json")
+        f"~/workspace/my-pod/data/bases-doblada/{prod}-{args.color}.json")
     if not os.path.isfile(cal_path):
         cal_path = os.path.expanduser(
-            f"~/workspace/pod-limpio/data/bases-doblada/{prod}-white.json")
+            f"~/workspace/my-pod/data/bases-doblada/{prod}-white.json")
     if not os.path.isfile(cal_path):
         gates["placement"] = {"pass": False,
                               "motivo": "sin calibración de base doblada"}
