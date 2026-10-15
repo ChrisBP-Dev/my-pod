@@ -5,8 +5,8 @@ Total: **18 propuestas** en espera (p002 publicado hoy, p001 rechazada — no cu
 ## Listas para oficializar como draft en Printify (arte print verificado)
 | ID | Diseño | Estado | Arte print |
 |----|--------|--------|------------|
-| p004 | Real Night Owl | Arte aprobado + paquete comercial aprobado + video2 aprobado | `data/artes-print/p004-print-300dpi.png` — puerta PASS (436 DPI, RGBA) |
-| p005 | Med Pass Marathon | Arte aprobado + paquete comercial aprobado + video2 aprobado | `data/artes-print/p005-print-300dpi.png` — puerta PASS (529 DPI, RGBA) |
+| p004 | Real Night Owl | Arte aprobado + paquete comercial aprobado + video2 aprobado. **DRAFT CREADO 2026-10-14 noche: Printify ID `6ad04920ef2f0ee1ca050d1c`** (16 variantes, 78% ancho, top 14%, unpublished). Pendiente: su validación de ubicación | `data/artes-print/p004-print-300dpi.png` — puerta PASS (436 DPI, RGBA) |
+| p005 | Med Pass Marathon | Arte aprobado + paquete comercial aprobado + video2 aprobado. **DRAFT CREADO 2026-10-14 noche: Printify ID `6ad0498944c5716eec05d902`** (16 variantes, 78% ancho, top 14%, unpublished). Pendiente: su validación de ubicación | `data/artes-print/p005-print-300dpi.png` — puerta PASS (529 DPI, RGBA) |
 
 ## Pendientes con arte NO recuperable (sistema viejo eliminado 2026-10-14)
 El arte print vivía en `~/workspace/especialistas-pod/` y `~/workspace/pod-etsy/`,
