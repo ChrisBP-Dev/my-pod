@@ -127,7 +127,10 @@
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
-    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts."
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c19d59ac88d91604ace4",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
   },
   "p022": {
     "diseno": "Night Shift Elves",
@@ -141,7 +144,10 @@
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
-    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts."
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c2675c7e4842a800f3c1",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
   },
   "p023": {
     "diseno": "Silent Night Unit",
@@ -155,7 +161,10 @@
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
-    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts."
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c30e210a7ce1c702879c",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
   },
   "p024": {
     "diseno": "NPO After Midnight",
@@ -169,7 +178,10 @@
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
-    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts."
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c378f0531fc34e0f4c19",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
   },
   "p025": {
     "diseno": "On Call Christmas",
@@ -183,7 +195,10 @@
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
-    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts."
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c3dd5c7e4842a800f4d1",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
   },
   "p026": {
     "diseno": "North Pole Night Shift",
@@ -197,7 +212,10 @@
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
-    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts."
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c47c59ac88d91604aedf",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
   },
   "p027": {
     "diseno": "Nice List Sleepers",
@@ -211,6 +229,9 @@
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
-    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts."
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c4ef210a7ce1c7028880",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
   }
 }
