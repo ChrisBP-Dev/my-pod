@@ -1,0 +1,62 @@
+---
+name: "puerta-arte-propuesta"
+description: "Puerta del arte-propuesta: valida el PNG del diseño ANTES de generar ningún mockup — fondo transparente, 300 DPI y dimensiones de impresión. Lo más barato de rechazar."
+plantilla: false
+license: "Apache-2.0"
+compatibility: "framework >= 0.4.0"
+metadata:
+  version: "0.1.0"
+  framework_version: "0.8.0"
+  regression_suite: "evals/"
+---
+
+# Puerta de Arte-Propuesta
+
+**Versión: v0.1.1** · Primera puerta del flujo POD: la propuesta se valida
+antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
+después de 12 mockups.
+
+## Cuándo usarme
+
+- Al recibir la propuesta del diseño (PNG), antes de aprobar el arte.
+- Si FAIL, el diseño vuelve a corrección. No se genera flat-lay.
+
+## Procedimiento
+
+1. **Recibir** el PNG en alta (`--archivo`, `--ancho-pulgadas` del producto).
+2. **Correr** `scripts/verificar-arte.py`.
+3. **PASS** → el arte pasa a aprobación humana (ojo: counters).
+   **FAIL** → se devuelve con el criterio violado.
+
+## Puertas mecánicas
+
+- **formato**: PNG con canal alfa.
+- **fondo_limpio**: las 4 esquinas alfa = 0 (atrapa el PNG con fondo
+  de un color aplanado).
+- **recorte_ajustado**: el bbox del contenido deja ≤32px transparentes
+  (criterio del dueño: recortado exacto al arte, sin bordes vacíos —
+  los bordes vacíos distorsionan el área de impresión).
+- **Reparación** `--autotrim`: recorta al bbox + 4px y re-verifica.
+- **dpi**: ≥300 al ancho de impresión del producto.
+- **dimensiones**: lado menor ≥3000px (archivo de impresión).
+- **Gate humano**: counters — agujeros de letras (a, e, o, P...) sin fondo
+  metido. El código no distingue un counter limpio de un diseño sin letras;
+  va en el checklist del aprobador.
+
+## Calibraciones (mecanismo vs instancia)
+
+- `MECANISMO:` validar el arte antes del primer mockup (costo de rechazo
+  mínimo) — universal.
+- `MECANISMO:` fondo transparente medido por bbox alfa — universal.
+- `CALIBRACIÓN:` MARGEN_MAX 32px, LADO_MIN 3000px, DPI_MIN 300 —
+  calibrados en vitals-stable-print-300dpi.png (margen 22px), 2026-10-13.
+  Revalidar si cambia el producto (otro ancho de impresión).
+- `MECANISMO:` verifier-repair — el recorte es determinista y seguro,
+  la puerta lo repara y re-verifica en vez de solo bloquear.
+
+## Reglas con motivo
+
+- (2026-10-13, errores recurrentes suyos) Los errores típicos: PNG con
+  fondo de un color, fondo metido dentro de las letras. El primero lo
+  atrapa `fondo_limpio`; el segundo lo revisa el ojo (gate humano
+  declarado, no promesa falsa del código).

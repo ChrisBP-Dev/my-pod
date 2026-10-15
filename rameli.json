@@ -1,0 +1,5 @@
+{
+  "framework": "rameli",
+  "framework_version": "0.8.0",
+  "nota": "Versión pineada deliberadamente. Migrar con: rameli migrate --to <nueva>"
+}
