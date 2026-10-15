@@ -47,6 +47,13 @@ después de 12 mockups.
   2026-10-15): los diseños altos están permitidos; el criterio va en la
   COLOCACIÓN (scale-to-fit en publicar-printify-etsy) — el diseño debe
   verse COMPLETO en el mockup, nada cortado.
+- **Método de limpieza canónico (2026-10-15, aprendido del rescate p021-p026):**
+  en estos artes el diseño usa CREMA/blanco roto para sus elementos claros
+  (rellenos de letras, luna, taza, cofia — nunca blanco puro) mientras que
+  los restos de fondo son BLANCO PURO (min RGB ≥250, dispersión ≤18).
+  Limpiar blanco puro globalmente elimina TODO el fondo —incluidos counters
+  y espacios encerrados entre letras— sin tocar el diseño. Verificado en los
+  6 artes: blanco puro 0% tras limpiar, diseño intacto.
 - **Brief de generación (2026-10-15, pedido suyo):** fondo 100% transparente
   sin halo ni resplandor, sin backdrop/papel/viñeta detrás del diseño.
   El diseño debe mostrarse completo visualmente.
