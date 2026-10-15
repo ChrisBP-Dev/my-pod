@@ -123,14 +123,15 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
     "arte": "data/artes-print/p021-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta_lista_draft_bloqueado",
+    "estado": "draft-printify-revision-dueno-pendiente-reemplazo-arte",
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
     "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
     "printify_draft_id": "6ad0c19d59ac88d91604ace4",
     "printify_draft_estado": "unpublished",
-    "printify_draft_fecha": "2026-10-15"
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "sin cambios (ya limpio)"
   },
   "p022": {
     "diseno": "Night Shift Elves",
@@ -140,14 +141,15 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
     "arte": "data/artes-print/p022-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta_lista_draft_bloqueado",
+    "estado": "draft-printify-revision-dueno-pendiente-reemplazo-arte",
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
     "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
     "printify_draft_id": "6ad0c2675c7e4842a800f3c1",
     "printify_draft_estado": "unpublished",
-    "printify_draft_fecha": "2026-10-15"
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "mancha entre elfos + franja blanca entre textos eliminadas"
   },
   "p023": {
     "diseno": "Silent Night Unit",
@@ -157,14 +159,15 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
     "arte": "data/artes-print/p023-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta_lista_draft_bloqueado",
+    "estado": "draft-printify-revision-dueno-pendiente-reemplazo-arte",
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
     "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
     "printify_draft_id": "6ad0c30e210a7ce1c702879c",
     "printify_draft_estado": "unpublished",
-    "printify_draft_fecha": "2026-10-15"
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "sin cambios (ya limpio)"
   },
   "p024": {
     "diseno": "NPO After Midnight",
@@ -174,14 +177,15 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
     "arte": "data/artes-print/p024-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta_lista_draft_bloqueado",
+    "estado": "draft-printify-revision-dueno-pendiente-reemplazo-arte",
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
     "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
     "printify_draft_id": "6ad0c378f0531fc34e0f4c19",
     "printify_draft_estado": "unpublished",
-    "printify_draft_fecha": "2026-10-15"
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "disco blanco interior eliminado"
   },
   "p025": {
     "diseno": "On Call Christmas",
@@ -191,14 +195,15 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
     "arte": "data/artes-print/p025-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta_lista_draft_bloqueado",
+    "estado": "draft-printify-revision-dueno-pendiente-reemplazo-arte",
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
     "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
     "printify_draft_id": "6ad0c3dd5c7e4842a800f4d1",
     "printify_draft_estado": "unpublished",
-    "printify_draft_fecha": "2026-10-15"
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "mancha izquierda del telefono eliminada"
   },
   "p026": {
     "diseno": "North Pole Night Shift",
@@ -208,14 +213,15 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
     "arte": "data/artes-print/p026-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta_lista_draft_bloqueado",
+    "estado": "draft-printify-revision-dueno-pendiente-reemplazo-arte",
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
     "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
     "printify_draft_id": "6ad0c47c59ac88d91604aedf",
     "printify_draft_estado": "unpublished",
-    "printify_draft_fecha": "2026-10-15"
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "parches blancos entre letreros eliminados"
   },
   "p027": {
     "diseno": "Nice List Sleepers",
@@ -225,7 +231,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
     "arte": "data/artes-print/p027-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta_lista_draft_bloqueado",
+    "estado": "eliminado-por-dueno-2026-10-15",
     "fecha": "2026-10-15",
     "id_printify": null,
     "precio": 34.99,
