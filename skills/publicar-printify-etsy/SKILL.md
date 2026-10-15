@@ -33,7 +33,9 @@ que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
 ### 1. Crear propuesta (draft en Printify)
 - Subir el arte a Printify (navegador, el CLI está roto).
 - Crear producto draft: Gildan 18000, provider Printify Choice.
-- Colocación inicial: centrada, 78% ancho, ~14% desde arriba.
+- Colocación inicial: centrada; escala = min(78% del ancho del área,
+  90% del alto del área) — el diseño NUNCA se desborda del área
+  (2026-10-15: colocar solo por ancho cortó los diseños altos).
 - El draft queda "unpublished" = propuesta pendiente de revisión.
 
 ### 2. Revisión del dueño (en Printify)

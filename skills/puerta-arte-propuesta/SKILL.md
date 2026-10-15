@@ -39,6 +39,19 @@ después de 12 mockups.
 - **Reparación** `--autotrim`: recorta al bbox + 4px y re-verifica.
 - **dpi**: ≥300 al ancho de impresión del producto.
 - **dimensiones**: lado menor ≥3000px (archivo de impresión).
+- **sin_blancos_interiores**: blanco/casi-blanco opaco dentro del bbox ≤8%
+  (atrapa el fondo sin limpiar: p022 mancha crema entre los elfos, p024
+  disco blanco, 2026-10-15). Entre 2% y 8% → adjudicación visual (puede
+  ser blanco de diseño: papel, copos — no se destruye con key global).
+- **cabe_en_area_impresion**: aspecto h/w ≤1.10 (el área Gildan 18000 es
+  1.14; un arte más alto se CORTA al colocarlo al 78% de ancho —
+  caso 2026-10-15: 6 de 7 artes con ratio 1.46–1.93, todos cortados
+  en Printify y re-ajustados a mano por el dueño).
+- **Brief de generación (2026-10-15, pedido suyo):** el diseño se compone
+  para que QUEPA COMPLETO en el área de impresión: aspecto h/w ≤1.10,
+  fondo 100% transparente sin halo ni resplandor, sin backdrop/papel/
+  viñeta detrás del diseño. El diseño debe mostrarse completo
+  visualmente — nada cortado arriba/abajo.
 - **Gate humano**: counters — agujeros de letras (a, e, o, P...) sin fondo
   metido. El código no distingue un counter limpio de un diseño sin letras;
   va en el checklist del aprobador.
