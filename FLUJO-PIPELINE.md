@@ -87,3 +87,18 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 
 ### Principio
 Cada tienda tiene su propia configuración. Los criterios de una tienda no contaminan otra. La app no depende de la memoria del asistente.
+
+## Selección de productos (2026-10-14)
+
+**Principio:** el producto NO está hardcodeado. Cada tienda tiene una lista de `productos_aprobados` en su config.
+
+### Cómo se agrega un producto
+1. El cron `pod-trend-scan` (2×/semana) investiga qué prendas están en tendencia en el nicho.
+2. Si un producto emerge como tendencia fuerte, se PROPONE al dueño (no se agrega solo).
+3. Si el dueño aprueba, se agrega a `productos_aprobados` en `data/tiendas/<id>/config.json`.
+4. Las propuestas diarias (7am) generan drafts usando los productos aprobados (rota entre ellos para no quemar uno solo).
+
+### Personalización (pendiente)
+- Estado: pendiente de investigación.
+- Objetivo: determinar si se puede automatizar personalización via Etsy/Printify/herramientas propias.
+- No se implementa hasta tener investigación completa.
