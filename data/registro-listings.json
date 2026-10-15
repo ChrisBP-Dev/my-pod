@@ -123,7 +123,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
   "arte": "data/artes-print/p021-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado-video2-pendiente-reintento",
+  "estado": "publicado_completo_verificado",
   "fecha": "2026-10-15",
   "id_printify": "6ad0c19d59ac88d91604ace4",
   "precio": 34.99,
@@ -145,12 +145,14 @@
   },
   "etsy_publicado": true,
   "mockups": 9,
-  "videos_puerta": "PASS 2/2 (verificar-video.py, 2026-10-15)",
+  "videos_puerta": "PASS 12/12",
   "id_etsy": "4596086167",
   "url": "https://www.etsy.com/listing/4596086167",
-  "videos_etsy": 1,
+  "videos_etsy": 2,
   "tags": 13,
-  "fecha_publicacion": "2026-10-15"
+  "fecha_publicacion": "2026-10-15",
+  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
  },
  "p022": {
   "diseno": "Night Shift Elves",
@@ -182,12 +184,14 @@
   },
   "etsy_publicado": true,
   "mockups": 9,
-  "videos_puerta": "PASS 2/2 (verificar-video.py, 2026-10-15)",
+  "videos_puerta": "PASS 12/12",
   "id_etsy": "4596108104",
   "url": "https://www.etsy.com/listing/4596108104",
   "videos_etsy": 2,
   "tags": 13,
-  "fecha_publicacion": "2026-10-15"
+  "fecha_publicacion": "2026-10-15",
+  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
  },
  "p023": {
   "diseno": "Silent Night Unit",
@@ -219,12 +223,14 @@
   },
   "etsy_publicado": true,
   "mockups": 9,
-  "videos_puerta": "PASS 2/2 (verificar-video.py, 2026-10-15)",
+  "videos_puerta": "PASS 12/12",
   "id_etsy": "4596087957",
   "url": "https://www.etsy.com/listing/4596087957",
   "videos_etsy": 2,
   "tags": 13,
-  "fecha_publicacion": "2026-10-15"
+  "fecha_publicacion": "2026-10-15",
+  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
  },
  "p024": {
   "diseno": "NPO After Midnight",
@@ -234,7 +240,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
   "arte": "data/artes-print/p024-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado-video2-pendiente-reintento",
+  "estado": "publicado_completo_verificado",
   "fecha": "2026-10-15",
   "id_printify": "6ad0c378f0531fc34e0f4c19",
   "precio": 34.99,
@@ -256,12 +262,14 @@
   },
   "etsy_publicado": true,
   "mockups": 9,
-  "videos_puerta": "PASS 2/2 (verificar-video.py, 2026-10-15)",
+  "videos_puerta": "PASS 12/12",
   "id_etsy": "4596108754",
   "url": "https://www.etsy.com/listing/4596108754",
-  "videos_etsy": 1,
+  "videos_etsy": 2,
   "tags": 13,
-  "fecha_publicacion": "2026-10-15"
+  "fecha_publicacion": "2026-10-15",
+  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
  },
  "p025": {
   "diseno": "On Call Christmas",
@@ -293,12 +301,14 @@
   },
   "etsy_publicado": true,
   "mockups": 9,
-  "videos_puerta": "PASS 2/2 (verificar-video.py, 2026-10-15)",
+  "videos_puerta": "PASS 12/12",
   "id_etsy": "4596108958",
   "url": "https://www.etsy.com/listing/4596108958",
   "videos_etsy": 2,
   "tags": 13,
-  "fecha_publicacion": "2026-10-15"
+  "fecha_publicacion": "2026-10-15",
+  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
  },
  "p026": {
   "diseno": "North Pole Night Shift",
@@ -308,7 +318,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
   "arte": "data/artes-print/p026-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado_completo_verificado",
+  "estado": "publicado-video2-pendiente-reintento",
   "fecha": "2026-10-15",
   "id_printify": "6ad0c47c59ac88d91604aedf",
   "precio": 34.99,
@@ -330,12 +340,14 @@
   },
   "etsy_publicado": true,
   "mockups": 9,
-  "videos_puerta": "PASS 2/2 (verificar-video.py, 2026-10-15)",
+  "videos_puerta": "PASS 12/12",
   "id_etsy": "4596094421",
   "url": "https://www.etsy.com/listing/4596094421",
-  "videos_etsy": 2,
+  "videos_etsy": 1,
   "tags": 13,
-  "fecha_publicacion": "2026-10-15"
+  "fecha_publicacion": "2026-10-15",
+  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
  },
  "p027": {
   "diseno": "Nice List Sleepers",
@@ -353,5 +365,40 @@
   "printify_draft_id": "6ad0c4ef210a7ce1c7028880",
   "printify_draft_estado": "unpublished",
   "printify_draft_fecha": "2026-10-15"
+ },
+ "p004": {
+  "estado": "publicado",
+  "titulo": "night shift nurse gift Sweatshirt, Night Shift Nurse Sweatshirt, Funny RN Crewneck",
+  "id_printify": "6ad04920ef2f0ee1ca050d1c",
+  "id_etsy": "4595742812",
+  "url_etsy": "https://www.etsy.com/listing/4595742812/real-night-owl",
+  "mockups": "9/9 (flat+folded2+lifestyle, hero Lifestyle 2 White)",
+  "printify_titulo_corregido": true
+ },
+ "p005": {
+  "estado": "publicado",
+  "titulo": "christmas nurse Sweatshirt, Funny RN Crewneck Sweatshirt, Med Pass Marathon Night Shift Gift",
+  "id_printify": "6ad0498944c5716eec05d902",
+  "id_etsy": "4596202796",
+  "url_etsy": "https://www.etsy.com/listing/4596202796/christmas-nurse-sweatshirt-funny-rn",
+  "mockups": "9/9 (flat+folded2+lifestyle, hero Lifestyle 3 Sand)",
+  "tags": "13/13",
+  "materiales": "Cotton, Polyester",
+  "atributos": "US letter / Long sleeve",
+  "precio": "$34.99 x16 variantes",
+  "videos_etsy": "2/2",
+  "url": "https://www.etsy.com/listing/4596202796",
+  "nicho": "enfermeria",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-6.jpg"
+  ],
+  "pins_pinterest": [
+   "https://www.pinterest.com/pin/1142858842976403462/"
+  ],
+  "pin_ultimo": "2026-10-15T18:56:00-04:00"
  }
 }

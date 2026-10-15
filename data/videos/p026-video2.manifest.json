@@ -3,9 +3,9 @@
   "tipo": "mockups",
   "diseno": "p026",
   "imagenes": [
-    "flat-white.jpg",
-    "folded-sand.jpg",
-    "flat-sportgrey.jpg"
+    "front-white.jpg",
+    "folded2-sand.jpg",
+    "p026-detalle.jpg"
   ],
   "metodo_zoom": "posicion-absoluta",
   "zoom_expr": "1+0.25*on/105",
@@ -13,6 +13,6 @@
   "usa_acumulativo": false,
   "work_res": 2160,
   "transicion": "xfade-fade-0.5s",
-  "generado": "2026-10-15T15:44:36.501033+00:00",
+  "generado": "2026-10-15T17:30:54.189417+00:00",
   "script": "generar-video-listing.py"
 }
