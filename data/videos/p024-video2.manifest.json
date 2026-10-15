@@ -1,0 +1,18 @@
+{
+  "video": "p024-video2.mp4",
+  "tipo": "mockups",
+  "diseno": "p024",
+  "imagenes": [
+    "flat-white.jpg",
+    "folded-sand.jpg",
+    "flat-sportgrey.jpg"
+  ],
+  "metodo_zoom": "posicion-absoluta",
+  "zoom_expr": "1+0.25*on/105",
+  "usa_on": true,
+  "usa_acumulativo": false,
+  "work_res": 2160,
+  "transicion": "xfade-fade-0.5s",
+  "generado": "2026-10-15T15:39:25.188146+00:00",
+  "script": "generar-video-listing.py"
+}
