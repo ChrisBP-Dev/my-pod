@@ -1,0 +1,66 @@
+{
+  "area_impresion_px_por_talla": {
+    "2XL": [
+      3852,
+      4398
+    ],
+    "L": [
+      3852,
+      4398
+    ],
+    "M": [
+      3349,
+      3824
+    ],
+    "S": [
+      3185,
+      3636
+    ],
+    "XL": [
+      3852,
+      4398
+    ],
+    "nota": "a 300 DPI: S=10.62x12.12, M=11.16x12.75, L/XL/2XL=12.84x14.66 pulg"
+  },
+  "base_canonica": {
+    "archivo": "data/bases/flatlay-blanca-sin-arte.webp",
+    "dimensiones_px": [
+      1600,
+      1600
+    ],
+    "rect_area_impresion_px": {
+      "x0": 506,
+      "x1": 1056,
+      "y0": 439,
+      "y1": 1066
+    },
+    "referencia_visual": "data/productos/gildan-18000-area-visual.jpg"
+  },
+  "fuente_area_impresion": "API Printify: variants --blueprint-id 49 --provider-id 99 (2026-10-13)",
+  "metodo_verificacion": {
+    "cadena": [
+      "1. px/pulg de la foto base = 49.1, medido con el diseno vitals como regla: 430px en foto = 8.75 pulg fisicas (3168px x escala 0.8286 / 300 DPI, dato del producto en Printify)",
+      "2. area M (11.16x12.75 pulg) x 49.1 = 548x626 px; rectangulo derivado = 550x627 px (desvio 0.4%/0.2%)",
+      "3. posicion confirmada contra el editor de Printify (captura 2026-10-13): centrada horizontal, borde superior justo bajo el cuello, hasta media torso",
+      "4. talla de la prenda en foto = M: pecho 1055px / 49.1 = 21.5 pulg ~= 22 pulg spec Gildan (margen 2%)",
+      "5. experimento oliva del dueño (2026-10-13): diseño sólido llenando el área, mockups de Printify -> top_gap/area_h = 0.222 (vs 0.108 anterior); rectángulo recalibrado: y[479,1106] (antes y[408,1035]); bottom_margin 0.437 vs 0.421 de Printify",
+      "6. script calibrar-producto.py automatizado: detecta el rectángulo oliva y la costura del ribete (Sobel-y), reproduce top_gap 0.158"
+    ],
+    "conclusion": "rectángulo = área de impresión talla M, posición recalibrada contra el render real de Printify (2026-10-13)",
+    "talla_referencia_foto": "M (verificada por medida de pecho contra spec Gildan)"
+  },
+  "printify_blueprint_id": 49,
+  "printify_provider": "Printify Choice",
+  "printify_provider_id": 99,
+  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt",
+  "regla_colocacion": {
+    "calibracion_inicial": {
+      "ANCHO_FILL": 0.78,
+      "TOP_FRAC": 0.093,
+      "origen": "2026-10-13: rectángulo con top_gap 0.158 (costura del ribete, script calibrar-producto.py lo reproduce: 0.158); TOP_FRAC 0.093 conserva la posición aprobada del v4 (y=497)",
+      "revalidar": "el ojo ajusta por diseno; el mecanismo no cambia"
+    },
+    "mecanismo": "el arte vive DENTRO del area de impresion: centrado horizontal; tope = area.y0 + TOP_FRAC * area.alto; ancho = min(natural, ANCHO_FILL * area.ancho)"
+  },
+  "script_flatlay": "scripts/generar-flatlay.py"
+}

@@ -1,0 +1,33 @@
+{
+  "tienda_id": "29222324",
+  "nombre": "Tú Dale POD - Store",
+  "printify_store_id": 29222324,
+  "descripcion": "Tienda principal POD",
+  "precio_estandar": 34.99,
+  "producto_default": {
+    "nombre": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt",
+    "blueprint": 49,
+    "provider": 99
+  },
+  "mockups": {
+    "seleccion": [
+      "flat",
+      "folded_2_decorado",
+      "lifestyle_1",
+      "lifestyle_2",
+      "lifestyle_3"
+    ],
+    "por_color": true,
+    "hero_preferencia": [
+      "lifestyle_2",
+      "lifestyle_3",
+      "lifestyle_1",
+      "folded_2_decorado"
+    ],
+    "hero_color": "segun_diseno"
+  },
+  "pinterest": {
+    "pins_por_listing": 3,
+    "criterio": "hero + lifestyle alternativo + detalle"
+  }
+}
