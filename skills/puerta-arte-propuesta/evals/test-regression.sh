@@ -20,6 +20,7 @@ run "P1 print limpio 300dpi" PASS None --archivo "$K/vitals-stable-print-300dpi.
 run "F1 fondo aplanado" FAIL fondo_no_transparente --archivo "$SKILL/evals/fixtures/arte-con-fondo.png" --ancho-pulgadas 10.5
 run "F2 baja resolucion" FAIL dpi_insuficiente --archivo "$SKILL/evals/fixtures/arte-chico-margen.png" --ancho-pulgadas 10.5
 run "F3 bordes vacios" FAIL recorte_con_bordes_vacios --archivo "$SKILL/evals/fixtures/arte-margen-amplio.png" --ancho-pulgadas 3.0
+run "F4 blanco puro interior" FAIL blanco_puro_fondo_sin_limpiar --archivo "$SKILL/evals/fixtures/arte-blanco-puro-interior.png" --ancho-pulgadas 10
 
 echo "--- $ok ok, $fail fallas ---"
 [[ $fail -eq 0 ]]
