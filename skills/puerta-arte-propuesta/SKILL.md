@@ -21,12 +21,17 @@ después de 12 mockups.
 - Al recibir la propuesta del diseño (PNG), antes de aprobar el arte.
 - Si FAIL, el diseño vuelve a corrección. No se genera flat-lay.
 
-## Procedimiento
+## Procedimiento estándar (2026-10-15, endurecido)
 
-1. **Recibir** el PNG en alta (`--archivo`, `--ancho-pulgadas` del producto).
-2. **Correr** `scripts/verificar-arte.py`.
-3. **PASS** → el arte pasa a aprobación humana (ojo: counters).
-   **FAIL** → se devuelve con el criterio violado.
+1. **Generar** el PNG con el brief (fondo transparente, sin backdrop).
+2. **Limpiar** SIEMPRE: `scripts/limpiar-fondo.py --archivo ARTE.png`
+   (elimina blanco puro global — método canónico; no es opcional).
+3. **Correr** `scripts/verificar-arte.py` (`--archivo`, `--ancho-pulgadas`).
+4. **PASS** → el arte pasa a aprobación humana (ojo: counters).
+   **FAIL** → se devuelve con el criterio violado. Si falla
+   `sin_blanco_puro`, repetir paso 2 y re-verificar.
+5. **Draft en Printify** → el dueño revisa ubicación en gris.
+6. **Mockups** salen de Printify. Nada propio.
 
 ## Puertas mecánicas
 
@@ -37,6 +42,7 @@ después de 12 mockups.
   (criterio del dueño: recortado exacto al arte, sin bordes vacíos —
   los bordes vacíos distorsionan el área de impresión).
 - **Reparación** `--autotrim`: recorta al bbox + 4px y re-verifica.
+- **sin_blanco_puro**: blanco puro ≤0.3% (método canónico 2026-10-15).
 - **dpi**: ≥300 al ancho de impresión del producto.
 - **dimensiones**: lado menor ≥3000px (archivo de impresión).
 - **sin_blancos_interiores**: blanco/casi-blanco opaco dentro del bbox ≤8%
