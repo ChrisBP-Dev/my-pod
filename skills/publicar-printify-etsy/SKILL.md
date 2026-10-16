@@ -3,13 +3,14 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un solo listing) o track single-product (diseños personalizables, que el MPL no soporta). Drafts en Printify, revisión del dueño, mockups de Printify, videos, publicación y verificación integral en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.6.1"
+  version: "0.7.0"
   framework_version: "0.8.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.7.0** — Estándar API-vs-navegador (canon central en docs/, este skill apunta); tablas de precios por talla leídas del config de tienda (doctrina precio con colchón 2026-10-16)
 **Versión 0.6.1** — Esquema de mockups/videos movido al config de tienda
 (organización a nivel tienda, 2026-10-15). Printify es la fuente de verdad;
 no generamos mockups propios.
@@ -86,12 +87,16 @@ cuyo costo base supere al de S–XL lleva recargo:
 El ×1.15 cubre el fee de Etsy sobre el incremento (~9.5%) y preserva el
 margen en dólares de la talla base.
 
-**Tablas vigentes:**
+**Tablas vigentes:** la tabla de cada tienda vive en
+`data/tiendas/<id>/config.json → estrategia_precios` (precio base S–XL
+por producto; los recargos por talla se calculan con la fórmula de
+arriba). Ejemplo tienda 29222324 (doctrina "precio con colchón",
+2026-10-16):
 
 | Producto | S–XL | 2XL | 3XL |
 |---|---|---|---|
-| Sudadera Gildan 18000 | $34.99 | $37.99 (+$3) | $39.99 (+$5) |
-| Playera Bella+Canvas 3001 | $24.99 | $27.99 (+$3) | $30.99 (+$6) |
+| Sudadera Gildan 18000 | $40.99 | $44.99 (+$4) | $46.99 (+$6) |
+| Playera Bella+Canvas 3001 | $25.99 | $28.99 (+$3) | $32.99 (+$7) |
 
 **Aplicación:**
 - En Printify: el precio retail de CADA variante lleva su recargo ANTES
@@ -242,8 +247,9 @@ El esquema de videos vive en `data/tiendas/<tienda-id>/config.json` →
 ### M8. Verificación en Etsy — FASE C (exhaustiva, 2026-10-15)
 Nada se da por sentado. Verificar contra el listing vivo:
 - Variaciones correctas ("Sweatshirt"/"T-Shirt" + tallas + colores).
-- Precios por variación según tabla (sudadera $34.99/$37.99/$39.99,
-  playera $24.99/$27.99/$30.99).
+- Precios por variación según la tabla vigente de la tienda
+  (`estrategia_precios` en su config; ej. 29222324: sudadera
+  $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99).
 - SKUs correctos por variación.
 - Orden de imágenes = esquema de 10; hero = lifestyle sudadera.
 - Videos: los 2 nuevos presentes y reproducibles (que no se hayan

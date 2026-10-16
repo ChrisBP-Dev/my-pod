@@ -3,7 +3,6 @@
   "nombre": "Tú Dale POD - Store",
   "printify_store_id": 29222324,
   "descripcion": "Tienda principal POD",
-  "precio_estandar": 34.99,
   "estrategia_precios": {
     "nota": "Estrategia de ESTA tienda (decisiones del dueño 2026-10-16). Cada tienda define la suya en su propio config; el skill estratega-tienda solo trae el MECANISMO y el método de calibración, nunca valores universales.",
     "doctrina": "precio_con_colchon + tienda_siempre_en_descuento",
