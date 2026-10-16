@@ -97,8 +97,9 @@ En `data/tiendas/<id>/config.json`:
 
 El API v3 **no expone**: sales events / Sales and discounts, cupones y
 Targeted Offers, estadísticas de visitas/views/fuentes de tráfico,
-mensajes con compradores. Ver estándar API-vs-navegador en
-`publicar-printify-etsy` §"Estándar: API de Etsy vs navegador".
+mensajes con compradores. Canon de enrutamiento:
+`docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` (los skills consumidores
+apuntan ahí).
 
 ## Refresh de tokens
 
