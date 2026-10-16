@@ -18,6 +18,12 @@ data/
   artes-print/        # Diseños del usuario (sus creaciones, reutilizables
                       #   en cualquier tienda).
   banco-keywords/     # Keywords (compartido).
+  direccion-tienda.md # Directriz semanal de la estratega (humano): reparto,
+                      #   mix, precios, NO-hacer. Vigencia 7 días.
+  config-propuestas.json  # Directriz semanal MÁQUINA (contrato
+                      #   docs/CONTRATO-TIPO-PRODUCTO.md v1.0): tipo_lote
+                      #   (mpl/single/mixto), componentes, temas, precios.
+                      #   Lo escribe la estratega; lo lee el cron diario.
 
   # POR TIENDA — cada tienda tiene su propia presentación
   tiendas/

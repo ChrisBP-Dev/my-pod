@@ -1,5 +1,47 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.6.0 (2026-10-15)
+- **Flujo MPL nativo** (decisión del dueño): track MPL para diseños NO
+  personalizables — composición estándar Gildan 18000 + Bella+Canvas 3001
+  (Printify Choice), conversión "Convert to Multi-Product Listing" en
+  Printify, nombres de variación "Sweatshirt"/"T-Shirt".
+- **Flujo bifurcado por personalización** (orden del dueño): diseño
+  personalizable → track single-product SIEMPRE (el MPL nativo no soporta
+  personalización, verificado en help.printify.com). Cambiar de track
+  exige re-optimización SEO completa + mockups/videos nuevos.
+- **Esquema de mockups MPL: 10 imágenes** (APROBADO por el dueño):
+  2 lifestyles sudadera + 2 flat sudadera + 1 folded decorado + 2 on-model
+  playera + 1 flat playera + 2 tablas de tallas. Reglas: nunca repetir
+  pose/modelo, todos los colores vendidos representados, hero = lifestyle.
+- **Esquema de videos MPL:** Video 1 = 3 lifestyles sudadera, Video 2 =
+  3 tomas playera (1080×1080, 9.5s, sin audio).
+- **SEO MPL:** título con ambos productos, descripción con sección
+  "CHOOSE YOUR STYLE", 13 tags ≤20 car.
+- **Precios playera:** S–XL $24.99, 2XL $27.99, 3XL $30.99 (fórmula ×1.15).
+- **Placement en CADA producto del MPL** + revisión del dueño (lección
+  p005: el placement heredado no pasó puerta numérica).
+- **Criterio color-diseño** (regla suya): colores validados contra el
+  diseño, sin abarcar sin verificación visual.
+- **Regla:** componentes de un MPL no se publican single por separado.
+- **Fase C:** verificación exhaustiva en Etsy tras publicar el MPL
+  (variaciones, precios, SKUs, orden de imágenes, videos intactos,
+  materiales, atributos, políticas, envío, personalización ausente,
+  cantidades, visibilidad de variantes).
+- Notas MPL verificadas 2026-10-15: título/desc/tags/mockups se gestionan
+  en el MPL (pricing en cada single), un shipping profile compartido,
+  límites 20 productos/400 variantes/70 opciones, push selectivo por
+  categorías, revert a single disponible.
+
+## v0.5.0 (2026-10-15)
+- **Estándar de precios escalonados por talla** (orden del dueño): el precio
+  nunca es plano; recargo = redondeo((costo_talla − costo_SXL) × 1.15).
+  Calibración Gildan 18000: S–XL $34.99, 2XL $37.99 (+$3), 3XL $39.99 (+$5).
+  Aplica en Printify antes de publicar y se verifica por variación en Etsy.
+  El precio base S–XL lo define la directriz de la estratega
+  (`data/direccion-tienda.md`).
+- Checklist: "Precio final verificado" ahora exige cada variación con su
+  precio correcto en el listing vivo.
+
 ## v0.4.0 (2026-10-14)
 - **Endurecimiento:** checklist completa de publicación (CHECKLIST-PUBLICACION.md).
   Ningún listing se declara publicado hasta verificar título, descripción,

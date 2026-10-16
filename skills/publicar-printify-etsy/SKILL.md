@@ -1,84 +1,270 @@
+---
 name: "publicar-printify-etsy"
-description: "Publica un diseño aprobado en Printify y Etsy siguiendo el flujo Printify-first: el draft se crea en Printify, el dueño revisa la colocación ahí, los mockups salen de Printify, y se publica."
+description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un solo listing) o track single-product (diseños personalizables, que el MPL no soporta). Drafts en Printify, revisión del dueño, mockups de Printify, videos, publicación y verificación integral en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.4.0"
+  version: "0.6.0"
   framework_version: "0.8.0"
   regression_suite: "evals/"
 ---
 
-# Publicar en Printify + Etsy (Printify-First)
+# Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.2.0** — Actualizado al flujo Printify-first (2026-10-14).
-Printify es la fuente de verdad; no generamos mockups propios.
+**Versión 0.6.0** — Flujo MPL nativo + flujo bifurcado por personalización
+(decisiones del dueño 2026-10-15). Printify es la fuente de verdad;
+no generamos mockups propios.
 
 ## Cuándo usarme / cuándo NO
 
 **Úsame** cuando el diseño tiene: arte aprobado (300 DPI, sin fondo),
-paquete de listing aprobado (dale del dueño).
+paquete de listing aprobado (dale del dueño), y el track decidido
+(§0: bifurcado).
 
-**No me uses** si: falta el dale del dueño en el arte o el paquete.
+**No me uses** si: falta el dale del dueño en el arte o el paquete,
+o el diseño es personalizable y se pretende meterlo en un MPL
+(el MPL nativo NO soporta personalización).
 
-## Procedimiento (Printify-First)
+## 0. Decisión de track — FLUJO BIFURCADO (orden del dueño 2026-10-15)
 
-### 0. Inicio de sesión (protocolo Google-first, 2026-10-15)
+**¿El diseño es personalizable (lleva nombre/texto del comprador)?**
+
+- **SÍ → Track SINGLE** (este skill, §Track Single). El MPL nativo de
+  Printify NO soporta personalización — ni manual ni automática
+  (verificado en help.printify.com 2026-10-15). Los diseños
+  personalizables viven como producto individual, siempre.
+- **NO → Track MPL** (este skill, §Track MPL). El listing es un
+  Multi-Product Listing nativo de Printify: varios productos, un solo
+  listing en Etsy.
+
+La estratega puede proponer mover un diseño entre tracks, pero el cambio
+requiere dale del dueño: pasar de single a MPL (o nacer MPL) exige
+**re-optimización SEO COMPLETA** (título, descripción, 13 tags) para
+TODOS los productos del listing + mockups y videos nuevos (regla suya
+2026-10-15).
+
+## Composición estándar del MPL (regla de tienda 2026-10-15)
+
+Default (la estratega puede definir otra composición en
+`data/config-propuestas.json` — ver `docs/CONTRATO-TIPO-PRODUCTO.md`):
+
+- **Sudadera:** Gildan 18000, Printify Choice (blueprint 49, provider 99).
+- **Playera:** Bella+Canvas 3001, Printify Choice.
+
+**Criterio playera** (orden del dueño, regla de tienda hasta que la
+estratega defina mejor): colores White + Athletic Heather + Natural,
+TODAS las tallas que el proveedor ofrezca por color. Si un color trae
+tallas limitadas (ej. Natural solo XL/2XL), se acepta como viene.
+**NO sustituir colores ni detenerse por esto.**
+
+**Criterio color-diseño** (regla suya 2026-10-15): los colores ofrecidos
+por diseño se validan contra el diseño (contraste/legibilidad). No se
+abarcan colores sin verificación visual. La paleta se elige desde el
+inicio y el diseño debe verse bien en cada color. Va en la checklist.
+
+## Precios escalonados por talla (estándar 2026-10-15, orden del dueño)
+
+**Mecanismo (universal):** el precio NUNCA es plano por talla. Toda talla
+cuyo costo base supere al de S–XL lleva recargo:
+`recargo = redondeo_a_dólar((costo_talla − costo_base_SXL) × 1.15)`
+El ×1.15 cubre el fee de Etsy sobre el incremento (~9.5%) y preserva el
+margen en dólares de la talla base.
+
+**Tablas vigentes:**
+
+| Producto | S–XL | 2XL | 3XL |
+|---|---|---|---|
+| Sudadera Gildan 18000 | $34.99 | $37.99 (+$3) | $39.99 (+$5) |
+| Playera Bella+Canvas 3001 | $24.99 | $27.99 (+$3) | $30.99 (+$6) |
+
+**Aplicación:**
+- En Printify: el precio retail de CADA variante lleva su recargo ANTES
+  de publicar (el precio sincroniza a Etsy). Nota MPL: "Changes you make
+  here will also update the Single Listing pricing" — el pricing se edita
+  en cada producto single, no en el contenedor MPL.
+- En Etsy (verificación Fase C): cada variación con su precio correcto.
+- Producto nuevo: consultar costos por talla en la API, calcular recargos
+  con la fórmula, registrar la tabla en `data/productos/<producto>.json`.
+- El precio base S–XL lo define la directriz vigente de la estratega
+  (`data/direccion-tienda.md` / `data/config-propuestas.json`).
+
+**Regla anti-desincronización (2026-10-15, orden del dueño):** el precio se
+fija UNA sola vez, en el draft de Printify, ANTES de publicar. NUNCA se
+editan precios por separado en Etsy y en Printify sobre un listing ya
+publicado: eso deja el producto en "cambios no publicados" en Printify
+(verificado 2026-10-15) y rompe el filtro publicado = en vivo. Si un
+listing vivo necesita cambio de precio: se edita en UN solo lado y se
+sincroniza deliberadamente al otro, nunca en los dos por separado.
+
+**Ownership:** la tabla de precios por talla es parte del paquete de
+listing — la calcula el agente de publicación con la fórmula de arriba y
+los costos por talla de la API (registrada en
+`data/productos/<producto>.json`); el precio BASE S–XL lo define la
+estratega; el paquete de listing (título/descripción/tags) la referencia
+pero no la redefine.
+
+---
+
+## Track MPL — procedimiento
+
+### M0. Inicio de sesión (protocolo Google-first, 2026-10-15)
 Antes de pedirle al dueño que inicie sesión manualmente:
 1. Ir a printify.com → "Log in" → "Continue with Google".
-2. La sesión de Google YA está guardada en el navegador: en el selector de
-   cuentas elegir la de la tienda (tudale.pod / Tú Dale POD).
+2. La sesión de Google YA está guardada en el navegador: en el selector
+   de cuentas elegir la de la tienda (tudale.pod / Tú Dale POD).
 3. Esto inicia sesión en Printify sin intervención del dueño.
-Solo si Google no ofrece cuenta guardada o el login falla, se le pide a él
-que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
+Solo si Google no ofrece cuenta guardada o el login falla, se le pide a
+él que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
 
-### 1. Crear propuesta (draft en Printify)
+### M1. Crear los drafts componentes (uno por producto del MPL)
+Por cada producto de la composición (default: sudadera + playera):
 - Subir el arte a Printify (navegador, el CLI está roto).
-- Crear producto draft: Gildan 18000, provider Printify Choice.
+- Crear producto draft con el blueprint/provider de la composición.
 - Colocación inicial: centrada; escala = min(78% del ancho del área,
   90% del alto del área) — el diseño NUNCA se desborda del área
   (2026-10-15: colocar solo por ancho cortó los diseños altos).
-- El draft queda "unpublished" = propuesta pendiente de revisión.
+- Aplicar la paleta validada contra el diseño (criterio color-diseño) y
+  los precios escalonados de la tabla vigente.
+- En el draft, poner el **título real del diseño** (nunca el nombre
+  genérico del blueprint) — regla 2026-10-15.
+- Los drafts quedan "unpublished" = propuesta pendiente de revisión.
+- **REGLA: no publicar los componentes single por separado.** Los
+  componentes de un MPL se publican SOLO como parte del MPL. Publicar
+  un componente solo crea un listing single huérfano que compite con el
+  MPL y rompe el flujo.
 
-### 2. Revisión del dueño (en Printify)
-- El dueño revisa el draft en Printify cada mañana.
+### M2. Revisión del dueño — placement EN CADA PRODUCTO (2026-10-15)
+- El dueño revisa CADA draft componente en Printify cada mañana.
+- **Placement:** verificar en CADA producto del MPL (centrado, dentro
+  del área de impresión, sin desbordamiento) + revisión del dueño.
+  El placement heredado del flujo "same design" NO sustituye la
+  verificación por producto.
 - Corrige la ubicación directamente en el editor si hace falta.
 - Elimina los rechazados. Avisa cuáles están listos.
-- **La colocación se valida en Printify, no contra nuestros mockups.**
 
-### 2b. Metadata en el draft (ANTES de mockups)
-- Generar el paquete comercial: skill `paquete-listing-etsy` (título SEO,
-  descripción con disclosure IA, 13 tags).
-- En el draft de Printify, poner el **título real del diseño** y la
-  **descripción del paquete** (navegador). Elimina el nombre genérico del
-  blueprint ("Unisex Heavy Blend™ Crewneck Sweatshirt").
-- Regla: el draft en Printify siempre lleva el nombre real del producto.
-  Nombres genéricos = inconsistencia al revisar o vender.
+### M3. Paquete de listing — SEO completo para TODOS los productos
+- Generar con el skill `paquete-listing-etsy`.
+- **Regla SEO MPL (suya 2026-10-15):** re-optimización COMPLETA para
+  TODOS los productos del listing:
+  - **Título** (≤140 car.): incluye AMBOS productos
+    (ej. "...Sweatshirt, ...T-Shirt...").
+  - **Descripción:** estructurada con sección **"CHOOSE YOUR STYLE"**
+    (o "ELIGE TU ESTILO") que presenta cada producto + disclosure IA +
+    políticas.
+  - **13 tags** (≤20 car. c/u) cubriendo ambos productos y el nicho.
+- Puerta: `verificar-paquete.py`.
 
-### 3. Generar mockups (en Printify)
-- En el draft aprobado, generar todos los mockups del catálogo × colores.
-- Descargar los mockups para usar en videos y Pinterest.
-- El dueño los revisa en Printify.
+### M4. Convertir a MPL en Printify
+- En el producto base: "Convert to Multi-Product Listing".
+- "Add item": (a) crear nuevo con EL MISMO diseño desde el catálogo
+  (1 clic), o (b) agregar un producto existente.
+- Por cada item: verificar placement, colores/tallas, precios.
+- **Nombres de variación** (campo "Variation name for Etsy listing"):
+  **"Sweatshirt"** / **"T-Shirt"** — cortos, sin el nombre del blueprint.
+  (Decisión 2026-10-15, verificado en p005.)
+- Notas del MPL nativo (verificadas 2026-10-15):
+  - Título/descripción/tags/mockups se gestionan EN EL MPL, no en los
+    productos individuales; el pricing sigue en cada producto single.
+  - Un solo shipping price/profile compartido para todo el MPL.
+  - Límites: 20 productos, 400 variantes, 70 opciones por MPL.
+  - Al publicar, Etsy conserva URL, reseñas y SEO del listing base.
+  - Guardar como draft NO toca el listing vivo.
+  - Revert a single disponible tras publicar.
 
-### 4. Generar videos
-- Con los mockups descargados de Printify:
-  `scripts/generar-video-listing.py`
+### M5. Mockups — esquema de 10 (APROBADO por el dueño 2026-10-15)
+Seleccionar EXACTAMENTE estas 10, en este orden:
+1. Sudadera lifestyle hero (imagen principal del listing).
+2. Sudadera lifestyle 2 — pose/modelo DIFERENTE al #1.
+3. Sudadera flat-lay.
+4. Sudadera flat-lay, otro color.
+5. Sudadera folded decorado/ambientado (con fondo, NUNCA plano blanco).
+6. Playera on-model.
+7. Playera on-model distinto (pose/modelo diferente al #6).
+8. Playera flat-lay.
+9. Tabla de tallas sudadera.
+10. Tabla de tallas playera.
+
+**REGLAS duras:**
+- Nunca repetir la misma pose/modelo en colores diferentes.
+- Todos los productos y colores vendidos deben estar representados
+  visualmente (si un color se vende, aparece en alguna imagen).
+- La imagen principal (#1) SIEMPRE es lifestyle de sudadera.
+- Si el catálogo no ofrece los shoots necesarios, REPORTAR la
+  limitación antes de continuar, no improvisar.
+
+**Rotación de héroes entre productos** (criterio suyo 2026-10-15): en
+cada lote, ROTAR el modelo lifestyle y el color del héroe. Dos
+productos consecutivos NUNCA comparten modelo ni color de héroe.
+Aplica igual al primer clip del video 1.
+
+**Nota primario Printify vs Etsy** (observado 2026-10-15): Printify
+marca un primario pero al sincronizar el orden puede no preservarse.
+Tras el sync, VERIFICAR en Etsy que la imagen principal sea la
+esperada; si no, reordenar directo en el editor de Etsy.
+
+### M6. Videos — esquema MPL (APROBADO 2026-10-15)
+- Formato: 1080×1080, 30fps, H.264, 9.5s, sin audio.
+- **Video 1:** 3 lifestyles de SUDADERA (distintos).
+- **Video 2:** 3 tomas de PLAYERA (distintas).
+- Scripts: `scripts/generar-video-listing.py`; puerta:
+  `scripts/verificar-video.py` (movimiento mínimo 3.0) + manifiesto.
 - Criterio: `CRITERIO-VIDEO.md`.
-- Puerta: `scripts/verificar-video.py` (incluye manifiesto).
 
-### 5. Publicar producto
-- En Printify: publicar el draft (ya con colocación aprobada).
+### M7. Publicar el MPL
+- En Printify: publicar el MPL (los componentes ya están adentro).
 - Se sincroniza a Etsy automáticamente (canal conectado).
+- Verificar estado = "Published".
 
-### 6. Completar en Etsy
-- Subir los videos (no van por Printify).
-- Verificar título, descripción, 13 tags del paquete.
-- Publicar el listing.
+### M8. Verificación en Etsy — FASE C (exhaustiva, 2026-10-15)
+Nada se da por sentado. Verificar contra el listing vivo:
+- Variaciones correctas ("Sweatshirt"/"T-Shirt" + tallas + colores).
+- Precios por variación según tabla (sudadera $34.99/$37.99/$39.99,
+  playera $24.99/$27.99/$30.99).
+- SKUs correctos por variación.
+- Orden de imágenes = esquema de 10; hero = lifestyle sudadera.
+- Videos: los 2 nuevos presentes y reproducibles (que no se hayan
+  borrado en la conversión).
+- Título, descripción completa (con "CHOOSE YOUR STYLE"), 13 tags.
+- Materiales, atributos, políticas, perfil de envío, cantidades.
+- Caja de personalización: NO debe existir en un MPL
+  (el MPL no la soporta; si aparece, es error).
+- Visibilidad de variantes: "Only show in stock variants and hide out
+  of stock" (oculta combos que el proveedor no ofrece).
 
-### 7. Registrar
-- Guardar IDs de Printify y Etsy en `data/registro-listings.json`.
+### M9. Registrar
+- Guardar IDs de Printify y Etsy en `data/registro-listings.json`
+  con `tipo: "mpl"` y la lista de componentes.
 
-### 8. Publicidad (Pinterest)
+### M10. Publicidad (Pinterest)
 - Skill `puerta-pinterest-pin`: valida pins.
 - Crear pins con los mockups de Printify.
+
+---
+
+## Track Single — procedimiento (diseños personalizables)
+
+El flujo single clásico (v0.5.0), vigente para diseños personalizables:
+
+1. **Login** (protocolo Google-first, §M0).
+2. **Draft en Printify:** subir arte, crear producto draft (producto
+   según directriz), colocación centrada min(78% ancho, 90% alto),
+   precios escalonados, título real del diseño. Draft = propuesta.
+3. **Revisión del dueño** en Printify (placement + mockups).
+4. **Paquete de listing** (`paquete-listing-etsy`): título, descripción
+   con disclosure IA, 13 tags. Puerta `verificar-paquete.py`.
+5. **Mockups:** esquema single vigente = 9 (flat ×3 colores + folded
+   decorado ×3 + 3 lifestyles diferentes, hero = lifestyle).
+   Rotación de héroes entre productos (§M5).
+6. **Videos:** Video 1 = on-model/lifestyle, Video 2 = flat/folded.
+   1080×1080, 9.5s, sin audio. Puerta `verificar-video.py`.
+7. **Publicar** en Printify → sincroniza a Etsy.
+8. **Completar en Etsy:** videos, título, descripción, 13 tags,
+   categoría, atributos, production partner = Printify, envío,
+   políticas, **caja de personalización** (nativa de Etsy) si aplica,
+   precios por variación verificados.
+9. **Registrar** en `data/registro-listings.json` con `tipo: "single"`.
+10. **Pinterest** (`puerta-pinterest-pin`).
+
+---
 
 ## Reglas de seguridad Printify ↔ Etsy (2026-10-15)
 
@@ -89,22 +275,39 @@ que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
   Por eso: una vez publicado en Etsy, NUNCA republicar completo desde
   Printify. Si hay que cambiar el diseño o variantes, usar publicación
   selectiva (solo los campos necesarios).
-- **Mejoras SEO van en Etsy**, directo en el Shop Manager (tags, ajustes
-  de descripción, videos). No vuelven a Printify.
+- **Push selectivo por categorías** (verificado en UI 2026-10-15): el
+  diálogo "Sync and publish changes?" empuja lo marcado en "Details to
+  publish". NO hay preview ni descarte de cambios.
+- **Mejoras SEO van en Etsy**, directo en el Shop Manager. No vuelven
+  a Printify.
 - **Modelo de estados**: draft "unpublished" en Printify = NO está en
   Etsy. Publicado = tiene ID de Etsy (external_id) y título real.
-  La fuente de verdad del estado es `data/registro-listings.json`.
+  La fuente de verdad del estado es `data/registro-listings.json`,
+  con `tipo: "mpl" | "single"`.
+- **MPL:** los componentes single NO se publican por separado una vez
+  que pertenecen a un MPL (ver §M1, regla).
 
 ## Puertas mecánicas
 
-- **verificar-paquete.py**: el paquete comercial es válido.
-- **verificar-video.py**: los videos cumplen el criterio.
+- **verificar-paquete.py**: el paquete comercial es válido (título
+  ≤140, 13 tags ≤20 car., disclosure presente; en MPL: título con
+  ambos productos y sección "CHOOSE YOUR STYLE").
+- **verificar-video.py**: los videos cumplen el criterio (puerta
+  mínima de movimiento 3.0).
+- **CHECKLIST-PUBLICACION.md**: ningún listing se declara publicado
+  hasta verificar CADA item contra el listing vivo en Etsy.
 - **Revisión en Printify**: el dueño valida colocación y mockups
-  directamente donde se ve el resultado real.
+  directamente donde se ve el resultado real. **El ojo del dueño es
+  la puerta de calidad visual** — ningún gate numérico la sustituye.
 
 ## Calibraciones (mecanismo vs instancia)
 
 - **MECANISMO**: el flujo es igual para cualquier producto y diseño.
-  Printify-first siempre.
+  Printify-first siempre. El track (MPL/single) lo decide el flujo
+  bifurcado (§0); la composición del MPL y los precios base los define
+  la estratega (`data/config-propuestas.json`), no este skill.
 - **CALIBRACIÓN** (Gildan 18000): posición inicial 78% ancho, 14% desde
   arriba. El dueño ajusta por diseño en el editor.
+- **CALIBRACIÓN** (Bella+Canvas 3001): placement verificado visual en
+  p005 (centrado, 10.5"×11.93", verificado por preview del editor).
+  La puerta numérica de placement queda pendiente para este producto.
