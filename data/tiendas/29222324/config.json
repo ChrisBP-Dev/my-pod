@@ -23,6 +23,7 @@
     "ultima_calibracion": "2026-10-16",
     "recalibrar_si": ["cambian costos Printify", "nuevo producto en la composición", "el dueño cambia piso o descuento máximo"]
   },
+  "eventos_ofertas": [],
   "mockups": {
     "seleccion": [
       "flat",
