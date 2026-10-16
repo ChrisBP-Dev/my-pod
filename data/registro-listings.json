@@ -684,7 +684,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p028-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -697,7 +697,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad2065a067604a3850d192a",
+        "url": "https://printify.com/app/product-details/6ad2065a067604a3850d192a",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad2076020886a0bc203c518",
+        "url": "https://printify.com/app/product-details/6ad2076020886a0bc203c518",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p029": {
     "diseno": "Grateful Thankful Blessed",
@@ -717,7 +730,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p029-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -730,7 +743,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad20812067604a3850d192a",
+        "url": "https://printify.com/app/product-details/6ad20812067604a3850d192a",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad208b10015247b110c9010",
+        "url": "https://printify.com/app/product-details/6ad208b10015247b110c9010",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p030": {
     "diseno": "Pumpkin Spice & IV Drips",
@@ -750,7 +776,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p030-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -763,7 +789,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad209538a7dab9713047500",
+        "url": "https://printify.com/app/product-details/6ad209538a7dab9713047500",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad209f18368c0a02303046a",
+        "url": "https://printify.com/app/product-details/6ad209f18368c0a02303046a",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p031": {
     "diseno": "Night Shift Feast",
@@ -783,7 +822,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p031-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -796,7 +835,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad20a988368c0a0230304c3",
+        "url": "https://printify.com/app/product-details/6ad20a988368c0a0230304c3",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad20b3d8368c0a0230305a4",
+        "url": "https://printify.com/app/product-details/6ad20b3d8368c0a0230305a4",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p032": {
     "diseno": "Code Turkey",
@@ -816,7 +868,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p032-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -829,7 +881,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad20bed436d364f460864cb",
+        "url": "https://printify.com/app/product-details/6ad20bed436d364f460864cb",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad20c920015247b110c9336",
+        "url": "https://printify.com/app/product-details/6ad20c920015247b110c9336",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p033": {
     "diseno": "Blessed in Scrubs",
@@ -849,7 +914,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p033-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -862,7 +927,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad20d520015247b110c939a",
+        "url": "https://printify.com/app/product-details/6ad20d520015247b110c939a",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad20e0b05836938d40e4ed9",
+        "url": "https://printify.com/app/product-details/6ad20e0b05836938d40e4ed9",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p034": {
     "diseno": "ER Turkey Trot",
@@ -882,7 +960,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p034-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -895,7 +973,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad20eec20886a0bc203ca0e",
+        "url": "https://printify.com/app/product-details/6ad20eec20886a0bc203ca0e",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad20fa0436d364f4608677f",
+        "url": "https://printify.com/app/product-details/6ad20fa0436d364f4608677f",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p035": {
     "diseno": "Gobble 'Til You Wobble",
@@ -915,7 +1006,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p035-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -928,7 +1019,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad21072b7243250ec0848e2",
+        "url": "https://printify.com/app/product-details/6ad21072b7243250ec0848e2",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad211158a7dab9713047aad",
+        "url": "https://printify.com/app/product-details/6ad211158a7dab9713047aad",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p036": {
     "diseno": "ICU Thankful Heart",
@@ -948,7 +1052,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p036-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -961,7 +1065,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad211d58368c0a023030ab4",
+        "url": "https://printify.com/app/product-details/6ad211d58368c0a023030ab4",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad212b405836938d40e5303",
+        "url": "https://printify.com/app/product-details/6ad212b405836938d40e5303",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "p037": {
     "diseno": "Fall for Nursing",
@@ -981,7 +1098,7 @@
     "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
     "arte": "data/artes-print/p037-print-300dpi.png",
     "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-    "estado": "propuesta-draft-pendiente",
+    "estado": "draft-creado-sin-publicar",
     "fecha_propuesta": "2026-10-16",
     "precios": {
       "gildan-18000": {
@@ -994,7 +1111,20 @@
         "2XL": 27.99,
         "3XL": 30.99
       }
-    }
+    },
+    "drafts": {
+      "gildan-18000": {
+        "id": "6ad2137d067604a3850d236f",
+        "url": "https://printify.com/app/product-details/6ad2137d067604a3850d236f",
+        "variantes": 16
+      },
+      "bella-canvas-3001": {
+        "id": "6ad2146a436d364f46086c34",
+        "url": "https://printify.com/app/product-details/6ad2146a436d364f46086c34",
+        "variantes": 14
+      }
+    },
+    "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
   },
   "fueled-by-caffeine": {
     "id_etsy": "4593541859",
