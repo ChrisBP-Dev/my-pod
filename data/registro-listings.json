@@ -33,7 +33,7 @@
       }
     },
     "estado": "publicado_completo",
-    "videos_pendientes": true
+    "videos_pendientes": false
   },
   "vitals-stable": {
     "id_etsy": "4591617678",
@@ -73,7 +73,7 @@
       }
     },
     "estado": "publicado_completo",
-    "videos_pendientes": true
+    "videos_pendientes": false
   },
   "sleighin-12-hour-shift": {
     "id_etsy": "4591828133",
@@ -113,7 +113,7 @@
       }
     },
     "estado": "publicado_completo",
-    "videos_pendientes": true
+    "videos_pendientes": false
   },
   "quiet-night-shift": {
     "id_etsy": "4592008985",
@@ -153,7 +153,7 @@
       }
     },
     "estado": "publicado_completo",
-    "videos_pendientes": true,
+    "videos_pendientes": false,
     "nota_migracion": "Arte regenerado con IA (original perdido), aprobado por el dueño"
   },
   "p002": {
@@ -1150,6 +1150,6 @@
       }
     },
     "estado": "publicado_completo",
-    "videos_pendientes": true
+    "videos_pendientes": false
   }
 }
