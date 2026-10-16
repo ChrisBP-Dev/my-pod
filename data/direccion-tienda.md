@@ -42,8 +42,14 @@ Thanksgiving, más Navidad, o solo Navidad).
 - Fase 2 si despega: Teeinblue/Customily (auto, costo mensual) o
   HelloCustom (POD con personalización integrada).
 - Mecánica de template (diseño sin nombre + nombre calibrado) en estudio.
-- Canva Pro del dueño (cuenta en organización estudiantil) en evaluación:
-  solo si aporta valor al flujo; si no, se descarta.
+- **Spike Canva API (2026-10-15, verificado en canva.dev):** la ruta
+  Connect API + Autofill exige integración PRIVADA = solo para equipos
+  en plan **Canva Enterprise** (docs: "private (available only to your
+  team on a Canva Enterprise plan)"; autofill requiere Enterprise +
+  brand template + OAuth). Su cuenta está en org estudiantil → **ruta
+  BLOQUEADA salvo upgrade a Enterprise**. No invertir más en esta vía
+  sin ese upgrade. (DPI: la API permite diseños de 40–8000px, así que el
+  tamaño de exportación no era el bloqueo; el bloqueo es el plan.)
 
 ## NO hacer
 - Halloween: 16 días, cutoff de envío pasado.

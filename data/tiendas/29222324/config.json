@@ -55,8 +55,86 @@
       "gildan-18000": "Sweatshirt",
       "bella-canvas-3001": "T-Shirt"
     },
-    "esquema_mockups": 10,
-    "nota": "Ver skills/publicar-printify-etsy/SKILL.md §Track MPL. La estratega puede definir otra composición en data/config-propuestas.json."
+    "esquema_mockups": [
+      {
+        "slot": 1,
+        "producto": "gildan-18000",
+        "tipo": "lifestyle",
+        "nota": "hero = imagen principal del listing"
+      },
+      {
+        "slot": 2,
+        "producto": "gildan-18000",
+        "tipo": "lifestyle",
+        "nota": "pose/modelo DIFERENTE al slot 1"
+      },
+      {
+        "slot": 3,
+        "producto": "gildan-18000",
+        "tipo": "flat"
+      },
+      {
+        "slot": 4,
+        "producto": "gildan-18000",
+        "tipo": "flat",
+        "nota": "otro color"
+      },
+      {
+        "slot": 5,
+        "producto": "gildan-18000",
+        "tipo": "folded_decorado",
+        "nota": "ambientado con fondo, nunca plano blanco"
+      },
+      {
+        "slot": 6,
+        "producto": "bella-canvas-3001",
+        "tipo": "on_model"
+      },
+      {
+        "slot": 7,
+        "producto": "bella-canvas-3001",
+        "tipo": "on_model",
+        "nota": "pose/modelo distinto al slot 6"
+      },
+      {
+        "slot": 8,
+        "producto": "bella-canvas-3001",
+        "tipo": "flat"
+      },
+      {
+        "slot": 9,
+        "producto": "gildan-18000",
+        "tipo": "tabla_tallas"
+      },
+      {
+        "slot": 10,
+        "producto": "bella-canvas-3001",
+        "tipo": "tabla_tallas"
+      }
+    ],
+    "nota": "Esquema aprobado por el dueño 2026-10-15 para la composición default. Si la estratega define otra composición, define su esquema aquí (el skill lo lee, no lo quema).",
+    "esquema_videos": [
+      {
+        "video": 1,
+        "producto": "gildan-18000",
+        "tomas": 3,
+        "tipo": "lifestyle",
+        "nota": "distintos"
+      },
+      {
+        "video": 2,
+        "producto": "bella-canvas-3001",
+        "tomas": 3,
+        "tipo": "on_model",
+        "nota": "distintas"
+      }
+    ],
+    "reglas_esquema": [
+      "nunca repetir la misma pose/modelo en colores diferentes",
+      "todos los productos y colores vendidos deben estar representados visualmente",
+      "la imagen principal (slot 1) siempre es lifestyle del producto base",
+      "si el catálogo no ofrece los shoots necesarios, reportar la limitación, no improvisar"
+    ]
   },
   "flujo_bifurcado": {
     "personalizable": "single (el MPL nativo no soporta personalización)",

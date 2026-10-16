@@ -1,1 +1,66 @@
-{"colores_mpl":["White","Athletic Heather","Natural"],"costos_verificados_2026_10_15":{"base":11.29,"envio":3.99,"fuente":"API Printify (análisis de rentabilidad 2026-10-15)"},"criterio_color_diseno":"Cada color se valida contra el diseño (contraste/legibilidad) antes de ofrecerse. Sin verificación visual no se abarca.","nombre_variacion_mpl":"T-Shirt","nota_blueprint_id":"PENDIENTE: verificar el blueprint_id en el catálogo de Printify (no inventar). El provider es Printify Choice (decisión del dueño 2026-10-15).","nota_colores":"Criterio playera MPL (orden del dueño 2026-10-15): estos 3 colores, TODAS las tallas que el proveedor ofrezca por color. Si un color trae tallas limitadas (ej. Natural solo XL/2XL), se acepta como viene. NO sustituir colores.","placement":{"estado":"verificado_visual_p005","nota":"Heredado del flujo 'same design' en p005 (centrado, aprox 10.5x11.93 pulg). NO pasó la puerta numérica de placement: verificar en CADA producto del MPL + revisión del dueño (regla 2026-10-15)."},"precios":{"2XL":27.99,"3XL":30.99,"S-XL":24.99,"formula":"recargo = redondeo((costo_talla - costo_SXL) × 1.15)","margen_base":"28% ($6.89) — ver docs-migrados/analisis-rentabilidad-2026-10-15.md"},"printify_blueprint_id":null,"printify_provider":"Printify Choice","producto":"Bella+Canvas 3001 — Unisex Jersey Tee","slug":"bella-canvas-3001"}
+{
+  "colores_mpl": [
+    "White",
+    "Athletic Heather",
+    "Natural"
+  ],
+  "costos_verificados_2026_10_15": {
+    "base": 11.29,
+    "envio": 3.99,
+    "fuente": "API Printify (análisis de rentabilidad 2026-10-15)"
+  },
+  "criterio_color_diseno": "Cada color se valida contra el diseño (contraste/legibilidad) antes de ofrecerse. Sin verificación visual no se abarca.",
+  "nombre_variacion_mpl": "T-Shirt",
+  "nota_blueprint_id": "Verificado 2026-10-15 vía API Printify: productos vivos de la tienda (ej. 6ad167ade1630eaee406f44a 'On Call Christmas Nurse T-Shirt') usan blueprint_id 12 con print_provider_id 99 (Printify Choice).",
+  "nota_colores": "Criterio playera MPL (orden del dueño 2026-10-15): estos 3 colores, TODAS las tallas que el proveedor ofrezca por color. Si un color trae tallas limitadas (ej. Natural solo XL/2XL), se acepta como viene. NO sustituir colores.",
+  "placement": {
+    "estado": "verificado_visual_p005",
+    "nota": "Heredado del flujo 'same design' en p005 (centrado, aprox 10.5x11.93 pulg). NO pasó la puerta numérica de placement: verificar en CADA producto del MPL + revisión del dueño (regla 2026-10-15)."
+  },
+  "precios": {
+    "2XL": 27.99,
+    "3XL": 30.99,
+    "S-XL": 24.99,
+    "formula": "recargo = redondeo((costo_talla - costo_SXL) × 1.15)",
+    "margen_base": "28% ($6.89) — ver docs-migrados/analisis-rentabilidad-2026-10-15.md"
+  },
+  "printify_blueprint_id": 12,
+  "printify_provider": "Printify Choice",
+  "producto": "Bella+Canvas 3001 — Unisex Jersey Tee",
+  "slug": "bella-canvas-3001",
+  "printify_provider_id": 99,
+  "variantes_api_2026_10_15": {
+    "White": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL"
+    ],
+    "Athletic Heather": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "Natural": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL"
+    ],
+    "nota": "La tienda vende S–3XL (tablas de precio). Rangos completos del proveedor a modo de referencia; la regla de tienda es 'todas las tallas que el proveedor ofrezca por color'."
+  }
+}

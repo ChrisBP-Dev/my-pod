@@ -35,7 +35,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] 13 tags (≤20 car. c/u) cubriendo ambos productos y el nicho
 - [ ] Puerta `verificar-paquete.py` = PASS
 
-### Mockups — esquema de 10 (orden exacto)
+### Mockups — esquema vigente (de `data/tiendas/29222324/config.json` → `mpl.esquema_mockups`; si la composición cambia, el esquema cambia ahí)
 - [ ] 1. Sudadera lifestyle hero (= imagen principal del listing)
 - [ ] 2. Sudadera lifestyle 2 (pose/modelo DIFERENTE)
 - [ ] 3. Sudadera flat-lay

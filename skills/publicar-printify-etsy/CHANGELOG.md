@@ -1,5 +1,13 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.6.1 (2026-10-15)
+- **Organización a nivel tienda** (punto del dueño): el esquema de
+  mockups (`mpl.esquema_mockups`) y de videos (`mpl.esquema_videos`) se
+  movió a `data/tiendas/29222324/config.json`. El skill lee el esquema
+  vigente; si la estratega define otra composición, define su esquema
+  en el config sin reescribir el skill. Nueva sección "Calibraciones
+  (mecanismo vs instancia vs tienda)".
+
 ## v0.6.0 (2026-10-15)
 - **Flujo MPL nativo** (decisión del dueño): track MPL para diseños NO
   personalizables — composición estándar Gildan 18000 + Bella+Canvas 3001

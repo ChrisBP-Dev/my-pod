@@ -3,15 +3,15 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un solo listing) o track single-product (diseños personalizables, que el MPL no soporta). Drafts en Printify, revisión del dueño, mockups de Printify, videos, publicación y verificación integral en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.6.0"
+  version: "0.6.1"
   framework_version: "0.8.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.6.0** — Flujo MPL nativo + flujo bifurcado por personalización
-(decisiones del dueño 2026-10-15). Printify es la fuente de verdad;
+**Versión 0.6.1** — Esquema de mockups/videos movido al config de tienda
+(organización a nivel tienda, 2026-10-15). Printify es la fuente de verdad;
 no generamos mockups propios.
 
 ## Cuándo usarme / cuándo NO
@@ -170,8 +170,14 @@ Por cada producto de la composición (default: sudadera + playera):
   - Guardar como draft NO toca el listing vivo.
   - Revert a single disponible tras publicar.
 
-### M5. Mockups — esquema de 10 (APROBADO por el dueño 2026-10-15)
-Seleccionar EXACTAMENTE estas 10, en este orden:
+### M5. Mockups — esquema por composición (config de tienda, no quemado)
+El esquema de mockups NO está quemado en este skill: vive en
+`data/tiendas/<tienda-id>/config.json` → `mpl.esquema_mockups`
+(una entrada por slot: producto + tipo + nota). Si la estratega define
+otra composición, define su esquema ahí; el skill lo lee.
+
+**Esquema vigente para la composición default** (APROBADO por el dueño
+2026-10-15) — 10 imágenes, en este orden:
 1. Sudadera lifestyle hero (imagen principal del listing).
 2. Sudadera lifestyle 2 — pose/modelo DIFERENTE al #1.
 3. Sudadera flat-lay.
@@ -183,7 +189,7 @@ Seleccionar EXACTAMENTE estas 10, en este orden:
 9. Tabla de tallas sudadera.
 10. Tabla de tallas playera.
 
-**REGLAS duras:**
+**REGLAS duras** (`mpl.reglas_esquema` en el config):
 - Nunca repetir la misma pose/modelo en colores diferentes.
 - Todos los productos y colores vendidos deben estar representados
   visualmente (si un color se vende, aparece en alguna imagen).
@@ -201,7 +207,9 @@ marca un primario pero al sincronizar el orden puede no preservarse.
 Tras el sync, VERIFICAR en Etsy que la imagen principal sea la
 esperada; si no, reordenar directo en el editor de Etsy.
 
-### M6. Videos — esquema MPL (APROBADO 2026-10-15)
+### M6. Videos — esquema por composición (config de tienda)
+El esquema de videos vive en `data/tiendas/<tienda-id>/config.json` →
+`mpl.esquema_videos`. **Esquema vigente** (APROBADO 2026-10-15):
 - Formato: 1080×1080, 30fps, H.264, 9.5s, sin audio.
 - **Video 1:** 3 lifestyles de SUDADERA (distintos).
 - **Video 2:** 3 tomas de PLAYERA (distintas).
@@ -300,14 +308,19 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
   directamente donde se ve el resultado real. **El ojo del dueño es
   la puerta de calidad visual** — ningún gate numérico la sustituye.
 
-## Calibraciones (mecanismo vs instancia)
+## Calibraciones (mecanismo vs instancia vs tienda)
 
-- **MECANISMO**: el flujo es igual para cualquier producto y diseño.
-  Printify-first siempre. El track (MPL/single) lo decide el flujo
-  bifurcado (§0); la composición del MPL y los precios base los define
-  la estratega (`data/config-propuestas.json`), no este skill.
+- **MECANISMO** (este skill): el flujo es igual para cualquier producto y
+  diseño. Printify-first siempre. El track (MPL/single) lo decide el flujo
+  bifurcado (§0).
+- **TIENDA** (`data/tiendas/<id>/config.json` + `data/config-propuestas.json`):
+  la composición del MPL, los precios base, el esquema de mockups/videos y
+  el tipo de lote los define la tienda (vía la estratega), NO este skill.
+  Agregar un producto nuevo = ficha en `data/productos/` + esquema en el
+  config; el skill no se reescribe.
 - **CALIBRACIÓN** (Gildan 18000): posición inicial 78% ancho, 14% desde
   arriba. El dueño ajusta por diseño en el editor.
-- **CALIBRACIÓN** (Bella+Canvas 3001): placement verificado visual en
-  p005 (centrado, 10.5"×11.93", verificado por preview del editor).
-  La puerta numérica de placement queda pendiente para este producto.
+- **CALIBRACIÓN** (Bella+Canvas 3001): blueprint 12, provider 99
+  (Printify Choice), verificado vía API 2026-10-15. Placement verificado
+  visual en p005 (centrado, aprox 10.5"×11.93"); la puerta numérica de
+  placement queda pendiente para este producto.
