@@ -18,8 +18,9 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Colores = paleta validada contra el diseño (criterio color-diseño)
 - [ ] Playera: White + Athletic Heather + Natural, todas las tallas del proveedor
 - [ ] Precios escalonados APLICADOS en cada draft ANTES de publicar:
-  - [ ] Sudadera: S–XL $34.99 · 2XL $37.99 · 3XL $39.99
-  - [ ] Playera: S–XL $24.99 · 2XL $27.99 · 3XL $30.99
+  - [ ] Precios según `estrategia_precios` del config de la tienda
+    (ej. 29222324: sudadera S–XL $40.99 · 2XL $44.99 · 3XL $46.99;
+    playera S–XL $25.99 · 2XL $28.99 · 3XL $32.99)
 - [ ] Título = título REAL del diseño en cada draft (no genérico del blueprint)
 - [ ] Regla: componentes NO publicados single por separado
 
@@ -71,8 +72,9 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Abrir el listing vivo en Etsy
 - [ ] Variaciones: "Sweatshirt"/"T-Shirt" + tallas + colores correctos
 - [ ] Precio por variación verificado:
-  - [ ] Sudadera S–XL $34.99 · 2XL $37.99 · 3XL $39.99
-  - [ ] Playera S–XL $24.99 · 2XL $27.99 · 3XL $30.99
+  - [ ] Precios por variación según `estrategia_precios` del config
+    de la tienda (ej. 29222324: sudadera $40.99/$44.99/$46.99;
+    playera $25.99/$28.99/$32.99)
 - [ ] SKUs correctos por variación
 - [ ] Orden de imágenes = esquema de 10; hero = lifestyle sudadera
 - [ ] (Si el orden no se preservó del sync: reordenar en el editor de Etsy)

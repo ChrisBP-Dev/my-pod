@@ -53,14 +53,13 @@ indirecto (más pedidos = más oportunidades).
   **mínimo 25% off** en los listings participantes. Gratis participar;
   Etsy puede incluir la tienda en su marketing del evento.
 - Ya existe el cron `cyber-specials-decision-2026-10-26` (avisa el 26-oct).
-- **Margen con −25% (aritmética verificada contra
-  analisis-rentabilidad-2026-10-15):**
-  - Playera $24.99 → $18.74: costos $15.28 + fees ~$2.03 = **+$1.43**
-    (fino pero positivo).
-  - Sudadera $34.99 → $26.24: costos $25.86 + fees ~$2.74 = **−$2.36
-    PÉRDIDA por unidad**.
-  - Conclusión: a precios actuales, el evento solo es viable en
-    playeras (o eligiendo qué listings participan).
+- **Margen con −25% (doctrina "precio con colchón", precios
+  recalibrados 2026-10-16, piso $1.50):**
+  - Playera $25.99 → $19.49: margen **+$2.11** (S–XL).
+  - Sudadera $40.99 → $30.74: margen **+$1.71** (S–XL).
+  - Conclusión: con los precios con colchón, TODOS los listings pueden
+    entrar al evento. (Histórico: a precios anteriores $24.99/$34.99, la
+    sudadera daba −$2.36 por unidad.)
 
 ## 5. Star Seller [VERIFICADO oficial]
 

@@ -1,5 +1,10 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.7.0 (2026-10-16)
+- **Estándar API de Etsy vs navegador** (punto del dueño): sección nueva que apunta al canon `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` (API-first; navegador solo para ofertas/cupones, stats de visitas, mensajes).
+- **Tablas de precios**: ya no hardcodeadas; se leen de `estrategia_precios` del config de tienda (ejemplo 29222324 actualizado a doctrina precio con colchón).
+- Paso de checklist: listings nuevos se agregan a eventos de ofertas vigentes (`eventos_ofertas` del config).
+
 ## v0.6.1 (2026-10-15)
 - **Organización a nivel tienda** (punto del dueño): el esquema de
   mockups (`mpl.esquema_mockups`) y de videos (`mpl.esquema_videos`) se
