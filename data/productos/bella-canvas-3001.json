@@ -18,11 +18,11 @@
     "nota": "Heredado del flujo 'same design' en p005 (centrado, aprox 10.5x11.93 pulg). NO pasó la puerta numérica de placement: verificar en CADA producto del MPL + revisión del dueño (regla 2026-10-15)."
   },
   "precios": {
-    "2XL": 27.99,
-    "3XL": 30.99,
-    "S-XL": 24.99,
-    "formula": "recargo = redondeo((costo_talla - costo_SXL) × 1.15)",
-    "margen_base": "28% ($6.89) — ver docs-migrados/analisis-rentabilidad-2026-10-15.md"
+    "S-XL": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99,
+    "formula": "precio con colchon: con -25% el margen >= $1.50 (doctrina del dueno 2026-10-16)",
+    "margen_a_menos25": "S-XL $2.11 / 2XL $1.54 / 3XL $1.64 (costos 2XL/3XL inferidos de la formula vigente; verificar contra API Printify)"
   },
   "printify_blueprint_id": 12,
   "printify_provider": "Printify Choice",
