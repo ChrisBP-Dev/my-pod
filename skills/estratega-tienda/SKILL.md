@@ -3,7 +3,7 @@ name: "estratega-tienda"
 description: "Rol de estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal que direcciona las propuestas diarias (reparto de foco, mix de productos, guía de precios, nichos) + el config máquina de tipo de producto (mpl/single/mixto) que el cron de propuestas consume."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
   framework_version: "0.8.0"
 ---
 
@@ -81,14 +81,25 @@ de propuestas diarias consume como orden de trabajo.
    catálogo ya lo cubre.
 6. **Guía de precios.** Precio base S–XL por producto + recargos por talla
    (fórmula en publicar-printify-etsy §Precios).
-   **Acoplamiento cupones↔precios:** los cupones/descuentos y los
-   precios se deciden JUNTOS, nunca por separado. Antes de fijar un
-   precio base, activar un Targeted Offer o entrar a un evento/promo,
-   verifica los descuentos ya activos y calcula el margen COMBINADO
-   (precio − descuento apilado − costos − fees): el total nunca deja
-   el margen en negativo; siempre hay piso de ganancia positivo. Si
-   un evento exige −X% y hay cupones activos que lo volverían
-   negativo, se desactiva una cosa o no se entra al evento.
+   **Acoplamiento cupones↔precios (mecánica Etsy verificada
+   2026-10-16):** en Etsy solo aplica UN descuento por compra: los
+   cupones NO se combinan con precios en oferta. Si un listing está
+   en oferta (−15%) y el comprador tiene un cupón (−5%), Etsy aplica
+   el mejor de los dos (15%), no la suma. Conclusión: los cupones son
+   una herramienta para ventanas a PRECIO PLENO; durante cualquier
+   oferta o evento (incl. sales events de Etsy) los cupones quedan
+   inertes — no se "apilan", se desperdician. Por eso cupones,
+   descuentos y precios se planifican JUNTOS como un CALENDARIO
+   secuencial (qué descuento está activo en cada ventana), nunca como
+   suma. Antes de fijar un precio base, activar un cupón/Targeted
+   Offer o entrar a un evento/promo, verifica qué descuento ya está
+   activo y calcula el margen de ESA ventana (precio − descuento
+   vigente − costos − fees): siempre con piso de ganancia positivo.
+   **FLUJO (orden del dueño 2026-10-16):** el calendario de
+   descuentos/cupones lo PROPONE la estratega (con números y
+   márgenes por ventana), el dueño da el DALE, y Jarvis lo ejecuta y
+   verifica. El dueño no hace la aritmética: pone restricciones y
+   aprueba.
    **PORTABILIDAD (principio del sistema):** este skill define el
    MECANISMO y el método de calibración, NUNCA los valores. La
    estrategia de precios de cada tienda vive en
