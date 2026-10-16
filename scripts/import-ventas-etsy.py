@@ -50,7 +50,7 @@ API_BASE = "https://openapi.etsy.com/v3/application"
 OAUTH_AUTHORIZE = "https://www.etsy.com/oauth/connect"
 OAUTH_TOKEN = "https://api.etsy.com/v3/public/oauth/token"
 SCOPES = "email_r shops_r listings_r transactions_r"
-SHOP_ID = "29222324"  # Tú Dale POD - Store
+SHOP_ID = "68433437"  # MyNightShiftShop (Etsy). OJO: 29222324 es el ID de Printify, no de Etsy.
 
 # ---------------------------------------------------------------- utilidades
 
