@@ -1,404 +1,1025 @@
 {
- "santas-favorite-nurse": {
-  "id_etsy": "4589992085",
-  "url": "https://www.etsy.com/listing/4589992085",
-  "nicho": "enfermeria",
-  "assets_finales": [
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/01-hero-lifestyle-sportgrey-latina-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/02-flatlay-white-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/03-flatlay-sand-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/04-flatlay-sportgrey-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/05-lifestyle-white-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/06-lifestyle-sand-redhead-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/07-closecrop-detail-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/08-doblada-white-2000.jpg"
-  ]
- },
- "vitals-stable": {
-  "id_etsy": "4591617678",
-  "url": "https://www.etsy.com/listing/4591617678/vitals-stable-spirits-bright-sweatshirt",
-  "nicho": "enfermeria",
-  "assets_finales": [
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/closecrop-prop2-sand-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/closecrop-prop2-sportgrey-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/closecrop-prop2-white-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/doblada-prop2-sand-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/doblada-prop2-sportgrey-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/doblada-prop2-white-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/flatlay-prop2-sand-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/flatlay-prop2-sportgrey-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/flatlay-prop2-white-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/onmodel-d-prop2-white-canon-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/onmodel-b-prop2-sand-canon-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/onmodel-e-prop2-sportgrey-canon-v3-2000.jpg"
-  ]
- },
- "sleighin-12-hour-shift": {
-  "id_etsy": "4591828133",
-  "url": "https://www.etsy.com/listing/4591828133",
-  "nicho": "enfermeria",
-  "assets_finales": [
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/closecrop-sleighin-sand-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/closecrop-sleighin-sportgrey-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/closecrop-sleighin-white-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/doblada-sleighin-sand-v3-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/doblada-sleighin-sportgrey-v3-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/doblada-sleighin-white-v3-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/flatlay-sleighin-sand-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/flatlay-sleighin-sportgrey-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/flatlay-sleighin-white-v1-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/onmodel-a-sleighin-white-canon-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/onmodel-b-sleighin-sand-canon-v4-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/onmodel-d-sleighin-sportgrey-canon-v2-2000.jpg"
-  ]
- },
- "quiet-night-shift": {
-  "id_etsy": "4592008985",
-  "url": "https://www.etsy.com/listing/4592008985",
-  "nicho": "enfermeria",
-  "assets_finales": [
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/closecrop-quiet-sand-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/closecrop-quiet-sportgrey-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/closecrop-quiet-white-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/doblada-quiet-sand-v4-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/doblada-quiet-sportgrey-v3-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/doblada-quiet-white-v3-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/flatlay-quiet-sand-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/flatlay-quiet-sportgrey-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/flatlay-quiet-white-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/onmodel-a-quiet-white-canon-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/onmodel-b-quiet-sand-canon-v2-2000.jpg",
-   "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/onmodel-d-quiet-sportgrey-canon-v2-2000.jpg"
-  ]
- },
- "p002": {
-  "id_printify": "6acfea4b575ee9c2660b69cd",
-  "shop": "29222324",
-  "titulo": "Night Shift Hero Nurse Sweatshirt, Funny Nurse Gift, Call Don't Fall Sweatshirt, Nurse Appreciation Gift, Healthcare Worker Shirt",
-  "colores": [
-   "White",
-   "Sand",
-   "Sport Grey"
-  ],
-  "variantes": 16,
-  "mockups": 15,
-  "hero": "Lifestyle 2 White",
-  "video1": "/home/hatch/workspace/your_files/p002-video1-printify-v1.mp4",
-  "video2": "/home/hatch/workspace/your_files/p002-video2-printify-v1.mp4",
-  "paquete": "data/paquetes-listing/p002-paquete.md",
-  "arte": "data/artes-print/p002-print-300dpi.png",
-  "estado": "publicado_completo_verificado",
-  "fecha": "2026-10-14",
-  "id_etsy": "4595604876",
-  "url": "https://www.etsy.com/listing/4595604876",
-  "tags": 13,
-  "videos_etsy": 2,
-  "descripcion_aplicada": true,
-  "hero_verificado": "Lifestyle 2 White",
-  "precio": 34.99,
-  "materiales": [
-   "Cotton",
-   "Polyester"
-  ],
-  "atributos": {
-   "size_scale": "US letter",
-   "sleeve_length": "Long sleeve"
+  "santas-favorite-nurse": {
+    "id_etsy": "4589992085",
+    "url": "https://www.etsy.com/listing/4589992085",
+    "nicho": "enfermeria",
+    "assets_finales": [
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/01-hero-lifestyle-sportgrey-latina-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/02-flatlay-white-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/03-flatlay-sand-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/04-flatlay-sportgrey-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/05-lifestyle-white-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/06-lifestyle-sand-redhead-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/07-closecrop-detail-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups-santas-favorite-nurse/08-doblada-white-2000.jpg"
+    ],
+    "tipo": "mpl",
+    "mpl_id": "6797ec68-dba6-4a61-b76b-456035424a59",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ac5437b0c649170170368e6",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad1b94a40bc883459068140",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "estado": "publicado_completo",
+    "videos_pendientes": true
   },
-  "assets_finales": [
-   "/home/hatch/workspace/browser_downloads/sess-467387208/browser-download-20261014T222541.718973675Z-12-Lifestyle_2__White.jpg",
-   "/home/hatch/workspace/browser_downloads/sess-467387208/browser-download-20261014T221913.538399544Z-7-Lifestyle__Sand.jpg",
-   "/home/hatch/workspace/browser_downloads/sess-467387208/browser-download-20261014T222512.626294544Z-10-Folded_2__Sand.jpg"
-  ],
-  "pins_pinterest": [
-   "https://www.pinterest.com/pin/1142858842976332016/",
-   "https://www.pinterest.com/pin/1142858842976332546/",
-   "https://www.pinterest.com/pin/1142858842976332288/"
-  ]
- },
- "p021": {
-  "diseno": "Twelve Shifts of Christmas",
-  "titulo": "Twelve Shifts of Christmas Nurse Sweatshirt",
-  "nicho": "enfermeria",
-  "shop": "29222324",
-  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
-  "arte": "data/artes-print/p021-print-300dpi.png",
-  "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado_completo_verificado",
-  "fecha": "2026-10-15",
-  "id_printify": "6ad0c19d59ac88d91604ace4",
-  "precio": 34.99,
-  "printify_draft_id": "6ad0c19d59ac88d91604ace4",
-  "printify_draft_estado": "publicado",
-  "printify_draft_fecha": "2026-10-15",
-  "arte_limpio_2026_10_15": "sin cambios (ya limpio)",
-  "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
-  "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
-  "paquete": "data/paquetes-listing/p021-paquete.md",
-  "paquete_titulo": "Night Shift Nurse Sweatshirt, Twelve Shifts of Christmas Funny RN Crewneck | Christmas Gift for Her",
-  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
-  "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
-  "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
-  "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
-  "videos": {
-   "video1": "data/videos/p021-video1.mp4",
-   "video2": "data/videos/p021-video2.mp4"
+  "vitals-stable": {
+    "id_etsy": "4591617678",
+    "url": "https://www.etsy.com/listing/4591617678/vitals-stable-spirits-bright-sweatshirt",
+    "nicho": "enfermeria",
+    "assets_finales": [
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/closecrop-prop2-sand-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/closecrop-prop2-sportgrey-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/closecrop-prop2-white-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/doblada-prop2-sand-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/doblada-prop2-sportgrey-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/doblada-prop2-white-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/flatlay-prop2-sand-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/flatlay-prop2-sportgrey-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/flatlay-prop2-white-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/onmodel-d-prop2-white-canon-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/onmodel-b-prop2-sand-canon-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/vitals-stable-kit/onmodel-e-prop2-sportgrey-canon-v3-2000.jpg"
+    ],
+    "tipo": "mpl",
+    "mpl_id": "7a0a5f01-2950-4849-9d3d-551710212f9c",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ac85e72e74dd3c72b0e3443",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad1b4b816a1d5c8d6017835",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "estado": "publicado_completo",
+    "videos_pendientes": true
   },
-  "etsy_publicado": true,
-  "mockups": 9,
-  "videos_puerta": "PASS 12/12",
-  "id_etsy": "4596086167",
-  "url": "https://www.etsy.com/listing/4596086167",
-  "videos_etsy": 2,
-  "tags": 13,
-  "fecha_publicacion": "2026-10-15",
-  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
-  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
- },
- "p022": {
-  "diseno": "Night Shift Elves",
-  "titulo": "Night Shift Elves Nurse Sweatshirt",
-  "nicho": "enfermeria",
-  "shop": "29222324",
-  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
-  "arte": "data/artes-print/p022-print-300dpi.png",
-  "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado_completo_verificado",
-  "fecha": "2026-10-15",
-  "id_printify": "6ad0c2675c7e4842a800f3c1",
-  "precio": 34.99,
-  "printify_draft_id": "6ad0c2675c7e4842a800f3c1",
-  "printify_draft_estado": "publicado",
-  "printify_draft_fecha": "2026-10-15",
-  "arte_limpio_2026_10_15": "mancha entre elfos + franja blanca entre textos eliminadas",
-  "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
-  "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
-  "paquete": "data/paquetes-listing/p022-paquete.md",
-  "paquete_titulo": "Funny Nurse Crewneck, Night Shift Elves RN Christmas Sweatshirt | Gift for Night Shift Nurse",
-  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
-  "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
-  "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
-  "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
-  "videos": {
-   "video1": "data/videos/p022-video1.mp4",
-   "video2": "data/videos/p022-video2.mp4"
+  "sleighin-12-hour-shift": {
+    "id_etsy": "4591828133",
+    "url": "https://www.etsy.com/listing/4591828133",
+    "nicho": "enfermeria",
+    "assets_finales": [
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/closecrop-sleighin-sand-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/closecrop-sleighin-sportgrey-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/closecrop-sleighin-white-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/doblada-sleighin-sand-v3-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/doblada-sleighin-sportgrey-v3-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/doblada-sleighin-white-v3-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/flatlay-sleighin-sand-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/flatlay-sleighin-sportgrey-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/flatlay-sleighin-white-v1-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/onmodel-a-sleighin-white-canon-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/onmodel-b-sleighin-sand-canon-v4-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/sleighin-12-hour-shift-kit/onmodel-d-sleighin-sportgrey-canon-v2-2000.jpg"
+    ],
+    "tipo": "mpl",
+    "mpl_id": "34811fe1-a29d-415b-b8a0-a8a7428b42c2",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ac8d76caeaf729c3201aecd",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad1aea640bc883459067847",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "estado": "publicado_completo",
+    "videos_pendientes": true
   },
-  "etsy_publicado": true,
-  "mockups": 9,
-  "videos_puerta": "PASS 12/12",
-  "id_etsy": "4596108104",
-  "url": "https://www.etsy.com/listing/4596108104",
-  "videos_etsy": 2,
-  "tags": 13,
-  "fecha_publicacion": "2026-10-15",
-  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
-  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
- },
- "p023": {
-  "diseno": "Silent Night Unit",
-  "titulo": "Silent Night Unit Nurse Sweatshirt",
-  "nicho": "enfermeria",
-  "shop": "29222324",
-  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
-  "arte": "data/artes-print/p023-print-300dpi.png",
-  "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado_completo_verificado",
-  "fecha": "2026-10-15",
-  "id_printify": "6ad0c30e210a7ce1c702879c",
-  "precio": 34.99,
-  "printify_draft_id": "6ad0c30e210a7ce1c702879c",
-  "printify_draft_estado": "publicado",
-  "printify_draft_fecha": "2026-10-15",
-  "arte_limpio_2026_10_15": "sin cambios (ya limpio)",
-  "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
-  "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
-  "paquete": "data/paquetes-listing/p023-paquete.md",
-  "paquete_titulo": "Christmas Nurse Sweatshirt, Silent Night Unit RN Crewneck | Night Shift Christmas Gift for Her",
-  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
-  "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
-  "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
-  "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
-  "videos": {
-   "video1": "data/videos/p023-video1.mp4",
-   "video2": "data/videos/p023-video2.mp4"
+  "quiet-night-shift": {
+    "id_etsy": "4592008985",
+    "url": "https://www.etsy.com/listing/4592008985",
+    "nicho": "enfermeria",
+    "assets_finales": [
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/closecrop-quiet-sand-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/closecrop-quiet-sportgrey-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/closecrop-quiet-white-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/doblada-quiet-sand-v4-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/doblada-quiet-sportgrey-v3-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/doblada-quiet-white-v3-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/flatlay-quiet-sand-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/flatlay-quiet-sportgrey-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/flatlay-quiet-white-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/onmodel-a-quiet-white-canon-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/onmodel-b-quiet-sand-canon-v2-2000.jpg",
+      "/home/hatch/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/mockups/quiet-night-shift-kit/onmodel-d-quiet-sportgrey-canon-v2-2000.jpg"
+    ],
+    "tipo": "mpl",
+    "mpl_id": "e3cb77f0-1fda-4b18-b98d-2cd9297bd2c7",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ac8eca4b0b07f13520afea0",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad20c1e067604a3850d1cf6",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "estado": "publicado_completo",
+    "videos_pendientes": true,
+    "nota_migracion": "Arte regenerado con IA (original perdido), aprobado por el dueño"
   },
-  "etsy_publicado": true,
-  "mockups": 9,
-  "videos_puerta": "PASS 12/12",
-  "id_etsy": "4596087957",
-  "url": "https://www.etsy.com/listing/4596087957",
-  "videos_etsy": 2,
-  "tags": 13,
-  "fecha_publicacion": "2026-10-15",
-  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
-  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
- },
- "p024": {
-  "diseno": "NPO After Midnight",
-  "titulo": "NPO After Midnight Nurse Sweatshirt",
-  "nicho": "enfermeria",
-  "shop": "29222324",
-  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
-  "arte": "data/artes-print/p024-print-300dpi.png",
-  "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado_completo_verificado",
-  "fecha": "2026-10-15",
-  "id_printify": "6ad0c378f0531fc34e0f4c19",
-  "precio": 34.99,
-  "printify_draft_id": "6ad0c378f0531fc34e0f4c19",
-  "printify_draft_estado": "publicado",
-  "printify_draft_fecha": "2026-10-15",
-  "arte_limpio_2026_10_15": "disco blanco interior eliminado",
-  "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
-  "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
-  "paquete": "data/paquetes-listing/p024-paquete.md",
-  "paquete_titulo": "Funny Nurse Sweatshirt, NPO After Midnight RN Crewneck | Night Shift Christmas Gift for Her",
-  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
-  "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
-  "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
-  "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
-  "videos": {
-   "video1": "data/videos/p024-video1.mp4",
-   "video2": "data/videos/p024-video2.mp4"
+  "p002": {
+    "id_printify": "6acfea4b575ee9c2660b69cd",
+    "shop": "29222324",
+    "titulo": "Night Shift Hero Nurse Sweatshirt, Funny Nurse Gift, Call Don't Fall Sweatshirt, Nurse Appreciation Gift, Healthcare Worker Shirt",
+    "colores": [
+      "White",
+      "Sand",
+      "Sport Grey"
+    ],
+    "variantes": 16,
+    "mockups": 15,
+    "hero": "Lifestyle 2 White",
+    "video1": "/home/hatch/workspace/your_files/p002-video1-printify-v1.mp4",
+    "video2": "/home/hatch/workspace/your_files/p002-video2-printify-v1.mp4",
+    "paquete": "data/paquetes-listing/p002-paquete.md",
+    "arte": "data/artes-print/p002-print-300dpi.png",
+    "estado": "publicado_completo",
+    "fecha": "2026-10-14",
+    "id_etsy": "4595604876",
+    "url": "https://www.etsy.com/listing/4595604876",
+    "tags": 13,
+    "videos_etsy": 2,
+    "descripcion_aplicada": true,
+    "hero_verificado": "Lifestyle 2 White",
+    "precio": 34.99,
+    "materiales": [
+      "Cotton",
+      "Polyester"
+    ],
+    "atributos": {
+      "size_scale": "US letter",
+      "sleeve_length": "Long sleeve"
+    },
+    "assets_finales": [
+      "/home/hatch/workspace/browser_downloads/sess-467387208/browser-download-20261014T222541.718973675Z-12-Lifestyle_2__White.jpg",
+      "/home/hatch/workspace/browser_downloads/sess-467387208/browser-download-20261014T221913.538399544Z-7-Lifestyle__Sand.jpg",
+      "/home/hatch/workspace/browser_downloads/sess-467387208/browser-download-20261014T222512.626294544Z-10-Folded_2__Sand.jpg"
+    ],
+    "pins_pinterest": [
+      "https://www.pinterest.com/pin/1142858842976332016/",
+      "https://www.pinterest.com/pin/1142858842976332546/",
+      "https://www.pinterest.com/pin/1142858842976332288/"
+    ],
+    "tipo": "mpl",
+    "mpl_id": "0235659b-fea4-4d4d-ac99-3f7e0a4e86fe",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6acfea4b575ee9c2660b69cd",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad19eb547a196f8200d3987",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
   },
-  "etsy_publicado": true,
-  "mockups": 9,
-  "videos_puerta": "PASS 12/12",
-  "id_etsy": "4596108754",
-  "url": "https://www.etsy.com/listing/4596108754",
-  "videos_etsy": 2,
-  "tags": 13,
-  "fecha_publicacion": "2026-10-15",
-  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
-  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
- },
- "p025": {
-  "diseno": "On Call Christmas",
-  "titulo": "On Call Christmas Nurse Sweatshirt",
-  "nicho": "enfermeria",
-  "shop": "29222324",
-  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
-  "arte": "data/artes-print/p025-print-300dpi.png",
-  "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado_completo_verificado",
-  "fecha": "2026-10-15",
-  "id_printify": "6ad0c3dd5c7e4842a800f4d1",
-  "precio": 34.99,
-  "printify_draft_id": "6ad0c3dd5c7e4842a800f4d1",
-  "printify_draft_estado": "publicado",
-  "printify_draft_fecha": "2026-10-15",
-  "arte_limpio_2026_10_15": "mancha izquierda del telefono eliminada",
-  "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
-  "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
-  "paquete": "data/paquetes-listing/p025-paquete.md",
-  "paquete_titulo": "On Call Christmas Nurse Sweatshirt, Funny RN Crewneck | Night Shift Christmas Gift for Her",
-  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
-  "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
-  "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
-  "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
-  "videos": {
-   "video1": "data/videos/p025-video1.mp4",
-   "video2": "data/videos/p025-video2.mp4"
+  "p021": {
+    "diseno": "Twelve Shifts of Christmas",
+    "titulo": "Twelve Shifts of Christmas Nurse Sweatshirt",
+    "nicho": "enfermeria",
+    "shop": "29222324",
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
+    "arte": "data/artes-print/p021-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "publicado_completo",
+    "fecha": "2026-10-15",
+    "id_printify": "6ad0c19d59ac88d91604ace4",
+    "precio": 34.99,
+    "printify_draft_id": "6ad0c19d59ac88d91604ace4",
+    "printify_draft_estado": "publicado",
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "sin cambios (ya limpio)",
+    "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
+    "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
+    "paquete": "data/paquetes-listing/p021-paquete.md",
+    "paquete_titulo": "Night Shift Nurse Sweatshirt, Twelve Shifts of Christmas Funny RN Crewneck | Christmas Gift for Her",
+    "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
+    "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
+    "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
+    "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
+    "videos": {
+      "video1": "data/videos/p021-video1.mp4",
+      "video2": "data/videos/p021-video2.mp4"
+    },
+    "etsy_publicado": true,
+    "mockups": 9,
+    "videos_puerta": "PASS 12/12",
+    "id_etsy": "4596086167",
+    "url": "https://www.etsy.com/listing/4596086167",
+    "videos_etsy": 2,
+    "tags": 13,
+    "fecha_publicacion": "2026-10-15",
+    "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+    "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy",
+    "tipo": "mpl",
+    "mpl_id": "ed22c263-de7a-4f7b-bc65-3fe3cdeeadc3",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad0c19d59ac88d91604ace4",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad18cbfe9129153fd0b7a13",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
   },
-  "etsy_publicado": true,
-  "mockups": 9,
-  "videos_puerta": "PASS 12/12",
-  "id_etsy": "4596108958",
-  "url": "https://www.etsy.com/listing/4596108958",
-  "videos_etsy": 2,
-  "tags": 13,
-  "fecha_publicacion": "2026-10-15",
-  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
-  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
- },
- "p026": {
-  "diseno": "North Pole Night Shift",
-  "titulo": "North Pole Night Shift Nurse Sweatshirt",
-  "nicho": "enfermeria",
-  "shop": "29222324",
-  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
-  "arte": "data/artes-print/p026-print-300dpi.png",
-  "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado-video2-pendiente-reintento",
-  "fecha": "2026-10-15",
-  "id_printify": "6ad0c47c59ac88d91604aedf",
-  "precio": 34.99,
-  "printify_draft_id": "6ad0c47c59ac88d91604aedf",
-  "printify_draft_estado": "publicado",
-  "printify_draft_fecha": "2026-10-15",
-  "arte_limpio_2026_10_15": "parches blancos entre letreros eliminados",
-  "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
-  "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
-  "paquete": "data/paquetes-listing/p026-paquete.md",
-  "paquete_titulo": "Night Shift Nurse Sweatshirt, North Pole Night Shift Funny RN Crewneck | Christmas Gift",
-  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
-  "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
-  "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
-  "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
-  "videos": {
-   "video1": "data/videos/p026-video1.mp4",
-   "video2": "data/videos/p026-video2.mp4"
+  "p022": {
+    "diseno": "Night Shift Elves",
+    "titulo": "Night Shift Elves Nurse Sweatshirt",
+    "nicho": "enfermeria",
+    "shop": "29222324",
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
+    "arte": "data/artes-print/p022-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "publicado_completo",
+    "fecha": "2026-10-15",
+    "id_printify": "6ad0c2675c7e4842a800f3c1",
+    "precio": 34.99,
+    "printify_draft_id": "6ad0c2675c7e4842a800f3c1",
+    "printify_draft_estado": "publicado",
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "mancha entre elfos + franja blanca entre textos eliminadas",
+    "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
+    "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
+    "paquete": "data/paquetes-listing/p022-paquete.md",
+    "paquete_titulo": "Funny Nurse Crewneck, Night Shift Elves RN Christmas Sweatshirt | Gift for Night Shift Nurse",
+    "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
+    "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
+    "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
+    "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
+    "videos": {
+      "video1": "data/videos/p022-video1.mp4",
+      "video2": "data/videos/p022-video2.mp4"
+    },
+    "etsy_publicado": true,
+    "mockups": 9,
+    "videos_puerta": "PASS 12/12",
+    "id_etsy": "4596108104",
+    "url": "https://www.etsy.com/listing/4596108104",
+    "videos_etsy": 2,
+    "tags": 13,
+    "fecha_publicacion": "2026-10-15",
+    "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+    "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy",
+    "tipo": "mpl",
+    "mpl_id": "f2b7a1b3-964c-42bb-8adb-3b11b6ff5d6b",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad0c2675c7e4842a800f3c1",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad18254403458c5d3018c09",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
   },
-  "etsy_publicado": true,
-  "mockups": 9,
-  "videos_puerta": "PASS 12/12",
-  "id_etsy": "4596094421",
-  "url": "https://www.etsy.com/listing/4596094421",
-  "videos_etsy": 1,
-  "tags": 13,
-  "fecha_publicacion": "2026-10-15",
-  "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
-  "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy"
- },
- "p027": {
-  "diseno": "Nice List Sleepers",
-  "titulo": "Nice List Sleepers Nurse Sweatshirt",
-  "nicho": "enfermeria",
-  "shop": "29222324",
-  "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
-  "arte": "data/artes-print/p027-print-300dpi.png",
-  "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "eliminado-por-dueno-2026-10-15",
-  "fecha": "2026-10-15",
-  "id_printify": null,
-  "precio": 34.99,
-  "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
-  "printify_draft_id": "6ad0c4ef210a7ce1c7028880",
-  "printify_draft_estado": "unpublished",
-  "printify_draft_fecha": "2026-10-15"
- },
- "p004": {
-  "estado": "publicado",
-  "titulo": "night shift nurse gift Sweatshirt, Night Shift Nurse Sweatshirt, Funny RN Crewneck",
-  "id_printify": "6ad04920ef2f0ee1ca050d1c",
-  "id_etsy": "4595742812",
-  "url_etsy": "https://www.etsy.com/listing/4595742812/real-night-owl",
-  "mockups": "9/9 (flat+folded2+lifestyle, hero Lifestyle 2 White)",
-  "printify_titulo_corregido": true
- },
- "p005": {
-  "estado": "publicado",
-  "titulo": "christmas nurse Sweatshirt, Funny RN Crewneck Sweatshirt, Med Pass Marathon Night Shift Gift",
-  "id_printify": "6ad0498944c5716eec05d902",
-  "id_etsy": "4596202796",
-  "url_etsy": "https://www.etsy.com/listing/4596202796/christmas-nurse-sweatshirt-funny-rn",
-  "mockups": "9/9 (flat+folded2+lifestyle, hero Lifestyle 3 Sand)",
-  "tags": "13/13",
-  "materiales": "Cotton, Polyester",
-  "atributos": "US letter / Long sleeve",
-  "precio": "$34.99 x16 variantes",
-  "videos_etsy": "2/2",
-  "url": "https://www.etsy.com/listing/4596202796",
-  "nicho": "enfermeria",
-  "assets_finales": [
-   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-1.jpg",
-   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-9.jpg",
-   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-2.jpg",
-   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-3.jpg",
-   "/home/hatch/workspace/my-pod/data/mockups/p005/p005-6.jpg"
-  ],
-  "pins_pinterest": [
-   "https://www.pinterest.com/pin/1142858842976403462/"
-  ],
-  "pin_ultimo": "2026-10-15T18:56:00-04:00"
- }
+  "p023": {
+    "diseno": "Silent Night Unit",
+    "titulo": "Silent Night Unit Nurse Sweatshirt",
+    "nicho": "enfermeria",
+    "shop": "29222324",
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
+    "arte": "data/artes-print/p023-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "publicado_completo",
+    "fecha": "2026-10-15",
+    "id_printify": "6ad0c30e210a7ce1c702879c",
+    "precio": 34.99,
+    "printify_draft_id": "6ad0c30e210a7ce1c702879c",
+    "printify_draft_estado": "publicado",
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "sin cambios (ya limpio)",
+    "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
+    "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
+    "paquete": "data/paquetes-listing/p023-paquete.md",
+    "paquete_titulo": "Christmas Nurse Sweatshirt, Silent Night Unit RN Crewneck | Night Shift Christmas Gift for Her",
+    "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
+    "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
+    "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
+    "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
+    "videos": {
+      "video1": "data/videos/p023-video1.mp4",
+      "video2": "data/videos/p023-video2.mp4"
+    },
+    "etsy_publicado": true,
+    "mockups": 9,
+    "videos_puerta": "PASS 12/12",
+    "id_etsy": "4596087957",
+    "url": "https://www.etsy.com/listing/4596087957",
+    "videos_etsy": 2,
+    "tags": 13,
+    "fecha_publicacion": "2026-10-15",
+    "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+    "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy",
+    "tipo": "mpl",
+    "mpl_id": "7ac362f1-47e8-41dc-b3c2-32063c11c1dd",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad0c30e210a7ce1c702879c",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad17a162a7b57e9090d087c",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
+  },
+  "p024": {
+    "diseno": "NPO After Midnight",
+    "titulo": "NPO After Midnight Nurse Sweatshirt",
+    "nicho": "enfermeria",
+    "shop": "29222324",
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
+    "arte": "data/artes-print/p024-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "publicado_completo",
+    "fecha": "2026-10-15",
+    "id_printify": "6ad0c378f0531fc34e0f4c19",
+    "precio": 34.99,
+    "printify_draft_id": "6ad0c378f0531fc34e0f4c19",
+    "printify_draft_estado": "publicado",
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "disco blanco interior eliminado",
+    "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
+    "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
+    "paquete": "data/paquetes-listing/p024-paquete.md",
+    "paquete_titulo": "Funny Nurse Sweatshirt, NPO After Midnight RN Crewneck | Night Shift Christmas Gift for Her",
+    "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
+    "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
+    "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
+    "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
+    "videos": {
+      "video1": "data/videos/p024-video1.mp4",
+      "video2": "data/videos/p024-video2.mp4"
+    },
+    "etsy_publicado": true,
+    "mockups": 9,
+    "videos_puerta": "PASS 12/12",
+    "id_etsy": "4596108754",
+    "url": "https://www.etsy.com/listing/4596108754",
+    "videos_etsy": 2,
+    "tags": 13,
+    "fecha_publicacion": "2026-10-15",
+    "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+    "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy",
+    "tipo": "mpl",
+    "mpl_id": "043d0f13-c9e1-47c5-9954-75f623ee5367",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad0c378f0531fc34e0f4c19",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad1701529de0e418a0d190c",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
+  },
+  "p025": {
+    "diseno": "On Call Christmas",
+    "titulo": "On Call Christmas Nurse Sweatshirt",
+    "nicho": "enfermeria",
+    "shop": "29222324",
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
+    "arte": "data/artes-print/p025-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "publicado_completo",
+    "fecha": "2026-10-15",
+    "id_printify": "6ad0c3dd5c7e4842a800f4d1",
+    "precio": 34.99,
+    "printify_draft_id": "6ad0c3dd5c7e4842a800f4d1",
+    "printify_draft_estado": "publicado",
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "mancha izquierda del telefono eliminada",
+    "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
+    "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
+    "paquete": "data/paquetes-listing/p025-paquete.md",
+    "paquete_titulo": "On Call Christmas Nurse Sweatshirt, Funny RN Crewneck | Night Shift Christmas Gift for Her",
+    "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
+    "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
+    "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
+    "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
+    "videos": {
+      "video1": "data/videos/p025-video1.mp4",
+      "video2": "data/videos/p025-video2.mp4"
+    },
+    "etsy_publicado": true,
+    "mockups": 9,
+    "videos_puerta": "PASS 12/12",
+    "id_etsy": "4596108958",
+    "url": "https://www.etsy.com/listing/4596108958",
+    "videos_etsy": 2,
+    "tags": 13,
+    "fecha_publicacion": "2026-10-15",
+    "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+    "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy",
+    "tipo": "mpl",
+    "mpl_id": "3d333bd5-7b16-4c38-af9e-fb226c774735",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad0c3dd5c7e4842a800f4d1",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad167ade1630eaee406f44a",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
+  },
+  "p026": {
+    "diseno": "North Pole Night Shift",
+    "titulo": "North Pole Night Shift Nurse Sweatshirt",
+    "nicho": "enfermeria",
+    "shop": "29222324",
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
+    "arte": "data/artes-print/p026-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "publicado_completo",
+    "fecha": "2026-10-15",
+    "id_printify": "6ad0c47c59ac88d91604aedf",
+    "precio": 34.99,
+    "printify_draft_id": "6ad0c47c59ac88d91604aedf",
+    "printify_draft_estado": "publicado",
+    "printify_draft_fecha": "2026-10-15",
+    "arte_limpio_2026_10_15": "parches blancos entre letreros eliminados",
+    "arte_final_2026_10_15": "blanco-puro 0%, fondo completamente eliminado, colocacion del dueno intacta",
+    "veredicto_dueno": "aprobado 2026-10-15 (Ya quedaron perfectos. Aprobados.)",
+    "paquete": "data/paquetes-listing/p026-paquete.md",
+    "paquete_titulo": "Night Shift Nurse Sweatshirt, North Pole Night Shift Funny RN Crewneck | Christmas Gift",
+    "paquete_puerta": "PASS (verificar-paquete.py 2026-10-15)",
+    "paquete_aprobacion_dueno": "pendiente — sin dale del dueño no se publica",
+    "printify_metadata": "pendiente (navegador: poner título real + descripción del paquete en el draft; NO publicar)",
+    "printify_mockups": "pendiente (navegador: 9 por producto — Flat + Folded decorado + Lifestyle 1,2,3 × colores)",
+    "videos": {
+      "video1": "data/videos/p026-video1.mp4",
+      "video2": "data/videos/p026-video2.mp4"
+    },
+    "etsy_publicado": true,
+    "mockups": 9,
+    "videos_puerta": "PASS 12/12",
+    "id_etsy": "4596094421",
+    "url": "https://www.etsy.com/listing/4596094421",
+    "videos_etsy": 1,
+    "tags": 13,
+    "fecha_publicacion": "2026-10-15",
+    "videos_regenerados_2026_10_15": "mockups correctos (3 lifestyles diferentes + folded decorado)",
+    "videos_corregidos_2026_10_15": "mockups correctos subidos a Etsy",
+    "tipo": "mpl",
+    "mpl_id": "b0b886d9-fe9f-41d9-a964-10774009ff67",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad0c47c59ac88d91604aedf",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad15d4b66e83232560f4db1",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
+  },
+  "p027": {
+    "diseno": "Nice List Sleepers",
+    "titulo": "Nice List Sleepers Nurse Sweatshirt",
+    "nicho": "enfermeria",
+    "shop": "29222324",
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice)",
+    "arte": "data/artes-print/p027-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "eliminado-por-dueno-2026-10-15",
+    "fecha": "2026-10-15",
+    "id_printify": null,
+    "precio": 34.99,
+    "bloqueo": "2026-10-15 07:0x EDT: sesion de Google en Printify perdida (navegador muestra landing publica). Drafts NO creados. El dueno debe re-iniciar la sesion en el navegador; luego re-ejecutar creacion de drafts.",
+    "printify_draft_id": "6ad0c4ef210a7ce1c7028880",
+    "printify_draft_estado": "unpublished",
+    "printify_draft_fecha": "2026-10-15"
+  },
+  "p004": {
+    "estado": "publicado_completo",
+    "titulo": "night shift nurse gift Sweatshirt, Night Shift Nurse Sweatshirt, Funny RN Crewneck",
+    "id_printify": "6ad04920ef2f0ee1ca050d1c",
+    "id_etsy": "4595742812",
+    "url_etsy": "https://www.etsy.com/listing/4595742812/real-night-owl",
+    "mockups": "9/9 (flat+folded2+lifestyle, hero Lifestyle 2 White)",
+    "printify_titulo_corregido": true,
+    "tipo": "mpl",
+    "mpl_id": "2ec3ae14-0ead-4df-b1a8-3fceca8ba0aa",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad04920ef2f0ee1ca050d1c",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad19841025b92ff630ccf38",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
+  },
+  "p005": {
+    "estado": "publicado_completo",
+    "titulo": "christmas nurse Sweatshirt, Funny RN Crewneck Sweatshirt, Med Pass Marathon Night Shift Gift",
+    "id_printify": "6ad0498944c5716eec05d902",
+    "id_etsy": "4596202796",
+    "url_etsy": "https://www.etsy.com/listing/4596202796/christmas-nurse-sweatshirt-funny-rn",
+    "mockups": "9/9 (flat+folded2+lifestyle, hero Lifestyle 3 Sand)",
+    "tags": "13/13",
+    "materiales": "Cotton, Polyester",
+    "atributos": "US letter / Long sleeve",
+    "precio": "$34.99 x16 variantes",
+    "videos_etsy": "2/2",
+    "url": "https://www.etsy.com/listing/4596202796",
+    "nicho": "enfermeria",
+    "assets_finales": [
+      "/home/hatch/workspace/my-pod/data/mockups/p005/p005-1.jpg",
+      "/home/hatch/workspace/my-pod/data/mockups/p005/p005-9.jpg",
+      "/home/hatch/workspace/my-pod/data/mockups/p005/p005-2.jpg",
+      "/home/hatch/workspace/my-pod/data/mockups/p005/p005-3.jpg",
+      "/home/hatch/workspace/my-pod/data/mockups/p005/p005-6.jpg"
+    ],
+    "pins_pinterest": [
+      "https://www.pinterest.com/pin/1142858842976403462/"
+    ],
+    "pin_ultimo": "2026-10-15T18:56:00-04:00",
+    "tipo": "mpl",
+    "mpl_id": "65354306-1c8d-411d-8dc6-83f2a5e1a396",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6ad0498944c5716eec05d902",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad1336ed12cbea6030efee4",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "videos_pendientes": false
+  },
+  "p028": {
+    "diseno": "Thankful Nurse Turkey",
+    "titulo": "Thankful Nurse Turkey",
+    "titulos_draft": {
+      "gildan-18000": "Thankful Nurse Turkey",
+      "bella-canvas-3001": "Thankful Nurse Turkey T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p028-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p029": {
+    "diseno": "Grateful Thankful Blessed",
+    "titulo": "Grateful Thankful Blessed",
+    "titulos_draft": {
+      "gildan-18000": "Grateful Thankful Blessed",
+      "bella-canvas-3001": "Grateful Thankful Blessed T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p029-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p030": {
+    "diseno": "Pumpkin Spice & IV Drips",
+    "titulo": "Pumpkin Spice & IV Drips",
+    "titulos_draft": {
+      "gildan-18000": "Pumpkin Spice & IV Drips",
+      "bella-canvas-3001": "Pumpkin Spice & IV Drips T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p030-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p031": {
+    "diseno": "Night Shift Feast",
+    "titulo": "Night Shift Feast",
+    "titulos_draft": {
+      "gildan-18000": "Night Shift Feast",
+      "bella-canvas-3001": "Night Shift Feast T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p031-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p032": {
+    "diseno": "Code Turkey",
+    "titulo": "Code Turkey",
+    "titulos_draft": {
+      "gildan-18000": "Code Turkey",
+      "bella-canvas-3001": "Code Turkey T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p032-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p033": {
+    "diseno": "Blessed in Scrubs",
+    "titulo": "Blessed in Scrubs",
+    "titulos_draft": {
+      "gildan-18000": "Blessed in Scrubs",
+      "bella-canvas-3001": "Blessed in Scrubs T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p033-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p034": {
+    "diseno": "ER Turkey Trot",
+    "titulo": "ER Turkey Trot",
+    "titulos_draft": {
+      "gildan-18000": "ER Turkey Trot",
+      "bella-canvas-3001": "ER Turkey Trot T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p034-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p035": {
+    "diseno": "Gobble 'Til You Wobble",
+    "titulo": "Gobble 'Til You Wobble",
+    "titulos_draft": {
+      "gildan-18000": "Gobble 'Til You Wobble",
+      "bella-canvas-3001": "Gobble 'Til You Wobble T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p035-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p036": {
+    "diseno": "ICU Thankful Heart",
+    "titulo": "ICU Thankful Heart",
+    "titulos_draft": {
+      "gildan-18000": "ICU Thankful Heart",
+      "bella-canvas-3001": "ICU Thankful Heart T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p036-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "p037": {
+    "diseno": "Fall for Nursing",
+    "titulo": "Fall for Nursing",
+    "titulos_draft": {
+      "gildan-18000": "Fall for Nursing",
+      "bella-canvas-3001": "Fall for Nursing T-Shirt"
+    },
+    "nicho": "thanksgiving",
+    "tema": "thanksgiving",
+    "shop": "29222324",
+    "track": "mpl",
+    "componentes": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
+    "arte": "data/artes-print/p037-print-300dpi.png",
+    "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
+    "estado": "propuesta-draft-pendiente",
+    "fecha_propuesta": "2026-10-16",
+    "precios": {
+      "gildan-18000": {
+        "base": 34.99,
+        "2XL": 37.99,
+        "3XL": 39.99
+      },
+      "bella-canvas-3001": {
+        "base": 24.99,
+        "2XL": 27.99,
+        "3XL": 30.99
+      }
+    }
+  },
+  "fueled-by-caffeine": {
+    "id_etsy": "4593541859",
+    "url": "https://www.etsy.com/listing/4593541859",
+    "nicho": "enfermeria",
+    "tipo": "mpl",
+    "mpl_id": "2efa0da7-8a16-4b54-ab9a-e8dbc36d8d09",
+    "componentes": {
+      "sudadera": {
+        "printify_id": "6acc691f6d29e33c1f041260",
+        "producto": "Gildan 18000",
+        "proveedor": "Printify Choice"
+      },
+      "playera": {
+        "printify_id": "6ad1a50740bc883459067105",
+        "producto": "Bella+Canvas 3001",
+        "proveedor": "Printify Choice",
+        "colores": [
+          "White",
+          "Athletic Heather",
+          "Natural"
+        ]
+      }
+    },
+    "estado": "publicado_completo",
+    "videos_pendientes": true
+  }
 }
