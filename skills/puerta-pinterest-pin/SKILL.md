@@ -5,41 +5,66 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
   framework_version: "0.8.0"
   regression_suite: "evals/"
+  gate_script: "scripts/verificar-pin.py"
 ---
 
 # Puerta de Pinterest Pin
 
-**Versión: v0.1.0** · Rama de publicidad del sistema POD: el tráfico
-externo (Pinterest) reporta señales de calidad al listing, pero solo si el
-pin muestra exactamente lo que el comprador encuentra en la tienda.
+**Versión: v0.3.0** (2026-10-16: tipos de pin 1-5, gate real en
+`scripts/verificar-pin.py`, video pins 1:1 sin recortar) · Rama de
+publicidad del sistema POD: el tráfico externo (Pinterest) reporta
+señales de calidad al listing, pero solo si el pin muestra exactamente
+lo que el comprador encuentra en la tienda.
 
 ## Cuándo usarme
 
 - Al generar los pins de un listing recién publicado (mix imagen/video).
 - En el slot diario: cada pin de contenido antes de programarse.
+- La parrilla del día la decide `estratega-pinterest`; yo solo valido.
 - Si el pin no pasa, no entra a la cola. Sin excepciones.
+
+## Tipos de pin (v0.3.0)
+
+| Tipo | Nombre | Asset |
+|---|---|---|
+| 1 | hero-lifestyle | imagen principal del listing (assets_finales) |
+| 2 | lifestyle-alt | otro modelo/pose/color (assets_finales) |
+| 3 | detalle | close-up del diseño (assets_finales) |
+| 4 | video | MP4 1:1 de Etsy, **sin recortar**, con su `.manifest.json` |
+| 5 | folded-decorado | doblada ambientada (assets_finales) |
 
 ## Procedimiento
 
-1. **Armar el paquete** `pin.json`: slug, asset (ruta absoluta),
-   título, descripción, url_listing, tablero, keywords_fuente.
-2. **Correr** `scripts/verificar-pin.py --pin pin.json`.
+1. **Armar el paquete** `pin.json`: slug, tipo (1-5), asset (ruta
+   absoluta), título, descripción, url_listing, tablero,
+   keywords_fuente (banco **Pinterest** del nicho:
+   `data/banco-keywords/pinterest-<nicho>.md`, no el de Etsy).
+2. **Correr** `scripts/verificar-pin.py --pin pin.json` (gate real,
+   construido 2026-10-16; antes esta puerta solo existía en papel).
    El registro de assets finales vive en `data/registro-listings.json`;
-   el banco de keywords en `data/banco-keywords/<nicho>.md`.
+   el banco de keywords Pinterest en `data/banco-keywords/`.
 3. **PASS** → el pin entra a la cola (`data/cola-pins/`).
    **FAIL** → se corrige el campo violado y se reintenta.
 
 ## Puertas mecánicas
 
-- **asset_final**: el asset existe y está registrado como FINAL de ese
-  listing. Nada generado ad-hoc, nada de mockups viejos no-finales.
+- **schema**: pin.json trae slug, tipo (1-5), asset, titulo,
+  descripcion, url_listing, tablero, keywords_fuente.
+- **asset_final**: tipos 1/2/3/5 → el asset existe y está registrado
+  como FINAL de ese listing. Tipo 4 → el asset es el MP4 1:1 del
+  listing en `data/videos/`. Nada generado ad-hoc, nada de mockups
+  viejos no-finales.
+- **video_specs** (solo tipo 4): existe el `.manifest.json` del video
+  y corresponde al asset (el video se usa tal cual, sin recortar —
+  decisión del dueño 2026-10-16).
 - **url_listing**: `https://www.etsy.com/listing/<id>` y el id coincide
   con el registrado para el slug.
-- **keywords_banco**: título+descripción contienen ≥1 keyword multi-palabra
-  del banco del nicho; `keywords_fuente` cita el archivo (que existe).
+- **keywords_banco**: título+descripción contienen ≥1 keyword
+  multi-palabra del banco **Pinterest** del nicho;
+  `keywords_fuente` cita el archivo (que existe).
 - **tablero**: declarado. La existencia real del tablero en la cuenta es
   gate humano (la API de Pinterest no está conectada).
 

@@ -3,14 +3,14 @@ name: "estratega-tienda"
 description: "Rol de estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal que direcciona las propuestas diarias (reparto de foco, mix de productos, guía de precios, nichos) + el config máquina de tipo de producto (mpl/single/mixto) que el cron de propuestas consume."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
   framework_version: "0.8.0"
 ---
 
 # Estratega de tienda POD
 
-**Versión 0.2.0** (2026-10-15: emite también `data/config-propuestas.json`
-— contrato `docs/CONTRATO-TIPO-PRODUCTO.md`).
+**Versión 0.3.0** (2026-10-16: entrada #7 ledger de ventas — feedback loop
+M2; 0.2.0 emitía también `data/config-propuestas.json`).
 
 ## Rol
 
@@ -32,6 +32,15 @@ de propuestas diarias consume como orden de trabajo.
 5. Calendario estacional real: calcula los días restantes a cada fecha
    (Thanksgiving = 4º jueves de noviembre; Navidad = 25-dic; etc.).
 6. `data/productos/*.json` — productos disponibles y sus calibraciones.
+7. `data/ledger-ventas.json` — **ledger de ventas y performance por listing**
+   (M2, 2026-10-16): ventas por listing (receipts API), favoritos
+   (`num_favorers`, snapshot diario), views como proxy **sin verificar**
+   (la API v3 no expone visits/views/fuentes — hueco documentado en el
+   ledger), reviews. Conversión proxy = ventas / favoritos. Es la fuente
+   de verdad para matar/escalar: listing con 60+ días, 0 ventas y 0
+   favoritos entra a revisión. Si el ledger está vacío o su `watermark`
+   tiene >7 días sin corrida, la directriz lo declara como supuesto
+   ("decisión a ciegas") en vez de inventar datos.
 
 ## Método
 
