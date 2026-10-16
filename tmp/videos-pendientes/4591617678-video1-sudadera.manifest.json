@@ -1,0 +1,18 @@
+{
+  "video": "4591617678-video1-sudadera.mp4",
+  "tipo": "onmodel",
+  "diseno": "4591617678",
+  "imagenes": [
+    "4591617678-sweat1.jpg",
+    "4591617678-sweat2.jpg",
+    "4591617678-sweat3.jpg"
+  ],
+  "metodo_zoom": "posicion-absoluta",
+  "zoom_expr": "1+0.25*on/105",
+  "usa_on": true,
+  "usa_acumulativo": false,
+  "work_res": 2160,
+  "transicion": "xfade-fade-0.5s",
+  "generado": "2026-10-16T12:39:45.662497+00:00",
+  "script": "generar-video-listing.py"
+}

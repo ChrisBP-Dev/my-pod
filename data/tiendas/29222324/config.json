@@ -140,5 +140,12 @@
     "personalizable": "single (el MPL nativo no soporta personalización)",
     "no_personalizable": "mpl",
     "nota": "Orden del dueño 2026-10-15."
+  },
+  "mensajeria": {
+    "nombre_etsy": "MyNightShiftShop",
+    "firma": "MyNightShiftShop",
+    "nota_firma": "Los mensajes al comprador SIEMPRE firman con el nombre de la tienda (nombre_etsy), NUNCA con la marca madre (¡Tú Dale! / Tú Dale POD). Regla del dueño 2026-10-16.",
+    "tono": "cálido, directo, sin tecnicismos; servicio post-venta, no spam",
+    "idioma": "el del comprador (es/en)"
   }
 }
