@@ -49,3 +49,11 @@ en vez de crear uno nuevo.
 - Cláusula operativa: cada cron POD la lleva en su cuerpo como
   "ENTREGA (2026-10-15, preferencia del dueño)".
 - Preferencia durable: `~/MEMORY.md` (delivery de reportes POD).
+
+## Actualización 2026-10-16: nomenclatura My POD + multi-tienda
+
+Por decisión del dueño:
+- El hub se llama **🏭 My POD — Central** (antes "📌 POD — Equipo y fábrica").
+- Los chats de reporte incluyen la tienda: `📌 My POD · <tienda> — <Tipo> · <fecha>`
+  Ejemplo: `📌 My POD · MyNightShiftShop — Propuestas · 2026-10-16`
+- Motivo: si más adelante hay más tiendas, cada reporte se distingue por tienda.
