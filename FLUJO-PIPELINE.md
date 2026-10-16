@@ -1,10 +1,22 @@
-# Flujo Pipeline POD — Printify-First (2026-10-14)
+# Flujo Pipeline POD — Printify-First + MPL (2026-10-15)
 
-**Estado: APROBADO por el dueño 2026-10-14. Reemplaza el flujo anterior.**
+**Estado: actualizado 2026-10-15 con las decisiones del dueño (flujo MPL
+nativo + flujo bifurcado por personalización). Reemplaza el flujo single
+del 2026-10-14 como default.**
 
 ## Principio
 Printify es la fuente de verdad para cómo se ve el producto.
 No predecimos con mockups propios; usamos los de Printify directamente.
+
+## Flujo bifurcado (orden del dueño 2026-10-15)
+- **Diseño personalizable** (nombre/texto del comprador) → **track single**
+  (el MPL nativo NO soporta personalización). Producto individual.
+- **Diseño NO personalizable** → **track MPL**: sudadera Gildan 18000 +
+  playera Bella+Canvas 3001 en un solo listing (composición default;
+  la estratega puede definir otra en `data/config-propuestas.json`).
+- Detalle operativo: `skills/publicar-printify-etsy/SKILL.md`.
+- Contrato estratega → propuestas → publicación:
+  `docs/CONTRATO-TIPO-PRODUCTO.md`.
 
 ## Etapas
 
@@ -13,10 +25,17 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 - Puerta: `puerta-arte-propuesta` (fondo transparente, DPI, márgenes).
 - Dale del dueño al arte.
 
-### 2. Propuesta (draft en Printify)
-- Crear producto draft en Printify con el arte colocado.
+### 2. Propuesta (drafts en Printify)
+- **Track MPL:** un draft por producto de la composición (default:
+  sudadera + playera), cada uno con el arte colocado. Los drafts quedan
+  "unpublished" = propuesta pendiente. Los componentes NUNCA se publican
+  por separado.
+- **Track single:** un draft del producto indicado.
+- El tipo de lote (mpl/single/mixto) lo define la estratega en
+  `data/config-propuestas.json` (dinámico por semana).
 - Posición inicial: centrada, 78% ancho, ~14% desde arriba (ajustable).
-- El draft queda como "unpublished" = propuesta pendiente.
+- Detección de drafts: agrupar por diseño (título real); no duplicar
+  diseños que ya tienen sus componentes pendientes (ver contrato §E).
 
 ### 3. Revisión matutina (dueño)
 - El dueño entra a Printify cada mañana, revisa los drafts.
@@ -25,38 +44,54 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 - Avisa cuáles están listos.
 
 ### 4. Mockups (desde Printify)
-**Selección estándar (criterio del dueño 2026-10-14):**
-- Flat (default, 1 por color) — básico pero se acepta
-- Folded decorado/ambientado (Folded 2, 1 por color) — NO el blanco plano
-- Lifestyle 1, 2, 3 (1 por color, diferentes modelos/poses — nunca repetir la misma chica)
-- **Hero:** casi siempre un lifestyle. El color depende del diseño (White, Sand o Sport Grey). Orden: Lifestyle 2 o 3 primero, última opción Lifestyle 1 o Folded decorado. En propuestas: Jarvis elige una y el dueño valida.
+**Esquema MPL — 10 imágenes (APROBADO por el dueño 2026-10-15):**
+1. Sudadera lifestyle hero (principal) · 2. Sudadera lifestyle 2 (distinto)
+3. Sudadera flat-lay · 4. Sudadera flat-lay otro color
+5. Sudadera folded decorado/ambientado · 6. Playera on-model
+7. Playera on-model distinto · 8. Playera flat-lay
+9. Tabla de tallas sudadera · 10. Tabla de tallas playera.
+Reglas: nunca repetir pose/modelo en colores diferentes; todos los
+productos/colores vendidos representados; hero = lifestyle.
+**Track single:** esquema de 9 (flat ×3 + folded decorado ×3 + 3
+lifestyles diferentes, hero = lifestyle).
+- Rotación de héroes entre productos (modelo y color no se repiten en
+  consecutivos).
 - Descargar los mockups seleccionados.
 - Puerta: el dueño los revisa en Printify.
 - ⚠️ 2026-10-15 (lección): en Printify, **mockups SELECCIONADOS ≠ vistas
   descargables**. Solo los mockups con checkbox marcado se sincronizan a Etsy.
-  Para 15 imágenes en Etsy hay que marcar las 15 vistas en el producto ANTES de
+  Para 10 imágenes en Etsy hay que marcar las 10 vistas en el producto ANTES de
   publicar (o republicar solo-mockups después). Verificar el conteo "N/20
   selected" en el producto.
 
 ### 5. Videos
 - Descargar mockups de Printify.
 - Generar videos con `scripts/generar-video-listing.py`:
-  - Video 1: on-model (si hay) o mockups lifestyle
-  - Video 2: flat-lay → doblada → zoom/detalle
+  - **Track MPL:** Video 1 = 3 lifestyles de sudadera (distintos);
+    Video 2 = 3 tomas de playera (distintas).
+  - **Track single:** Video 1 = on-model/lifestyle; Video 2 = flat/folded.
 - Criterio: `CRITERIO-VIDEO.md` (1080×1080, 9.5s, zoom sin temblor, fade 0.5s).
 - Puerta: `scripts/verificar-video.py`.
 
 ### 6. Paquete de listing
 - Skill `paquete-listing-etsy`: título, descripción, 13 tags, copy.
+- **Track MPL:** re-optimización COMPLETA para TODOS los productos:
+  título con ambos productos (≤140), descripción con sección
+  "CHOOSE YOUR STYLE", 13 tags ≤20 car.
 - Puerta: `verificar-paquete.py`.
 - Dale del dueño (confía en puerta para SEO).
 
 ### 7. Publicación
-- Skill `publicar-printify-etsy`.
-- Publicar producto en Printify → sincroniza a Etsy.
+- Skill `publicar-printify-etsy` (track MPL o single según §Flujo bifurcado).
+- **Track MPL:** convertir a MPL en Printify ("Convert to Multi-Product
+  Listing"), nombres de variación "Sweatshirt"/"T-Shirt", publicar el MPL,
+  verificación exhaustiva en Etsy (Fase C: variaciones, precios, SKUs,
+  orden de imágenes, videos intactos, atributos, políticas, envío).
+- **Track single:** publicar el draft → sincroniza a Etsy → completar
+  (videos, caja de personalización si aplica).
 - Subir videos directo en Etsy.
 - Verificar título, descripción, tags.
-- Registrar IDs en `data/registro-listings.json`.
+- Registrar IDs en `data/registro-listings.json` (con `tipo: "mpl"|"single"`).
 
 ### 8. Publicidad (Pinterest)
 - Skill `puerta-pinterest-pin`: valida pins antes de publicar.
@@ -93,17 +128,22 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 ### Principio
 Cada tienda tiene su propia configuración. Los criterios de una tienda no contaminan otra. La app no depende de la memoria del asistente.
 
-## Selección de productos (2026-10-14)
+## Selección de productos y tipo de lote (2026-10-15)
 
-**Principio:** el producto NO está hardcodeado. Cada tienda tiene una lista de `productos_aprobados` en su config.
+**Principio:** el producto y el tipo de lote NO están hardcodeados.
+La estratega los decide cada semana en `data/config-propuestas.json`
+(contrato: `docs/CONTRATO-TIPO-PRODUCTO.md`).
 
 ### Cómo se agrega un producto
 1. El cron `pod-trend-scan` (2×/semana) investiga qué prendas están en tendencia en el nicho.
 2. Si un producto emerge como tendencia fuerte, se PROPONE al dueño (no se agrega solo).
-3. Si el dueño aprueba, se agrega a `productos_aprobados` en `data/tiendas/<id>/config.json`.
-4. Las propuestas diarias (7am) generan drafts usando los productos aprobados (rota entre ellos para no quemar uno solo).
+3. Si el dueño aprueba, se agrega a `productos_aprobados` en `data/tiendas/<id>/config.json` + ficha en `data/productos/<slug>.json`.
+4. La estratega puede incluirlo en la composición del MPL o en lotes single (PROPUESTA hasta su dale si cambia la composición).
 
-### Personalización (pendiente)
-- Estado: pendiente de investigación.
-- Objetivo: determinar si se puede automatizar personalización via Etsy/Printify/herramientas propias.
-- No se implementa hasta tener investigación completa.
+### Personalización — DECIDIDO 2026-10-15
+- Diseño personalizable → track single-product SIEMPRE (el MPL nativo no
+  soporta personalización — verificado en help.printify.com).
+- Etsy: caja nativa de personalización (gratis, fulfillment manual).
+- Automatización sin intervención (Teeinblue/Customily/HelloCustom) y
+  flujo Canva (template + API): en investigación, spikes pendientes del
+  dale del dueño. Ver `data/direccion-tienda.md`.

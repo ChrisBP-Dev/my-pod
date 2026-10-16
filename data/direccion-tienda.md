@@ -34,7 +34,7 @@ Thanksgiving, más Navidad, o solo Navidad).
 
 ## Guía de precios
 - Base S–XL: $34.99. 2XL: $37.99 (+$3). 3XL: $39.99 (+$5).
-  (Estándar publicar-printify-etsy §5b. Aplicado a los 14 listings vivos.)
+  (Estándar publicar-printify-etsy §Precios. Aplicado a los 14 listings vivos.)
 
 ## Personalización — EN INVESTIGACIÓN (no entra a producción aún)
 - Fase 1 propuesta: caja nativa de Etsy en 1-2 listings, fulfillment

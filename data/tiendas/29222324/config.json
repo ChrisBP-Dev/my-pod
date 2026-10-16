@@ -19,7 +19,8 @@
       "lifestyle_1",
       "folded_2_decorado"
     ],
-    "hero_color": "segun_diseno"
+    "hero_color": "segun_diseno",
+    "nota_mpl": "Esquema MPL = 10 imágenes (ver skill §M5). El esquema single de 9 queda solo para el track single (personalizables)."
   },
   "pinterest": {
     "pins_por_listing": 3,
@@ -32,10 +33,34 @@
       "provider": 99,
       "estado": "activo",
       "notas": "Producto inicial, validado en producción con p002"
+    },
+    {
+      "nombre": "Bella+Canvas 3001 — Unisex Jersey Tee",
+      "blueprint": null,
+      "provider": "Printify Choice",
+      "estado": "activo",
+      "notas": "Playera del MPL (decisión del dueño 2026-10-15). blueprint_id pendiente de verificar en catálogo."
     }
   ],
   "personalizacion": {
     "estado": "pendiente_investigacion",
     "notas": "Investigar: herramientas Etsy/Printify para personalización automatizable"
+  },
+  "mpl": {
+    "composicion_default": [
+      "gildan-18000",
+      "bella-canvas-3001"
+    ],
+    "nombres_variacion": {
+      "gildan-18000": "Sweatshirt",
+      "bella-canvas-3001": "T-Shirt"
+    },
+    "esquema_mockups": 10,
+    "nota": "Ver skills/publicar-printify-etsy/SKILL.md §Track MPL. La estratega puede definir otra composición en data/config-propuestas.json."
+  },
+  "flujo_bifurcado": {
+    "personalizable": "single (el MPL nativo no soporta personalización)",
+    "no_personalizable": "mpl",
+    "nota": "Orden del dueño 2026-10-15."
   }
 }
