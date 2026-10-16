@@ -3,14 +3,15 @@ name: "estratega-tienda"
 description: "Rol de estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal que direcciona las propuestas diarias (reparto de foco, mix de productos, guía de precios, nichos) + el config máquina de tipo de producto (mpl/single/mixto) que el cron de propuestas consume."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
   framework_version: "0.8.0"
 ---
 
 # Estratega de tienda POD
 
-**Versión 0.3.0** (2026-10-16: entrada #7 ledger de ventas — feedback loop
-M2; 0.2.0 emitía también `data/config-propuestas.json`).
+**Versión 0.4.0** (2026-10-16: portabilidad de la estrategia de precios —
+mecanismo + calibración en el skill, valores en el config de cada tienda;
+0.3.0: entrada #7 ledger de ventas — feedback loop M2).
 
 ## Rol
 
@@ -75,31 +76,40 @@ de propuestas diarias consume como orden de trabajo.
    catálogo ya lo cubre.
 6. **Guía de precios.** Precio base S–XL por producto + recargos por talla
    (fórmula en publicar-printify-etsy §Precios).
-   **Doctrina "precio con colchón" (regla del dueño 2026-10-16):** TODO
-   precio base se fija de modo que con −25% de descuento el margen por
-   unidad siga ≥ $1.50 (costos verificados + fees 9.5% + $0.25).
-   Tabla vigente: Sudadera Gildan 18000 → S–XL $40.99 / 2XL $44.99 /
-   3XL $46.99; Playera Bella+Canvas 3001 → S–XL $25.99 / 2XL $28.99 /
-   3XL $32.99. Todo listing NUEVO nace con estos precios; si cambian
-   costos o la estratega propone otro producto, recalcular con la
-   misma fórmula antes de publicar.
-   **Doctrina "tienda siempre en descuento" (regla del dueño
-   2026-10-16):** el precio base es un ancla; la tienda vive en
-   descuento permanente rotativo (eventos de Etsy o promos/cupones
-   propios), de modo que el comprador casi nunca ve el precio ancla.
-   La estratega mantiene SIEMPRE un descuento activo o programado.
-   **Acoplamiento cupones↔precios (regla del dueño 2026-10-16):** los
-   cupones/descuentos y los precios se deciden JUNTOS, nunca por
-   separado. Antes de fijar un precio base, activar un Targeted Offer
-   o entrar a un evento/promo, verifica los descuentos ya activos y
-   calcula el margen COMBINADO (precio − descuento apilado − costos −
-   fees): el total nunca deja el margen en negativo; siempre hay piso
-   de ganancia positivo. Si un evento exige −X% y hay cupones activos
-   que lo volverían negativo, se desactiva una cosa o no se entra al
-   evento. **Presupuesto de descuento (regla del dueño 2026-10-16):**
-   descuento TOTAL (evento/promo + cupones) ≤ 25% del precio base;
-   nunca 25% de evento + cupones simultáneos (ej. cupón 10% →
-   promo máx 15%). Esta directriz fija ambos juntos: % de cupones + precios.
+   **Acoplamiento cupones↔precios:** los cupones/descuentos y los
+   precios se deciden JUNTOS, nunca por separado. Antes de fijar un
+   precio base, activar un Targeted Offer o entrar a un evento/promo,
+   verifica los descuentos ya activos y calcula el margen COMBINADO
+   (precio − descuento apilado − costos − fees): el total nunca deja
+   el margen en negativo; siempre hay piso de ganancia positivo. Si
+   un evento exige −X% y hay cupones activos que lo volverían
+   negativo, se desactiva una cosa o no se entra al evento.
+   **PORTABILIDAD (principio del sistema):** este skill define el
+   MECANISMO y el método de calibración, NUNCA los valores. La
+   estrategia de precios de cada tienda vive en
+   `data/tiendas/<id>/config.json → estrategia_precios` (piso de
+   margen, descuento máximo total, regla de apilado, modo de
+   descuento, precios base vigentes, fecha de calibración). La
+   estratega la LEE de ahí en cada corrida; si no existe (tienda
+   nueva), la CALIBRA con el dueño y la escribe antes de emitir la
+   primera directriz. Los números de abajo son el EJEMPLO de la
+   tienda de referencia, no una regla universal.
+   **Mecanismo "precio con colchón":** dado el costo por talla C, el
+   piso de margen M y el descuento máximo D de la tienda, el precio
+   base P cumple: P×(1−D)×0.905 − 0.25 − C ≥ M, o sea
+   P ≥ (C + 0.25 + M) / ((1−D)×0.905) (fees Etsy 9.5% + $0.25).
+   **Calibración inicial (preguntas al dueño de una tienda nueva):**
+   ¿piso de margen por unidad? ¿descuento máximo total apilado
+   (evento+cupones)? ¿se permite apilar evento + cupones? ¿modo
+   "siempre en descuento" (el precio base es un ancla y vive en
+   promo rotativa) o "solo eventos"?
+   **Ejemplo — tienda 29222324 (NO regla):** piso $1.50, D=25% sin
+   apilado con cupones, siempre en descuento → sudadera
+   $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99.
+   **Recalibración:** la corrida semanal re-valida la estrategia si
+   cambian los costos de Printify, entra un producto nuevo o el
+   dueño ajusta parámetros; guarda la nueva calibración con fecha
+   en el config. Esta directriz fija % de cupones + precios juntos.
 7. **Qué NO hacer.** Lista explícita de temas/productos descartados esta
    semana, con motivo.
 

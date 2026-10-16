@@ -4,6 +4,25 @@
   "printify_store_id": 29222324,
   "descripcion": "Tienda principal POD",
   "precio_estandar": 34.99,
+  "estrategia_precios": {
+    "nota": "Estrategia de ESTA tienda (decisiones del dueño 2026-10-16). Cada tienda define la suya en su propio config; el skill estratega-tienda solo trae el MECANISMO y el método de calibración, nunca valores universales.",
+    "doctrina": "precio_con_colchon + tienda_siempre_en_descuento",
+    "piso_margen_usd": 1.5,
+    "descuento_max_total_pct": 25,
+    "regla_apilado": "descuento TOTAL (evento/promo + cupones) <= 25% del precio base; nunca 25% de evento + cupones simultáneos (ej. cupón 10% => promo máx 15%)",
+    "modo_descuento": "siempre_en_descuento",
+    "nota_modo": "El precio base es un ancla; la tienda vive en descuento permanente rotativo (eventos Etsy o promos/cupones propios). La estratega mantiene SIEMPRE un descuento activo o programado.",
+    "precio_base_s_xl": {
+      "gildan-18000": 40.99,
+      "bella-canvas-3001": 25.99
+    },
+    "margen_a_menos25_verificado": {
+      "gildan-18000": "S-XL $1.71 / 2XL $1.73 / 3XL $1.62 (costos API Printify 2026-10-15)",
+      "bella-canvas-3001": "S-XL $2.11 / 2XL $1.54 / 3XL $1.64 (costos 2XL/3XL inferidos de la fórmula vigente; verificar contra API)"
+    },
+    "ultima_calibracion": "2026-10-16",
+    "recalibrar_si": ["cambian costos Printify", "nuevo producto en la composición", "el dueño cambia piso o descuento máximo"]
+  },
   "mockups": {
     "seleccion": [
       "flat",

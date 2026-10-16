@@ -68,6 +68,7 @@
     "2XL": 44.99,
     "3XL": 46.99,
     "formula": "precio con colchon: con -25% el margen >= $1.50 (doctrina del dueno 2026-10-16)",
-    "margen_a_menos25": "S-XL $1.71 / 2XL $1.73 / 3XL $1.62 (costos API Printify 2026-10-15)"
+    "margen_a_menos25": "S-XL $1.71 / 2XL $1.73 / 3XL $1.62 (costos API Printify 2026-10-15)",
+    "fuente_de_verdad": "data/tiendas/29222324/config.json -> estrategia_precios (los valores aquí son caché de la última calibración)"
   }
 }
