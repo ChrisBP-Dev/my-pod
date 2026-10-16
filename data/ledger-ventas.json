@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "fuente": "etsy-open-api-v3",
+    "shop_id": 29222324,
+    "creado": "2026-10-16T15:03:02+00:00",
+    "watermark": {
+      "min_created": 0,
+      "last_run": null
+    },
+    "seen_receipt_ids": [],
+    "views_listing_no_verificado": true,
+    "notas": "Conversión proxy = ventas / favoritos. Visits/views/fuentes solo en el dashboard de Etsy Stats."
+  },
+  "ventas": [],
+  "snapshots_diarios": [
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4589992085",
+      "slug": "santas-favorite-nurse",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4591617678",
+      "slug": "vitals-stable",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4591828133",
+      "slug": "sleighin-12-hour-shift",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4592008985",
+      "slug": "quiet-night-shift",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4593541859",
+      "slug": "fueled-by-caffeine",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4595604876",
+      "slug": "p002",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4595742812",
+      "slug": "p004",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4596086167",
+      "slug": "p021",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4596087957",
+      "slug": "p023",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4596094421",
+      "slug": "p026",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4596108104",
+      "slug": "p022",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4596108754",
+      "slug": "p024",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4596108958",
+      "slug": "p025",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    },
+    {
+      "fecha": "2026-10-16",
+      "listing_id": "4596202796",
+      "slug": "p005",
+      "num_favorers": 0,
+      "views": 0,
+      "views_caveat": "proxy sin verificar"
+    }
+  ],
+  "reviews": [],
+  "conciliacion_csv": {
+    "ultimo_csv": null,
+    "diffs": []
+  }
+}
