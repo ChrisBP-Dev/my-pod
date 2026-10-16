@@ -75,6 +75,15 @@ de propuestas diarias consume como orden de trabajo.
    catálogo ya lo cubre.
 6. **Guía de precios.** Precio base S–XL por producto + recargos por talla
    (fórmula en publicar-printify-etsy §Precios).
+   **Acoplamiento cupones↔precios (regla del dueño 2026-10-16):** los
+   cupones/descuentos y los precios se deciden JUNTOS, nunca por
+   separado. Antes de fijar un precio base, activar un Targeted Offer
+   o entrar a un evento/promo, verifica los descuentos ya activos y
+   calcula el margen COMBINADO (precio − descuento apilado − costos −
+   fees): el total nunca deja el margen en negativo; siempre hay piso
+   de ganancia positivo. Si un evento exige −X% y hay cupones activos
+   que lo volverían negativo, se desactiva una cosa o no se entra al
+   evento. Esta directriz fija ambos juntos: % de cupones + precios.
 7. **Qué NO hacer.** Lista explícita de temas/productos descartados esta
    semana, con motivo.
 

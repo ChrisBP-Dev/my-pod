@@ -128,5 +128,10 @@ Efecto: más ventas → más oportunidades de review. Sin control.
 - Nada condicionado a review. Nunca. (Extorsión = riesgo de tienda.)
 - El follow-up es servicio post-venta, no spam: 1 mensaje, sobrio,
   sin incentivo.
+- **Cupones acoplados a precios (regla del dueño 2026-10-16):** el %
+  de cada cupón se define JUNTO con la estrategia de precios, no
+  aislado. Antes de activar un cupón se verifica contra descuentos
+  activos y el margen combinado nunca queda en negativo. La
+  estratega-tienda es dueña del cálculo.
 - Las reviews alimentan el ledger (`data/ledger-ventas.json` vía el
   endpoint de reviews de la API — M2) para que la estratega las use.
