@@ -75,6 +75,19 @@ de propuestas diarias consume como orden de trabajo.
    catálogo ya lo cubre.
 6. **Guía de precios.** Precio base S–XL por producto + recargos por talla
    (fórmula en publicar-printify-etsy §Precios).
+   **Doctrina "precio con colchón" (regla del dueño 2026-10-16):** TODO
+   precio base se fija de modo que con −25% de descuento el margen por
+   unidad siga ≥ $1.50 (costos verificados + fees 9.5% + $0.25).
+   Tabla vigente: Sudadera Gildan 18000 → S–XL $40.99 / 2XL $44.99 /
+   3XL $46.99; Playera Bella+Canvas 3001 → S–XL $25.99 / 2XL $28.99 /
+   3XL $32.99. Todo listing NUEVO nace con estos precios; si cambian
+   costos o la estratega propone otro producto, recalcular con la
+   misma fórmula antes de publicar.
+   **Doctrina "tienda siempre en descuento" (regla del dueño
+   2026-10-16):** el precio base es un ancla; la tienda vive en
+   descuento permanente rotativo (eventos de Etsy o promos/cupones
+   propios), de modo que el comprador casi nunca ve el precio ancla.
+   La estratega mantiene SIEMPRE un descuento activo o programado.
    **Acoplamiento cupones↔precios (regla del dueño 2026-10-16):** los
    cupones/descuentos y los precios se deciden JUNTOS, nunca por
    separado. Antes de fijar un precio base, activar un Targeted Offer
