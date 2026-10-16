@@ -1,5 +1,9 @@
 # CHANGELOG — estratega-tienda
 
+## v0.5.0 (2026-10-16)
+- **Mecánica Etsy verificada:** los cupones NO se apilan con ofertas (un solo descuento por compra; Etsy aplica el mejor). Los cupones son herramienta de ventanas a precio pleno; el acoplamiento cupones↔precios pasa a planificarse como CALENDARIO secuencial, no como suma.
+- **Flujo dueño (2026-10-16):** la estratega PROPONE el calendario de descuentos/cupones con números y márgenes por ventana; el dueño da el dale; Jarvis ejecuta y verifica.
+
 ## v0.4.0 (2026-10-16)
 - **Portabilidad de la estrategia de precios** (corrección del dueño):
   el skill define el MECANISMO ("precio con colchón":
