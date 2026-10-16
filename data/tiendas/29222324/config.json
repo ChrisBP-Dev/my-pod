@@ -26,7 +26,8 @@
   "eventos_ofertas": [],
   "etsy_api": {
     "shop_id": "68433437",
-    "scopes": ["email_r", "shops_r", "listings_r", "transactions_r"],
+    "scopes": ["email_r", "shops_r", "listings_r", "transactions_r", "listings_w"],
+    "scopes_ampliados_el": "2026-10-16",
     "secrets_file": "~/.config/my-pod/etsy-api.json",
     "conectada_el": "2026-10-16",
     "nota": "Conexión por tienda (skill conectar-etsy-api). Credencial en archivo 0600, nunca en repo/chat."
