@@ -1,8 +1,12 @@
-# Regla: delivery de procesos automatizados a chats (2026-10-15)
+# Regla: delivery de procesos automatizados a chats (2026-10-15, act. 22:30)
 
-**Problema:** procesos automatizados (crons, reportes de investigación,
-notificaciones de propuestas) reabrían chats archivados en vez de crear
-uno nuevo o ir al destino correcto.
+**Preferencia del dueño (2026-10-15, verbal):** cada investigación,
+cada reporte, cada notificación automática va en un **chat NUEVO**
+(fresh), nunca en el hub ni en un chat archivado.
+
+**Problema original:** procesos automatizados (crons, reportes de
+investigación, notificaciones de propuestas) reabrían chats archivados
+en vez de crear uno nuevo.
 
 **Causa raíz (investigación 2026-10-15):**
 1. Los workers de cron NO tienen la herramienta `chat`: no pueden crear
@@ -17,22 +21,23 @@ uno nuevo o ir al destino correcto.
    chat" sin nombrar el destino por rol ni prohibir explícitamente
    escribir en chats archivados.
 
-## La regla
+## La regla (vigente)
 
-1. **Cada reporte automático tiene UN destino vivo:** el chat de
-   `delivery` configurado en el cron (hub "📌 POD — Equipo y fábrica"
-   para los crons del equipo POD; el chat de trabajo correspondiente
-   para los demás). El destino se nombra por ROL en el cuerpo del cron,
-   no solo por ID.
-2. **NUNCA se escribe en un chat archivado.** Un chat archivado es una
+1. **Cada reporte automático vive en un chat NUEVO** (fresh), titulado
+   según su tipo: `📌 POD — Propuestas · <fecha>`,
+   `🔍 POD — Investigación · <fecha>`, `📊 POD — Estratega · <fecha>`,
+   `📋 POD — Revisión viernes · <fecha>`, `📈 POD — Trends · <fecha>`,
+   `📌 POD — Pinterest · <fecha>`, `⚠️ POD — Alerta watchdog · <fecha>`.
+2. **Mecánica:** el worker termina con su mensaje final = SOLO el
+   reporte, primera línea `TÍTULO: <título del chat nuevo>`. El agente
+   conversacional (al procesar el handoff en el hub) crea el chat con
+   `chat.create` (fresh) y publica el reporte ahí con `chat.send_message`.
+   En el hub solo queda una línea indicando dónde quedó el reporte.
+3. **NUNCA se escribe en un chat archivado.** Un chat archivado es una
    decisión del dueño (quitarlo de su vista). Ningún proceso automático
-   la revierte.
-3. **Si el destino configurado está archivado o no existe**, el reporte
-   se entrega en un chat NUEVO (fresh) titulado
-   `"<Nombre del reporte> · <fecha>"` — nunca reabriendo el archivado.
-4. **El worker no nombra chats en su salida.** El cuerpo del cron prohíbe
-   al worker mencionar IDs de chats viejos como destino ("en vez de crear
-   uno nuevo" aplica al agente conversacional que procesa el handoff).
+   la revierte. El worker no menciona IDs de chats viejos como destino.
+4. **Excepción:** el watchdog en silencio (sin alertas) no crea ningún
+   chat.
 5. **Los chats de trabajo del dueño no se archivan** (regla vigente);
    los workers/background sí. Si un destino deja de ser el correcto, se
    cambia el `delivery` del cron con `cron.update`, no se improvisa en
@@ -42,4 +47,5 @@ uno nuevo o ir al destino correcto.
 
 - Esta regla: `docs/REGLA-DELIVERY-CHATS.md` (este archivo).
 - Cláusula operativa: cada cron POD la lleva en su cuerpo como
-  "REGLA ANTI-REAPERTURA (2026-10-15)".
+  "ENTREGA (2026-10-15, preferencia del dueño)".
+- Preferencia durable: `~/MEMORY.md` (delivery de reportes POD).

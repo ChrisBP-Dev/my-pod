@@ -67,6 +67,11 @@ junto con `data/direccion-tienda.md` en cada corrida semanal.
   `["gildan-18000", "bella-canvas-3001"]`.
 - `mpl.nombres_variacion`: nombre corto por componente para el campo
   "Variation name for Etsy listing". Default: Sweatshirt/T-Shirt.
+- El **esquema de mockups/videos** de cada composición vive en
+  `data/tiendas/<id>/config.json` (`mpl.esquema_mockups`,
+  `mpl.esquema_videos`) — no en este contrato ni quemado en el skill.
+  Si la estratega propone una composición nueva, propone su esquema
+  junto con ella (PROPUESTA hasta el dale del dueño).
 - `single.producto`: slug del producto para lotes single.
 - `mixto.reparto`: cuántas propuestas van por cada track (suma = N).
 - `flujo_bifurcado`: siempre `true`. Aunque `tipo_lote` sea `"mpl"`,
