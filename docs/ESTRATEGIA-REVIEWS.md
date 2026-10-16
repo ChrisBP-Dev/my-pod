@@ -114,10 +114,9 @@ Efecto: más ventas → más oportunidades de review. Sin control.
    Thank You 10% recompra; Favorited/Abandoned 10-15% conversión —
    el % lo define él).
 2. **Follow-up C:** ¿dale para mensajear a cada comprador tras la
-   entrega? Plantilla propuesta (requiere su aprobación antes de usarse;
-   la firma sale de la ficha de la tienda
-   `data/tiendas/<id>/config.json → mensajeria.firma`, nunca de la
-   marca madre — regla del dueño 2026-10-16):
+   entrega? Plantilla APROBADA por el dueño 2026-10-16 (la firma sale de
+   la ficha de la tienda `data/tiendas/<id>/config.json → mensajeria.firma`,
+   nunca de la marca madre — regla del dueño 2026-10-16):
    > "¡Gracias por tu compra! Esperamos que te encante. Si algo no está
    > perfecto, escríbenos y lo resolvemos. Y si te gustó, una review
    > honesta nos ayuda muchísimo. — MyNightShiftShop"
