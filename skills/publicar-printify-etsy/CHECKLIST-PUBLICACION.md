@@ -88,6 +88,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 ## Registro
 - [ ] IDs de Printify y Etsy en `data/registro-listings.json`, `tipo: "mpl"`, componentes listados
 - [ ] Estado = "publicado_completo"
+- [ ] Eventos de ofertas: si `data/tiendas/<id>/config.json → eventos_ofertas` tiene eventos vigentes que apliquen a este listing, agregarlo al evento (navegador: Marketing → Sales and discounts → editar la oferta → incluir el listing)
 
 ---
 
@@ -109,6 +110,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] **Caja de personalización** configurada (nativa de Etsy) si el diseño la lleva
 - [ ] Precio final verificado por variación en el listing vivo
 - [ ] Registro en `data/registro-listings.json`, `tipo: "single"`, estado "publicado_completo"
+- [ ] Eventos de ofertas: si `data/tiendas/<id>/config.json → eventos_ofertas` tiene eventos vigentes que apliquen a este listing, agregarlo al evento (navegador: Marketing → Sales and discounts → editar la oferta → incluir el listing)
 
 ---
 
