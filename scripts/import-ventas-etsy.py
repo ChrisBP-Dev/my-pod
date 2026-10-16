@@ -46,6 +46,23 @@ REGISTRO_PATH = os.path.join(APP_ROOT, "data", "registro-listings.json")
 CSV_DIR = os.path.join(APP_ROOT, "data", "ventas-csv")
 SECRETS_PATH = os.path.expanduser("~/.config/my-pod/etsy-api.json")
 
+
+def resolve_secrets_path():
+    """La ruta del archivo de secretos sale del config de la tienda
+    (data/tiendas/<id>/config.json -> etsy_api.secrets_file); si no
+    existe, se usa el default. Ver skill conectar-etsy-api."""
+    cfg = os.path.expanduser(
+        os.environ.get("MY_POD_TIENDA_CONFIG",
+                       "~/workspace/my-pod/data/tiendas/29222324/config.json"))
+    try:
+        c = json.load(open(cfg))
+        p = (c.get("etsy_api") or {}).get("secrets_file")
+        if p:
+            return os.path.expanduser(p)
+    except Exception:
+        pass
+    return SECRETS_PATH
+
 API_BASE = "https://openapi.etsy.com/v3/application"
 OAUTH_AUTHORIZE = "https://www.etsy.com/oauth/connect"
 OAUTH_TOKEN = "https://api.etsy.com/v3/public/oauth/token"
@@ -60,8 +77,9 @@ def now_iso():
 
 def load_secrets():
     sec = {}
-    if os.path.exists(SECRETS_PATH):
-        with open(SECRETS_PATH) as f:
+    sp = resolve_secrets_path()
+    if os.path.exists(sp):
+        with open(sp) as f:
             sec = json.load(f)
     sec.setdefault("keystring", os.environ.get("ETSY_KEYSTRING", ""))
     sec.setdefault("shared_secret", os.environ.get("ETSY_SHARED_SECRET", ""))
@@ -69,10 +87,11 @@ def load_secrets():
 
 
 def save_secrets(sec):
-    os.makedirs(os.path.dirname(SECRETS_PATH), exist_ok=True)
-    with open(SECRETS_PATH, "w") as f:
+    sp = resolve_secrets_path()
+    os.makedirs(os.path.dirname(sp), exist_ok=True)
+    with open(sp, "w") as f:
         json.dump(sec, f, indent=2)
-    os.chmod(SECRETS_PATH, 0o600)
+    os.chmod(sp, 0o600)
 
 
 def api_get(path, sec, params=None):
