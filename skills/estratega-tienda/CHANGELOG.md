@@ -1,5 +1,20 @@
 # CHANGELOG — estratega-tienda
 
+## v0.4.0 (2026-10-16)
+- **Portabilidad de la estrategia de precios** (corrección del dueño):
+  el skill define el MECANISMO ("precio con colchón":
+  P ≥ (C + 0.25 + M) / ((1−D)×0.905)) y el método de calibración
+  (preguntas al dueño + recalibración semanal), NUNCA los valores.
+  La estrategia de cada tienda vive en
+  `data/tiendas/<id>/config.json → estrategia_precios`; la estratega
+  la lee, y si no existe la calibra con el dueño antes de la primera
+  directriz. Los números de la tienda 29222324 quedan como EJEMPLO
+  marcado, no como regla.
+
+## v0.3.0 (2026-10-16)
+- Entrada #7: ledger de ventas como feedback loop (M2) — la estratega
+  lee `data/ledger-ventas.json` en cada corrida.
+
 ## v0.2.0 (2026-10-15)
 - **Config máquina de tipo de producto** (pedido del dueño): la estratega
   ahora también escribe `data/config-propuestas.json` (contrato
