@@ -11,6 +11,9 @@ import os
 import sys
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from precios_comunes import precio_esperado, normalizar  # noqa: E402
+
 BASE = os.path.expanduser("~/workspace/my-pod")
 SECRETS = os.path.expanduser("~/.config/my-pod/etsy-api.json")
 
@@ -31,15 +34,6 @@ def resolve_secrets():
     return SECRETS
 API = "https://openapi.etsy.com/v3/application"
 SHOP_ID = "68433437"
-
-TABLA = {  # (producto, talla) -> precio USD
-    ("Sweatshirt", "S"): 40.99, ("Sweatshirt", "M"): 40.99,
-    ("Sweatshirt", "L"): 40.99, ("Sweatshirt", "XL"): 40.99,
-    ("Sweatshirt", "2XL"): 44.99, ("Sweatshirt", "3XL"): 46.99,
-    ("T-Shirt", "S"): 25.99, ("T-Shirt", "M"): 25.99,
-    ("T-Shirt", "L"): 25.99, ("T-Shirt", "XL"): 25.99,
-    ("T-Shirt", "2XL"): 28.99, ("T-Shirt", "3XL"): 32.99,
-}
 
 
 def api_get(path):
@@ -66,10 +60,9 @@ def main():
                     size = (pv.get("values") or ["?"])[0]
                 elif pv.get("property_name") == "Color":
                     color = (pv.get("values") or ["?"])[0]
-            if not size or "/" not in size:
+            if not size:
                 continue
-            prod, talla = [s.strip() for s in size.split("/", 1)]
-            esperado = TABLA.get((prod, talla))
+            esperado = precio_esperado(size)
             if esperado is None:
                 errores.append(f"{lid} {size}/{color}: talla no mapeada")
                 continue
