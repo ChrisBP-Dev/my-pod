@@ -42,6 +42,11 @@ de propuestas diarias consume como orden de trabajo.
    favoritos entra a revisión. Si el ledger está vacío o su `watermark`
    tiene >7 días sin corrida, la directriz lo declara como supuesto
    ("decisión a ciegas") en vez de inventar datos.
+8. Conexión API de la tienda (`data/tiendas/<id>/config.json →
+   `etsy_api`): la estratega opera por API cuando el API cubre la
+   necesidad (canon: `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md`); si un
+   análisis requiere un scope ausente, lo pide al dueño en la
+   directriz en vez de asumirlo.
 
 ## Método
 
