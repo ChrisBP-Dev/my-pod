@@ -24,6 +24,33 @@ paquete de listing aprobado (dale del dueño), y el track decidido
 o el diseño es personalizable y se pretende meterlo en un MPL
 (el MPL nativo NO soporta personalización).
 
+## Estándar: API de Etsy vs navegador (2026-10-16)
+
+**Principio: API-first.** Todo lo que el API de Etsy cubre se hace por
+API (determinista, rápido, verificable por máquina); el navegador es
+solo para lo que el API no expone.
+
+**Por API** (requiere scopes; ver skill `conectar-etsy-api`):
+- Lectura: listings, inventario/precios por variación, órdenes/recibos,
+  reviews, favoritos, datos de la tienda.
+- Escritura (scope `listings_w`): precios e inventario por variación
+  (`updateListingInventory`), título/descripción/tags/materiales
+  (`updateListing`), subida de imágenes, creación de borradores.
+  → Las actualizaciones de precios/inventario van por API, NUNCA por
+  edición manual en el navegador.
+
+**Por navegador** (el API no lo expone): sales events / Sales and
+discounts, cupones y Targeted Offers, estadísticas de visitas/views,
+mensajes con compradores, y cualquier flujo que exija interacción JS.
+
+**Calibración por tienda:** la conexión API es POR TIENDA (skill
+`conectar-etsy-api`): cada tienda tiene su Seller App, sus tokens
+(`~/.config/my-pod/etsy-api-<shop>.json`, 0600, nunca en repo/chat) y
+su `shop_id` registrado en `data/tiendas/<id>/config.json`. Los scopes
+otorgados también se registran ahí; si un flujo necesita un scope
+ausente, se pide al dueño (re-autorización OAuth) antes de usar el
+navegador como atajo.
+
 ## 0. Decisión de track — FLUJO BIFURCADO (orden del dueño 2026-10-15)
 
 **¿El diseño es personalizable (lleva nombre/texto del comprador)?**

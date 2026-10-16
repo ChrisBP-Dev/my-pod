@@ -13,6 +13,22 @@ import urllib.request
 
 BASE = os.path.expanduser("~/workspace/my-pod")
 SECRETS = os.path.expanduser("~/.config/my-pod/etsy-api.json")
+
+
+def resolve_secrets():
+    """Ruta del archivo de secretos desde el config de la tienda
+    (etsy_api.secrets_file); default si no existe. Ver conectar-etsy-api."""
+    cfg = os.path.expanduser(
+        os.environ.get("MY_POD_TIENDA_CONFIG",
+                       "~/workspace/my-pod/data/tiendas/29222324/config.json"))
+    try:
+        c = json.load(open(cfg))
+        p = (c.get("etsy_api") or {}).get("secrets_file")
+        if p:
+            return os.path.expanduser(p)
+    except Exception:
+        pass
+    return SECRETS
 API = "https://openapi.etsy.com/v3/application"
 SHOP_ID = "68433437"
 
@@ -27,7 +43,7 @@ TABLA = {  # (producto, talla) -> precio USD
 
 
 def api_get(path):
-    sec = json.load(open(SECRETS))
+    sec = json.load(open(resolve_secrets()))
     req = urllib.request.Request(
         API + path,
         headers={"x-api-key": sec["keystring"] + ":" + sec["shared_secret"],

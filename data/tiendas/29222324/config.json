@@ -24,6 +24,13 @@
     "recalibrar_si": ["cambian costos Printify", "nuevo producto en la composición", "el dueño cambia piso o descuento máximo"]
   },
   "eventos_ofertas": [],
+  "etsy_api": {
+    "shop_id": "68433437",
+    "scopes": ["email_r", "shops_r", "listings_r", "transactions_r"],
+    "secrets_file": "~/.config/my-pod/etsy-api.json",
+    "conectada_el": "2026-10-16",
+    "nota": "Conexión por tienda (skill conectar-etsy-api). Credencial en archivo 0600, nunca en repo/chat."
+  },
   "mockups": {
     "seleccion": [
       "flat",
