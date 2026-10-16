@@ -114,10 +114,13 @@ Efecto: más ventas → más oportunidades de review. Sin control.
    Thank You 10% recompra; Favorited/Abandoned 10-15% conversión —
    el % lo define él).
 2. **Follow-up C:** ¿dale para mensajear a cada comprador tras la
-   entrega? Plantilla propuesta (requiere su aprobación antes de usarse):
+   entrega? Plantilla propuesta (requiere su aprobación antes de usarse;
+   la firma sale de la ficha de la tienda
+   `data/tiendas/<id>/config.json → mensajeria.firma`, nunca de la
+   marca madre — regla del dueño 2026-10-16):
    > "¡Gracias por tu compra! Esperamos que te encante. Si algo no está
    > perfecto, escríbenos y lo resolvemos. Y si te gustó, una review
-   > honesta nos ayuda muchísimo. — Tú Dale POD"
+   > honesta nos ayuda muchísimo. — MyNightShiftShop"
 3. **Cyber Specials D:** ¿opt-in? Solo playeras (margen verificado), o
    no participar. El cron avisa el 26-oct.
 4. **Star Seller E:** objetivo declarado a 3 meses (sin acción hoy salvo
@@ -133,5 +136,10 @@ Efecto: más ventas → más oportunidades de review. Sin control.
   aislado. Antes de activar un cupón se verifica contra descuentos
   activos y el margen combinado nunca queda en negativo. La
   estratega-tienda es dueña del cálculo.
+- **Presupuesto de descuento (regla del dueño 2026-10-16):**
+  descuento TOTAL (evento/promo + cupones) ≤ 25% del precio base.
+  Nunca 25% de evento + cupones a la vez: ej. cupón 10% activo →
+  promo máx 15%. El margen con el descuento total aplicado respeta
+  siempre el piso mínimo de ganancia.
 - Las reviews alimentan el ledger (`data/ledger-ventas.json` vía el
   endpoint de reviews de la API — M2) para que la estratega las use.

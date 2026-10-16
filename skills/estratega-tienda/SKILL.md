@@ -83,7 +83,10 @@ de propuestas diarias consume como orden de trabajo.
    fees): el total nunca deja el margen en negativo; siempre hay piso
    de ganancia positivo. Si un evento exige −X% y hay cupones activos
    que lo volverían negativo, se desactiva una cosa o no se entra al
-   evento. Esta directriz fija ambos juntos: % de cupones + precios.
+   evento. **Presupuesto de descuento (regla del dueño 2026-10-16):**
+   descuento TOTAL (evento/promo + cupones) ≤ 25% del precio base;
+   nunca 25% de evento + cupones simultáneos (ej. cupón 10% →
+   promo máx 15%). Esta directriz fija ambos juntos: % de cupones + precios.
 7. **Qué NO hacer.** Lista explícita de temas/productos descartados esta
    semana, con motivo.
 
