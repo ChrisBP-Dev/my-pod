@@ -3,7 +3,7 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un solo listing) o track single-product (diseños personalizables, que el MPL no soporta). Drafts en Printify, revisión del dueño, mockups de Printify, videos, publicación y verificación integral en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.7.0"
+  version: "0.7.1"
   framework_version: "0.8.0"
   regression_suite: "evals/"
 ---
@@ -155,11 +155,16 @@ Por cada producto de la composición (default: sudadera + playera):
   MPL y rompe el flujo.
 
 ### M2. Revisión del dueño — placement EN CADA PRODUCTO (2026-10-15)
-- El dueño revisa CADA draft componente en Printify cada mañana.
-- **Placement:** verificar en CADA producto del MPL (centrado, dentro
-  del área de impresión, sin desbordamiento) + revisión del dueño.
-  El placement heredado del flujo "same design" NO sustituye la
-  verificación por producto.
+- **Variante propuestas diarias (orden del dueño 2026-10-16):** las
+  propuestas llegan como **MPL drafts ensamblados (un draft por
+  diseño)**. El dueño abre cada MPL draft y verifica el placement
+  **por item dentro del editor** (centrado, dentro del área de
+  impresión, sin desbordamiento — cada blueprint tiene su área).
+  Rechazado = elimina el MPL draft completo. Aprobado = sigue a M3.
+- **Variante publicación directa (diseño ya aprobado):** el dueño
+  revisa CADA draft componente en Printify (mismo criterio por
+  producto). El placement heredado del flujo "same design" NO
+  sustituye la verificación por producto.
 - Corrige la ubicación directamente en el editor si hace falta.
 - Elimina los rechazados. Avisa cuáles están listos.
 
