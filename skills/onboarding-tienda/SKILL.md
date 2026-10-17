@@ -3,13 +3,13 @@ name: "onboarding-tienda"
 description: "Playbook de puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento con el dueño, conexiones (Etsy API, Printify), config de tienda, activaciones de Etsy (Share & Save, calendario de descuentos, cupones), calibración de productos y creación de los crons operativos con patrones de resiliencia. El mecanismo es portable; los valores son calibración por tienda."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   framework_version: "0.8.0"
 ---
 
 # Onboarding de tienda POD
 
-**Versión 0.1.1** (2026-10-16: destilado de la puesta en marcha real de
+**Versión 0.1.2** (2026-10-16: destilado de la puesta en marcha real de
 MyNightShiftShop — todo lo aprendido en el camino, convertido en
 procedimiento reproducible).
 
@@ -103,6 +103,11 @@ Registrar todo en `data/tiendas/<shop_id>/config.json`
 
 Credenciales: `~/.config/my-pod/` (0600), nunca en el repo ni en el
 chat.
+
+**Estándar API-first** (canon: `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md`):
+todo lo que el API de Etsy cubre se hace por API; el navegador solo
+para lo que el API no expone. Los skills lo referencian; este playbook
+no duplica sus reglas.
 
 ## Fase 3 — Activaciones de Etsy (lo aprendido en el camino)
 

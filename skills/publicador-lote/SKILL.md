@@ -3,13 +3,13 @@ name: "publicador-lote"
 description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito de aprobados, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing, videos en paralelo y nunca regenerados, fallos aislados sin bloquear el lote, y protocolo de rollback. Formaliza lo que antes ocurría por accidente."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   framework_version: "0.8.0"
 ---
 
 # Publicador de lote POD
 
-**Versión 0.1.0** (2026-10-16: el flujo post-aprobación existía y
+**Versión 0.1.1** (2026-10-16: el flujo post-aprobación existía y
 funcionaba, pero sin vehículo diseñado — corría donde el dueño
 respondiera, sin checkpoints. Este skill lo formaliza: un side chat por
 lote, manifiesto explícito, resume por listing).
@@ -42,6 +42,17 @@ Por cada slug del manifiesto, en orden, delegando en
 **M7** publicar → **M8** verificación Fase C → **M9** registrar.
 M2 (revisión del dueño) ya ocurrió: es la aprobación que originó el
 lote. M10 (Pinterest) lo cubre el cron de Pinterest con la parrilla.
+
+## Enrutamiento API vs navegador (2026-10-16)
+
+**API-first.** Canon: `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` — tabla
+de enrutamiento (qué va por API con qué scope, qué va por navegador).
+Todo lo que el API de Etsy cubre se hace por API (determinista, rápido,
+verificable por máquina); el navegador es solo para lo que el API no
+expone. El pipeline M3→M9 heredado de `publicar-printify-etsy` ya trae
+este enrutamiento; este skill lo **exige**, no lo relaja: si un paso
+tiene vía API disponible, se usa la vía API. La conexión es por tienda
+(skill `conectar-etsy-api`, `config.json → etsy_api`).
 
 ## Patrones de resiliencia (docs/PATRONES-RESILIENCIA.md)
 

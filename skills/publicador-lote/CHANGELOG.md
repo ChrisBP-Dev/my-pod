@@ -1,5 +1,10 @@
 # CHANGELOG — publicador-lote
 
+## v0.1.1 (2026-10-16)
+- Enrutamiento API-first hecho explícito: el skill ahora apunta al canon
+  `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` y exige la vía API donde
+  exista (antes lo heredaba implícitamente de publicar-printify-etsy).
+
 ## v0.1.0 (2026-10-16)
 - Skill nuevo: formaliza el flujo de publicación post-aprobación (antes
   funcionaba por accidente, sin vehículo diseñado). Un side chat por
