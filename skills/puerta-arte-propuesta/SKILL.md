@@ -130,3 +130,19 @@ después de 12 mockups.
   fondo de un color, fondo metido dentro de las letras. El primero lo
   atrapa `fondo_limpio`; el segundo lo revisa el ojo (gate humano
   declarado, no promesa falsa del código).
+- (2026-10-17, caso p036 ICU Thankful Heart, cazado por el dueño en el
+  mockup) **Damero de "transparencia falsa" horneado en el arte:** el
+  generador dibuja los cuadros grises del damero como píxeles reales y
+  la limpieza por flood-fill/blanco puro NO los quita: son gris neutro
+  ~237 (bajo el umbral de blanco puro ≥250 de `limpiar-fondo.py`) y
+  quedan atrapados en huecos interiores entre elementos. Los gates
+  actuales lo pasan todo (el damero es contenido opaco: `fondo_limpio`
+  y `sin_blanco_puro` dan PASS). Detección: componer el arte sobre
+  fondo NEGRO y mirar — los fragmentos aparecen como cuadros
+  gris/blanco entre elementos; conteo de píxeles opacos acromáticos
+  (dispersión RGB ≤18) con media ≥200 fuera de elementos de diseño.
+  Limpieza determinista verificada: alfa→0 en píxeles acromáticos
+  (dispersión ≤18, media ≥200, cualquier alfa) — el diseño de estos
+  artes no usa gris neutro (sus claros son crema cálido), remanente 0
+  y diseño intacto. Candidato a gate automático cuando se calibre
+  contra artes con gris de diseño legítimo (no bloquear por defecto).
