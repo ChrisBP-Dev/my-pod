@@ -7,3 +7,4 @@ data/cola-pins/
 data/ventas-csv/*.csv
 data/estado-propuestas.json
 data/estado-pinterest.json
+data/estado-publicacion.json
