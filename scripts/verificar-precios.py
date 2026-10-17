@@ -12,36 +12,14 @@ import sys
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from precios_comunes import precio_esperado, normalizar  # noqa: E402
+from precios_comunes import precio_esperado, normalizar, SHOP_ID  # noqa: E402
+from etsy_auth import get_headers  # noqa: E402 (refresca el token si venció)
 
-BASE = os.path.expanduser("~/workspace/my-pod")
-SECRETS = os.path.expanduser("~/.config/my-pod/etsy-api.json")
-
-
-def resolve_secrets():
-    """Ruta del archivo de secretos desde el config de la tienda
-    (etsy_api.secrets_file); default si no existe. Ver conectar-etsy-api."""
-    cfg = os.path.expanduser(
-        os.environ.get("MY_POD_TIENDA_CONFIG",
-                       "~/workspace/my-pod/data/tiendas/29222324/config.json"))
-    try:
-        c = json.load(open(cfg))
-        p = (c.get("etsy_api") or {}).get("secrets_file")
-        if p:
-            return os.path.expanduser(p)
-    except Exception:
-        pass
-    return SECRETS
 API = "https://openapi.etsy.com/v3/application"
-SHOP_ID = "68433437"
 
 
 def api_get(path):
-    sec = json.load(open(resolve_secrets()))
-    req = urllib.request.Request(
-        API + path,
-        headers={"x-api-key": sec["keystring"] + ":" + sec["shared_secret"],
-                 "Authorization": "Bearer " + sec["access_token"]})
+    req = urllib.request.Request(API + path, headers=get_headers())
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 

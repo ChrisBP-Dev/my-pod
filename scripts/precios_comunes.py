@@ -1,25 +1,44 @@
-"""Canon de precios por variación — módulo compartido.
+"""Canon de precios por variación — módulo compartido (CAPA SISTEMA).
 
-Fuente de verdad: data/tiendas/<id>/config.json -> estrategia_precios
-(doctrina "precio con colchón", 2026-10-16). Esta TABLA la replica;
-si la doctrina cambia, se actualiza AQUÍ y los scripts la heredan.
-
-Los nombres de Size en Etsy varían por listing ("Sweatshirt / 2XL" vs
-"Unisex Heavy Blend™ Crewneck Sweatshirt / 2XL"), así que la
-normalización es por contenido, no por igualdad exacta.
+Este módulo es PORTABLE: no contiene ningún valor de tienda quemado.
+- La TABLA se lee de `data/tiendas/<id>/config.json → estrategia_precios.tabla_variaciones`
+  (la tienda se resuelve vía MY_POD_TIENDA_CONFIG o el default).
+- El SHOP_ID (Etsy) se lee de `etsy_api.shop_id` del mismo config.
+- `normalizar()` es MECANISMO universal: los nombres de Size en Etsy
+  varían por listing ("Sweatshirt / 2XL" vs "Unisex Heavy Blend™ Crewneck
+  Sweatshirt / 2XL"), así que la normalización es por contenido, no por
+  igualdad exacta.
 """
 
-# (producto, talla) -> precio USD
-TABLA = {
-    ("Sweatshirt", "S"): 40.99, ("Sweatshirt", "M"): 40.99,
-    ("Sweatshirt", "L"): 40.99, ("Sweatshirt", "XL"): 40.99,
-    ("Sweatshirt", "2XL"): 44.99, ("Sweatshirt", "3XL"): 46.99,
-    ("T-Shirt", "S"): 25.99, ("T-Shirt", "M"): 25.99,
-    ("T-Shirt", "L"): 25.99, ("T-Shirt", "XL"): 25.99,
-    ("T-Shirt", "2XL"): 28.99, ("T-Shirt", "3XL"): 32.99,
-}
+import json
+import os
 
-_TALLAS = ("S", "M", "L", "XL", "2XL", "3XL")
+_CONFIG_DEFAULT = os.path.expanduser(
+    "~/workspace/my-pod/data/tiendas/29222324/config.json")
+
+# config: nombre de producto en español -> nombre detectado en Etsy
+_PRODUCTO_CONFIG = {"sudadera": "Sweatshirt", "playera": "T-Shirt"}
+
+
+def _cargar_config():
+    path = os.path.expanduser(os.environ.get("MY_POD_TIENDA_CONFIG",
+                                             _CONFIG_DEFAULT))
+    with open(path) as f:
+        return json.load(f)
+
+
+_CONFIG = _cargar_config()
+
+# Shop ID de Etsy: del config de la tienda, nunca hardcodeado.
+SHOP_ID = str((_CONFIG.get("etsy_api") or {}).get("shop_id", ""))
+
+# (producto, talla) -> precio USD, construido desde el config.
+TABLA = {}
+for prod_es, tallas in ((_CONFIG.get("estrategia_precios") or {})
+                        .get("tabla_variaciones", {})).items():
+    prod = _PRODUCTO_CONFIG.get(prod_es, prod_es)
+    for talla, precio in tallas.items():
+        TABLA[(prod, talla)] = float(precio)
 
 
 def normalizar(size_str):

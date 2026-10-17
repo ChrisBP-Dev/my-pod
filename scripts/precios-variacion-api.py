@@ -24,37 +24,23 @@ import urllib.request
 import urllib.error
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from precios_comunes import precio_esperado  # noqa: E402
+from precios_comunes import precio_esperado, SHOP_ID  # noqa: E402
+from etsy_auth import load_secrets, get_headers  # noqa: E402
 
 BASE = os.path.expanduser("~/workspace/my-pod")
 API = "https://openapi.etsy.com/v3/application"
-SHOP_ID = "68433437"
 
 
-def resolve_secrets():
-    cfg = os.path.expanduser(
-        os.environ.get("MY_POD_TIENDA_CONFIG",
-                       "~/workspace/my-pod/data/tiendas/29222324/config.json"))
-    try:
-        c = json.load(open(cfg))
-        p = (c.get("etsy_api") or {}).get("secrets_file")
-        if p:
-            return os.path.expanduser(p)
-    except Exception:
-        pass
-    return os.path.expanduser("~/.config/my-pod/etsy-api.json")
 
 
-def headers(sec):
-    return {"x-api-key": sec["keystring"] + ":" + sec["shared_secret"],
-            "Authorization": "Bearer " + sec["access_token"],
-            "Content-Type": "application/json"}
+def headers(sec=None):
+    h = get_headers(sec)
+    h["Content-Type"] = "application/json"
+    return h
 
 
 def api_get(sec, path):
-    req = urllib.request.Request(API + path, headers={
-        "x-api-key": sec["keystring"] + ":" + sec["shared_secret"],
-        "Authorization": "Bearer " + sec["access_token"]})
+    req = urllib.request.Request(API + path, headers=headers(sec))
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
@@ -113,7 +99,7 @@ def variation_images(sec, lid):
 
 
 def cmd_noop(lid):
-    sec = json.load(open(resolve_secrets()))
+    sec = load_secrets()
     inv_antes = api_get(sec, f"/listings/{lid}/inventory")
     imgs_antes = variation_images(sec, lid)
     precios_antes = {}
@@ -143,7 +129,7 @@ def cmd_noop(lid):
 
 
 def cmd_aplicar(solo=None):
-    sec = json.load(open(resolve_secrets()))
+    sec = load_secrets()
     listings = api_get(sec, f"/shops/{SHOP_ID}/listings/active?limit=100")["results"]
     if solo:
         listings = [l for l in listings if str(l["listing_id"]) == str(solo)]
