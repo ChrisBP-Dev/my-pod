@@ -1,5 +1,7 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.7.1 (2026-10-16)
+- **Propuestas como MPL drafts (orden del dueño, causa raíz 2026-10-16):** M2 calibrado — las propuestas diarias llegan ensambladas como MPL draft (un draft por diseño); la revisión del dueño verifica placement por item dentro del editor del MPL. El cron de propuestas ahora incluye el ensamblaje (M1+M4 antes de la revisión).
 ## v0.7.0 (2026-10-16)
 - **Estándar API de Etsy vs navegador** (punto del dueño): sección nueva que apunta al canon `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` (API-first; navegador solo para ofertas/cupones, stats de visitas, mensajes).
 - **Tablas de precios**: ya no hardcodeadas; se leen de `estrategia_precios` del config de tienda (ejemplo 29222324 actualizado a doctrina precio con colchón).
