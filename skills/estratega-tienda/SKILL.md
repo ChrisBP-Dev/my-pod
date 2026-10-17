@@ -3,7 +3,7 @@ name: "estratega-tienda"
 description: "Rol de estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal que direcciona las propuestas diarias (reparto de foco, mix de productos, guía de precios, nichos) + el config máquina de tipo de producto (mpl/single/mixto) que el cron de propuestas consume."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.0"
+  version: "0.5.1"
   framework_version: "0.8.0"
 ---
 
@@ -114,6 +114,12 @@ de propuestas diarias consume como orden de trabajo.
    piso de margen M y el descuento máximo D de la tienda, el precio
    base P cumple: P×(1−D)×0.905 − 0.25 − C ≥ M, o sea
    P ≥ (C + 0.25 + M) / ((1−D)×0.905) (fees Etsy 9.5% + $0.25).
+   **Share & Save (si la tienda está inscrita):** devolución del 4%
+   del total de la orden (6.5% en intro) cuando la compra llega por
+   link rastreable — es devolución de COMISIÓN, no descuento al
+   comprador, así que NO entra en el presupuesto de descuento D y
+   convive con ofertas. Para margen por canal: órdenes atribuidas
+   a Share & Save pagan 2.5% de transaction fee en vez de 6.5%.
    **Calibración inicial (preguntas al dueño de una tienda nueva):**
    ¿piso de margen por unidad? ¿descuento máximo total apilado
    (evento+cupones)? ¿se permite apilar evento + cupones? ¿modo

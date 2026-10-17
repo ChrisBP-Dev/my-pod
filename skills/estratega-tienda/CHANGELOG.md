@@ -1,5 +1,7 @@
 # CHANGELOG — estratega-tienda
 
+## v0.5.1 (2026-10-16)
+- **Share & Save:** la estratega ahora conoce el programa (4% devolución de comisión por link rastreable, 6.5% en intro; no entra en el presupuesto de descuento D; margen por canal usa 2.5% de transaction fee en órdenes atribuidas).
 ## v0.5.0 (2026-10-16)
 - **Mecánica Etsy verificada:** los cupones NO se apilan con ofertas (un solo descuento por compra; Etsy aplica el mejor). Los cupones son herramienta de ventanas a precio pleno; el acoplamiento cupones↔precios pasa a planificarse como CALENDARIO secuencial, no como suma.
 - **Flujo dueño (2026-10-16):** la estratega PROPONE el calendario de descuentos/cupones con números y márgenes por ventana; el dueño da el dale; Jarvis ejecuta y verifica.
