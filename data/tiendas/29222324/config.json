@@ -242,5 +242,29 @@
       "listings": "toda la tienda (14 activos)",
       "estado": "programada (verificado 2026-10-16)"
     }
-  ]
+  ],
+  "share_save": {
+    "inscrito": true,
+    "fecha_inscripcion": "2026-10-16",
+    "intro_hasta": "2026-10-30",
+    "intro_devolucion": "6.5%",
+    "devolucion_estandar": "4%",
+    "link_tienda": "https://mynightshiftshop.etsy.com",
+    "links": {
+      "4596202796": "https://mynightshiftshop.etsy.com/listing/4596202796",
+      "4596094421": "https://mynightshiftshop.etsy.com/listing/4596094421",
+      "4596108958": "https://mynightshiftshop.etsy.com/listing/4596108958",
+      "4596108754": "https://mynightshiftshop.etsy.com/listing/4596108754",
+      "4596087957": "https://mynightshiftshop.etsy.com/listing/4596087957",
+      "4596108104": "https://mynightshiftshop.etsy.com/listing/4596108104",
+      "4596086167": "https://mynightshiftshop.etsy.com/listing/4596086167",
+      "4595742812": "https://mynightshiftshop.etsy.com/listing/4595742812",
+      "4595604876": "https://mynightshiftshop.etsy.com/listing/4595604876",
+      "4593541859": "https://mynightshiftshop.etsy.com/listing/4593541859",
+      "4592008985": "https://mynightshiftshop.etsy.com/listing/4592008985",
+      "4591828133": "https://mynightshiftshop.etsy.com/listing/4591828133",
+      "4591617678": "https://mynightshiftshop.etsy.com/listing/4591617678",
+      "4589992085": "https://mynightshiftshop.etsy.com/listing/4589992085"
+    }
+  }
 }
