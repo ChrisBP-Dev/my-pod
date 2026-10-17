@@ -5,3 +5,4 @@ data/cola-pins/
 *.mp4
 *.mp3
 data/ventas-csv/*.csv
+data/estado-propuestas.json
