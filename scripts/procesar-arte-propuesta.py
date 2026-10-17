@@ -21,8 +21,10 @@ from PIL import Image
 
 FSRCNN_MODEL = "/home/hatch/.cache/superres/FSRCNN-small_x2.pb"
 TOL = 24          # tolerancia flood-fill fondo blanco
-OBJETIVO_ANCHO = 3600   # px para retrato (lado menor final >= 3400)
-OBJETIVO_CUADRADO = 4200
+OBJETIVO_ANCHO = 4000   # px para retrato (margen de zoom 2026-10-17: el
+                        # contenido debe rendir >=300 DPI al ancho nominal
+                        # x1.20 -> >=3780px a 10.5"; 3600 se quedaba corto)
+OBJETIVO_CUADRADO = 4400
 
 
 def fondo_a_alfa(img_rgb):

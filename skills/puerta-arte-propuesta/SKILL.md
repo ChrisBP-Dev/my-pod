@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
   framework_version: "0.8.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.3.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.4.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -26,7 +26,12 @@ después de 12 mockups.
 1. **Generar** el PNG con el brief (fondo transparente, sin backdrop).
 2. **Limpiar** SIEMPRE: `scripts/limpiar-fondo.py --archivo ARTE.png`
    (elimina blanco puro global — método canónico; no es opcional).
-3. **Correr** `scripts/verificar-arte.py` (`--archivo`, `--ancho-pulgadas`).
+2b. **Recortar** SIEMPRE: `scripts/verificar-arte.py --archivo ARTE.png
+   --autotrim --salida ARTE.png` (recorta al contenido real alfa≥128
+   +4px; sin este paso el PNG conserva el aire del lienzo de generación
+   y el diseño entra chico a Printify — corrección del dueño 2026-10-17).
+3. **Correr** `scripts/verificar-arte.py` (`--archivo`, `--ancho-pulgadas`,
+   `--exigir-margen-zoom` en el flujo de propuestas).
 4. **PASS** → el arte pasa a aprobación humana (ojo: counters).
    **FAIL** → se devuelve con el criterio violado. Si falla
    `sin_blanco_puro`, repetir paso 2 y re-verificar.
@@ -38,9 +43,24 @@ después de 12 mockups.
 - **formato**: PNG con canal alfa.
 - **fondo_limpio**: las 4 esquinas alfa = 0 (atrapa el PNG con fondo
   de un color aplanado).
-- **recorte_ajustado**: el bbox del contenido deja ≤32px transparentes
+- **recorte_ajustado**: el bbox del contenido REAL (alfa≥128) deja, **en
+  cada lado por separado**, ≤ máx(48px, 4% del lado) transparentes
   (criterio del dueño: recortado exacto al arte, sin bordes vacíos —
-  los bordes vacíos distorsionan el área de impresión).
+  los bordes vacíos distorsionan el área de impresión). **Corrección
+  2026-10-17:** la puerta medía el margen MENOR de los 4 lados — un arte
+  con aire enorme en 3 lados pasaba si un lado estaba pegado, y el
+  canónico de calibración trae 50px de margen máximo (el "22px" citado
+  era su mínimo). El dueño lo cazó revisando: PNG con mucho aire en
+  todos lados y colocación pequeña. Ahora se mide lado por lado sobre
+  el contenido visible (alfa≥128), no sobre píxeles fantasma.
+- **dpi_al_zoom** (con `--exigir-margen-zoom`, obligatorio en el flujo
+  de propuestas): el ANCHO DEL CONTENIDO debe rendir ≥300 DPI al ancho
+  máximo de colocación (nominal ×1.20). **Motivo (dueño, 2026-10-17):**
+  él agranda la colocación en su revisión; un arte que apenas pasa
+  300 DPI al nominal cae a 250-260 DPI al agrandarlo y "ya no lo puede
+  jugar". Si falla → escalar (`scripts/upscale-arte-fsrcnn.py`) y
+  re-verificar ANTES de crear el draft. Nunca entregar al dueño un
+  arte sin margen de zoom.
 - **Reparación** `--autotrim`: recorta al bbox + 4px y re-verifica.
 - **sin_blanco_puro**: blanco puro ≤0.3% (método canónico 2026-10-15).
 - **dpi**: ≥300 al ancho de impresión del producto.
@@ -93,8 +113,13 @@ después de 12 mockups.
 - `MECANISMO:` validar el arte antes del primer mockup (costo de rechazo
   mínimo) — universal.
 - `MECANISMO:` fondo transparente medido por bbox alfa — universal.
-- `CALIBRACIÓN:` MARGEN_MAX 32px, LADO_MIN 3000px, DPI_MIN 300 —
-  calibrados en vitals-stable-print-300dpi.png (margen 22px), 2026-10-13.
+- `CALIBRACIÓN:` MARGEN_MAX 48px o 4% por lado (el mayor), LADO_MIN
+  3000px, DPI_MIN 300, ZOOM_HEADROOM 1.20 — recalibrado 2026-10-17
+  contra vitals-stable-print-300dpi.png (márgenes por masa 0.05%:
+  69/50/66/84px, máx 2.7% → PASS), arte-margen-amplio.png (≥185px/lado → FAIL),
+  arte-aire-asimetrico.png (aire solo en 2 lados → FAIL; la versión
+  anterior con min() lo pasaba) y arte-zoom-ok.png (contenido 3980px →
+  PASS con margen de zoom; vitals sin margen → FAIL dpi_al_zoom).
   Revalidar si cambia el producto (otro ancho de impresión).
 - `MECANISMO:` verifier-repair — el recorte es determinista y seguro,
   la puerta lo repara y re-verifica en vez de solo bloquear.
