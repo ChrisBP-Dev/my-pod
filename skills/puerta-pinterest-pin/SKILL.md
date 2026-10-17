@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.3.0"
+  version: "0.3.1"
   framework_version: "0.8.0"
   regression_suite: "evals/"
   gate_script: "scripts/verificar-pin.py"
@@ -60,8 +60,11 @@ lo que el comprador encuentra en la tienda.
 - **video_specs** (solo tipo 4): existe el `.manifest.json` del video
   y corresponde al asset (el video se usa tal cual, sin recortar —
   decisión del dueño 2026-10-16).
-- **url_listing**: `https://www.etsy.com/listing/<id>` y el id coincide
-  con el registrado para el slug.
+- **url_listing**: debe coincidir EXACTAMENTE con la `url` registrada
+  para el slug en `data/registro-listings.json`. Si la tienda está
+  inscrita en Share & Save, esa URL es el link rastreable
+  (`<tienda>.etsy.com/...`); todos los pines usan el formato
+  rastreable, sin excepción.
 - **keywords_banco**: título+descripción contienen ≥1 keyword
   multi-palabra del banco **Pinterest** del nicho;
   `keywords_fuente` cita el archivo (que existe).

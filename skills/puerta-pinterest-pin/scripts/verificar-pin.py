@@ -5,8 +5,9 @@ Gates mecánicos (código):
   1. asset_final: el asset existe Y está registrado como FINAL del listing.
      (Caso 2026-10-12: dos pins salieron con mockups faithful viejos,
      no-finales. El pin muestra lo que el comprador encuentra en la tienda.)
-  2. url_listing: formato etsy.com/listing/<id> y el id coincide con el
-     registrado para ese slug.
+  2. url_listing: formato rastreable de Share & Save
+     (<tienda>.etsy.com/.../<id>) o clásico (etsy.com/listing/<id>),
+     y el id coincide con el registrado para ese slug.
   3. keywords: título+descripción contienen ≥1 keyword del banco del nicho,
      y keywords_fuente cita el archivo del banco (que debe existir).
   4. tablero: no vacío. (La existencia real del tablero es gate humano:
@@ -66,9 +67,12 @@ def main():
     if not g1:
         violado = "asset_no_final" if info else "slug_desconocido"
 
-    # G2: URL del listing
+    # G2: URL del listing (clásica o rastreable Share & Save)
     url = pin.get("url_listing", "")
     m = re.fullmatch(r"https://www\.etsy\.com/listing/(\d+)(/.*)?", url or "")
+    if not m:
+        m = re.fullmatch(r"https://[a-z0-9-]+\.etsy\.com/listing/(\d+)(/.*)?",
+                         url or "")
     g2 = bool(m) and bool(info) and m.group(1) == info["id_etsy"]
     gates["url_listing"] = {"pass": g2, "url": url}
     violado = violado or (None if g2 else "url_listing_invalida")
