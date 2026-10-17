@@ -70,6 +70,14 @@ json.dump(p, open(sys.argv[2], "w"))
 EOF
 run "F4 slug desconocido" FAIL "$TMP/f4.json"
 
+# P2: URL rastreable Share & Save (mismo id) → PASS
+python3 - "$TMP/p1.json" "$TMP/p2.json" <<'PYEOF'
+import json, sys
+p = json.load(open(sys.argv[1])); p["url_listing"] = "https://mynightshiftshop.etsy.com/listing/4589992085/santas-favorite-nurse"
+json.dump(p, open(sys.argv[2], "w"))
+PYEOF
+run "P2 url share-save" PASS "$TMP/p2.json"
+
 # F5: tablero vacío
 python3 - "$TMP/p1.json" "$TMP/f5.json" <<'EOF'
 import json, sys
