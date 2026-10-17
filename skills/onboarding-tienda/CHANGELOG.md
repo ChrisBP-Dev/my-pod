@@ -1,5 +1,9 @@
 # CHANGELOG — onboarding-tienda
 
+## v0.1.2 (2026-10-16)
+- Referencia explícita al canon `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md`
+  (API-first) en la fase de conexiones.
+
 ## v0.1.1 (2026-10-16)
 - Fase 0 agregada: nicho → nombre → identidad visual (logo/banner) →
   creación de la tienda en Etsy → perfil y políticas → conexión

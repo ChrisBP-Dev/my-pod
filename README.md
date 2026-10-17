@@ -10,10 +10,10 @@ Valida el framework en el camino más corto antes de atacar la Fábrica.
 | `conectar-etsy-api` | v0.1.1 | Conexión API Etsy por tienda: Seller App → OAuth PKCE → tokens → registro |
 | `estratega-tienda` | v0.5.1 | Dirección semanal de tienda: reparto de foco, mix, guía de precios, NO-hacer |
 | `estratega-pinterest` | v0.1.0 | Parrilla de Pinterest: 5 pins/día, mix por listing |
-| `onboarding-tienda` | v0.1.0 | Playbook de puesta en marcha: de cero a tienda operativa |
+| `onboarding-tienda` | v0.1.2 | Playbook de puesta en marcha: de cero a tienda operativa |
 | `paquete-listing-etsy` | v0.2.0 | Paquete comercial del listing: título, descripción, tags, keywords |
 | `publicar-printify-etsy` | v0.7.1 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
-| `publicador-lote` | v0.1.0 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
+| `publicador-lote` | v0.1.1 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
 | `puerta-arte-propuesta` | v0.3.0 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
 | `puerta-pinterest-pin` | v0.3.1 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
 | `puerta-publicacion-pod` | v0.2.2 | Mockup listo: dimensiones, DPI ≥300, placement contra el flat-lay aprobado DE ESE DISEÑO |
