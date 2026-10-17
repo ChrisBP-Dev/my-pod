@@ -6,3 +6,4 @@ data/cola-pins/
 *.mp3
 data/ventas-csv/*.csv
 data/estado-propuestas.json
+data/estado-pinterest.json

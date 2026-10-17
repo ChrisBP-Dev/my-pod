@@ -17,6 +17,23 @@ Valida el framework en el camino más corto antes de atacar la Fábrica.
 | `puerta-pinterest-pin` | v0.3.1 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
 | `puerta-publicacion-pod` | v0.2.2 | Mockup listo: dimensiones, DPI ≥300, placement contra el flat-lay aprobado DE ESE DISEÑO |
 
+## Principios operativos (para quien opere esta app)
+
+Esta app es portable: quien la clone recibe skills + docs + scripts.
+Estos principios rigen cómo se opera, sin depender del manual del
+operador original:
+
+- **Patrones de resiliencia** (`docs/PATRONES-RESILIENCIA.md`): todo
+  trabajo largo con dependencia externa lleva health-check antes de
+  trabajar, checkpoints con resume, y reintentos acotados (tope 3/día).
+- **Puesta en marcha** (`skills/onboarding-tienda`): playbook de cero
+  a tienda operativa; es el que aplica los patrones al crear crons.
+- **Capas**: sistema portable y versionado (skills/docs/scripts) vs
+  tienda (config en `data/tiendas/<id>/`). Nada de la tienda quemado
+  en código.
+- **API-first**: lo que cubre la API de Etsy va por API; navegador
+  solo para lo no expuesto (`docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md`).
+
 ## Docs operativos
 
 - `docs/PATRONES-RESILIENCIA.md` — patrones portables para workers con dependencias externas (health-check, checkpoints, reintentos acotados).
