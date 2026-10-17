@@ -209,9 +209,30 @@
       "nombre": "FALL15OCT",
       "descuento": "15%",
       "inicio": "2026-10-16",
+      "fin": "2026-10-17",
+      "listings": "toda la tienda (14 activos)",
+      "nota": "Terminada anticipadamente el 2026-10-17 7:00 AM para subir a 25% (Etsy no permite editar el % de una sale activa).",
+      "estado": "cerrada"
+    },
+    {
+      "tipo": "oferta",
+      "nombre": "FALL25OCT",
+      "descuento": "25%",
+      "inicio": "2026-10-17",
       "fin": "2026-11-14",
       "listings": "toda la tienda (14 activos)",
-      "estado": "activa (verificado 2026-10-16)"
+      "nota": "Sale NUEVA creada el 2026-10-17 (dale del dueño): 25% durante la intro de Share & Save (6.5% de devolución hasta el 30-oct). Ventana agresiva para tracción pre-evento.",
+      "estado": "activa (verificado en vivo 2026-10-17)"
+    },
+    {
+      "tipo": "oferta",
+      "nombre": "FALL20OCT",
+      "descuento": "20%",
+      "inicio": "2026-10-31",
+      "fin": "2026-11-14",
+      "listings": "toda la tienda (14 activos)",
+      "nota": "El 31-oct se cierra FALL25OCT anticipadamente y se crea esta al 20% (fin de la intro 6.5%; desde el 31-oct la devolución Share & Save es 4% estándar).",
+      "estado": "programada (cron etsy-sale-25-to-20-oct31)"
     },
     {
       "tipo": "oferta",
