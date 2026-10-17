@@ -19,7 +19,7 @@ Uso:
 pin.json:
   {"slug": "...", "asset": "/ruta/absoluta.jpg",
    "titulo": "...", "descripcion": "...",
-   "url_listing": "https://www.etsy.com/listing/<id>",
+   "url_listing": "https://<tienda>.etsy.com/listing/<id>",
    "tablero": "...", "keywords_fuente": "/ruta/banco.md"}
 
 Salida: JSON {"veredicto": "PASS"|"FAIL", "criterio_violado": ...}.
