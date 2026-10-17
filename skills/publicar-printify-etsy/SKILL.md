@@ -3,7 +3,7 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un solo listing) o track single-product (diseños personalizables, que el MPL no soporta). Drafts en Printify, revisión del dueño, mockups de Printify, videos, publicación y verificación integral en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.7.1"
+  version: "0.7.2"
   framework_version: "0.8.0"
   regression_suite: "evals/"
 ---
@@ -141,9 +141,16 @@ Solo si Google no ofrece cuenta guardada o el login falla, se le pide a
 Por cada producto de la composición (default: sudadera + playera):
 - Subir el arte a Printify (navegador, el CLI está roto).
 - Crear producto draft con el blueprint/provider de la composición.
-- Colocación inicial: centrada; escala = min(78% del ancho del área,
-  90% del alto del área) — el diseño NUNCA se desborda del área
-  (2026-10-15: colocar solo por ancho cortó los diseños altos).
+- Colocación inicial (RECALIBRADA por el dueño, 2026-10-17 — reemplaza
+  el 78%/centrado anterior): escala = min(92% del ancho del área,
+  95% del alto del área) — el diseño se ve GRANDE y COMPLETO, NUNCA se
+  desborda del área (2026-10-15: colocar solo por ancho cortó los
+  diseños altos). **Centrado HORIZONTAL siempre. Vertical NO centrado:**
+  el borde superior del diseño queda al 8–12% del alto del área desde
+  el tope (sesgo arriba) — el centro vertical deja aire arriba/abajo y
+  el diseño se ve chico y bajo; el dueño lo corrige a mano en cada
+  revisión, así que nace corregido. El ajuste fino por diseño sigue
+  siendo de su revisión, pero la base ya sale en su criterio.
 - Aplicar la paleta validada contra el diseño (criterio color-diseño) y
   los precios escalonados de la tabla vigente.
 - En el draft, poner el **título real del diseño** (nunca el nombre
@@ -158,8 +165,9 @@ Por cada producto de la composición (default: sudadera + playera):
 - **Variante propuestas diarias (orden del dueño 2026-10-16):** las
   propuestas llegan como **MPL drafts ensamblados (un draft por
   diseño)**. El dueño abre cada MPL draft y verifica el placement
-  **por item dentro del editor** (centrado, dentro del área de
-  impresión, sin desbordamiento — cada blueprint tiene su área).
+  **por item dentro del editor** (grande según §M1, centrado
+  horizontal, sesgo arriba, dentro del área de impresión, sin
+  desbordamiento — cada blueprint tiene su área).
   Rechazado = elimina el MPL draft completo. Aprobado = sigue a M3.
 - **Variante publicación directa (diseño ya aprobado):** el dueño
   revisa CADA draft componente en Printify (mismo criterio por
@@ -282,7 +290,8 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
 
 1. **Login** (protocolo Google-first, §M0).
 2. **Draft en Printify:** subir arte, crear producto draft (producto
-   según directriz), colocación centrada min(78% ancho, 90% alto),
+   según directriz), colocación según §M1 (min(92% ancho, 95% alto),
+   centrada horizontal, sesgo arriba 8–12% desde el tope),
    precios escalonados, título real del diseño. Draft = propuesta.
 3. **Revisión del dueño** en Printify (placement + mockups).
 4. **Paquete de listing** (`paquete-listing-etsy`): título, descripción
@@ -346,8 +355,11 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
   el tipo de lote los define la tienda (vía la estratega), NO este skill.
   Agregar un producto nuevo = ficha en `data/productos/` + esquema en el
   config; el skill no se reescribe.
-- **CALIBRACIÓN** (Gildan 18000): posición inicial 78% ancho, 14% desde
-  arriba. El dueño ajusta por diseño en el editor.
+- **CALIBRACIÓN** (Gildan 18000): posición inicial min(92% ancho,
+  95% alto), centrada horizontal, 8–12% desde arriba (corrección del
+  dueño 2026-10-17; antes 78% ancho centrado — se veía chico con aire
+  en todos lados y él lo agrandaba/subía a mano en cada revisión,
+  perdiendo DPI en el zoom). El dueño ajusta por diseño en el editor.
 - **CALIBRACIÓN** (Bella+Canvas 3001): blueprint 12, provider 99
   (Printify Choice), verificado vía API 2026-10-15. Placement verificado
   visual en p005 (centrado, aprox 10.5"×11.93"); la puerta numérica de
