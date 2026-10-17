@@ -3,13 +3,13 @@ name: "onboarding-tienda"
 description: "Playbook de puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento con el dueño, conexiones (Etsy API, Printify), config de tienda, activaciones de Etsy (Share & Save, calendario de descuentos, cupones), calibración de productos y creación de los crons operativos con patrones de resiliencia. El mecanismo es portable; los valores son calibración por tienda."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   framework_version: "0.8.0"
 ---
 
 # Onboarding de tienda POD
 
-**Versión 0.1.0** (2026-10-16: destilado de la puesta en marcha real de
+**Versión 0.1.1** (2026-10-16: destilado de la puesta en marcha real de
 MyNightShiftShop — todo lo aprendido en el camino, convertido en
 procedimiento reproducible).
 
@@ -37,7 +37,39 @@ reintentos acotados).
 - El dueño disponible para: crear la Seller App (1 clic), pegar el
   código OAuth, y responder el cuestionario de descubrimiento.
 
-## Fase 1 — Descubrimiento (preguntas al dueño, UNA decisión a la vez)
+## Fase 0 — Nicho, identidad y creación de la tienda (2026-10-16)
+
+Todo lo anterior a "la tienda existe". Una pregunta al dueño a la vez.
+
+**0.1 Selección de nicho.** Con el dueño: revisar `docs-migrados/nichos/`
+(plantilla `_plantilla.md` + nichos evaluados). Criterios: demanda
+evergreen o estacional con calendario claro, competencia atacable,
+margen viable con la doctrina de precios de la Fase 1. El nicho elegido
+se registra en el config (`nicho`, `subnichos`, `temporadas`).
+
+**0.2 Nombre de la tienda.** Con el dueño: corto, memorable, con la
+palabra del nicho si ayuda al SEO de Etsy. Verificar disponibilidad en
+Etsy antes de enamorarse del nombre.
+
+**0.3 Identidad visual.** Generar con el dueño: logo (versión clara y
+oscura, legible a 64px), banner de tienda (dimensiones vigentes de
+Etsy — verificarlas, cambian), foto de perfil. Guardar finales en
+`data/tiendas/<shop_id>/branding/`. Nada de versiones previas junto a
+la final aprobada.
+
+**0.4 Creación de la tienda en Etsy.** Guiar al dueño en la creación
+(Etsy la crea él, no el agente). Luego configurar el perfil: about,
+políticas de la tienda (ver `docs-migrados/estandar-politicas-etsy.md`),
+banner, foto, idiomas/moneda, ubicación.
+
+**0.5 Conexión Printify ↔ Etsy.** Conectar la tienda Printify como canal
+de ventas de la tienda Etsy (desde Printify, con el dueño). Anotar el
+Printify shop ID → es el `<shop_id>` de `data/tiendas/<shop_id>/`.
+
+Sin la Fase 0 completa no se avanza: una tienda sin nicho ni identidad
+es la que después hay que re-marcar.
+
+## Fase 1 — Descubrimiento
 
 No se avanza a la Fase 2 sin estas respuestas. Una pregunta a la vez;
 el dueño no responde dos cosas al mismo tiempo.
