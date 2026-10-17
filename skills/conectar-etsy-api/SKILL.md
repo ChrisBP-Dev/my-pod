@@ -3,7 +3,7 @@ name: "conectar-etsy-api"
 description: "Conecta la API de Etsy (v3, OAuth 2.0 + PKCE) para UNA tienda: crea la Seller App, guía el grant del dueño, canjea tokens, verifica la conexión y la registra en el config de la tienda. Flujo por tienda, portable."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   framework_version: "0.8.0"
 ---
 
@@ -104,5 +104,8 @@ apuntan ahí).
 ## Refresh de tokens
 
 El `access_token` expira (~1h); el `refresh_token` rota. Los scripts
-refrescan solos antes de cada corrida (`refresh_if_needed`). Si un
-refresh falla con 400/401, repetir el paso 2 (re-grant del dueño).
+refrescan solos vía `scripts/etsy_auth.py` (`get_headers()` /
+`load_secrets()` renuevan el token si está por vencer y reescriben el
+archivo 0600). Todo script nuevo que hable con la API de Etsy DEBE usar
+ese helper, nunca un token leído a mano. Si un refresh falla con
+400/401, repetir el paso 2 (re-grant del dueño).

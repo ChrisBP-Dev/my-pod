@@ -67,7 +67,9 @@ API_BASE = "https://openapi.etsy.com/v3/application"
 OAUTH_AUTHORIZE = "https://www.etsy.com/oauth/connect"
 OAUTH_TOKEN = "https://api.etsy.com/v3/public/oauth/token"
 SCOPES = "email_r shops_r listings_r transactions_r"
-SHOP_ID = "68433437"  # MyNightShiftShop (Etsy). OJO: 29222324 es el ID de Printify, no de Etsy.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from precios_comunes import SHOP_ID  # del config de la tienda, nunca hardcodeado
+from etsy_auth import load_secrets as _auth_load, get_headers  # noqa: E402
 
 # ---------------------------------------------------------------- utilidades
 
@@ -76,14 +78,18 @@ def now_iso():
 
 
 def load_secrets():
-    sec = {}
-    sp = resolve_secrets_path()
-    if os.path.exists(sp):
-        with open(sp) as f:
-            sec = json.load(f)
-    sec.setdefault("keystring", os.environ.get("ETSY_KEYSTRING", ""))
-    sec.setdefault("shared_secret", os.environ.get("ETSY_SHARED_SECRET", ""))
-    return sec
+    # etsy_auth refresca el access token si venció (dura 1h)
+    try:
+        return _auth_load()
+    except Exception:
+        sec = {}
+        sp = resolve_secrets_path()
+        if os.path.exists(sp):
+            with open(sp) as f:
+                sec = json.load(f)
+        sec.setdefault("keystring", os.environ.get("ETSY_KEYSTRING", ""))
+        sec.setdefault("shared_secret", os.environ.get("ETSY_SHARED_SECRET", ""))
+        return sec
 
 
 def save_secrets(sec):
@@ -98,10 +104,7 @@ def api_get(path, sec, params=None):
     url = API_BASE + path
     if params:
         url += "?" + urllib.parse.urlencode(params)
-    req = urllib.request.Request(url, headers={
-        "x-api-key": f"{sec['keystring']}:{sec['shared_secret']}",
-        "Authorization": f"Bearer {sec['access_token']}",
-    })
+    req = urllib.request.Request(url, headers=get_headers(sec))
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
