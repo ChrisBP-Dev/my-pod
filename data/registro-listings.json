@@ -1121,7 +1121,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p036-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "standby-correccion (2026-10-17: fragmentos de damero blanco/negro opacos atrapados entre banner y corazón; limpieza de arte pendiente de dale)",
+  "estado": "corregido-pendiente-revision (2026-10-17: arte v2 data/artes-print/p036-print-300dpi-v2.png — damero gris neutro eliminado por completo, remanente 0, diseño intacto, mismas dimensiones para conservar el placement manual del dueño; falta su OK visual y el reemplazo de imagen en los drafts)",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
@@ -1167,7 +1167,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p037-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "standby-correccion (2026-10-17: tubo del estetoscopio incoherente, extremos sueltos; regeneración pendiente de dale)",
+  "estado": "corregido-pendiente-revision (2026-10-17: arte v2 data/artes-print/p037-print-300dpi-v2.png — estetoscopio regenerado como tubo continuo en forma de corazón con diafragma, texto exacto; candidato alternativo plano descartado internamente; falta su OK visual y el reemplazo de imagen en los drafts)",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
