@@ -26,18 +26,6 @@
       "el dueño cambia piso o descuento máximo"
     ]
   },
-  "eventos_ofertas": [
-    {
-      "evento": "Cyber Specials 2026",
-      "codigo": "CYBER26",
-      "descuento": "25%",
-      "inicio": "2026-11-23T00:00:00-05:00",
-      "fin": "2026-12-01T23:59:59-05:00",
-      "listings": "todos (14 activos)",
-      "estado": "inscrito (verificado 2026-10-16)",
-      "opt_in_marketing_etsy": "2026-10-16 (antes del 27-oct)"
-    }
-  ],
   "etsy_api": {
     "shop_id": "68433437",
     "scopes": [
@@ -195,5 +183,45 @@
     "nota_firma": "Los mensajes al comprador SIEMPRE firman con el nombre de la tienda (nombre_etsy), NUNCA con la marca madre (¡Tú Dale! / Tú Dale POD). Regla del dueño 2026-10-16.",
     "tono": "cálido, directo, sin tecnicismos; servicio post-venta, no spam",
     "idioma": "el del comprador (es/en)"
-  }
+  },
+  "calendario_descuentos": [
+    {
+      "tipo": "oferta",
+      "nombre": "FALL15OCT",
+      "descuento": "15%",
+      "inicio": "2026-10-16",
+      "fin": "2026-11-14",
+      "listings": "toda la tienda (14 activos)",
+      "estado": "activa (verificado 2026-10-16)"
+    },
+    {
+      "tipo": "oferta",
+      "nombre": "PREBF20",
+      "descuento": "20%",
+      "inicio": "2026-11-15",
+      "fin": "2026-11-22",
+      "listings": "toda la tienda (14 activos)",
+      "estado": "programada (verificado 2026-10-16)"
+    },
+    {
+      "tipo": "evento",
+      "nombre": "Cyber Specials 2026",
+      "codigo": "CYBER26",
+      "descuento": "25%",
+      "inicio": "2026-11-23",
+      "fin": "2026-12-01",
+      "listings": "toda la tienda (14 activos)",
+      "estado": "inscrito (verificado 2026-10-16)",
+      "opt_in_marketing_etsy": "2026-10-16 (antes del 27-oct)"
+    },
+    {
+      "tipo": "oferta",
+      "nombre": "DEC15",
+      "descuento": "15%",
+      "inicio": "2026-12-03",
+      "fin": "2026-12-31",
+      "listings": "toda la tienda (14 activos)",
+      "estado": "programada (verificado 2026-10-16)"
+    }
+  ]
 }
