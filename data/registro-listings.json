@@ -746,25 +746,38 @@
   "tema": "thanksgiving",
   "shop": "29222324",
   "track": "mpl",
-  "componentes": [
-   "gildan-18000",
-   "bella-canvas-3001"
-  ],
+  "componentes": {
+   "sudadera": {
+    "printify_id": "6ad2065a067604a3850d192a",
+    "producto": "Gildan 18000",
+    "proveedor": "Printify Choice"
+   },
+   "playera": {
+    "printify_id": "6ad2076020886a0bc203c518",
+    "producto": "Bella+Canvas 3001",
+    "proveedor": "Printify Choice",
+    "colores": [
+     "White",
+     "Athletic Heather",
+     "Natural"
+    ]
+   }
+  },
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p028-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "aprobado-publicando (revisión del dueño 2026-10-17, ajustes manuales hechos por él)",
+  "estado": "publicado_completo",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
-    "base": 34.99,
-    "2XL": 37.99,
-    "3XL": 39.99
+    "base": 40.99,
+    "2XL": 44.99,
+    "3XL": 46.99
    },
    "bella-canvas-3001": {
-    "base": 24.99,
-    "2XL": 27.99,
-    "3XL": 30.99
+    "base": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99
    }
   },
   "drafts": {
@@ -779,7 +792,40 @@
     "variantes": 14
    }
   },
-  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
+  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones.",
+  "id_etsy": "4597477587",
+  "url": "https://mynightshiftshop.etsy.com/listing/4597477587",
+  "tipo": "mpl",
+  "mpl_id": "0adb5603-d05e-4e9e-bfd0-8687ee9c64c7",
+  "paquete": "data/paquetes-listing/p028-paquete.md",
+  "paquete_titulo": "Thankful Nurse Sweatshirt or T-Shirt, Funny Turkey Thanksgiving Crewneck, Fall RN Gift Tee",
+  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-17)",
+  "tags": 13,
+  "mockups": 10,
+  "videos": {
+   "video1": "data/videos/p028-video1.mp4",
+   "video2": "data/videos/p028-video2.mp4"
+  },
+  "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
+  "videos_etsy": 2,
+  "etsy_publicado": true,
+  "fecha_publicacion": "2026-10-17",
+  "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
+  "precio_actualizado_el": "2026-10-17",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-4.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-5.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-6.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-7.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-8.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p028/p028-10.jpg"
+  ],
+  "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
+  "videos_pendientes": false
  },
  "p029": {
   "diseno": "Grateful Thankful Blessed",
@@ -792,25 +838,38 @@
   "tema": "thanksgiving",
   "shop": "29222324",
   "track": "mpl",
-  "componentes": [
-   "gildan-18000",
-   "bella-canvas-3001"
-  ],
+  "componentes": {
+   "sudadera": {
+    "printify_id": "6ad20812067604a3850d1a4c",
+    "producto": "Gildan 18000",
+    "proveedor": "Printify Choice"
+   },
+   "playera": {
+    "printify_id": "6ad208b10015247b110c9010",
+    "producto": "Bella+Canvas 3001",
+    "proveedor": "Printify Choice",
+    "colores": [
+     "White",
+     "Athletic Heather",
+     "Natural"
+    ]
+   }
+  },
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p029-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "aprobado-publicando (revisión del dueño 2026-10-17, ajustes manuales hechos por él)",
+  "estado": "publicado_completo",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
-    "base": 34.99,
-    "2XL": 37.99,
-    "3XL": 39.99
+    "base": 40.99,
+    "2XL": 44.99,
+    "3XL": 46.99
    },
    "bella-canvas-3001": {
-    "base": 24.99,
-    "2XL": 27.99,
-    "3XL": 30.99
+    "base": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99
    }
   },
   "drafts": {
@@ -825,7 +884,41 @@
     "variantes": 14
    }
   },
-  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
+  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones.",
+  "id_etsy": "4597487331",
+  "url": "https://mynightshiftshop.etsy.com/listing/4597487331",
+  "tipo": "mpl",
+  "mpl_id": "3e4537a2-81cc-4eed-be0b-7a1f288ab5d3",
+  "paquete": "data/paquetes-listing/p029-paquete.md",
+  "paquete_titulo": "Grateful Thankful Blessed Sweatshirt or T-Shirt, Nurse Thanksgiving Crewneck, Fall Stethoscope Tee",
+  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-17)",
+  "tags": 13,
+  "mockups": 10,
+  "videos": {
+   "video1": "data/videos/p029-video1.mp4",
+   "video2": "data/videos/p029-video2.mp4"
+  },
+  "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
+  "videos_etsy": 2,
+  "etsy_publicado": true,
+  "fecha_publicacion": "2026-10-17",
+  "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
+  "precio_actualizado_el": "2026-10-17",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-4.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-5.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-6.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-7.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-8.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p029/p029-10.jpg"
+  ],
+  "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
+  "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17); verificado por API",
+  "videos_pendientes": false
  },
  "p030": {
   "diseno": "Pumpkin Spice & IV Drips",
@@ -838,25 +931,38 @@
   "tema": "thanksgiving",
   "shop": "29222324",
   "track": "mpl",
-  "componentes": [
-   "gildan-18000",
-   "bella-canvas-3001"
-  ],
+  "componentes": {
+   "sudadera": {
+    "printify_id": "6ad209538a7dab9713047500",
+    "producto": "Gildan 18000",
+    "proveedor": "Printify Choice"
+   },
+   "playera": {
+    "printify_id": "6ad209f18368c0a02303046a",
+    "producto": "Bella+Canvas 3001",
+    "proveedor": "Printify Choice",
+    "colores": [
+     "White",
+     "Athletic Heather",
+     "Natural"
+    ]
+   }
+  },
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p030-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "aprobado-publicando (revisión del dueño 2026-10-17, ajustes manuales hechos por él)",
+  "estado": "publicado",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
-    "base": 34.99,
-    "2XL": 37.99,
-    "3XL": 39.99
+    "base": 40.99,
+    "2XL": 44.99,
+    "3XL": 46.99
    },
    "bella-canvas-3001": {
-    "base": 24.99,
-    "2XL": 27.99,
-    "3XL": 30.99
+    "base": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99
    }
   },
   "drafts": {
@@ -871,7 +977,42 @@
     "variantes": 14
    }
   },
-  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
+  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones.",
+  "id_etsy": "4597491807",
+  "url": "https://mynightshiftshop.etsy.com/listing/4597491807",
+  "tipo": "mpl",
+  "mpl_id": "705bde97-837f-49cd-abe7-41668a060659",
+  "paquete": "data/paquetes-listing/p030-paquete.md",
+  "paquete_titulo": "Pumpkin Spice Nurse Sweatshirt or T-Shirt, Funny IV Drips Thanksgiving Tee, Fall RN Crewneck Gift",
+  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-17)",
+  "tags": 13,
+  "mockups": 10,
+  "videos": {
+   "video1": "data/videos/p030-video1.mp4",
+   "video2": "data/videos/p030-video2.mp4"
+  },
+  "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
+  "videos_etsy": 1,
+  "etsy_publicado": true,
+  "fecha_publicacion": "2026-10-17",
+  "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
+  "precio_actualizado_el": "2026-10-17",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-4.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-5.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-6.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-7.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-8.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p030/p030-10.jpg"
+  ],
+  "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
+  "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17); verificado por API",
+  "videos_pendientes": true,
+  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
  },
  "p031": {
   "diseno": "Night Shift Feast",
@@ -884,25 +1025,38 @@
   "tema": "thanksgiving",
   "shop": "29222324",
   "track": "mpl",
-  "componentes": [
-   "gildan-18000",
-   "bella-canvas-3001"
-  ],
+  "componentes": {
+   "sudadera": {
+    "printify_id": "6ad20a988368c0a0230304c3",
+    "producto": "Gildan 18000",
+    "proveedor": "Printify Choice"
+   },
+   "playera": {
+    "printify_id": "6ad20b3d8368c0a0230305a4",
+    "producto": "Bella+Canvas 3001",
+    "proveedor": "Printify Choice",
+    "colores": [
+     "White",
+     "Athletic Heather",
+     "Natural"
+    ]
+   }
+  },
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p031-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "aprobado-publicando (revisión del dueño 2026-10-17, ajustes manuales hechos por él)",
+  "estado": "publicado",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
-    "base": 34.99,
-    "2XL": 37.99,
-    "3XL": 39.99
+    "base": 40.99,
+    "2XL": 44.99,
+    "3XL": 46.99
    },
    "bella-canvas-3001": {
-    "base": 24.99,
-    "2XL": 27.99,
-    "3XL": 30.99
+    "base": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99
    }
   },
   "drafts": {
@@ -917,7 +1071,42 @@
     "variantes": 14
    }
   },
-  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
+  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones.",
+  "id_etsy": "4597588550",
+  "url": "https://mynightshiftshop.etsy.com/listing/4597588550",
+  "tipo": "mpl",
+  "mpl_id": "cea7a35e-1fb4-4382-ac03-772b4d21deba",
+  "paquete": "data/paquetes-listing/p031-paquete.md",
+  "paquete_titulo": "Night Shift Feast Sweatshirt or T-Shirt, Nurse Thanksgiving Crewneck, Funny Pumpkin Pie RN Tee Gift",
+  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-17)",
+  "tags": 13,
+  "mockups": 10,
+  "videos": {
+   "video1": "data/videos/p031-video1.mp4",
+   "video2": "data/videos/p031-video2.mp4"
+  },
+  "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
+  "videos_etsy": 1,
+  "etsy_publicado": true,
+  "fecha_publicacion": "2026-10-17",
+  "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
+  "precio_actualizado_el": "2026-10-17",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-4.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-5.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-6.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-7.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-8.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p031/p031-10.jpg"
+  ],
+  "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
+  "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17)",
+  "videos_pendientes": true,
+  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
  },
  "p032": {
   "diseno": "Code Turkey",
@@ -930,25 +1119,38 @@
   "tema": "thanksgiving",
   "shop": "29222324",
   "track": "mpl",
-  "componentes": [
-   "gildan-18000",
-   "bella-canvas-3001"
-  ],
+  "componentes": {
+   "sudadera": {
+    "printify_id": "6ad20bed436d364f460864cb",
+    "producto": "Gildan 18000",
+    "proveedor": "Printify Choice"
+   },
+   "playera": {
+    "printify_id": "6ad20c920015247b110c9336",
+    "producto": "Bella+Canvas 3001",
+    "proveedor": "Printify Choice",
+    "colores": [
+     "White",
+     "Athletic Heather",
+     "Natural"
+    ]
+   }
+  },
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p032-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "aprobado-publicando (revisión del dueño 2026-10-17, ajustes manuales hechos por él)",
+  "estado": "publicado",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
-    "base": 34.99,
-    "2XL": 37.99,
-    "3XL": 39.99
+    "base": 40.99,
+    "2XL": 44.99,
+    "3XL": 46.99
    },
    "bella-canvas-3001": {
-    "base": 24.99,
-    "2XL": 27.99,
-    "3XL": 30.99
+    "base": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99
    }
   },
   "drafts": {
@@ -963,7 +1165,41 @@
     "variantes": 14
    }
   },
-  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
+  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones.",
+  "id_etsy": "4597597346",
+  "url": "https://mynightshiftshop.etsy.com/listing/4597597346",
+  "tipo": "mpl",
+  "paquete": "data/paquetes-listing/p032-paquete.md",
+  "paquete_titulo": "Code Turkey Sweatshirt or T-Shirt, Funny Thanksgiving ER Crewneck, Crash Cart RN Tee Gift",
+  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-17)",
+  "tags": 13,
+  "mockups": 10,
+  "videos": {
+   "video1": "data/videos/p032-video1.mp4",
+   "video2": "data/videos/p032-video2.mp4"
+  },
+  "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
+  "videos_etsy": 1,
+  "etsy_publicado": true,
+  "fecha_publicacion": "2026-10-17",
+  "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
+  "precio_actualizado_el": "2026-10-17",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-4.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-5.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-6.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-7.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-8.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p032/p032-10.jpg"
+  ],
+  "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
+  "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17)",
+  "videos_pendientes": true,
+  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
  },
  "p033": {
   "diseno": "Blessed in Scrubs",
@@ -976,25 +1212,38 @@
   "tema": "thanksgiving",
   "shop": "29222324",
   "track": "mpl",
-  "componentes": [
-   "gildan-18000",
-   "bella-canvas-3001"
-  ],
+  "componentes": {
+   "sudadera": {
+    "printify_id": "6ad20d520015247b110c939a",
+    "producto": "Gildan 18000",
+    "proveedor": "Printify Choice"
+   },
+   "playera": {
+    "printify_id": "6ad20e0b05836938d40e4ed9",
+    "producto": "Bella+Canvas 3001",
+    "proveedor": "Printify Choice",
+    "colores": [
+     "White",
+     "Athletic Heather",
+     "Natural"
+    ]
+   }
+  },
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p033-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "aprobado-publicando (revisión del dueño 2026-10-17, ajustes manuales hechos por él)",
+  "estado": "publicado",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
-    "base": 34.99,
-    "2XL": 37.99,
-    "3XL": 39.99
+    "base": 40.99,
+    "2XL": 44.99,
+    "3XL": 46.99
    },
    "bella-canvas-3001": {
-    "base": 24.99,
-    "2XL": 27.99,
-    "3XL": 30.99
+    "base": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99
    }
   },
   "drafts": {
@@ -1009,7 +1258,41 @@
     "variantes": 14
    }
   },
-  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
+  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones.",
+  "id_etsy": "4597605814",
+  "url": "https://mynightshiftshop.etsy.com/listing/4597605814",
+  "tipo": "mpl",
+  "paquete": "data/paquetes-listing/p033-paquete.md",
+  "paquete_titulo": "Blessed in Scrubs Sweatshirt or T-Shirt, Nurse Thanksgiving Crewneck Tee, Fall Scrubs RN Gift",
+  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-17)",
+  "tags": 13,
+  "mockups": 10,
+  "videos": {
+   "video1": "data/videos/p033-video1.mp4",
+   "video2": "data/videos/p033-video2.mp4"
+  },
+  "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
+  "videos_etsy": 1,
+  "etsy_publicado": true,
+  "fecha_publicacion": "2026-10-17",
+  "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
+  "precio_actualizado_el": "2026-10-17",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-4.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-5.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-6.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-7.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-8.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p033/p033-10.jpg"
+  ],
+  "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
+  "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17)",
+  "videos_pendientes": true,
+  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
  },
  "p034": {
   "diseno": "ER Turkey Trot",
@@ -1022,25 +1305,38 @@
   "tema": "thanksgiving",
   "shop": "29222324",
   "track": "mpl",
-  "componentes": [
-   "gildan-18000",
-   "bella-canvas-3001"
-  ],
+  "componentes": {
+   "sudadera": {
+    "printify_id": "6ad20eec20886a0bc203ca0e",
+    "producto": "Gildan 18000",
+    "proveedor": "Printify Choice"
+   },
+   "playera": {
+    "printify_id": "6ad20fa0436d364f4608677f",
+    "producto": "Bella+Canvas 3001",
+    "proveedor": "Printify Choice",
+    "colores": [
+     "White",
+     "Athletic Heather",
+     "Natural"
+    ]
+   }
+  },
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p034-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "aprobado-publicando (revisión del dueño 2026-10-17, ajustes manuales hechos por él)",
+  "estado": "publicado_completo",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
-    "base": 34.99,
-    "2XL": 37.99,
-    "3XL": 39.99
+    "base": 40.99,
+    "2XL": 44.99,
+    "3XL": 46.99
    },
    "bella-canvas-3001": {
-    "base": 24.99,
-    "2XL": 27.99,
-    "3XL": 30.99
+    "base": 25.99,
+    "2XL": 28.99,
+    "3XL": 32.99
    }
   },
   "drafts": {
@@ -1055,7 +1351,40 @@
     "variantes": 14
    }
   },
-  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones."
+  "nota_variantes": "Sudadera 16 variantes: Sand sin 2XL, Sport Grey sin 3XL (proveedor no las ofrece). Playera 14 variantes: Natural solo 2 tallas (proveedor). Aceptado como viene, sin sustituciones.",
+  "id_etsy": "4597592457",
+  "url": "https://mynightshiftshop.etsy.com/listing/4597592457",
+  "tipo": "mpl",
+  "paquete": "data/paquetes-listing/p034-paquete.md",
+  "paquete_titulo": "ER Turkey Trot Sweatshirt or T-Shirt, Funny Thanksgiving Nurse Crewneck, Fall Running RN Tee Gift",
+  "paquete_puerta": "PASS (verificar-paquete.py 2026-10-17)",
+  "tags": 13,
+  "mockups": 10,
+  "videos": {
+   "video1": "data/videos/p034-video1.mp4",
+   "video2": "data/videos/p034-video2.mp4"
+  },
+  "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
+  "videos_etsy": 2,
+  "etsy_publicado": true,
+  "fecha_publicacion": "2026-10-17",
+  "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
+  "precio_actualizado_el": "2026-10-17",
+  "assets_finales": [
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-1.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-2.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-3.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-4.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-5.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-6.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-7.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-8.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-9.jpg",
+   "/home/hatch/workspace/my-pod/data/mockups/p034/p034-10.jpg"
+  ],
+  "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
+  "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17)",
+  "videos_pendientes": false
  },
  "p035": {
   "diseno": "Gobble 'Til You Wobble",

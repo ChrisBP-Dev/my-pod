@@ -1,0 +1,18 @@
+{
+  "video": "p032-video2.mp4",
+  "tipo": "mockups",
+  "diseno": "p032",
+  "imagenes": [
+    "p032-6.jpg",
+    "p032-7.jpg",
+    "p032-8.jpg"
+  ],
+  "metodo_zoom": "posicion-absoluta",
+  "zoom_expr": "1+0.25*on/105",
+  "usa_on": true,
+  "usa_acumulativo": false,
+  "work_res": 2160,
+  "transicion": "xfade-fade-0.5s",
+  "generado": "2026-10-17T20:21:57.533461+00:00",
+  "script": "generar-video-listing.py"
+}

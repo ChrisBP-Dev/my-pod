@@ -1,0 +1,18 @@
+{
+  "video": "p028-video1.mp4",
+  "tipo": "mockups",
+  "diseno": "p028",
+  "imagenes": [
+    "p028-1.jpg",
+    "p028-2.jpg",
+    "p028-5.jpg"
+  ],
+  "metodo_zoom": "posicion-absoluta",
+  "zoom_expr": "1+0.25*on/105",
+  "usa_on": true,
+  "usa_acumulativo": false,
+  "work_res": 2160,
+  "transicion": "xfade-fade-0.5s",
+  "generado": "2026-10-17T17:29:57.659957+00:00",
+  "script": "generar-video-listing.py"
+}
