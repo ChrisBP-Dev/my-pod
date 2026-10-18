@@ -37,8 +37,15 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 - Detección de drafts: agrupar por diseño (título real); no duplicar
   diseños que ya tienen sus componentes pendientes (ver contrato §E).
 
-### 3. Revisión matutina (dueño)
-- El dueño entra a Printify cada mañana, revisa los drafts.
+### 3. Revisión del dueño
+- **Piloto flujo nocturno (desde lun 2026-10-19, decisión del dueño
+  2026-10-18, piloto de 1 semana):** las propuestas se generan a las
+  18:00 y el dueño entra a Printify EN LA NOCHE, antes de dormir,
+  revisa los drafts. La producción posterior (mockups → videos →
+  paquete → publicación) corre de noche tras sus dales; Pinterest
+  corre a las 08:50 de la mañana siguiente sobre lo ya publicado y el
+  watchdog a las 07:50. Si una noche no puede revisar, el lote espera
+  y lo aprueba cuando pueda — el flujo no se rompe.
 - Corrige ubicación directamente en el editor si hace falta.
 - Elimina los rechazados. Los que quedan = aprobados para continuar.
 - Avisa cuáles están listos.
