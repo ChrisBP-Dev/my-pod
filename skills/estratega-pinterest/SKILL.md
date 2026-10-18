@@ -5,13 +5,16 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   framework_version: "0.8.0"
 ---
 
 # Estratega de Pinterest
 
-**Versión 0.1.0** (2026-10-16). Rama de publicidad: Pinterest es un
+**Versión 0.1.1** (2026-10-18: elegibilidad por CLASE de asset del
+mapa verificado — la parrilla se arma desde el `mapa_assets` del
+listing, nunca por posición del archivo) · 0.1.0 (2026-10-16).
+Rama de publicidad: Pinterest es un
 buscador con intención de compra planificada (no una red social). El
 tráfico externo reporta señales de calidad al listing de Etsy.
 
@@ -42,7 +45,18 @@ Pinterest (distintas a las de Etsy: descubrimiento, no transacción).
 
 ## Método
 
-1. **Elegibilidad.** Solo listings `publicado_completo`. El tipo 4
+1. **Elegibilidad.** Solo listings `publicado_completo` CON
+   `mapa_assets` verificado en el registro (si falta, se construye
+   por inspección visual antes de incluir el listing — ver
+   puerta-pinterest-pin v0.4.0). **Cada tipo exige que el listing
+   tenga un asset de la clase correspondiente en su mapa**: tipo 1 →
+   hero-lifestyle; tipo 2 → lifestyle-alt/modelo-playera; tipo 3 →
+   close-up, o front-flat si no hay close-up (los MPL de
+   Thanksgiving NO traen close-up: su tipo 3 es front-flat y el
+   texto nunca dice "close-up"); tipo 5 → folded-decorado. Si el
+   listing no tiene la clase del slot, el slot pasa a otro listing
+   que sí la tenga — jamás se sustituye por "el asset que haya"
+   manteniendo el tipo o el título. El tipo 4
    (video) requiere video MP4 1:1 generado (`data/videos/` +
    manifest). Si un listing aún no tiene video, su slot de video va a
    otro listing — no se inventa ni se recorta nada.
@@ -72,10 +86,11 @@ Pinterest (distintas a las de Etsy: descubrimiento, no transacción).
 ## Salida
 
 5 archivos `pin.json` en `data/cola-pins/`, cada uno con
-`slug, tipo (1-5), asset (ruta absoluta), titulo, descripcion,
-url_listing, tablero, keywords_fuente`. Todos deben pasar
-`scripts/verificar-pin.py` antes de entrar a la cola. Sin PASS no hay
-cola.
+`slug, tipo (1-5), clase_asset (la del mapa verificado), asset (ruta
+absoluta), titulo, descripcion, url_listing, tablero,
+keywords_fuente`. Todos deben pasar `scripts/verificar-pin.py`
+(v0.4.0: incluye mapa/clase/claims) antes de entrar a la cola. Sin
+PASS no hay cola.
 
 ## Reglas
 
