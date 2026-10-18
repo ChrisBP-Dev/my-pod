@@ -57,3 +57,9 @@ Por decisión del dueño:
 - Los chats de reporte incluyen la tienda: `📌 My POD · <tienda> — <Tipo> · <fecha>`
   Ejemplo: `📌 My POD · MyNightShiftShop — Propuestas · 2026-10-16`
 - Motivo: si más adelante hay más tiendas, cada reporte se distingue por tienda.
+
+## Actualización 2026-10-18: nombre vigente del hub
+
+- El hub se llama **🎯 My POD — Centro de mando** (antes "🏭 My POD — Central",
+  y originalmente "📌 POD — Equipo y fábrica"). Las entradas anteriores de
+  este documento quedan como registro histórico de cada renombre.

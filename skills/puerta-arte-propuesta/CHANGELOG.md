@@ -1,5 +1,5 @@
 # Changelog — puerta-arte-propuesta
-Skill de app. Pineado a Rameli v0.8.0.
+Skill de app. Pineado a Rameli v0.9.0.
 
 ## v0.4.0 — 2026-10-17 (corrección del dueño revisando el lote de ayer)
 - `recorte_ajustado` REPARADO: medía el margen MENOR de los 4 lados

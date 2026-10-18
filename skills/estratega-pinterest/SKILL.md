@@ -6,7 +6,7 @@ license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.1"
-  framework_version: "0.8.0"
+  framework_version: "0.9.0"
 ---
 
 # Estratega de Pinterest
@@ -104,7 +104,7 @@ PASS no hay cola.
   al siguiente.
 - Nada de teoría: cada parrilla cita qué listings rotaron y por qué.
 
-## Calibraciones (mecanismo vs instancia)
+## Calibraciones (mecanismo vs aplicación)
 
 - `MECANISMO:` 5 pins/día con mix fijo de tipos 1-5 — universal para
   la tienda; volumen y mix los fijó el dueño 2026-10-16.

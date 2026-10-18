@@ -4,7 +4,7 @@ description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): t
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.7.2"
-  framework_version: "0.8.0"
+  framework_version: "0.9.0"
   regression_suite: "evals/"
 ---
 
@@ -345,7 +345,7 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
   directamente donde se ve el resultado real. **El ojo del dueño es
   la puerta de calidad visual** — ningún gate numérico la sustituye.
 
-## Calibraciones (mecanismo vs instancia vs tienda)
+## Calibraciones (mecanismo vs aplicación vs tienda)
 
 - **MECANISMO** (este skill): el flujo es igual para cualquier producto y
   diseño. Printify-first siempre. El track (MPL/single) lo decide el flujo

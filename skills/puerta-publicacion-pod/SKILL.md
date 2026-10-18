@@ -4,7 +4,7 @@ description: "Puerta de publicación POD: valida que un mockup esté listo — d
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.2.2"
-  framework_version: "0.8.0"
+  framework_version: "0.9.0"
   regression_suite: "evals/"
 ---
 
@@ -61,7 +61,7 @@ Tolerancias calibradas sobre el golden set y fixtures con desviación
 conocida (ver `evals/casos.md`). Un mockup que el código no puede ubicar
 con confianza **falla** — no se aprueba a ojo.
 
-## Calibraciones (mecanismo vs instancia)
+## Calibraciones (mecanismo vs aplicación)
 
 - `MECANISMO:` SIFT + RANSAC con semilla fija para localizar el diseño;
   comparación determinista contra referencia — universal.

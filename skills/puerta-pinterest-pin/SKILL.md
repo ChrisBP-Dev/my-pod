@@ -6,7 +6,7 @@ license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.4.0"
-  framework_version: "0.8.0"
+  framework_version: "0.9.0"
   regression_suite: "evals/"
   gate_script: "scripts/verificar-pin.py"
 ---
@@ -132,7 +132,7 @@ momento (queda como paso del flujo de publicación, no de Pinterest).
 - **tablero**: declarado. La existencia real del tablero en la cuenta es
   gate humano (la API de Pinterest no está conectada).
 
-## Calibraciones (mecanismo vs instancia)
+## Calibraciones (mecanismo vs aplicación)
 
 - `MECANISMO:` el pin muestra el asset final del listing (trazabilidad
   por registro) — universal; caso 2026-10-12.

@@ -6,7 +6,7 @@ license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.4.0"
-  framework_version: "0.8.0"
+  framework_version: "0.9.0"
   regression_suite: "evals/"
 ---
 
@@ -108,7 +108,7 @@ después de 12 mockups.
   metido. El código no distingue un counter limpio de un diseño sin letras;
   va en el checklist del aprobador.
 
-## Calibraciones (mecanismo vs instancia)
+## Calibraciones (mecanismo vs aplicación)
 
 - `MECANISMO:` validar el arte antes del primer mockup (costo de rechazo
   mínimo) — universal.

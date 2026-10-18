@@ -3,7 +3,7 @@ description: "Genera el paquete completo de listing para Etsy: título SEO, desc
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.2.0"
-  framework_version: "0.8.0"
+  framework_version: "0.9.0"
   regression_suite: "evals/"
 ---
 
@@ -76,11 +76,11 @@ Estructura fija (precedente listings #1, #2, #3):
 - **descripción**: contiene disclosure IA, bloque made-to-order, secciones DETAILS/FIT
 - **completitud**: todos los campos presentes
 
-## Calibraciones (mecanismo vs instancia)
+## Calibraciones (mecanismo vs aplicación)
 
 - **MECANISMO** (universal): estructura de descripción, fórmula de título,
   reglas de tags. Vienen de principios SEO públicos de Etsy.
-- **CALIBRACIÓN** (instancia: nicho enfermería, 2026-10-08): banco de keywords
+- **CALIBRACIÓN** (aplicación: nicho enfermería, 2026-10-08): banco de keywords
   específico, frases semilla long-tail. Ver `data/banco-keywords/enfermeria.md`.
 
 ## Actualización continua (proactividad)

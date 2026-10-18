@@ -1,7 +1,17 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.8.0** (pineado en `rameli.json`).
-Valida el framework en el camino más corto antes de atacar la Fábrica.
+App construida con Rameli **v0.9.0** (pineado en `rameli.json`).
+Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.9.0 (2026-10-18)
+
+Adoptada por dale del dueño, siguiendo `rameli/MIGRACIONES.md`:
+pin en `rameli.json` y en el frontmatter de los 10 skills, secciones
+"Calibraciones (mecanismo vs aplicación)" renombradas, terminología
+canónica (framework / aplicación / ficha) en los documentos vivos.
+El gemelo máquina de la ficha de la tienda (`config.json`) no cambió
+de nombre ni de formato: ningún dato se tocó. Los documentos
+históricos conservan la terminología de su época.
 
 ## Skills
 
@@ -15,7 +25,7 @@ Valida el framework en el camino más corto antes de atacar la Fábrica.
 | `publicar-printify-etsy` | v0.7.2 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
 | `publicador-lote` | v0.1.1 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
 | `puerta-arte-propuesta` | v0.4.0 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
-| `puerta-pinterest-pin` | v0.3.1 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
+| `puerta-pinterest-pin` | v0.4.0 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
 | `puerta-publicacion-pod` | v0.2.2 | Mockup listo: dimensiones, DPI ≥300, placement contra el flat-lay aprobado DE ESE DISEÑO |
 
 ## Principios operativos (para quien opere esta app)

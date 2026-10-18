@@ -1,5 +1,5 @@
 {
   "framework": "rameli",
-  "framework_version": "0.8.0",
-  "nota": "Versión pineada deliberadamente. Migrar con: rameli migrate --to <nueva>"
+  "framework_version": "0.9.0",
+  "nota": "Versión pineada deliberadamente. No se auto-actualiza. Migrar con: rameli migrate --to <nueva>. Adopción del criterio de colocación y la terminología canónica de v0.9.0: 2026-10-18."
 }
