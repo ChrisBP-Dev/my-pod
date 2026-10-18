@@ -951,7 +951,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p030-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado",
+  "estado": "publicado_completo",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
@@ -992,7 +992,7 @@
    "video2": "data/videos/p030-video2.mp4"
   },
   "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
-  "videos_etsy": 1,
+  "videos_etsy": 2,
   "etsy_publicado": true,
   "fecha_publicacion": "2026-10-17",
   "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
@@ -1011,8 +1011,7 @@
   ],
   "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
   "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17); verificado por API",
-  "videos_pendientes": true,
-  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
+  "videos_pendientes": false
  },
  "p031": {
   "diseno": "Night Shift Feast",
@@ -1045,7 +1044,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p031-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado",
+  "estado": "publicado_completo",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
@@ -1086,7 +1085,7 @@
    "video2": "data/videos/p031-video2.mp4"
   },
   "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
-  "videos_etsy": 1,
+  "videos_etsy": 2,
   "etsy_publicado": true,
   "fecha_publicacion": "2026-10-17",
   "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
@@ -1105,8 +1104,7 @@
   ],
   "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
   "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17)",
-  "videos_pendientes": true,
-  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
+  "videos_pendientes": false
  },
  "p032": {
   "diseno": "Code Turkey",
@@ -1139,7 +1137,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p032-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado",
+  "estado": "publicado_completo",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
@@ -1179,7 +1177,7 @@
    "video2": "data/videos/p032-video2.mp4"
   },
   "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
-  "videos_etsy": 1,
+  "videos_etsy": 2,
   "etsy_publicado": true,
   "fecha_publicacion": "2026-10-17",
   "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
@@ -1198,8 +1196,7 @@
   ],
   "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
   "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17)",
-  "videos_pendientes": true,
-  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
+  "videos_pendientes": false
  },
  "p033": {
   "diseno": "Blessed in Scrubs",
@@ -1232,7 +1229,7 @@
   "producto": "Gildan 18000 — Unisex Heavy Blend Crewneck Sweatshirt (Printify Choice) + Bella+Canvas 3001 (Printify Choice)",
   "arte": "data/artes-print/p033-print-300dpi.png",
   "puerta_arte": "PASS (fondo transparente, >=300 DPI, lado menor >=3000px, recorte ajustado)",
-  "estado": "publicado",
+  "estado": "publicado_completo",
   "fecha_propuesta": "2026-10-16",
   "precios": {
    "gildan-18000": {
@@ -1272,7 +1269,7 @@
    "video2": "data/videos/p033-video2.mp4"
   },
   "videos_puerta": "PASS 14/14 lote (verificar-video.py 2026-10-17)",
-  "videos_etsy": 1,
+  "videos_etsy": 2,
   "etsy_publicado": true,
   "fecha_publicacion": "2026-10-17",
   "precio": "doctrina 2026-10-16: sudadera $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99",
@@ -1291,8 +1288,7 @@
   ],
   "fase_c": "PASS API 2026-10-17: activo, título/tags exactos, descripción con disclosure + CHOOSE YOUR STYLE, 10 imágenes, 30 combos habilitados a precio de tabla, sin personalización",
   "nota_variaciones": "Nombre de variación corregido a Sweatshirt/T-Shirt vía MPL + republicación selectiva (2026-10-17)",
-  "videos_pendientes": true,
-  "nota_videos": "Video de sudadera (video1) pendiente: el endpoint de subida de videos de Etsy rechazó los archivos de forma intermitente el 2026-10-17 (video de playera activo). Reintento P3 programado 2026-10-17 ~19:50 EDT (cron pod-videos-reintento-2026-10-17)."
+  "videos_pendientes": false
  },
  "p034": {
   "diseno": "ER Turkey Trot",
