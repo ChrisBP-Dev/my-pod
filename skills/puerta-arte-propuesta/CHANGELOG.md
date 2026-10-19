@@ -1,6 +1,17 @@
 # Changelog — puerta-arte-propuesta
 Skill de app. Pineado a Rameli v0.11.1.
 
+## v0.5.1 — 2026-10-19 (flujo de propuestas v2, idea del dueño)
+- Nueva sección "Entrega para aprobación del dueño": el PASS de
+  la puerta se entrega por diseño en un chat nuevo, con el arte
+  final y su porqué (tema/ángulo/frase/iconografía) + qué mirar
+  (los pendientes del ojo humano que la puerta ya declaraba).
+  Sin esa aprobación, el diseño no entra a producción: el dale
+  creativo se mueve al punto más barato (antes se revisaba el
+  arte recién en Printify, con los drafts ya creados). El porqué
+  se guarda en el registro (`porque`) y lo hereda el paquete
+  comercial. Sin cambios en los gates.
+
 ## v0.5.0 — 2026-10-18 (lote de drafts mutilados p038-p057, cazado por el dueño)
 Contexto: 16 diseños llegaron CORTADOS a los drafts de Printify (palabras
 rebanadas en los extremos, hojas y elementos incompletos) y ninguna
