@@ -35,7 +35,7 @@ históricos conservan la terminología de su época.
 | `publicador-lote` | v0.1.1 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
 | `puerta-arte-propuesta` | v0.5.0 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
 | `puerta-pinterest-pin` | v0.4.0 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
-| `puerta-publicacion-pod` | v0.2.2 | Mockup listo: dimensiones, DPI ≥300, placement contra el flat-lay aprobado DE ESE DISEÑO |
+| `puerta-publicacion-pod` | v0.2.3 | Mockup listo: dimensiones, DPI ≥300, placement contra el flat-lay aprobado DE ESE DISEÑO |
 
 ## Principios operativos (para quien opere esta app)
 

@@ -145,11 +145,21 @@ def gate_doblada_placement(args, gates, med):
        la región donde debe estar el diseño vs. la tela de fondo.
     """
     prod = "gildan-18000"
-    cal_path = os.path.expanduser(
-        f"~/workspace/my-pod/data/bases-doblada/{prod}-{args.color}.json")
+    # La raíz de la app se resuelve subiendo directorios hasta el
+    # registro (mismo patrón que verificar-pin.py): sin rutas
+    # absolutas del árbol de una máquina (fase de mejora P2/P3).
+    d = os.path.dirname(os.path.abspath(__file__))
+    app_root = d
+    for _ in range(6):
+        if os.path.isfile(os.path.join(app_root, "data",
+                                       "registro-listings.json")):
+            break
+        app_root = os.path.dirname(app_root)
+    cal_path = os.path.join(
+        app_root, "data", "bases-doblada", f"{prod}-{args.color}.json")
     if not os.path.isfile(cal_path):
-        cal_path = os.path.expanduser(
-            f"~/workspace/my-pod/data/bases-doblada/{prod}-white.json")
+        cal_path = os.path.join(
+            app_root, "data", "bases-doblada", f"{prod}-white.json")
     if not os.path.isfile(cal_path):
         gates["placement"] = {"pass": False,
                               "motivo": "sin calibración de base doblada"}
