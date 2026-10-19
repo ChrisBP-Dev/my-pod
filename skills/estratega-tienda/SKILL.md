@@ -4,7 +4,7 @@ description: "Rol de estratega/administrador de la tienda POD: revisa investigac
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.5.1"
-  framework_version: "0.9.0"
+  framework_version: "0.11.0"
 ---
 
 # Estratega de tienda POD

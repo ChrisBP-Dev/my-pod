@@ -4,7 +4,7 @@ description: "Puerta de publicación POD: valida que un mockup esté listo — d
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.2.2"
-  framework_version: "0.9.0"
+  framework_version: "0.11.0"
   regression_suite: "evals/"
 ---
 

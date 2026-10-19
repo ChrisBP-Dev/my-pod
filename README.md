@@ -1,7 +1,16 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.9.0** (pineado en `rameli.json`).
+App construida con Rameli **v0.11.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.11.0 (2026-10-19)
+
+Adoptada por dale del dueño, siguiendo `rameli/MIGRACIONES.md`:
+pin en `rameli.json` y en el frontmatter de los 10 skills. El delta
+0.9.0 → 0.11.0 es aditivo y sin cambios rompientes: v0.10.0 suma el
+modelo de ejecución por workers (adoptado **por flujo**, con el
+registro en `docs/MIGRACION-RAMELI-V0110.md`) y v0.11.0 suma la
+fase de mejora post-migración. Ningún dato se tocó.
 
 ## Migración a Rameli v0.9.0 (2026-10-18)
 
@@ -19,12 +28,12 @@ históricos conservan la terminología de su época.
 |---|---|---|
 | `conectar-etsy-api` | v0.1.1 | Conexión API Etsy por tienda: Seller App → OAuth PKCE → tokens → registro |
 | `estratega-tienda` | v0.5.1 | Dirección semanal de tienda: reparto de foco, mix, guía de precios, NO-hacer |
-| `estratega-pinterest` | v0.1.0 | Parrilla de Pinterest: 5 pins/día, mix por listing |
+| `estratega-pinterest` | v0.1.1 | Parrilla de Pinterest: 5 pins/día, mix por listing |
 | `onboarding-tienda` | v0.1.2 | Playbook de puesta en marcha: de cero a tienda operativa |
 | `paquete-listing-etsy` | v0.2.0 | Paquete comercial del listing: título, descripción, tags, keywords |
 | `publicar-printify-etsy` | v0.7.2 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
 | `publicador-lote` | v0.1.1 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
-| `puerta-arte-propuesta` | v0.4.0 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
+| `puerta-arte-propuesta` | v0.5.0 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
 | `puerta-pinterest-pin` | v0.4.0 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
 | `puerta-publicacion-pod` | v0.2.2 | Mockup listo: dimensiones, DPI ≥300, placement contra el flat-lay aprobado DE ESE DISEÑO |
 
@@ -37,6 +46,12 @@ operador original:
 - **Patrones de resiliencia** (`docs/PATRONES-RESILIENCIA.md`): todo
   trabajo largo con dependencia externa lleva health-check antes de
   trabajar, checkpoints con resume, y reintentos acotados (tope 3/día).
+- **Ejecución por workers** (Rameli v0.10.0, adoptado por flujo —
+  registro completo en `docs/MIGRACION-RAMELI-V0110.md`): el
+  publicador de lote ya opera con un worker por lote y los crons
+  diarios operan como workers con checkpoint local
+  (`data/estado-*.json`); las puertas y las tareas de 1–2 pasos van
+  por vía directa.
 - **Puesta en marcha** (`skills/onboarding-tienda`): playbook de cero
   a tienda operativa; es el que aplica los patrones al crear crons.
 - **Capas**: sistema portable y versionado (skills/docs/scripts) vs
