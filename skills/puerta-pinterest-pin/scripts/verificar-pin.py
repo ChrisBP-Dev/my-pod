@@ -81,6 +81,28 @@ APP_ROOT = find_app_root()
 REGISTRO_PATH = os.path.join(APP_ROOT, "data", "registro-listings.json")
 VIDEOS_DIR = os.path.join(APP_ROOT, "data", "videos")
 
+
+def norm_ruta(p):
+    """Normaliza una ruta de asset a una forma comparable entre árboles.
+
+    El registro guarda los assets de ESTA app como rutas relativas
+    (`data/...`); los pin.json y los listings heredados pueden traer
+    rutas absolutas del árbol donde se crearon. Comparar los strings
+    crudos hacía que la puerta solo funcionara en el árbol exacto
+    donde se escribió el registro (corregido en la fase de mejora
+    post-v0.11.0, punto P3, 2026-10-19). Forma canónica: desde el
+    segmento `data/` si la ruta lo contiene; si no, los dos últimos
+    segmentos (carpeta/archivo) — únicos en todo el registro,
+    verificado al introducir la normalización.
+    """
+    p = str(p).replace("\\", "/")
+    if "/data/" in p:
+        return "data/" + p.split("/data/", 1)[1]
+    if p.startswith("data/"):
+        return p
+    partes = [s for s in p.split("/") if s]
+    return "/".join(partes[-2:]) if len(partes) >= 2 else p
+
 TIPOS = {1: "hero-lifestyle", 2: "lifestyle-alt", 3: "detalle",
          4: "video", 5: "folded-decorado"}
 IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".webp")
@@ -162,14 +184,15 @@ def main():
             ok = fail("asset_final", "tipo 4 (video) requiere asset .mp4") and ok
         elif not os.path.isfile(asset):
             ok = fail("asset_final", f"video no existe: {asset}") and ok
-        elif not asset.startswith(VIDEOS_DIR):
+        elif not norm_ruta(asset).startswith("data/videos/"):
             ok = fail("asset_final",
                       f"video fuera de data/videos/: {asset}") and ok
     else:
         if not asset.lower().endswith(IMAGE_EXTS):
             ok = fail("asset_final",
                       f"tipo {tipo} requiere imagen {IMAGE_EXTS}") and ok
-        elif asset not in entry.get("assets_finales", []):
+        elif norm_ruta(asset) not in {norm_ruta(a) for a in
+                                      entry.get("assets_finales", [])}:
             ok = fail("asset_final",
                       f"asset no registrado como FINAL de '{slug}'") and ok
         elif not os.path.isfile(asset):

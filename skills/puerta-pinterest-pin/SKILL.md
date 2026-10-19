@@ -80,14 +80,16 @@ momento (queda como paso del flujo de publicación, no de Pinterest).
 ## Procedimiento
 
 1. **Armar el paquete** `pin.json`: slug, tipo (1-5), **clase_asset**
-   (qué ES la imagen según el mapa verificado), asset (ruta
-   absoluta), título, descripción, url_listing, tablero,
+   (qué ES la imagen según el mapa verificado), asset (ruta del
+   asset; forma canónica relativa a la app, `data/...` — la puerta
+   normaliza antes de comparar contra el registro), título,
+   descripción, url_listing, tablero,
    keywords_fuente (banco **Pinterest** del nicho:
    `data/banco-keywords/pinterest-<nicho>.md`, no el de Etsy).
 2. **Correr** `scripts/verificar-pin.py --pin pin.json` (gate real,
    construido 2026-10-16; antes esta puerta solo existía en papel).
-   Hay UNA sola implementación: `~/workspace/my-pod/scripts/verificar-pin.py`
-   y la copia de este skill son byte-idénticas y la suite lo verifica
+   Hay UNA sola implementación: `scripts/verificar-pin.py` (raíz de
+   la app) y la copia de este skill son byte-idénticas y la suite lo verifica
    (la divergencia entre copias era deuda registrada desde v0.3.1 y
    se cerró en v0.4.0). El registro de assets finales vive en
    `data/registro-listings.json`; el banco de keywords Pinterest en
