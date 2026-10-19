@@ -3,13 +3,14 @@ name: "publicador-lote"
 description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing y rollback."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   framework_version: "0.11.0"
 ---
 
 # Publicador de lote POD
 
-**Versión 0.1.1** (2026-10-16: el flujo post-aprobación existía y
+**Versión 0.1.2** (2026-10-19: watchdog obligatorio al lanzar el
+lote — fase de mejora P4; 0.1.1: el flujo post-aprobación existía y
 funcionaba, pero sin vehículo diseñado — corría donde el dueño
 respondiera, sin checkpoints. Este skill lo formaliza: un side chat por
 lote, manifiesto explícito, resume por listing).
@@ -86,6 +87,14 @@ tiene vía API disponible, se usa la vía API. La conexión es por tienda
   siguiente retoma donde quedó — nunca repite fases hechas.
 - **P3 —** no aplica como reintento programado (el lote es a demanda);
   el escalado es el reporte al principal.
+- **Watchdog (obligatorio desde 2026-10-19, fase de mejora P4):**
+  al lanzar el lote, el agente principal monta una vigilancia
+  programada que verifica el avance contra
+  `data/estado-publicacion.json` y le despierta si el lote se
+  frena o falla en silencio (la notificación del worker no es
+  confiable — doctrina en `docs/EJECUCION-Y-RELEVO.md`). El
+  watchdog se retira al cerrar el lote. Un lote sin watchdog es
+  un lote mal lanzado.
 
 ## Videos: paralelo y nunca regenerados
 
