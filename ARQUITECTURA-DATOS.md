@@ -104,3 +104,14 @@ accesible por la app.
    `estado-*.json` se resume en el registro o doc correspondiente
    y se borra; un checkpoint de un flujo cerrado es estado muerto
    que finge ser reanudable.
+6. **El registro fechado se queda, declarado.** Cuando el detalle
+   de una unidad cerrada es evidencia (una auditoría, una
+   corrección), no vive como `estado-*` sino como registro con
+   fecha en el nombre, y se declara aquí. Registros vigentes:
+   `data/auditoria-2026-10-15/` (auditoría de mockups, histórica)
+   y `data/registro-correccion-recortes-2026-10-19.json` (detalle
+   de la corrección de recortes, resumida en
+   `data/tiendas/29222324/registro-flujo.md`; su nombre original
+   era `estado-correccion-recortes.json` y se renombró el
+   2026-10-19, en la ejecución P5 de la auditoría de adopción,
+   para que ningún lector lo crea un checkpoint reanudable).

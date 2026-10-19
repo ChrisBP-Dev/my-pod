@@ -6,7 +6,7 @@ Contexto: 16 diseños llegaron CORTADOS a los drafts de Printify (palabras
 rebanadas en los extremos, hojas y elementos incompletos) y ninguna
 puerta lo vio — la puerta medía que no sobrara aire tras el recorte,
 pero un diseño ya cortado "pasa" ese criterio. Causas medidas, no
-supuestas (auditoría completa en data/estado-correccion-recortes.json):
+supuestas (auditoría completa en data/registro-correccion-recortes-2026-10-19.json):
 (a) lote A (p038-p045): el autotrim por bbox de MASA (0.05%) amputó los
 extremos de baja masa de originales completos (7-53px por lado a escala
 de generación); (b) lote B (p048-p057): un desbordamiento tipo fill
