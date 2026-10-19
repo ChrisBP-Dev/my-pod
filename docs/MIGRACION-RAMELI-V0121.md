@@ -123,6 +123,20 @@ ese mecanismo; se registra solo como parte del delta migrado.
 - La misma corrida sobre el árbol principal (ANTES, con los
   datos vivos) dio el mismo resultado: lint VERDE total,
   regresión VERDE total.
+- Verificación post-fusión sobre `main` (con el dale ya dado):
+  lint idéntico y VERDE; la primera corrida de regresión dio 4
+  fallas en la suite de Pinterest que el worktree y el ANTES no
+  daban — se atribuyó con evidencia antes de concluir: la causa
+  fue ambiental, NO la migración ni los datos: las corridas
+  repetidas de la suite habían llenado `/tmp` (tmpfs de 512 MB)
+  con directorios de frames filtrados por
+  `scripts/verificar-video.py` (`extract_frames` usa
+  `tempfile.mkdtemp()` y nunca borra el directorio; ~143 MB por
+  corrida completa), y con `/tmp` lleno los archivos temporales
+  de la suite de Pinterest salían vacíos. Limpiado `/tmp` y
+  re-corrida con el temporal en disco: **idéntica byte a byte al
+  ANTES/DESPUÉS, VERDE total**. La fuga de `verificar-video.py`
+  queda registrada como brecha para la fase de mejora.
 - Barrido final de pin viejo: `0.11.1` solo queda citando el
   delta o como historia — la nota fechada de `rameli.json`, la
   línea del delta y la sección histórica "Migración a Rameli
