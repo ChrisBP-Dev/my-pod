@@ -119,3 +119,31 @@ con su propio dale — esta fase solo lo deja inventariado.
 Cada punto, si se aprueba, corre con rama propia y puertas
 antes/después; el avance y los veredictos se anotan en este
 documento.
+
+---
+
+## Estado de ejecución (2026-10-19, dale del dueño: todo menos P5)
+
+- **P1 — CERRADO.** Aditivo (merge `6f379b0`): secciones y CHANGELOG;
+  descripciones (merge `e65530b`): las 5 reescritas ≤220 conservando
+  disparadores. **Lint final: 0 fallos, los 10 skills en verde.**
+- **P3 — CERRADO** (merge `3b30933`). Registro con rutas relativas
+  (102), gate con normalización de rutas en ambas copias, specs
+  actualizadas. Verificación decisiva: la suite de Pinterest da
+  15/15 en un worktree aislado (antes 11/15) y 15/15 en vivo.
+- **P2 — DOBLADA CERRADA, ONMODEL ABIERTO.** Doblada (merge
+  `42fc62b`): la causa era una calibración que nunca llegó a la app
+  limpia; recreada desde el golden set (escala 1.30, validada con
+  negativos), skill v0.2.3. Onmodel: diagnóstico cerrado (el método
+  de gap por color es inválido en fotos reales; los golden están
+  bien colocados, gap real ≈16%) y **decisión de criterio en manos
+  del dueño**: (A) medir el gap con el localizador SIFT + cuello
+  calibrado por base [recomendada] o (B) retirar el chequeo de gap
+  en onmodel. Suite de la puerta al momento: 15 ok / 3 fallas (solo
+  onmodel).
+- **P4 — CERRADO** (merge `38b38e8`). Registro de flujo adoptado
+  con instancia por tienda, watchdog obligatorio en
+  `publicador-lote` v0.1.2, umbral de relevo calibrado en
+  `docs/EJECUCION-Y-RELEVO.md`.
+- **P5 — FUERA por decisión del dueño** (2026-10-19): la
+  contribución al framework la ejecuta él en otro chat.
