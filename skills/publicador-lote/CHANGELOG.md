@@ -1,5 +1,12 @@
 # CHANGELOG — publicador-lote
 
+## v0.1.2 (2026-10-19)
+- Watchdog obligatorio al lanzar el lote: vigilancia programada
+  sobre `data/estado-publicacion.json` que despierta al
+  orquestador ante freno o fallo en silencio; se retira al cerrar
+  el lote (fase de mejora post-v0.11.0, P4; doctrina en
+  `docs/EJECUCION-Y-RELEVO.md`).
+
 ## v0.1.1 (2026-10-16)
 - Enrutamiento API-first hecho explícito: el skill ahora apunta al canon
   `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` y exige la vía API donde
