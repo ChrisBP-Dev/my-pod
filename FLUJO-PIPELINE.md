@@ -20,12 +20,25 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 
 ## Etapas
 
-### 1. Arte
+### 1. Arte + aprobación del dueño (Fase A — flujo v2, 2026-10-19)
 - Generar arte en alta calidad: PNG sin fondo, 300 DPI, recortado exacto.
-- Puerta: `puerta-arte-propuesta` (fondo transparente, DPI, márgenes).
-- Dale del dueño al arte.
+- Puerta mecánica COMPLETA: `puerta-arte-propuesta` v0.5.0+ (composición
+  sobre el crudo, limpieza, autotrim seguro, fidelidad contra el crudo).
+- **Entrega para aprobación:** cada arte que pasa la puerta se entrega
+  en un chat nuevo con su **porqué** (tema y ángulo de la directriz,
+  frase, iconografía y su motivo, y qué mirar al revisar — p. ej. los
+  counters, que la puerta declara pendientes del ojo humano). El
+  porqué se guarda en el registro (`porque` por diseño) y lo hereda
+  el paquete comercial.
+- **Puerta del dueño, por diseño, en el chat:** aprueba, rechaza o
+  pide ajuste ANTES de que se produzca nada. Lo aprobado se enlista
+  (la cola persiste entre días; no caduca). Lo rechazado no consume
+  producción. Lo ajustado vuelve solo a esta etapa.
+  (Flujo v2, idea del dueño 2026-10-19: el dale creativo se mueve al
+  punto más barato — antes el arte se revisaba recién en Printify,
+  con el trabajo de drafts ya gastado.)
 
-### 2. Propuesta (drafts en Printify)
+### 2. Propuesta (drafts en Printify) — Fase B: solo aprobados
 - **Track MPL:** un draft por producto de la composición (default:
   sudadera + playera), cada uno con el arte colocado. Los drafts quedan
   "unpublished" = propuesta pendiente. Los componentes NUNCA se publican
@@ -37,15 +50,18 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 - Detección de drafts: agrupar por diseño (título real); no duplicar
   diseños que ya tienen sus componentes pendientes (ver contrato §E).
 
-### 3. Revisión del dueño
+### 3. Revisión del dueño (ubicación, en Printify)
 - **Piloto flujo nocturno (desde lun 2026-10-19, decisión del dueño
-  2026-10-18, piloto de 1 semana):** las propuestas se generan a las
-  18:00 y el dueño entra a Printify EN LA NOCHE, antes de dormir,
-  revisa los drafts. La producción posterior (mockups → videos →
-  paquete → publicación) corre de noche tras sus dales; Pinterest
-  corre a las 08:50 de la mañana siguiente sobre lo ya publicado y el
-  watchdog a las 07:50. Si una noche no puede revisar, el lote espera
-  y lo aprueba cuando pueda — el flujo no se rompe.
+  2026-10-18, piloto de 1 semana; orden actualizado por el flujo v2
+  del 2026-10-19):** la corrida de las 18:00 entrega las artes para
+  su aprobación (etapa 1) y produce los diseños ya aprobados
+  (etapa 2); el dueño entra a Printify EN LA NOCHE, antes de dormir,
+  y revisa la UBICACIÓN en los drafts de lo producido. La producción
+  posterior (mockups → videos → paquete → publicación) corre de
+  noche tras sus dales; Pinterest corre a las 08:50 de la mañana
+  siguiente sobre lo ya publicado y el watchdog a las 07:50. Si una
+  noche no puede revisar, el lote espera y lo aprueba cuando pueda —
+  el flujo no se rompe.
 - Corrige ubicación directamente en el editor si hace falta.
 - Elimina los rechazados. Los que quedan = aprobados para continuar.
 - Avisa cuáles están listos.
