@@ -4,13 +4,13 @@ description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): t
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.7.2"
-  framework_version: "0.11.0"
+  framework_version: "0.11.1"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.7.0** — Estándar API-vs-navegador (canon central en docs/, este skill apunta); tablas de precios por talla leídas del config de tienda (doctrina precio con colchón 2026-10-16)
+**Versión 0.7.2** (0.7.0 — Estándar API-vs-navegador (canon central en docs/, este skill apunta); tablas de precios por talla leídas del config de tienda (doctrina precio con colchón 2026-10-16))
 **Versión 0.6.1** — Esquema de mockups/videos movido al config de tienda
 (organización a nivel tienda, 2026-10-15). Printify es la fuente de verdad;
 no generamos mockups propios.

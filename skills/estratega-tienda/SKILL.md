@@ -4,12 +4,12 @@ description: "Estratega/administrador de la tienda POD: revisa investigación, t
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.5.1"
-  framework_version: "0.11.0"
+  framework_version: "0.11.1"
 ---
 
 # Estratega de tienda POD
 
-**Versión 0.4.0** (2026-10-16: portabilidad de la estrategia de precios —
+**Versión 0.5.1** (0.4.0, 2026-10-16: portabilidad de la estrategia de precios —
 mecanismo + calibración en el skill, valores en el config de cada tienda;
 0.3.0: entrada #7 ledger de ventas — feedback loop M2).
 

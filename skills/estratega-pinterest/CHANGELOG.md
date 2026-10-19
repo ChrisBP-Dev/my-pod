@@ -1,5 +1,5 @@
 # Changelog — estratega-pinterest
-Skill de app. Pineado a Rameli v0.11.0.
+Skill de app. Pineado a Rameli v0.11.1.
 
 ## v0.1.1 — 2026-10-18
 - Elegibilidad por CLASE de asset del `mapa_assets` verificado del

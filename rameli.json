@@ -1,5 +1,5 @@
 {
   "framework": "rameli",
-  "framework_version": "0.11.0",
-  "nota": "Versión pineada deliberadamente. No se auto-actualiza. Migrar con: rameli migrate --to <nueva>. Adopción del criterio de colocación y la terminología canónica de v0.9.0: 2026-10-18. Migración a v0.11.0: 2026-10-19 (delta v0.10.0 ejecución por workers + v0.11.0 fase de mejora post-migración; registro en docs/MIGRACION-RAMELI-V0110.md)."
+  "framework_version": "0.11.1",
+  "nota": "Versión pineada deliberadamente. No se auto-actualiza. Migrar con: rameli migrate --to <nueva>. Adopción del criterio de colocación y la terminología canónica de v0.9.0: 2026-10-18. Migración a v0.11.0: 2026-10-19 (delta v0.10.0 ejecución por workers + v0.11.0 fase de mejora post-migración; registro en docs/MIGRACION-RAMELI-V0110.md). Migración a v0.11.1: 2026-10-19 (parche del framework: doctrina de workers declarada vigente, bin/rameli ejecutable, paso de estado en el checklist de contribuciones; ejecutada como Propuesta 3 de la auditoría de adopción, docs/AUDITORIA-ADOPCION-V0110.md)."
 }

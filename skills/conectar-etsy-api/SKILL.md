@@ -4,12 +4,12 @@ description: "Conecta la API de Etsy (v3, OAuth 2.0 + PKCE) para UNA tienda: cre
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.1"
-  framework_version: "0.11.0"
+  framework_version: "0.11.1"
 ---
 
 # Conectar API de Etsy por tienda
 
-**Versión 0.1.0** (2026-10-16: extraído del montaje manual de
+**Versión 0.1.1** (origen 0.1.0, 2026-10-16: extraído del montaje manual de
 MyNightShiftShop — primera conexión real verificada).
 
 ## Principio

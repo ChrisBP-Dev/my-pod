@@ -1,5 +1,5 @@
 # Changelog — puerta-arte-propuesta
-Skill de app. Pineado a Rameli v0.11.0.
+Skill de app. Pineado a Rameli v0.11.1.
 
 ## v0.5.0 — 2026-10-18 (lote de drafts mutilados p038-p057, cazado por el dueño)
 Contexto: 16 diseños llegaron CORTADOS a los drafts de Printify (palabras
