@@ -581,6 +581,31 @@ auditoría** — con el alcance acotado siguiente:
   script, dato o cron. La única escritura fuera de este repo fue
   ninguna — el cuerpo del cron de propuestas se leyó, no se editó
   (su corrección es la Propuesta 1, con dale).
-- **Fusión a `main`: pendiente del dale del dueño en este chat.**
-- Piso 2: **bloqueado** hasta que el dueño apruebe este resultado
-  en este chat.
+- **Fusión a `main`: hecha el 2026-10-19** con el dale del dueño en
+  este chat (merge `9ab05eb`, push verificado, rama eliminada).
+- Piso 2: **abierto por el mismo dale** — ver el cierre abajo.
+
+## Ejecución de las propuestas (2026-10-19, dale total del dueño)
+
+El dueño dio dale a ejecutar TODAS las propuestas ("encárgate de
+todo, sin dejar nada a medias") y a abrir el piso 2. Ejecución en
+la rama `mejora-adopcion-v0111`, un commit por propuesta,
+verificación total antes de fusionar (lint verde en los 9 skills;
+`rameli test` verde: arte 13/13, pin 15/15, paquete 4/4, publicar
+2/2, contrato de la estratega 13/13).
+
+| Propuesta | Estado | Evidencia |
+|---|---|---|
+| P1 (B3) — cron de propuestas invoca la puerta de arte completa | **Ejecutada** | Cuerpo del cron actualizado paso a paso contra puerta-arte-propuesta v0.5.0: paso 1b `--es-original` sobre el crudo (que se conserva como artefacto del lote), autotrim descrito como bbox seguro, paso 3 con `--original` y manejo de `fidelidad_recorte`; línea "Rameli v0.9.0" corregida a v0.11.1. Verificado releyendo el job. **El cron sigue pausado**: su reactivación es un dale separado que el dueño no ha dado. |
+| P2 (B2) — suites donde se declaraban | **Ejecutada** | Suites reales nuevas: paquete-listing-etsy (4/4, sobre `verificar-paquete.py` con fixtures versionados), publicar-printify-etsy (2/2, sobre `verificar-listos-publicar.py`), estratega-tienda (13/13, contrato del config de propuestas). Los 4 skills sin suite determinista posible (conectar-etsy-api, estratega-pinterest, onboarding-tienda, publicador-lote) llevan ahora la declaración explícita "sin suite — motivo" en su SKILL.md. Ningún skill declara ya una suite vacía. |
+| P3 (B1) — pin y declaraciones vivas | **Ejecutada** | Pin a Rameli **0.11.1** en `rameli.json`, README y los 9 frontmatter; mini-registro del delta del parche en el README. Corregidas las declaraciones vivas: "los 10 skills" (hoy son 9), la descripción del registro de listings (conteo real) y las líneas de versión de cuerpo desalineadas (conectar, estratega-tienda, publicar). Los punteros rotos de "Criterios canónicos" del README se repararon en la misma pasada, apuntando a los cánones que sí existen (el PR #3 de Rameli sigue pendiente en su propio chat; si se integra, la ruta de lectura por flujo se adopta entonces). |
+| P4 (B4) — secciones de Calibraciones | **Ejecutada** | Sección "Calibraciones (mecanismo vs aplicación)" agregada en conectar-etsy-api, estratega-tienda, onboarding-tienda y publicador-lote, extrayendo los umbrales que ya usaban, sin cambiar ningún valor. |
+| P5 (B8) — ciclo de vida de remanentes | **Ejecutada** | El checkpoint de la corrección cerrada se renombró a `data/registro-correccion-recortes-2026-10-19.json` (registro fechado declarado en ARQUITECTURA-DATOS; referencias actualizadas). `artwork-recuperado/`: el arte final de quiet-night-shift se promovió a `data/artes-print/quiet-night-shift-print-300dpi.png` con nota honesta en el registro (bajo la puerta vigente da dpi insuficiente: es un legado aprobado, no un arte nuevo; el asset de producción vive en Printify); los sobrantes de generación y `data/candidatos-p037/` (el ganador ya vive en artes-print) fueron a la papelera recuperable, restaurables hasta el 2026-11-18. `data/auditoria-2026-10-15/` queda declarado como registro histórico. El `evals/` vacío de la raíz se eliminó. |
+| P6 (B6+B7) — delimitaciones declaradas | **Ejecutada** | `docs/DELIMITACIONES-ADOPCION.md`: F7 (operación comercial por scripts) con dueño y ruta declarados (skill propio solo si abre una segunda tienda o el flujo crece), y no-adopción deliberada de las primitivas de orquestación de la Pieza 4, por flujo, con motivo y disparador de revisión. |
+| P7 (B5) — capa de juicio | **Ejecutada** | Declarado en `docs/DELIMITACIONES-ADOPCION.md`: la capa de juicio con modelo no se adopta como práctica continua (las puertas humanas del dueño son el juicio real a esta escala); la evaluación A/B del constructor se adopta acotada — al crear un skill nuevo o subir versión mayor, registrada en su CHANGELOG. |
+| Piso 2 — contribución a Rameli | **Ejecutada (PR abierto)** | Rama `contribucion-auditoria-adopcion` en el repo de Rameli: la auditoría de adopción como pieza obligada de la fase de mejora en `MIGRACIONES.md`, obligada cuando el delta trae doctrinas o mecanismos nuevos y diferible con motivo registrado en deltas de solo parche. Push verificado con `git status -sb` y **PR #4 abierto, pendiente de revisión**: https://github.com/ChrisBP-Dev/rameli/pull/4. Sin tocar el PR #3. La integración, el bump y el tag esperan su revisión en el PR, como manda CONTRIBUCIONES.md. |
+
+**Lo que NO cambió:** ningún comportamiento de producción. El
+cron de propuestas sigue pausado; ningún lote corrió; ninguna
+puerta cambió de criterio (solo ganaron suites); los valores de
+calibración son los mismos, ahora declarados.
