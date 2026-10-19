@@ -103,7 +103,9 @@ Pinterest (distintas a las de Etsy: descubrimiento, no transacción).
 
 5 archivos `pin.json` en `data/cola-pins/`, cada uno con
 `slug, tipo (1-5), clase_asset (la del mapa verificado), asset (ruta
-absoluta), titulo, descripcion, url_listing, tablero,
+del asset; la forma canónica es relativa a la app, `data/...` — la
+puerta normaliza antes de comparar contra el registro), titulo,
+descripcion, url_listing, tablero,
 keywords_fuente`. Todos deben pasar `scripts/verificar-pin.py`
 (v0.4.0: incluye mapa/clase/claims) antes de entrar a la cola. Sin
 PASS no hay cola.
