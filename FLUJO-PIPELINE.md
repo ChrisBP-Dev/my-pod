@@ -127,11 +127,40 @@ lifestyles diferentes, hero = lifestyle).
   → La colocación se hace directo en Printify
 - ❌ Predecir cómo se verá → Se ve directo en Printify
 
-## Skills activos
-- `puerta-arte-propuesta` — valida el arte
-- `paquete-listing-etsy` — genera paquete comercial
-- `publicar-printify-etsy` — flujo de publicación
-- `puerta-pinterest-pin` — valida pins
+## Ruta de lectura (adoptada 2026-10-19, fase de mejora post-migración v0.12.1)
+
+Qué lee el orquestador (o un chat frío que retoma la app) para
+cada tipo de tarea: las **lecturas mínimas gobernantes**, como
+punteros puros — esta sección no copia contenido. Es **piso,
+nunca techo**: un incidente o una investigación pueden exigir
+leer más, y la ruta nunca lo prohíbe. Canon:
+`../rameli/skills/fabrica-skills/references/ruta-de-lectura.md`.
+Esta sección ES el índice de lo vivo (reemplaza a la antigua
+lista "Skills activos", que cubría 4 de los 9 skills): **lo que
+no está en la ruta no es flujo vivo, y retirar un flujo = retirar
+su ruta en el mismo cambio.**
+
+| Tarea / flujo | Lecturas mínimas gobernantes |
+|---|---|
+| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/direccion-tienda.md` (directriz vigente) · `data/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) |
+| **Propuestas — etapa 2: drafts de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/registro-listings.json` (qué diseños ya tienen componentes) |
+| **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` · `CRITERIO-VIDEO.md` (criterio y puerta de video) |
+| **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/registro-listings.json` (lo hereda el paquete) |
+| **Publicación por lote** (F2) | `skills/publicador-lote/SKILL.md` · `skills/publicar-printify-etsy/SKILL.md` (checklist de publicación) · este doc (§Etapa 7) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
+| **Pinterest diario** (F3) | `skills/estratega-pinterest/SKILL.md` (parrilla) · `skills/puerta-pinterest-pin/SKILL.md` (puerta del pin) · este doc (§Etapa 8) · `data/tiendas/29222324/config.json` (links rastreables Share & Save) |
+| **Dirección semanal** (F4: estratega e investigación) | `skills/estratega-tienda/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · salidas que produce: `data/direccion-tienda.md` y `data/config-propuestas.json` |
+| **Operación comercial** (F7: precios, ledger, ofertas) | `docs/DELIMITACIONES-ADOPCION.md` (§1: dueño y ruta completa del flujo, scripts incluidos) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` · `data/tiendas/29222324/config.json` (precios y calendario de descuentos) |
+| **Conectar Etsy API de una tienda** (F6) | `skills/conectar-etsy-api/SKILL.md` · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
+| **Onboarding de tienda nueva** (F5) | `skills/onboarding-tienda/SKILL.md` · este doc (§Crear tienda desde cero) · `docs/PATRONES-RESILIENCIA.md` (cómo nacen sus crons) |
+| **Trabajos largos con dependencia externa** (cualquier flujo) | `docs/PATRONES-RESILIENCIA.md` (health-check, checkpoints con resume, reintentos acotados) · `docs/REGLA-DELIVERY-CHATS.md` (cómo se entrega el resultado) |
+| **Mantenimiento del sistema** (F9: migraciones, fases de mejora, contribuciones) | `rameli.json` (pin vigente) · `../rameli/MIGRACIONES.md` y `../rameli/CHANGELOG.md` (proceso y delta) · `../rameli/docs/CONTRIBUCIONES.md` (si el trabajo sube al framework) · `docs/DELIMITACIONES-ADOPCION.md` (§§2–3: orquestación y capa de juicio) · `docs/EJECUCION-Y-RELEVO.md` (registro y relevo) · `data/tiendas/29222324/registro-flujo.md` (estado de los flujos de la tienda) |
+
+Cobertura verificada al adoptar (2026-10-19): los **9 skills
+vivos** aparecen en al menos una ruta — puerta-arte-propuesta,
+publicar-printify-etsy, paquete-listing-etsy, publicador-lote,
+estratega-pinterest, puerta-pinterest-pin, estratega-tienda,
+conectar-etsy-api, onboarding-tienda — y todo puntero de la
+tabla resuelve a un archivo existente.
 
 
 ## Crear tienda desde cero (para nuevas tiendas/nichos)

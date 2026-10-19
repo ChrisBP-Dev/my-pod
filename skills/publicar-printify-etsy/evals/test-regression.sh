@@ -35,5 +35,21 @@ else
   fail=$((fail+1)); echo "FALLA: p002 no dio el veredicto esperado (rc=$rc)"; echo "$out" | head -8
 fi
 
+# F3: higiene de temporales (2026-10-19, fase de mejora v0.12.1 P2 —
+# brecha B2 de docs/AUDITORIA-ADOPCION-V0121.md): la puerta de video
+# no debe fugar directorios temporales. Se corre el mismo caso p002
+# con TMPDIR controlado y el directorio debe quedar VACÍO: antes del
+# fix, verificar-video.py (extract_frames con mkdtemp sin borrado)
+# fugaba 4 directorios / ~142 MB por corrida de esta suite, y con
+# /tmp lleno las suites siguientes daban fallas espurios.
+TMPH="$(mktemp -d)"
+TMPDIR="$TMPH" python3 "$V" --diseno p002 >/dev/null 2>&1
+if [[ -z "$(ls -A "$TMPH")" ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: la puerta de video fugó temporales:"; ls "$TMPH"
+fi
+rm -rf "$TMPH"
+
 echo "--- $ok ok, $fail fallas ---"
 [[ $fail -eq 0 ]]

@@ -68,18 +68,25 @@ def check_specs(video, info):
 
 
 def extract_frames(video, fps=5):
-    """Extrae frames a bajo fps para análisis."""
-    tmp = tempfile.mkdtemp()
-    subprocess.run(
-        ["ffmpeg", "-y", "-loglevel", "error", "-i", video,
-         "-vf", f"fps={fps}", os.path.join(tmp, "f%04d.png")],
-        check=True, capture_output=True,
-    )
+    """Extrae frames a bajo fps para análisis.
+
+    El directorio temporal se cierra con el bloque: los frames
+    quedan en memoria y el directorio se borra siempre (antes se
+    usaba mkdtemp() sin borrado y cada llamada fugaba ~35 MB de
+    PNGs en /tmp — brecha B2 de docs/AUDITORIA-ADOPCION-V0121.md,
+    corregida en la fase de mejora v0.12.1, P2).
+    """
     frames = []
-    for f in sorted(os.listdir(tmp)):
-        img = cv2.imread(os.path.join(tmp, f), cv2.IMREAD_GRAYSCALE)
-        if img is not None:
-            frames.append(img)
+    with tempfile.TemporaryDirectory() as tmp:
+        subprocess.run(
+            ["ffmpeg", "-y", "-loglevel", "error", "-i", video,
+             "-vf", f"fps={fps}", os.path.join(tmp, "f%04d.png")],
+            check=True, capture_output=True,
+        )
+        for f in sorted(os.listdir(tmp)):
+            img = cv2.imread(os.path.join(tmp, f), cv2.IMREAD_GRAYSCALE)
+            if img is not None:
+                frames.append(img)
     return frames
 
 
