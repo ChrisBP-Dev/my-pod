@@ -1,6 +1,6 @@
 ---
 name: "estratega-pinterest"
-description: "Estratega de Pinterest para My POD: decide la parrilla diaria de 5 pins (qué listings, qué mix de tipos imagen/video, qué tableros, con qué keywords del banco Pinterest). La puerta-pinterest-pin valida; este skill decide."
+description: "Estratega de Pinterest: decide la parrilla diaria de 5 pins de una tienda POD (qué listings, mix de tipos imagen/video, tableros y keywords del banco Pinterest). La puerta-pinterest-pin valida; este skill decide."
 plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"

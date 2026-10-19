@@ -1,6 +1,6 @@
 ---
 name: "publicar-printify-etsy"
-description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un solo listing) o track single-product (diseños personalizables, que el MPL no soporta). Drafts en Printify, revisión del dueño, mockups de Printify, videos, publicación y verificación integral en Etsy."
+description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.7.2"

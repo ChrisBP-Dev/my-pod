@@ -1,6 +1,6 @@
 ---
 name: "onboarding-tienda"
-description: "Playbook de puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento con el dueño, conexiones (Etsy API, Printify), config de tienda, activaciones de Etsy (Share & Save, calendario de descuentos, cupones), calibración de productos y creación de los crons operativos con patrones de resiliencia. El mecanismo es portable; los valores son calibración por tienda."
+description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento, conexiones (Etsy API, Printify), activaciones de Etsy, calibración de productos y crons operativos con patrones de resiliencia."
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.2"
