@@ -90,3 +90,27 @@ las propuestas de ejecución de arriba:
 De la fase post-v0.11.0 no queda nada abierto: sus cinco
 propuestas cerraron (P5 por decisión del dueño, cuyo resultado
 — las contribuciones — es hoy framework vigente v0.12.0/v0.12.1).
+
+---
+
+## Estado de ejecución (2026-10-19, dale del dueño en su secuencia por partes)
+
+El dueño fijó el orden el 2026-10-19: **primero** las mejoras de
+la migración (esta fase), **después** pulir la personalización en
+su chat nuevo, y **recién entonces** activar el cron de
+propuestas — su activación servirá además de prueba de que todo
+funciona. Ejecutada en la rama `mejora-v0121` (commit `a1b6266`),
+fusionada a `main` el mismo día; rama borrada (local y remota)
+y worktree retirado al cerrar.
+
+| Propuesta | Estado | Evidencia |
+|---|---|---|
+| P2 (B2) — fuga de `verificar-video.py` | **Ejecutada** | `extract_frames` con `TemporaryDirectory()` (mismos frames, mismos criterios — verificado: mismo veredicto y rc sobre el mismo video antes/después). Línea base medida: la suite de publicar fugaba 4 directorios / 142 MB por corrida en un TMPDIR controlado; tras el fix: **0**. Caso de higiene **F3** nuevo en la suite de publicar, calibrado en ambos sentidos: FAIL nombrando los 4 directorios contra el código sin fix, PASS ya fusionado. Regresión total: **48 casos** (publicar 3/3), verde en **dos corridas consecutivas idénticas** sobre `main`, con 0 crecimiento de temporales y `/tmp` de vuelta a 1%. |
+| P1 (B1) — ruta de lectura | **Ejecutada** | Sección "Ruta de lectura" en `FLUJO-PIPELINE.md`: 12 rutas por tarea/flujo (F1–F9 + transversales), punteros puros, piso-no-techo declarado, y la regla "retirar un flujo = retirar su ruta". Absorbió la lista "Skills activos" (4/9). Verificación mecánica corrida en la rama y otra vez sobre `main`: **cobertura 9/9 skills, 26 punteros, todos resuelven**. Lint verde total antes y después. |
+
+**Lo que NO cambió:** ningún criterio de ninguna puerta, ningún
+valor de calibración, ningún dato de producción. El cron de
+propuestas **sigue pausado** — su reactivación quedó
+resecuenciada por el dueño (ver inventario): espera a que la
+personalización quede pulida en su chat, y entonces se activa
+como prueba integral del sistema.
