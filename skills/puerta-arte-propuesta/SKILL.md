@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.0"
+  version: "0.5.1"
   framework_version: "0.11.1"
   regression_suite: "evals/"
 ---
@@ -198,3 +198,25 @@ después de 12 mockups.
   artes no usa gris neutro (sus claros son crema cálido), remanente 0
   y diseño intacto. Candidato a gate automático cuando se calibre
   contra artes con gris de diseño legítimo (no bloquear por defecto).
+
+## Entrega para aprobación del dueño (flujo v2, 2026-10-19)
+
+Un PASS de esta puerta NO va directo a producción: va primero
+al dueño, en un chat nuevo, **por diseño**, con este bloque:
+
+- **El arte final** (el PNG que pasó la puerta, adjunto).
+- **El porqué:** tema y ángulo según la directriz vigente, la
+  frase y su sentido, la iconografía y por qué esos elementos
+  (qué significan en el tema; p. ej. qué es propio de la
+  temporada y qué sería de otra).
+- **Qué mirar:** los puntos que la puerta declara pendientes
+  del ojo humano (counters/agujeros de las letras, trazos que
+  llegan al borde adjudicados como motivo) y cualquier duda
+  honesta del generador.
+
+El porqué se escribe al generar (sale de la directriz y del
+brief del diseño, no se inventa al entregar) y se guarda en el
+registro del diseño (`porque` en `data/registro-listings.json`)
+para que lo hereden la producción y el paquete comercial. Sin
+aprobación del dueño en esta entrega, el diseño no entra a
+producción (flujo v2 en `FLUJO-PIPELINE.md`).

@@ -30,30 +30,42 @@ skill propio:** la apertura de una segunda tienda (el flujo
 pasaría a operar por tienda, no global) o que F7 gane pasos con
 juicio que hoy no tiene.
 
-## 2. Orquestación determinista del runtime (Pieza 4 de Rameli) — no adoptada, con motivo
+## 2. Orquestación — la doctrina es una: workers fríos
 
-El framework declara como patrón las primitivas del runtime
-(workflows guardados con snapshot, `agent()` con `schema` como
-gate en código, verifier-repair programado, `parallel()` /
-`pipeline()`). **Esta app no las usa en ningún flujo, y es
-deliberado:**
+**(Sección reescrita el 2026-10-19, corrección pedida por el
+dueño: la versión original presentaba las primitivas del
+entorno como una "forma de trabajo alternativa no adoptada", y
+ese encuadre fabricó una confusión — como si hubiera dos
+caminos rivales entre los que se elige por gusto. No los hay.)**
 
-- El grafo de cada flujo ya es fijo y está versionado en la forma
-  que esta escala necesita: cuerpos de cron guardados,
-  `FLUJO-PIPELINE.md` y los procedimientos de los skills, con las
-  puertas como scripts deterministas que bloquean.
-- Las unidades de trabajo son corridas de cron y workers de chat
-  (modelo C16, adoptado con su registro), no agentes invocados
-  desde un workflow JS: no hay hoy ningún punto donde un gate
-  deba decidir en código sobre salidas estructuradas de varios
-  agentes en paralelo.
+La doctrina de ejecución de esta app es la del framework,
+una sola: **workers fríos** (chat nuevo, brief limpio con el
+objetivo y los punteros a los skills, sin heredar historial),
+adoptada por flujo en la migración a v0.11.0 con su registro
+en `docs/MIGRACION-RAMELI-V0110.md`. Lo que varía entre flujos
+no es la doctrina, es **el despertador**:
 
-**Disparador de revisión:** el primer flujo donde un gate deba
-evaluar en código la salida de agentes paralelos (p. ej.
-producción de artes con verificador independiente en la misma
-corrida), o donde el snapshot versionado de un workflow aporte
-algo que el cuerpo de cron no dé. Cuando ocurra, se adopta para
-ese flujo y se anota aquí.
+- **El chat orquestador**, cuando un humano conversa y decide
+  (etapas de calibración e iteración: el chat decide y despacha
+  workers; no ejecuta él mismo ni crece con el trabajo).
+- **El cron**, cuando el trabajo es programado (etapa de
+  automatización: el cron despierta la corrida y la corrida
+  trabaja con la misma doctrina — workers, checkpoints,
+  registro).
+
+Donde un flujo no usa worker, el motivo está en ese mismo
+registro de adopción (puertas dentro de un flujo, tareas de
+1–2 pasos, la conexión a Etsy que exige el clic del dueño en
+vivo, el onboarding guiado por fases).
+
+Las primitivas que la arquitectura del framework describe
+como disponibles en el entorno (la Pieza 4: workflows con
+snapshot, `agent()` con schema, verificador-reparación en
+código) **no son una doctrina rival ni una alternativa entre
+la que esta app "eligió" no estar**: son capacidades del
+entorno que hoy ningún flujo necesita. Si un flujo futuro las
+necesita, se usan dentro de la misma doctrina (un worker las
+invoca como invoca cualquier herramienta) y se anota aquí.
 
 ## 3. Capa de juicio del framework (evals capa 2 + A/B del constructor) — estatus
 
