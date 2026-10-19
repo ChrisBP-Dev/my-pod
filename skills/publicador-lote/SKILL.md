@@ -150,3 +150,14 @@ adopción `docs/AUDITORIA-ADOPCION-V0110.md`.)
   manifiesto de cada lote (decisión del dueño por lote), no este
   skill; el pipeline por listing (M3→M9) y sus puertas son los
   de `publicar-printify-etsy` vigentes al lanzarse el lote.
+
+## Regresión
+
+Sin suite determinista propia — **declarado** (2026-10-19,
+Propuesta 2 de la auditoría de adopción): el lote corre contra
+sistemas externos vivos (Printify, Etsy, navegador) y su
+verificación es el pipeline por listing con las puertas de
+`publicar-printify-etsy` (que sí tienen suite) + el checkpoint
+con resume + el watchdog. Un fallo real de un lote se convierte
+en caso en la suite del skill cuya puerta debió atraparlo, no
+en un fixture de este orquestador.

@@ -145,3 +145,15 @@ existían dispersos en el cuerpo; aquí se declaran.)
   viven en `data/tiendas/<id>/config.json` y en el archivo de
   credenciales fuera del repo — nunca en este skill. Revalidar
   al conectar una tienda nueva o al agregar un scope.
+
+## Regresión
+
+Sin suite determinista en `evals/` — **declarado** (2026-10-19,
+Propuesta 2 de la auditoría de adopción): este flujo es
+interactivo y con efectos externos (OAuth con clic del dueño,
+tokens que rotan); un fixture no puede reproducirlo sin
+credenciales reales. Lo cubre la verificación en vivo de cada
+conexión (canje → llamada de lectura → registro en el config) y
+el smoke test de los scripts que consumen los tokens. Si el
+flujo gana una parte determinista (p. ej. validación del formato
+del config), esa parte sí entra como suite en `evals/`.

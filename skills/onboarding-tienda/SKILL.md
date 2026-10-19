@@ -207,3 +207,14 @@ adopción `docs/AUDITORIA-ADOPCION-V0110.md`.)
   trae los de la tienda 29222324 como ejemplo, no como default
   universal). Revalidar al abrir la segunda tienda: lo que solo
   se ha probado con una tienda es calibración, no mecanismo.
+
+## Regresión
+
+Sin suite determinista en `evals/` — **declarado** (2026-10-19,
+Propuesta 2 de la auditoría de adopción): es un playbook guiado
+por fases con el dueño; su "suite" es la Fase 6 (verificación y
+cierre contra la tienda real) y el hecho de que cada artefacto
+que deja montado (crons con patrones, conexión API, config)
+hereda las suites y puertas de su propio skill. Al abrir la
+segunda tienda, los fallos que aparezcan se convierten en casos
+aquí o en el skill que corresponda, en la misma sesión.
