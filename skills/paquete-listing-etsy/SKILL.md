@@ -3,7 +3,7 @@ description: "Genera el paquete completo de listing para Etsy: título SEO, desc
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.2.0"
-  framework_version: "0.11.0"
+  framework_version: "0.11.1"
   regression_suite: "evals/"
 ---
 

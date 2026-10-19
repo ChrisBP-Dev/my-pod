@@ -4,12 +4,12 @@ description: "Conecta la API de Etsy (v3, OAuth 2.0 + PKCE) para UNA tienda: cre
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.1"
-  framework_version: "0.11.0"
+  framework_version: "0.11.1"
 ---
 
 # Conectar API de Etsy por tienda
 
-**Versión 0.1.0** (2026-10-16: extraído del montaje manual de
+**Versión 0.1.1** (origen 0.1.0, 2026-10-16: extraído del montaje manual de
 MyNightShiftShop — primera conexión real verificada).
 
 ## Principio
@@ -125,3 +125,35 @@ refrescan solos vía `scripts/etsy_auth.py` (`get_headers()` /
 archivo 0600). Todo script nuevo que hable con la API de Etsy DEBE usar
 ese helper, nunca un token leído a mano. Si un refresh falla con
 400/401, repetir el paso 2 (re-grant del dueño).
+
+## Calibraciones (mecanismo vs aplicación)
+
+(Sección agregada 2026-10-19, Propuesta 4 de la auditoría de
+adopción `docs/AUDITORIA-ADOPCION-V0110.md`: los umbrales ya
+existían dispersos en el cuerpo; aquí se declaran.)
+
+- `MECANISMO:` OAuth 2.0 + PKCE por tienda, scopes mínimos por
+  flujo, y registro de la conexión en el config de la tienda —
+  igual para cualquier tienda y cualquier proveedor OAuth.
+- `MECANISMO:` el `access_token` expira en ~1 hora y el
+  `refresh_token` rota al usarse (comportamiento de la API de
+  Etsy, verificado 2026-10-16): por eso los tokens solo se leen
+  y refrescan vía el helper, nunca a mano. Revalidar si Etsy
+  cambia la política de tokens.
+- `CALIBRACIÓN:` los valores concretos de cada conexión (shop_id,
+  user_id, scopes concedidos, rutas de archivos de credenciales)
+  viven en `data/tiendas/<id>/config.json` y en el archivo de
+  credenciales fuera del repo — nunca en este skill. Revalidar
+  al conectar una tienda nueva o al agregar un scope.
+
+## Regresión
+
+Sin suite determinista en `evals/` — **declarado** (2026-10-19,
+Propuesta 2 de la auditoría de adopción): este flujo es
+interactivo y con efectos externos (OAuth con clic del dueño,
+tokens que rotan); un fixture no puede reproducirlo sin
+credenciales reales. Lo cubre la verificación en vivo de cada
+conexión (canje → llamada de lectura → registro en el config) y
+el smoke test de los scripts que consumen los tokens. Si el
+flujo gana una parte determinista (p. ej. validación del formato
+del config), esa parte sí entra como suite en `evals/`.

@@ -1,5 +1,5 @@
 # Changelog — puerta-pinterest-pin
-Skill de app. Pineado a Rameli v0.11.0.
+Skill de app. Pineado a Rameli v0.11.1.
 ## v0.4.0 — 2026-10-18
 - **Causa (mandato del dueño):** 3 pins publicados con imagen que no coincidía con tipo/título (p028-3 y p030-3 "Close-Up" con modelo de playera; p032-5 "Folded" con tabla de tallas). La puerta vieja solo verificaba registro del asset, nunca su clase; la clase se infería por posición — inválido: el orden no es uniforme entre listings (p032: folded=-5, tabla=-10 · p034: folded=-10, tablas=-8/-9).
 - **Mapa de assets:** nuevo campo `mapa_assets` (verificado visualmente, con fuente) en `data/registro-listings.json`; sin mapa, FAIL para pins de imagen. Mapas construidos el 2026-10-18 para p028–p034 desde hojas de contacto revisadas.

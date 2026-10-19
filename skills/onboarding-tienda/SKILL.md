@@ -4,7 +4,7 @@ description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: des
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.2"
-  framework_version: "0.11.0"
+  framework_version: "0.11.1"
 ---
 
 # Onboarding de tienda POD
@@ -189,3 +189,32 @@ el reintento lo relee, no lo duplica.
 - Quemar valores de la tienda en skills o scripts.
 - Crons sin P1/P2/P3: el primer fallo externo los deja tirados.
 - Asumir endpoints o costos sin verificarlos en vivo.
+
+## Calibraciones (mecanismo vs aplicación)
+
+(Sección agregada 2026-10-19, Propuesta 4 de la auditoría de
+adopción `docs/AUDITORIA-ADOPCION-V0110.md`.)
+
+- `MECANISMO:` el recorrido por fases (0→6) con dale del dueño
+  entre fases, las conexiones por API-first, las activaciones de
+  Etsy con sus reglas (ofertas ≤30 días, sin solapar eventos) y
+  dejar los crons naciendo con los patrones de resiliencia
+  (health-check, checkpoint, reintentos acotados) — igual para
+  cualquier tienda nueva.
+- `CALIBRACIÓN:` horarios, N diario de propuestas, pins/día y mix
+  son valores de CADA tienda: se fijan en su onboarding y viven en
+  su config y en los cuerpos de sus crons (la tabla de la Fase 5
+  trae los de la tienda 29222324 como ejemplo, no como default
+  universal). Revalidar al abrir la segunda tienda: lo que solo
+  se ha probado con una tienda es calibración, no mecanismo.
+
+## Regresión
+
+Sin suite determinista en `evals/` — **declarado** (2026-10-19,
+Propuesta 2 de la auditoría de adopción): es un playbook guiado
+por fases con el dueño; su "suite" es la Fase 6 (verificación y
+cierre contra la tienda real) y el hecho de que cada artefacto
+que deja montado (crons con patrones, conexión API, config)
+hereda las suites y puertas de su propio skill. Al abrir la
+segunda tienda, los fallos que aparezcan se convierten en casos
+aquí o en el skill que corresponda, en la misma sesión.

@@ -6,7 +6,7 @@ license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.1"
-  framework_version: "0.11.0"
+  framework_version: "0.11.1"
 ---
 
 # Estratega de Pinterest
@@ -130,3 +130,14 @@ PASS no hay cola.
   universal; evita saturar tableros.
 - `CALIBRACIÓN:` no repetir asset en <30 días — umbral razonable,
   2026-10-16. Revalidar cuando haya datos de impresiones.
+
+## Regresión
+
+Sin suite determinista propia — **declarado** (2026-10-19,
+Propuesta 2 de la auditoría de adopción): la salida de este skill
+es una decisión (la parrilla), no un artefacto verificable por
+código; lo que sí es mecánico — que cada pin de la parrilla use
+asset final, keywords con fuente y URL rastreable — lo verifica
+la suite de `puerta-pinterest-pin` (15/15), que es la puerta por
+la que la parrilla pasa antes de publicarse. El juicio de la
+parrilla lo ejerce el dueño al revisar los pins publicados.

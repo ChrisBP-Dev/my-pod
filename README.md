@@ -1,12 +1,24 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.11.0** (pineado en `rameli.json`).
+App construida con Rameli **v0.11.1** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.11.1 (2026-10-19)
+
+Parche del framework (encabezado de la doctrina de workers
+declarado vigente, `bin/rameli` ejecutable, paso de estado en el
+checklist de contribuciones): cero cambios de comportamiento.
+Adoptada como Propuesta 3 de la auditoría de adopción
+(`docs/AUDITORIA-ADOPCION-V0110.md`, con el dale del dueño a
+ejecutar todas sus propuestas): pin en `rameli.json` y en el
+frontmatter de los **9 skills actuales** (la puerta legacy
+`puerta-publicacion-pod` se eliminó en la fase de mejora
+post-v0.11.0; en la migración anterior la app tenía 10 skills).
 
 ## Migración a Rameli v0.11.0 (2026-10-19)
 
 Adoptada por dale del dueño, siguiendo `rameli/MIGRACIONES.md`:
-pin en `rameli.json` y en el frontmatter de los 10 skills. El delta
+pin en `rameli.json` y en el frontmatter de los skills. El delta
 0.9.0 → 0.11.0 es aditivo y sin cambios rompientes: v0.10.0 suma el
 modelo de ejecución por workers (adoptado **por flujo**, con el
 registro en `docs/MIGRACION-RAMELI-V0110.md`) y v0.11.0 suma la
@@ -15,7 +27,7 @@ fase de mejora post-migración. Ningún dato se tocó.
 ## Migración a Rameli v0.9.0 (2026-10-18)
 
 Adoptada por dale del dueño, siguiendo `rameli/MIGRACIONES.md`:
-pin en `rameli.json` y en el frontmatter de los 10 skills, secciones
+pin en `rameli.json` y en el frontmatter de los skills, secciones
 "Calibraciones (mecanismo vs aplicación)" renombradas, terminología
 canónica (framework / aplicación / ficha) en los documentos vivos.
 El gemelo máquina de la ficha de la tienda (`config.json`) no cambió
@@ -70,12 +82,15 @@ operador original:
 
 ## Datos
 
-- `data/registro-listings.json` — listings + sus assets finales aprobados (4 listings, 44 assets).
+- `data/registro-listings.json` — registro de diseños y listings con sus assets finales aprobados (45 claves, 21 publicados completos al 2026-10-19).
 - `data/banco-keywords/` — bancos de keywords por nicho.
 - `data/cola-pins/` — pins que pasaron la puerta, en espera de publicación.
 
 ## Criterios canónicos
 
-- `CRITERIO-COLOCACION.md` — la referencia es el flat-lay aprobado del diseño.
-- `VISION-BIBLIOTECA-MOCKUPS-BORRADOR.md` — biblioteca de mockups por tienda.
-- `CAMINO-OPTIMIZADO-BORRADOR.md` — flujo end-to-end revalidado.
+- `FLUJO-PIPELINE.md` — el flujo end-to-end Printify-first + MPL vigente.
+- `CRITERIO-VIDEO.md` — criterio de los videos de listing (1080×1080, 9.5 s, zoom sin temblor).
+- `ARQUITECTURA-DATOS.md` — qué dato vive dónde (global vs por tienda) y el ciclo de vida de los activos.
+- `docs/PATRONES-RESILIENCIA.md` — health-check, checkpoints con resume y reintentos acotados.
+- `docs/CONTRATO-TIPO-PRODUCTO.md` — contrato estratega → propuestas → publicación (tipo de lote).
+- `docs/DELIMITACIONES-ADOPCION.md` — estatus declarado de lo no adoptado (capa de juicio, orquestación del runtime) y dueño del flujo comercial F7.
