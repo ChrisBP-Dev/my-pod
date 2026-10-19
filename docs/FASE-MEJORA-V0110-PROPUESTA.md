@@ -147,3 +147,15 @@ documento.
   `docs/EJECUCION-Y-RELEVO.md`.
 - **P5 — FUERA por decisión del dueño** (2026-10-19): la
   contribución al framework la ejecuta él en otro chat.
+- **P2 — CIERRE POR ELIMINACIÓN (2026-10-19, decisión del dueño):**
+  con el contexto que trajo el dueño (los mockups salen de
+  Printify desde el 2026-10-14; `FLUJO-PIPELINE.md` ya declaraba
+  esta puerta legacy y ningún flujo la invocaba), la puerta
+  `puerta-publicacion-pod` se **eliminó del sistema** en vez de
+  repararse: skill completo + `data/bases-doblada/` borrados y
+  referencias vivas limpiadas (README, `FLUJO-PIPELINE.md`,
+  `ARQUITECTURA-DATOS.md`, que además declaraba un `data/bases/`
+  ya inexistente). Doctrina del dueño: el remanente de un flujo
+  descartado no se conserva "por historial" — si algún día se
+  reintenta, se parte de cero sobre la app actual. La decisión
+  A/B de onmodel quedó sin objeto. **La fase queda CERRADA.**

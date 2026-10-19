@@ -12,9 +12,6 @@ data/
   # COMPARTIDO — catálogo del sistema, igual para todos los usuarios
   productos/          # Fichas de producto (Gildan 18000...): área de impresión,
                       #   regla de colocación. Viene de Printify, no cambia por tienda.
-  bases/              # Fotos base de prenda sin arte (por producto/color).
-                      #   La prenda física es la misma para todos.
-  bases-doblada/      # Calibraciones de doblada por producto/color.
   artes-print/        # Diseños del usuario (sus creaciones, reutilizables
                       #   en cualquier tienda).
   banco-keywords/     # Keywords (compartido).
