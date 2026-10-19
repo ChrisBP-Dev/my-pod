@@ -1,6 +1,6 @@
 ---
 name: "publicador-lote"
-description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito de aprobados, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing, videos en paralelo y nunca regenerados, fallos aislados sin bloquear el lote, y protocolo de rollback. Formaliza lo que antes ocurría por accidente."
+description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing y rollback."
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.1"

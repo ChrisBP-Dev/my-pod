@@ -1,6 +1,6 @@
 ---
 name: "estratega-tienda"
-description: "Rol de estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal que direcciona las propuestas diarias (reparto de foco, mix de productos, guía de precios, nichos) + el config máquina de tipo de producto (mpl/single/mixto) que el cron de propuestas consume."
+description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.5.1"
