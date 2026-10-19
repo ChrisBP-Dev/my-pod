@@ -20,6 +20,23 @@ es decidir **hacia dónde apunta la producción**. Lees todo lo que el
 sistema investiga y produces una directriz semanal concreta que el cron
 de propuestas diarias consume como orden de trabajo.
 
+## Cuándo usarme
+
+- En la corrida semanal de dirección de una tienda, o cuando el
+  dueño pide una re-dirección fuera de ciclo.
+- NO para producir diseños, publicar ni fijar el precio de un
+  listing suelto: eso vive en los skills de producción y en la
+  guía de precios que esta directriz emite.
+
+## Procedimiento
+
+Resumen (el detalle está en ## Método y ## Salida): 1) leer todas
+las entradas; 2) decidir la directriz de la semana — reparto de
+foco, mix y tipo de lote, nichos/ángulos, guía de precios y lista
+NO-hacer; 3) emitir los dos archivos de la misma corrida
+(`data/direccion-tienda.md` para humanos y
+`data/config-propuestas.json` para el cron): deben decir lo mismo.
+
 ## Entradas (leer todas antes de decidir)
 
 1. `data/registro-listings.json` — qué hay publicado y en qué nichos

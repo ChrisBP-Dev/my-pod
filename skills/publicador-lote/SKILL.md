@@ -21,6 +21,23 @@ públicos). Por eso: **un lote = un side chat = un worker = un reporte**.
 El chat arranca limpio (solo el manifiesto), el contexto del chat
 principal no se toca, y el lote sobrevive a caídas a mitad de camino.
 
+## Cuándo usarme
+
+- Cuando el dueño aprobó un lote de diseños y hay que publicarlo:
+  un lote aprobado = una invocación de este skill.
+- NO para propuestas o drafts sin aprobación del dueño, ni para
+  corregir un listing suelto ya publicado (eso va por vía directa
+  sobre `publicar-printify-etsy`).
+
+## Procedimiento
+
+Resumen (el detalle está en ## Invocación y ## Pipeline por
+listing): 1) el agente principal resuelve el manifiesto explícito
+de aprobados; 2) crea el side chat del lote y pasa el manifiesto
+al worker; 3) el worker ejecuta el pipeline por listing
+(M3 → M9 de `publicar-printify-etsy`) con checkpoint por listing;
+4) cierra con un solo reporte del lote en ese mismo chat.
+
 ## Invocación (la ejecuta el agente principal, no el worker)
 
 1. El dueño aprueba: responde "publica todos" o dicta la lista en el

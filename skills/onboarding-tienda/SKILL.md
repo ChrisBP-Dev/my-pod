@@ -29,6 +29,22 @@ Los patrones de resiliencia que aplican los crons están en
 `docs/PATRONES-RESILIENCIA.md` (P1 health-check, P2 checkpoints, P3
 reintentos acotados).
 
+## Cuándo usarme
+
+- Para poner en marcha una tienda nueva desde cero, o una tienda
+  existente que nunca recorrió este playbook completo.
+- NO para la operación diaria de una tienda ya operativa: eso vive
+  en los crons y skills que este onboarding deja montados.
+
+## Procedimiento
+
+Recorrer las fases en orden, sin saltarse ninguna: Fase 0 (nicho,
+identidad y creación de la tienda) → Fase 1 (descubrimiento) →
+Fase 2 (conexiones) → Fase 3 (activaciones de Etsy) → Fase 4
+(calibración de productos) → Fase 5 (crons operativos con los
+patrones P1/P2/P3) → Fase 6 (verificación y cierre). La tienda se
+declara operativa solo cuando la Fase 6 verifica el conjunto.
+
 ## Pre-requisitos
 
 - Cuentas del dueño: Printify (con tienda creada) y Etsy (con tienda

@@ -9,6 +9,8 @@ metadata:
 
 # Paquete de Listing Etsy
 
+**Versión: v0.2.0**
+
 Genera el paquete comercial completo para publicar un diseño en Etsy:
 título, descripción, 13 tags y copy de anuncio.
 
