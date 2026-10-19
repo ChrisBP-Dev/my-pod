@@ -3,14 +3,14 @@ name: "puerta-publicacion-pod"
 description: "Puerta de publicación POD: valida que un mockup esté listo — dimensiones, DPI del arte y placement del diseño contra la referencia aprobada, todo medido por código."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.2.2"
+  version: "0.2.3"
   framework_version: "0.11.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Publicación POD
 
-**Versión: v0.2.1** · Skill de referencia del framework Rameli: la primera
+**Versión: v0.2.3** · Skill de referencia del framework Rameli: la primera
 prueba de que el formato nuevo expresa una puerta real con gates en código.
 
 Ningún mockup se publica si rompe la regresión.

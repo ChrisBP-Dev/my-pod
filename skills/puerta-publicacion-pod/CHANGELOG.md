@@ -1,5 +1,21 @@
 # CHANGELOG — puerta-publicacion-pod
 
+## v0.2.3 (2026-10-19)
+- Fase de mejora P2: creadas las calibraciones de base doblada
+  `data/bases-doblada/gildan-18000-{white,sand,sportgrey}.json`
+  (escala 1.30, calibrada contra el golden set aprobado; el
+  directorio estaba declarado en ARQUITECTURA-DATOS.md pero los
+  archivos nunca llegaron a la app limpia — los 3 casos G1 de
+  doblada fallaban "sin calibración de base doblada"). Validado:
+  golden PASS ×3, negativos FAIL ×3 en todo el rango 1.23–1.36.
+- La ruta de la calibración se resuelve desde la raíz de la app
+  (sin `~/workspace/my-pod` quemado en el código).
+- Diagnóstico G1 onmodel (queda ABIERTO, decisión del dueño):
+  el método de gap por color no es válido en fotos on-model
+  reales (pelo/piel/fondo saturan desde el cuello; el cuello
+  default 30% no coincide con la base ≈40%) — los 3 golden están
+  visualmente bien colocados (gap real ≈16%).
+
 ## v0.1.0 (2026-10-13)
 - Nace como piloto del formato Rameli nuevo: valida mockups antes de
   publicar (dimensiones 2000×2000, DPI del arte ≥ 300, placement del diseño
