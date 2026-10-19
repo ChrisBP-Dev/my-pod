@@ -8,8 +8,9 @@ según `rameli/MIGRACIONES.md` y el CHANGELOG v0.9.0 → v0.11.0 del
 framework (v0.10.0: ejecución por workers + contribuciones, aditivo;
 v0.11.0: fase de mejora post-migración; sin cambios rompientes, sin
 cambios de datos ni de comportamiento). Delta confirmado además con
-`rameli migrate --to 0.11.0`. **Fusión a main: pendiente del dale
-explícito del dueño en el chat de la migración.**
+`rameli migrate --to 0.11.0`. **Fusión a main: ejecutada el
+2026-10-19 con el dale explícito del dueño en el chat de la
+migración; rama borrada (local y remota) al cerrar.**
 
 ## Alcance aplicado
 
