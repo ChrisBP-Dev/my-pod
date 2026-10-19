@@ -4,7 +4,7 @@ description: "Publica un lote de diseños APROBADOS por el dueño: un side chat 
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.1"
-  framework_version: "0.9.0"
+  framework_version: "0.11.0"
 ---
 
 # Publicador de lote POD
