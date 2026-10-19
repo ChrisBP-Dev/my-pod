@@ -1,5 +1,8 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.7.3 (2026-10-19)
+- El registro de listings y la directriz viven ahora en `data/tiendas/29222324/` (reorden de datos por tienda, 2026-10-19); punteros actualizados en el skill y el checklist.
+
 ## v0.7.1 (2026-10-16)
 - **Propuestas como MPL drafts (orden del dueño, causa raíz 2026-10-16):** M2 calibrado — las propuestas diarias llegan ensambladas como MPL draft (un draft por diseño); la revisión del dueño verifica placement por item dentro del editor del MPL. El cron de propuestas ahora incluye el ensamblaje (M1+M4 antes de la revisión).
 ## v0.7.0 (2026-10-16)

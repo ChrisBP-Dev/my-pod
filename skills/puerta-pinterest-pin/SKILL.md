@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.4.0"
+  version: "0.4.1"
   framework_version: "0.12.1"
   regression_suite: "evals/"
   gate_script: "scripts/verificar-pin.py"
@@ -61,7 +61,7 @@ ahora vive en el `mapa_assets` del registro y en el gate.
 ## Mapa de assets (obligatorio antes de pinear un listing)
 
 Cada listing con pins de imagen necesita `mapa_assets` en
-`data/registro-listings.json`: `{basename: clase}` con clase ∈
+`data/tiendas/<tienda-id>/registro-listings.json`: `{basename: clase}` con clase ∈
 {hero-lifestyle, lifestyle-alt, lifestyle, front-flat,
 folded-decorado, modelo-playera, tee-flat, close-up, tabla-tallas},
 más `mapa_assets_fuente` citando la evidencia. Se construye UNA vez
@@ -92,7 +92,7 @@ momento (queda como paso del flujo de publicación, no de Pinterest).
    la app) y la copia de este skill son byte-idénticas y la suite lo verifica
    (la divergencia entre copias era deuda registrada desde v0.3.1 y
    se cerró en v0.4.0). El registro de assets finales vive en
-   `data/registro-listings.json`; el banco de keywords Pinterest en
+   `data/tiendas/<tienda-id>/registro-listings.json`; el banco de keywords Pinterest en
    `data/banco-keywords/`. Suite de calibración:
    `evals/test-regression.sh` — incluye como casos conocidos-malos los
    TRES pins defectuosos reales de 2026-10-17/18 y como buenos sus
@@ -124,7 +124,7 @@ momento (queda como paso del flujo de publicación, no de Pinterest).
   y corresponde al asset (el video se usa tal cual, sin recortar —
   decisión del dueño 2026-10-16).
 - **url_listing**: debe coincidir EXACTAMENTE con la `url` registrada
-  para el slug en `data/registro-listings.json`. Si la tienda está
+  para el slug en `data/tiendas/<tienda-id>/registro-listings.json`. Si la tienda está
   inscrita en Share & Save, esa URL es el link rastreable
   (`<tienda>.etsy.com/...`); todos los pines usan el formato
   rastreable, sin excepción.
@@ -188,7 +188,7 @@ No hay conector API de Pinterest. La publicación se hace por navegador:
    - Tableros por nicho/intención, no genéricos
    - Para POD (reproducible): link directo al listing está bien
    - Formato vertical 2:3 rinde mejor; si el asset es cuadrado se publica tal cual
-4. Registrar URLs de pins publicados en `data/registro-listings.json`.
+4. Registrar URLs de pins publicados en `data/tiendas/<tienda-id>/registro-listings.json`.
 
 ## Criterio de pins (investigación 2026-10-14)
 

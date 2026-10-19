@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.1"
+  version: "0.5.2"
   framework_version: "0.12.1"
   regression_suite: "evals/"
 ---
@@ -216,7 +216,7 @@ al dueño, en un chat nuevo, **por diseño**, con este bloque:
 
 El porqué se escribe al generar (sale de la directriz y del
 brief del diseño, no se inventa al entregar) y se guarda en el
-registro del diseño (`porque` en `data/registro-listings.json`)
+registro del diseño (`porque` en `data/tiendas/<tienda-id>/registro-listings.json`)
 para que lo hereden la producción y el paquete comercial. Sin
 aprobación del dueño en esta entrega, el diseño no entra a
 producción (flujo v2 en `FLUJO-PIPELINE.md`).

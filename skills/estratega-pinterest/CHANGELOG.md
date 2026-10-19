@@ -1,4 +1,7 @@
 # Changelog — estratega-pinterest
+
+## v0.1.2 (2026-10-19)
+- Insumos reubicados a la carpeta de la tienda: `data/tiendas/<tienda-id>/registro-listings.json`, `direccion-tienda.md` y `ledger-ventas.json` (reorden 2026-10-19).
 Skill de app. Pineado a Rameli v0.12.1.
 
 ## v0.1.1 — 2026-10-18

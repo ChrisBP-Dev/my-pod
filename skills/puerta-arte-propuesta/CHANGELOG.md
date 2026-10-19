@@ -1,4 +1,7 @@
 # Changelog — puerta-arte-propuesta
+
+## v0.5.2 (2026-10-19)
+- El registro del diseño (`porque`) vive en `data/tiendas/<tienda-id>/registro-listings.json` (reorden de datos por tienda, 2026-10-19).
 Skill de app. Pineado a Rameli v0.12.1.
 
 ## v0.5.1 — 2026-10-19 (flujo de propuestas v2, idea del dueño)

@@ -88,7 +88,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Visibilidad de variantes = "Only show in stock variants and hide out of stock"
 
 ## Registro
-- [ ] IDs de Printify y Etsy en `data/registro-listings.json`, `tipo: "mpl"`, componentes listados
+- [ ] IDs de Printify y Etsy en `data/tiendas/<tienda-id>/registro-listings.json`, `tipo: "mpl"`, componentes listados
 - [ ] Estado = "publicado_completo"
 - [ ] Calendario de descuentos: si `data/tiendas/<id>/config.json → calendario_descuentos` tiene ventanas vigentes que apliquen a este listing, agregarlo (navegador: Marketing → Sales and discounts → editar la oferta/evento → incluir el listing). Nota: las ofertas con 'All listings' incluyen futuros listings automáticamente; los sales events pueden requerir alta manual
 
@@ -111,7 +111,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Production partner = Printify; perfil de envío; políticas
 - [ ] **Caja de personalización** configurada (nativa de Etsy) si el diseño la lleva
 - [ ] Precio final verificado por variación en el listing vivo
-- [ ] Registro en `data/registro-listings.json`, `tipo: "single"`, estado "publicado_completo"
+- [ ] Registro en `data/tiendas/<tienda-id>/registro-listings.json`, `tipo: "single"`, estado "publicado_completo"
 - [ ] Calendario de descuentos: si `data/tiendas/<id>/config.json → calendario_descuentos` tiene ventanas vigentes que apliquen a este listing, agregarlo (navegador: Marketing → Sales and discounts → editar la oferta/evento → incluir el listing). Nota: las ofertas con 'All listings' incluyen futuros listings automáticamente; los sales events pueden requerir alta manual
 
 ---

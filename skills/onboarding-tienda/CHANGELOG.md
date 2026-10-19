@@ -1,5 +1,8 @@
 # CHANGELOG — onboarding-tienda
 
+## v0.1.3 (2026-10-19)
+- La estructura de tienda nueva nace con su operación dentro de `data/tiendas/<tienda-id>/` (dirección, config, registro, ledger, checkpoints, investigaciones/, revisiones/) — reorden 2026-10-19.
+
 ## v0.1.2 (2026-10-16)
 - Referencia explícita al canon `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md`
   (API-first) en la fase de conexiones.

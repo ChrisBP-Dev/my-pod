@@ -3,13 +3,13 @@ name: "onboarding-tienda"
 description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento, conexiones (Etsy API, Printify), activaciones de Etsy, calibración de productos y crons operativos con patrones de resiliencia."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.2"
+  version: "0.1.3"
   framework_version: "0.12.1"
 ---
 
 # Onboarding de tienda POD
 
-**Versión 0.1.2** (2026-10-16: destilado de la puesta en marcha real de
+**Versión 0.1.3** (2026-10-16: destilado de la puesta en marcha real de
 MyNightShiftShop — todo lo aprendido en el camino, convertido en
 procedimiento reproducible).
 
@@ -161,13 +161,13 @@ Crear el set estándar de crons (ajustar horarios/N por tienda):
 |---|---|---|
 | propuestas diarias | diario, hora de revisión −X | P1→P2→P3; genera N propuestas según `tipo_lote`; ensambla MPL si aplica; reporte en chat nuevo |
 | pinterest diario | diario | pins según mix; gate `puerta-pinterest-pin`; URLs rastreables Share & Save |
-| estratega semanal | semanal | `estratega-tienda`: `data/direccion-tienda.md` (vigencia 7 días) |
+| estratega semanal | semanal | `estratega-tienda`: `data/tiendas/<tienda-id>/direccion-tienda.md` (vigencia 7 días) |
 | revisión viernes | semanal | paquetes SEO vs ledger |
 | trends | semanal | señales de nicho para la estratega |
 | watchdog | según criticidad | vigila trabajos largos delegados |
 
 Cada cron lleva en su body: **P1** (health-check antes de trabajar),
-**P2** (checkpoints con resume en `data/estado-<cron>.json`,
+**P2** (checkpoints con resume en `data/tiendas/<tienda-id>/estado-<cron>.json`,
 gitignoreado), **P3** (reintentos acotados: 1 reintento en ~2h, tope
 3/día, luego escala al dueño). El body del cron ES el procedimiento;
 el reintento lo relee, no lo duplica.

@@ -15,18 +15,32 @@ data/
   artes-print/        # Diseños del usuario (sus creaciones, reutilizables
                       #   en cualquier tienda).
   banco-keywords/     # Keywords (compartido).
-  direccion-tienda.md # Directriz semanal de la estratega (humano): reparto,
-                      #   mix, precios, NO-hacer. Vigencia 7 días.
-  config-propuestas.json  # Directriz semanal MÁQUINA (contrato
-                      #   docs/CONTRATO-TIPO-PRODUCTO.md v1.0): tipo_lote
-                      #   (mpl/single/mixto), componentes, temas, precios.
-                      #   Lo escribe la estratega; lo lee el cron diario.
 
-  # POR TIENDA — cada tienda tiene su propia presentación
+  # POR TIENDA — todo lo que es operación de UNA tienda vive aquí
   tiendas/
     <tienda-id>/        # Ej: 29222324 (Tú Dale POD - Store)
-      config.json        # Nombre, IDs de Printify/Etsy, etc.
-      modelos/           # Modelos de ESTA tienda (5 canónicos)
+      config.json        # Nombre, IDs de Printify/Etsy, precios,
+                        #   calendario de descuentos, Share & Save.
+      direccion-tienda.md  # Directriz semanal de la estratega (humano):
+                        #   reparto, mix, precios, NO-hacer. Vigencia 7 días.
+      config-propuestas.json  # Directriz semanal MÁQUINA (contrato
+                        #   docs/CONTRATO-TIPO-PRODUCTO.md v1.0): tipo_lote
+                        #   (mpl/single/mixto), componentes, temas, precios.
+                        #   Lo escribe la estratega; lo lee el cron diario.
+      registro-listings.json  # Registro de listings de la tienda
+                        #   (propuestas, drafts, publicados, porqués).
+      ledger-ventas.json  # Ledger de ventas y performance por listing.
+      registro-flujo.md   # Estado de los flujos de la tienda.
+      investigaciones/    # Investigación semanal y trend-scan, por fecha
+                        #   (<fecha>-investigacion.md / <fecha>-tendencias.md).
+                        #   La estratega lee las más recientes de aquí.
+      revisiones/         # Actas de revisión (viernes), por fecha.
+      estado-propuestas.json / estado-pinterest.json /
+      estado-publicacion.json  # Checkpoints de ejecución (locales,
+                        #   gitignoreados): viven junto a su tienda.
+      modelos/           # (LEGADO del sistema de mockups propios,
+                        #   eliminado 2026-10-14: sin uso vivo.)
+                        # Modelos de ESTA tienda (5 canónicos)
         <modelo-id>/      # latina-30, afroamericana-38, latino-24, rubia-22, pelirroja-24
           referencia.webp  # Cara canónica
           ficha.json       # Descripción, edad aparente
@@ -75,12 +89,31 @@ accesible por la app.
   tienda. Por eso su ruta NO lleva tienda, deliberadamente.
 - **Por tienda** (`data/tiendas/<id>/`): config/ficha (precios,
   esquema de mockups, calendario), estrategia y registro de flujo.
-- **Hueco conocido (2026-10-19):** `registro-listings.json` y los
-  `estado-*.json` viven HOY en la raíz de `data/` — alcance global
-  de facto con una sola tienda. Al abrir la segunda tienda se
-  escopan a `data/tiendas/<id>/` en ese mismo cambio; hasta
-  entonces se declaran aquí para que ningún lector los crea
-  compartidos por diseño.
+- **Hueco CERRADO (2026-10-19, decisión del dueño — no se espera a
+  la segunda tienda):** `direccion-tienda.md`,
+  `config-propuestas.json`, `registro-listings.json`,
+  `ledger-ventas.json` y los `estado-*.json` vivían en la raíz de
+  `data/` siendo operación de UNA tienda. Desde hoy viven en
+  `data/tiendas/<id>/` (árbol de arriba), y todos los punteros
+  vivos (skills, scripts, crons, ruta de lectura) apuntan ahí.
+  Las investigaciones y las actas, que vivían solo en el log de
+  memoria fuera de la app, tienen casa propia en la tienda
+  (`investigaciones/`, `revisiones/`).
+- **Escribir = commitear en la misma corrida (regla 2026-10-19):**
+  todo documento vivo de una tienda que un agente escriba
+  (directriz, config, registro, ledger, investigación, acta) se
+  commitea y pushea en la corrida que lo escribe, con verificación
+  (`git status -sb` sin "ahead"). Un documento vivo sin commitear
+  es trabajo sin respaldar y la causa raíz de registros divergentes
+  entre frentes (caso real: la directriz del 2026-10-19 quedó un
+  día entero sin guardar).
+- **Versiones anteriores de documentos vivos:** la directriz y el
+  config son UN archivo vivo por tienda; al rotar se sobrescriben
+  y la versión anterior queda en el historial de git (ese es su
+  archivo — no se crean copias `direccion-anterior.md` ni
+  carpetas paralelas). Investigaciones y actas son fechadas por
+  nombre y se acumulan en su carpeta: son el insumo histórico que
+  la estratega lee, no se sobrescriben ni se borran al rotar.
 
 ## Ciclo de vida de los activos (2026-10-19, criterio del dueño)
 

@@ -2,8 +2,8 @@
 """Sincroniza el registro local contra la verdad de Printify (solo lectura de Printify).
 
 Problema que resuelve (falla repetida 2026-10-18): una corrida crea drafts en
-Printify por navegador pero el registro local (data/registro-listings.json) y el
-checkpoint (data/estado-propuestas.json) quedan atrás porque registrar era un
+Printify por navegador pero el registro local (data/tiendas/29222324/registro-listings.json) y el
+checkpoint (data/tiendas/29222324/estado-propuestas.json) quedan atrás porque registrar era un
 paso manual del agente, diferido al final de la corrida. Si la corrida se corta,
 Printify y el registro divergen y nadie sabe qué existe de verdad.
 

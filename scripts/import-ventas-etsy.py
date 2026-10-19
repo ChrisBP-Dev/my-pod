@@ -2,7 +2,7 @@
 """
 import-ventas-etsy.py — Feedback loop de ventas para My POD (M2).
 
-Vía A (principal): Etsy Open API v3 → data/ledger-ventas.json
+Vía A (principal): Etsy Open API v3 → data/tiendas/29222324/ledger-ventas.json
 Vía B (conciliación manual): CSV "Order Items" de Etsy Stats → data/ventas-csv/
 
 HALLAZGO DE INVESTIGACIÓN (2026-10-16): la API v3 NO tiene endpoint de
@@ -16,8 +16,8 @@ ETSY_SHARED_SECRET) o de ~/.config/my-pod/etsy-api.json (modo 0600),
 que crea el modo --auth. El refresh_token vive ahí mismo.
 
 Modos:
-  --init        Crea data/ledger-ventas.json semilla desde
-                data/registro-listings.json (25 listings, ceros).
+  --init        Crea data/tiendas/29222324/ledger-ventas.json semilla desde
+                data/tiendas/29222324/registro-listings.json (25 listings, ceros).
   --auth        Flujo OAuth manual: imprime la URL de autorización, el dueño
                 pega el código, el script intercambia por tokens y los guarda.
   --pull        Corrida incremental: receipts nuevos (watermark) + snapshot

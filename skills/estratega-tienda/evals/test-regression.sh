@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Suite de contrato de estratega-tienda (creada 2026-10-19, Propuesta 2
 # de la auditoría de adopción docs/AUDITORIA-ADOPCION-V0110.md).
-# La salida máquina de la estratega es data/config-propuestas.json,
+# La salida máquina de la estratega es data/tiendas/29222324/config-propuestas.json,
 # cuyo contrato vive en docs/CONTRATO-TIPO-PRODUCTO.md. Esta suite
 # valida el config VIGENTE contra ese contrato: campos obligatorios,
 # tipo_lote válido, componentes presentes según el track, reparto y
@@ -13,7 +13,7 @@ set -u
 SKILL="$(cd "$(dirname "$0")/.." && pwd)"
 APP="$(cd "$SKILL/../.." && pwd)"
 
-python3 - "$APP/data/config-propuestas.json" << 'EOF'
+python3 - "$APP/data/tiendas/29222324/config-propuestas.json" << 'EOF'
 import json, sys
 from datetime import date
 ok = fail = 0

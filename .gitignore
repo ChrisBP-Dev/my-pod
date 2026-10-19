@@ -5,6 +5,6 @@ data/cola-pins/
 *.mp4
 *.mp3
 data/ventas-csv/*.csv
-data/estado-propuestas.json
-data/estado-pinterest.json
-data/estado-publicacion.json
+data/tiendas/29222324/estado-propuestas.json
+data/tiendas/29222324/estado-pinterest.json
+data/tiendas/29222324/estado-publicacion.json

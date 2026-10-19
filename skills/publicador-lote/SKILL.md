@@ -3,13 +3,13 @@ name: "publicador-lote"
 description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing y rollback."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.2"
+  version: "0.1.3"
   framework_version: "0.12.1"
 ---
 
 # Publicador de lote POD
 
-**Versión 0.1.2** (2026-10-19: watchdog obligatorio al lanzar el
+**Versión 0.1.3** (2026-10-19: watchdog obligatorio al lanzar el
 lote — fase de mejora P4; 0.1.1: el flujo post-aprobación existía y
 funcionaba, pero sin vehículo diseñado — corría donde el dueño
 respondiera, sin checkpoints. Este skill lo formaliza: un side chat por
@@ -78,7 +78,7 @@ tiene vía API disponible, se usa la vía API. La conexión es por tienda
   (`https://printify.com/app/` → 200) y de la API de Etsy. Si un
   servicio está caído: no se empieza, se reporta, y el agente principal
   re-dispara cuando vuelva (a demanda: sin reintentos programados).
-- **P2 — Checkpoints:** `data/estado-publicacion.json`
+- **P2 — Checkpoints:** `data/tiendas/<tienda-id>/estado-publicacion.json`
   (gitignoreado):
   `{"lote_actual": {"fecha": "YYYY-MM-DD", "manifiesto": [slugs],
   "fases_ok": {"slug": ["seo","mockups","video","publicado",
@@ -90,7 +90,7 @@ tiene vía API disponible, se usa la vía API. La conexión es por tienda
 - **Watchdog (obligatorio desde 2026-10-19, fase de mejora P4):**
   al lanzar el lote, el agente principal monta una vigilancia
   programada que verifica el avance contra
-  `data/estado-publicacion.json` y le despierta si el lote se
+  `data/tiendas/<tienda-id>/estado-publicacion.json` y le despierta si el lote se
   frena o falla en silencio (la notificación del worker no es
   confiable — doctrina en `docs/EJECUCION-Y-RELEVO.md`). El
   watchdog se retira al cerrar el lote. Un lote sin watchdog es

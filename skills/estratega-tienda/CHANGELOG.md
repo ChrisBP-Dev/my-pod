@@ -1,5 +1,8 @@
 # CHANGELOG — estratega-tienda
 
+## v0.5.2 (2026-10-19)
+- La directriz y el config viven ahora en `data/tiendas/<tienda-id>/` (reorden de datos por tienda, decisión del dueño 2026-10-19) y la salida declara la regla de commit en la misma corrida.
+
 ## v0.5.1 (2026-10-16)
 - **Share & Save:** la estratega ahora conoce el programa (4% devolución de comisión por link rastreable, 6.5% en intro; no entra en el presupuesto de descuento D; margen por canal usa 2.5% de transaction fee en órdenes atribuidas).
 ## v0.5.0 (2026-10-16)

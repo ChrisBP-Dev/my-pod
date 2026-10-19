@@ -3,14 +3,14 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.7.2"
+  version: "0.7.3"
   framework_version: "0.12.1"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.7.2** (0.7.0 — Estándar API-vs-navegador (canon central en docs/, este skill apunta); tablas de precios por talla leídas del config de tienda (doctrina precio con colchón 2026-10-16))
+**Versión 0.7.3** (0.7.0 — Estándar API-vs-navegador (canon central en docs/, este skill apunta); tablas de precios por talla leídas del config de tienda (doctrina precio con colchón 2026-10-16))
 **Versión 0.6.1** — Esquema de mockups/videos movido al config de tienda
 (organización a nivel tienda, 2026-10-15). Printify es la fuente de verdad;
 no generamos mockups propios.
@@ -63,7 +63,7 @@ TODOS los productos del listing + mockups y videos nuevos (regla suya
 ## Composición estándar del MPL (regla de tienda 2026-10-15)
 
 Default (la estratega puede definir otra composición en
-`data/config-propuestas.json` — ver `docs/CONTRATO-TIPO-PRODUCTO.md`):
+`data/tiendas/<tienda-id>/config-propuestas.json` — ver `docs/CONTRATO-TIPO-PRODUCTO.md`):
 
 - **Sudadera:** Gildan 18000, Printify Choice (blueprint 49, provider 99).
 - **Playera:** Bella+Canvas 3001, Printify Choice.
@@ -107,7 +107,7 @@ arriba). Ejemplo tienda 29222324 (doctrina "precio con colchón",
 - Producto nuevo: consultar costos por talla en la API, calcular recargos
   con la fórmula, registrar la tabla en `data/productos/<producto>.json`.
 - El precio base S–XL lo define la directriz vigente de la estratega
-  (`data/direccion-tienda.md` / `data/config-propuestas.json`).
+  (`data/tiendas/<tienda-id>/direccion-tienda.md` / `data/tiendas/<tienda-id>/config-propuestas.json`).
 
 **Regla anti-desincronización (2026-10-15, orden del dueño):** el precio se
 fija UNA sola vez, en el draft de Printify, ANTES de publicar. NUNCA se
@@ -275,7 +275,7 @@ Nada se da por sentado. Verificar contra el listing vivo:
   of stock" (oculta combos que el proveedor no ofrece).
 
 ### M9. Registrar
-- Guardar IDs de Printify y Etsy en `data/registro-listings.json`
+- Guardar IDs de Printify y Etsy en `data/tiendas/<tienda-id>/registro-listings.json`
   con `tipo: "mpl"` y la lista de componentes.
 
 ### M10. Publicidad (Pinterest)
@@ -306,7 +306,7 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
    categoría, atributos, production partner = Printify, envío,
    políticas, **caja de personalización** (nativa de Etsy) si aplica,
    precios por variación verificados.
-9. **Registrar** en `data/registro-listings.json` con `tipo: "single"`.
+9. **Registrar** en `data/tiendas/<tienda-id>/registro-listings.json` con `tipo: "single"`.
 10. **Pinterest** (`puerta-pinterest-pin`).
 
 ---
@@ -327,7 +327,7 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
   a Printify.
 - **Modelo de estados**: draft "unpublished" en Printify = NO está en
   Etsy. Publicado = tiene ID de Etsy (external_id) y título real.
-  La fuente de verdad del estado es `data/registro-listings.json`,
+  La fuente de verdad del estado es `data/tiendas/<tienda-id>/registro-listings.json`,
   con `tipo: "mpl" | "single"`.
 - **MPL:** los componentes single NO se publican por separado una vez
   que pertenecen a un MPL (ver §M1, regla).
@@ -350,7 +350,7 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
 - **MECANISMO** (este skill): el flujo es igual para cualquier producto y
   diseño. Printify-first siempre. El track (MPL/single) lo decide el flujo
   bifurcado (§0).
-- **TIENDA** (`data/tiendas/<id>/config.json` + `data/config-propuestas.json`):
+- **TIENDA** (`data/tiendas/<id>/config.json` + `data/tiendas/<tienda-id>/config-propuestas.json`):
   la composición del MPL, los precios base, el esquema de mockups/videos y
   el tipo de lote los define la tienda (vía la estratega), NO este skill.
   Agregar un producto nuevo = ficha en `data/productos/` + esquema en el

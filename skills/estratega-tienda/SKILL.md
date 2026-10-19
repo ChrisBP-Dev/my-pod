@@ -3,14 +3,14 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.1"
+  version: "0.5.2"
   framework_version: "0.12.1"
   regression_suite: "evals/"
 ---
 
 # Estratega de tienda POD
 
-**Versión 0.5.1** (0.4.0, 2026-10-16: portabilidad de la estrategia de precios —
+**Versión 0.5.2** (0.4.0, 2026-10-16: portabilidad de la estrategia de precios —
 mecanismo + calibración en el skill, valores en el config de cada tienda;
 0.3.0: entrada #7 ledger de ventas — feedback loop M2).
 
@@ -35,12 +35,12 @@ Resumen (el detalle está en ## Método y ## Salida): 1) leer todas
 las entradas; 2) decidir la directriz de la semana — reparto de
 foco, mix y tipo de lote, nichos/ángulos, guía de precios y lista
 NO-hacer; 3) emitir los dos archivos de la misma corrida
-(`data/direccion-tienda.md` para humanos y
-`data/config-propuestas.json` para el cron): deben decir lo mismo.
+(`data/tiendas/<tienda-id>/direccion-tienda.md` para humanos y
+`data/tiendas/<tienda-id>/config-propuestas.json` para el cron): deben decir lo mismo.
 
 ## Entradas (leer todas antes de decidir)
 
-1. `data/registro-listings.json` — qué hay publicado y en qué nichos
+1. `data/tiendas/<tienda-id>/registro-listings.json` — qué hay publicado y en qué nichos
    (fíjate en `tipo: "mpl" | "single"` de cada listing).
 2. Último reporte de `equipo-pod-investigacion-semanal` y de
    `pod-trend-scan` (logs del goal o memoria diaria).
@@ -51,7 +51,7 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
 5. Calendario estacional real: calcula los días restantes a cada fecha
    (Thanksgiving = 4º jueves de noviembre; Navidad = 25-dic; etc.).
 6. `data/productos/*.json` — productos disponibles y sus calibraciones.
-7. `data/ledger-ventas.json` — **ledger de ventas y performance por listing**
+7. `data/tiendas/<tienda-id>/ledger-ventas.json` — **ledger de ventas y performance por listing**
    (M2, 2026-10-16): ventas por listing (receipts API), favoritos
    (`num_favorers`, snapshot diario), views como proxy **sin verificar**
    (la API v3 no expone visits/views/fuentes — hueco documentado en el
@@ -155,15 +155,24 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
 
 ## Salida (dos archivos, misma corrida)
 
-1. `data/direccion-tienda.md` (humano): `vigencia_desde` /
+1. `data/tiendas/<tienda-id>/direccion-tienda.md` (humano): `vigencia_desde` /
    `vigencia_hasta` (7 días exactos), reparto de foco, mix de productos,
    nichos/ángulos, guía de precios, lista NO-hacer con motivos,
    supuestos y qué invalidaría la directriz.
-2. `data/config-propuestas.json` (máquina): el contrato de
+2. `data/tiendas/<tienda-id>/config-propuestas.json` (máquina): el contrato de
    `docs/CONTRATO-TIPO-PRODUCTO.md` v1.0 — `tipo_lote`, componentes o
    producto, reparto mixto, `flujo_bifurcado: true`, temas, precios,
    vigencia, notas (overrides del dueño). Los dos archivos deben decir
    lo mismo; el JSON es lo que el cron lee.
+3. **Commit en la misma corrida (regla 2026-10-19):** la corrida que
+   escribe la directriz y el config los **commitea y pushea en el
+   acto** (`git status -sb` sin "ahead" al verificar). Una directriz
+   escrita y no commiteada es trabajo sin respaldar y fuente de
+   divergencia entre frentes; la versión anterior queda en el
+   historial de git — ese es el archivo de directrices pasadas, no
+   se crean copias paralelas. Lo mismo aplica a todo documento vivo
+   de la tienda que cualquier agente escriba (registro, ledger,
+   investigaciones, actas): escribir = commitear en la misma corrida.
 
 ## Reglas
 

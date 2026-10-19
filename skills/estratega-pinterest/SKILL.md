@@ -5,13 +5,13 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   framework_version: "0.12.1"
 ---
 
 # Estratega de Pinterest
 
-**Versión 0.1.1** (2026-10-18: elegibilidad por CLASE de asset del
+**Versión 0.1.2** (2026-10-18: elegibilidad por CLASE de asset del
 mapa verificado — la parrilla se arma desde el `mapa_assets` del
 listing, nunca por posición del archivo) · 0.1.0 (2026-10-16).
 Rama de publicidad: Pinterest es un
@@ -47,14 +47,14 @@ Pinterest (distintas a las de Etsy: descubrimiento, no transacción).
 
 ## Entradas (leer todas antes de decidir)
 
-1. `data/registro-listings.json` — listings `publicado_completo`, sus
+1. `data/tiendas/<tienda-id>/registro-listings.json` — listings `publicado_completo`, sus
    `assets_finales`, `url`, `videos_pendientes`.
-2. `data/direccion-tienda.md` — foco de la semana (reparto de temas).
+2. `data/tiendas/<tienda-id>/direccion-tienda.md` — foco de la semana (reparto de temas).
 3. `data/banco-keywords/pinterest-<nicho>.md` — keywords de Pinterest
    del nicho. Si no existe el banco Pinterest del nicho, se crea con el
    método documentado ahí antes de pinear (nunca se reutiliza el banco
    de Etsy: el lenguaje de descubrimiento es distinto).
-4. `data/ledger-ventas.json` — cuando tenga datos: prioriza listings
+4. `data/tiendas/<tienda-id>/ledger-ventas.json` — cuando tenga datos: prioriza listings
    con ventas/favoritos (lo que tracciona, se empuja).
 5. `data/pins-publicados/` — qué ya se pineó: ningún asset se repite
    en <30 días.

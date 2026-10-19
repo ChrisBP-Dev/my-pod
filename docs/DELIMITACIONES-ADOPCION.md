@@ -20,8 +20,8 @@ re-narre sería prosa duplicada. Su ruta, completa:
 |---|---|---|
 | `scripts/precios_comunes.py` + `scripts/precios-variacion-api.py` | Aplica la tabla de precios por variación vía API de Etsy (GET → cambia solo precios → PUT) | `--no-op` como prueba de seguridad antes de `--aplicar` |
 | `scripts/verificar-precios.py` | Verifica que los precios vivos coincidan con la tabla esperada | PASS/FAIL por listing |
-| `scripts/import-ventas-etsy.py` | Ledger de ventas M2: receipts, favoritos, reviews → `data/ledger-ventas.json` | Watermark incremental; conciliación CSV opcional |
-| `scripts/sincronizar-registro-printify.py` | Reconcilia `data/registro-listings.json` contra Printify (IDs reales) | Sale con código 2 ante CONFLICTO: el consumidor debe detenerse |
+| `scripts/import-ventas-etsy.py` | Ledger de ventas M2: receipts, favoritos, reviews → `data/tiendas/29222324/ledger-ventas.json` | Watermark incremental; conciliación CSV opcional |
+| `scripts/sincronizar-registro-printify.py` | Reconcilia `data/tiendas/29222324/registro-listings.json` contra Printify (IDs reales) | Sale con código 2 ante CONFLICTO: el consumidor debe detenerse |
 | Ofertas y calendario de descuentos | Viven en `data/tiendas/<id>/config.json` (`calendario_descuentos`) y se operan por navegador (la API no las expone) | Revisión del dueño; ver `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
 
 **Qué manda:** el config de la tienda (precios, calendario) y la

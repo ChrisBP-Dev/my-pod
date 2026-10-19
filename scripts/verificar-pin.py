@@ -5,7 +5,7 @@ verificar-pin.py — Puerta mecánica de pins de Pinterest (v2, 2026-10-18).
 ÚNICA implementación del gate: la copia en
 skills/puerta-pinterest-pin/scripts/verificar-pin.py es byte-idéntica
 (deuda de divergencia cerrada el 2026-10-18). APP_ROOT se resuelve
-subiendo directorios hasta encontrar data/registro-listings.json, así
+subiendo directorios hasta encontrar data/tiendas/*/registro-listings.json, así
 el mismo archivo funciona desde scripts/ y desde el skill.
 
 Valida un pin.json contra el registro de listings y el banco de
@@ -62,6 +62,7 @@ Calibración (2026-10-18, suite evals/test-regression.sh):
 
 import argparse
 import json
+import glob
 import os
 import re
 import sys
@@ -70,15 +71,15 @@ import sys
 def find_app_root():
     d = os.path.dirname(os.path.abspath(__file__))
     for _ in range(6):
-        if os.path.isfile(os.path.join(d, "data", "registro-listings.json")):
+        if glob.glob(os.path.join(d, "data", "tiendas", "*", "registro-listings.json")):
             return d
         d = os.path.dirname(d)
-    raise SystemExit("ERROR: no se encontró data/registro-listings.json "
+    raise SystemExit("ERROR: no se encontró data/tiendas/*/registro-listings.json "
                      "subiendo desde el script")
 
 
 APP_ROOT = find_app_root()
-REGISTRO_PATH = os.path.join(APP_ROOT, "data", "registro-listings.json")
+REGISTRO_PATH = sorted(glob.glob(os.path.join(APP_ROOT, "data", "tiendas", "*", "registro-listings.json")))[0]
 VIDEOS_DIR = os.path.join(APP_ROOT, "data", "videos")
 
 

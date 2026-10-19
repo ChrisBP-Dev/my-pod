@@ -13,7 +13,7 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   (el MPL nativo NO soporta personalización). Producto individual.
 - **Diseño NO personalizable** → **track MPL**: sudadera Gildan 18000 +
   playera Bella+Canvas 3001 en un solo listing (composición default;
-  la estratega puede definir otra en `data/config-propuestas.json`).
+  la estratega puede definir otra en `data/tiendas/29222324/config-propuestas.json`).
 - Detalle operativo: `skills/publicar-printify-etsy/SKILL.md`.
 - Contrato estratega → propuestas → publicación:
   `docs/CONTRATO-TIPO-PRODUCTO.md`.
@@ -45,7 +45,7 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   por separado.
 - **Track single:** un draft del producto indicado.
 - El tipo de lote (mpl/single/mixto) lo define la estratega en
-  `data/config-propuestas.json` (dinámico por semana).
+  `data/tiendas/29222324/config-propuestas.json` (dinámico por semana).
 - Posición inicial: centrada, 78% ancho, ~14% desde arriba (ajustable).
 - Detección de drafts: agrupar por diseño (título real); no duplicar
   diseños que ya tienen sus componentes pendientes (ver contrato §E).
@@ -114,7 +114,7 @@ lifestyles diferentes, hero = lifestyle).
   (videos, caja de personalización si aplica).
 - Subir videos directo en Etsy.
 - Verificar título, descripción, tags.
-- Registrar IDs en `data/registro-listings.json` (con `tipo: "mpl"|"single"`).
+- Registrar IDs en `data/tiendas/29222324/registro-listings.json` (con `tipo: "mpl"|"single"`).
 
 ### 8. Publicidad (Pinterest)
 - Skill `puerta-pinterest-pin`: valida pins antes de publicar.
@@ -142,13 +142,13 @@ su ruta en el mismo cambio.**
 
 | Tarea / flujo | Lecturas mínimas gobernantes |
 |---|---|
-| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/direccion-tienda.md` (directriz vigente) · `data/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) |
-| **Propuestas — etapa 2: drafts de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/registro-listings.json` (qué diseños ya tienen componentes) |
+| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) |
+| **Propuestas — etapa 2: drafts de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen componentes) |
 | **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` · `CRITERIO-VIDEO.md` (criterio y puerta de video) |
-| **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/registro-listings.json` (lo hereda el paquete) |
+| **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/tiendas/29222324/registro-listings.json` (lo hereda el paquete) |
 | **Publicación por lote** (F2) | `skills/publicador-lote/SKILL.md` · `skills/publicar-printify-etsy/SKILL.md` (checklist de publicación) · este doc (§Etapa 7) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
 | **Pinterest diario** (F3) | `skills/estratega-pinterest/SKILL.md` (parrilla) · `skills/puerta-pinterest-pin/SKILL.md` (puerta del pin) · este doc (§Etapa 8) · `data/tiendas/29222324/config.json` (links rastreables Share & Save) |
-| **Dirección semanal** (F4: estratega e investigación) | `skills/estratega-tienda/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · salidas que produce: `data/direccion-tienda.md` y `data/config-propuestas.json` |
+| **Dirección semanal** (F4: estratega e investigación) | `skills/estratega-tienda/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · insumos: la investigación y el trend-scan más recientes en `data/tiendas/29222324/investigaciones/` y el acta más reciente en `data/tiendas/29222324/revisiones/` · salidas que produce: `data/tiendas/29222324/direccion-tienda.md` y `data/tiendas/29222324/config-propuestas.json` (se commitean en la misma corrida) |
 | **Operación comercial** (F7: precios, ledger, ofertas) | `docs/DELIMITACIONES-ADOPCION.md` (§1: dueño y ruta completa del flujo, scripts incluidos) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` · `data/tiendas/29222324/config.json` (precios y calendario de descuentos) |
 | **Conectar Etsy API de una tienda** (F6) | `skills/conectar-etsy-api/SKILL.md` · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
 | **Onboarding de tienda nueva** (F5) | `skills/onboarding-tienda/SKILL.md` · este doc (§Crear tienda desde cero) · `docs/PATRONES-RESILIENCIA.md` (cómo nacen sus crons) |
@@ -182,7 +182,7 @@ Cada tienda tiene su propia configuración. Los criterios de una tienda no conta
 ## Selección de productos y tipo de lote (2026-10-15)
 
 **Principio:** el producto y el tipo de lote NO están hardcodeados.
-La estratega los decide cada semana en `data/config-propuestas.json`
+La estratega los decide cada semana en `data/tiendas/29222324/config-propuestas.json`
 (contrato: `docs/CONTRATO-TIPO-PRODUCTO.md`).
 
 ### Cómo se agrega un producto
@@ -197,4 +197,4 @@ La estratega los decide cada semana en `data/config-propuestas.json`
 - Etsy: caja nativa de personalización (gratis, fulfillment manual).
 - Automatización sin intervención (Teeinblue/Customily/HelloCustom) y
   flujo Canva (template + API): en investigación, spikes pendientes del
-  dale del dueño. Ver `data/direccion-tienda.md`.
+  dale del dueño. Ver `data/tiendas/29222324/direccion-tienda.md`.

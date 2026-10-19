@@ -11,7 +11,7 @@ calibraciones de ESTA aplicación.
 - Cada tienda lleva su registro de flujo versionado junto a su
   ficha: `data/tiendas/<id>/registro-flujo.md` (plantilla:
   `rameli/templates/registro-flujo.md`).
-- Los checkpoints `data/estado-*.json` siguen siendo la capa fina
+- Los checkpoints `data/tiendas/<tienda-id>/estado-*.json` siguen siendo la capa fina
   local (gitignoreada): NO se duplican en el registro; el registro
   resume por unidad y apunta al checkpoint.
 - El registro se actualiza al cerrar cada unidad, no en tiempo
@@ -21,7 +21,7 @@ calibraciones de ESTA aplicación.
 
 - Todo lote de publicación lanzado con `publicador-lote` lleva
   watchdog: una vigilancia programada que verifica el avance
-  contra `data/estado-publicacion.json` y despierta al
+  contra `data/tiendas/29222324/estado-publicacion.json` y despierta al
   orquestador si el lote se frena o falla en silencio.
 - El watchdog se monta AL LANZAR el lote y se retira AL CERRARLO.
   Un lote sin watchdog es un lote mal lanzado.

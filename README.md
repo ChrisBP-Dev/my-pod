@@ -58,14 +58,14 @@ históricos conservan la terminología de su época.
 | Skill | Versión | Qué puerta |
 |---|---|---|
 | `conectar-etsy-api` | v0.1.1 | Conexión API Etsy por tienda: Seller App → OAuth PKCE → tokens → registro |
-| `estratega-tienda` | v0.5.1 | Dirección semanal de tienda: reparto de foco, mix, guía de precios, NO-hacer |
-| `estratega-pinterest` | v0.1.1 | Parrilla de Pinterest: 5 pins/día, mix por listing |
-| `onboarding-tienda` | v0.1.2 | Playbook de puesta en marcha: de cero a tienda operativa |
+| `estratega-tienda` | v0.5.2 | Dirección semanal de tienda: reparto de foco, mix, guía de precios, NO-hacer |
+| `estratega-pinterest` | v0.1.2 | Parrilla de Pinterest: 5 pins/día, mix por listing |
+| `onboarding-tienda` | v0.1.3 | Playbook de puesta en marcha: de cero a tienda operativa |
 | `paquete-listing-etsy` | v0.2.0 | Paquete comercial del listing: título, descripción, tags, keywords |
-| `publicar-printify-etsy` | v0.7.2 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
-| `publicador-lote` | v0.1.2 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
-| `puerta-arte-propuesta` | v0.5.1 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
-| `puerta-pinterest-pin` | v0.4.0 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
+| `publicar-printify-etsy` | v0.7.3 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
+| `publicador-lote` | v0.1.3 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
+| `puerta-arte-propuesta` | v0.5.2 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
+| `puerta-pinterest-pin` | v0.4.1 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
 
 ## Principios operativos (para quien opere esta app)
 
@@ -81,7 +81,7 @@ operador original:
   calibraciones en `docs/EJECUCION-Y-RELEVO.md`): el
   publicador de lote ya opera con un worker por lote y los crons
   diarios operan como workers con checkpoint local
-  (`data/estado-*.json`); las puertas y las tareas de 1–2 pasos van
+  (`data/tiendas/<tienda-id>/estado-*.json`); las puertas y las tareas de 1–2 pasos van
   por vía directa. Cada tienda lleva su registro de flujo en
   `data/tiendas/<id>/registro-flujo.md`.
 - **Puesta en marcha** (`skills/onboarding-tienda`): playbook de cero
@@ -101,7 +101,7 @@ operador original:
 
 ## Datos
 
-- `data/registro-listings.json` — registro de diseños y listings con sus assets finales aprobados (45 claves, 21 publicados completos al 2026-10-19).
+- `data/tiendas/29222324/registro-listings.json` — registro de diseños y listings con sus assets finales aprobados (45 claves, 21 publicados completos al 2026-10-19).
 - `data/banco-keywords/` — bancos de keywords por nicho.
 - `data/cola-pins/` — pins que pasaron la puerta, en espera de publicación.
 

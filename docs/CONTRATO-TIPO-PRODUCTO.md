@@ -10,14 +10,14 @@ de cada skill afectado.
 
 | Parte | Escribe | Lee | No hace |
 |---|---|---|---|
-| `estratega-tienda` (cron semanal) | `data/config-propuestas.json` + `data/direccion-tienda.md` | research, márgenes, actas | No toca listings ni crea drafts |
-| `equipo-pod-propuestas-diarias` (cron diario) | drafts en Printify según el config | `data/config-propuestas.json` (primero), `data/direccion-tienda.md` (fallback) | No redefine el tipo de producto; no publica |
+| `estratega-tienda` (cron semanal) | `data/tiendas/29222324/config-propuestas.json` + `data/tiendas/29222324/direccion-tienda.md` | research, márgenes, actas | No toca listings ni crea drafts |
+| `equipo-pod-propuestas-diarias` (cron diario) | drafts en Printify según el config | `data/tiendas/29222324/config-propuestas.json` (primero), `data/tiendas/29222324/direccion-tienda.md` (fallback) | No redefine el tipo de producto; no publica |
 | `publicar-printify-etsy` (skill) | listings publicados | `tipo` del registro + config vigente | No cambia la composición sin dale |
 
-## Formato: `data/config-propuestas.json`
+## Formato: `data/tiendas/29222324/config-propuestas.json`
 
 JSON (parseable por código, editable a mano). La estratega lo escribe
-junto con `data/direccion-tienda.md` en cada corrida semanal.
+junto con `data/tiendas/29222324/direccion-tienda.md` en cada corrida semanal.
 
 ```json
 {

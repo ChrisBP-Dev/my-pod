@@ -1,5 +1,8 @@
 # CHANGELOG — publicador-lote
 
+## v0.1.3 (2026-10-19)
+- El checkpoint del lote vive en `data/tiendas/<tienda-id>/estado-publicacion.json` (reorden de datos por tienda, 2026-10-19).
+
 ## v0.1.2 (2026-10-19)
 - Watchdog obligatorio al lanzar el lote: vigilancia programada
   sobre `data/estado-publicacion.json` que despierta al
