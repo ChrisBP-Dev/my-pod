@@ -176,3 +176,23 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
   aplica directo.
 - Nada de teoría: cada decisión cita su fuente (reporte, fecha, número).
 - No edites MEMORY.md. No toques listings vivos.
+
+## Calibraciones (mecanismo vs aplicación)
+
+(Sección agregada 2026-10-19, Propuesta 4 de la auditoría de
+adopción `docs/AUDITORIA-ADOPCION-V0110.md`: el cuerpo ya discutía
+mecanismo y calibración en prosa; aquí queda declarado.)
+
+- `MECANISMO:` la fórmula de precio con colchón
+  (P ≥ (C + 0.25 + M) / ((1−D)×0.905)), la regla de ventana
+  estacional (un tema necesita ≥21 días desde publicación para
+  traccionar), el criterio de matar/escalar (60+ días, 0 ventas,
+  0 señales) y la vigencia de la directriz (7 días exactos) —
+  universales para una tienda POD en Etsy. Revalidar el ≥21 días
+  si cambia la indexación de Etsy.
+- `CALIBRACIÓN:` los valores de ESTA tienda (piso de margen,
+  porcentajes de oferta y cupones, precios por producto, reparto
+  de foco) viven en `data/tiendas/<id>/config.json` y en la
+  directriz vigente — el ejemplo con cifras del cuerpo es de la
+  tienda 29222324 (2026-10-16) y NO es regla. Revalidar en cada
+  directriz semanal y al abrir otra tienda.

@@ -134,3 +134,19 @@ El agente principal lo resume al dueño en el chat donde aprobó.
 - Correr el lote en el chat principal.
 - Un worker por listing (diez briefs, diez reportes, diez sesiones de
   navegador contra la misma cuenta).
+
+## Calibraciones (mecanismo vs aplicación)
+
+(Sección agregada 2026-10-19, Propuesta 4 de la auditoría de
+adopción `docs/AUDITORIA-ADOPCION-V0110.md`.)
+
+- `MECANISMO:` un lote = un worker = un manifiesto explícito del
+  dueño; checkpoint por listing con resume; fallos aislados por
+  listing (nunca bloquean el lote); watchdog obligatorio al
+  lanzar y retirado al cerrar (calibración de la app en
+  `docs/EJECUCION-Y-RELEVO.md`). Revalidar el watchdog si cambia
+  el runtime de vigilancia.
+- `CALIBRACIÓN:` el tamaño del lote y su composición los fija el
+  manifiesto de cada lote (decisión del dueño por lote), no este
+  skill; el pipeline por listing (M3→M9) y sus puertas son los
+  de `publicar-printify-etsy` vigentes al lanzarse el lote.
