@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
   framework_version: "0.9.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.4.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.5.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -21,17 +21,28 @@ después de 12 mockups.
 - Al recibir la propuesta del diseño (PNG), antes de aprobar el arte.
 - Si FAIL, el diseño vuelve a corrección. No se genera flat-lay.
 
-## Procedimiento estándar (2026-10-15, endurecido)
+## Procedimiento estándar (2026-10-15, endurecido 2026-10-18)
 
 1. **Generar** el PNG con el brief (fondo transparente, sin backdrop).
+1b. **Composición sobre el CRUDO** SIEMPRE, antes de tocarlo:
+    `scripts/verificar-arte.py --archivo CRUDO.png --es-original`.
+    Si el contenido toca el borde del lienzo de generación
+    (`composicion_toca_borde`), el diseño nació cortado o un paso
+    previo lo desbordó: NO se procesa — se regenera o se adjudica
+    visualmente (un trazo que llega al borde ACABADO, p. ej. una línea
+    EKG que cruza el diseño, es motivo, no truncamiento; lo decide el
+    ojo, no la puerta — corrección del dueño 2026-10-18 tras el lote
+    de drafts mutilados p038-p057).
 2. **Limpiar** SIEMPRE: `scripts/limpiar-fondo.py --archivo ARTE.png`
    (elimina blanco puro global — método canónico; no es opcional).
 2b. **Recortar** SIEMPRE: `scripts/verificar-arte.py --archivo ARTE.png
-   --autotrim --salida ARTE.png` (recorta al contenido real alfa≥128
-   +4px; sin este paso el PNG conserva el aire del lienzo de generación
-   y el diseño entra chico a Printify — corrección del dueño 2026-10-17).
+   --autotrim --salida ARTE.png` (recorta al bbox SEGURO +4px — ver
+   Puertas mecánicas; sin este paso el PNG conserva el aire del lienzo
+   de generación y el diseño entra chico a Printify — corrección del
+   dueño 2026-10-17).
 3. **Correr** `scripts/verificar-arte.py` (`--archivo`, `--ancho-pulgadas`,
-   `--exigir-margen-zoom` en el flujo de propuestas).
+   `--exigir-margen-zoom` en el flujo de propuestas) y, cuando exista
+   el crudo, **`--original CRUDO.png`** para la fidelidad de recorte.
 4. **PASS** → el arte pasa a aprobación humana (ojo: counters).
    **FAIL** → se devuelve con el criterio violado. Si falla
    `sin_blanco_puro`, repetir paso 2 y re-verificar.
@@ -61,7 +72,39 @@ después de 12 mockups.
   jugar". Si falla → escalar (`scripts/upscale-arte-fsrcnn.py`) y
   re-verificar ANTES de crear el draft. Nunca entregar al dueño un
   arte sin margen de zoom.
-- **Reparación** `--autotrim`: recorta al bbox + 4px y re-verifica.
+- **composicion_completa** (con `--es-original`, sobre el crudo, ANTES
+  de cualquier recorte): el contenido no puede tocar el borde del
+  lienzo de generación. Se mide con el **bbox seguro** (unión de
+  componentes reales: área ≥150px y min(ancho,alto) ≥8px — filtra
+  slivers y specks de borde que no son diseño) por lado: margen ≥
+  máx(6px, 0.4% del lado) en los cuatro lados. Contenido en el borde =
+  truncamiento de generación o desborde de un paso posterior.
+  Calibración 2026-10-18: 16 crudos completos del lote ≥0.86% por
+  lado → PASS; los 16 prints mutilados tocan el borde (0px) → FAIL.
+- **contenido_intacto** (finales): el bbox seguro del archivo final no
+  puede tocar el borde del lienzo (≥2px por lado). Este flujo es
+  recorte-al-contenido + pad: si el contenido toca el borde del
+  archivo, algo fue rebanado en el camino. Calibración: mutilados 0px
+  en los 4 lados (16/16); buenos conocidos ≥12px.
+- **fidelidad_recorte** (con `--original CRUDO`): el final debe
+  contener TODO el crudo — desviación de aspecto del contenido
+  ≤1.5% y pérdida en la banda externa (3%, rejilla 200×200) ≤2% por
+  lado. Calibración: pares fieles 16/16 PASS (pérdida 0.0, aspecto
+  ≤0.5%); pares mutilados 10/16 FAIL aquí y 16/16 FAIL en
+  contenido_intacto. Cobertura honesta: las amputaciones finas y
+  simétricas de pocos px no las separa ninguna métrica de píxeles a
+  esa magnitud (medido) — se previenen en el mecanismo (autotrim
+  seguro) y se hacen visibles con contenido_intacto.
+- **Reparación** `--autotrim`: recorta al **bbox seguro** + 4px y
+  re-verifica (la salida declara `"autotrim_bbox": "seguro"`).
+  **Corrección raíz 2026-10-18:** antes recortaba al bbox por MASA
+  (0.05% acumulado), que amputa los extremos de baja masa — puntas de
+  guirnaldas, hojas finas, iconos pequeños, la base de un círculo —
+  y así llegaron 8 diseños cortados a los drafts sin que ninguna
+  puerta lo viera (el contenido que quedaba no tocaba el borde del
+  crudo; el recorte mismo era el corte). Si el bbox seguro no se
+  puede calcular (sin cv2/scipy), cae al de masa y lo declara
+  (`"masa_fallback"`).
 - **sin_blanco_puro**: blanco puro ≤0.3% (método canónico 2026-10-15).
 - **dpi**: ≥300 al ancho de impresión del producto.
 - **dimensiones**: lado menor ≥3000px (archivo de impresión).
@@ -123,6 +166,15 @@ después de 12 mockups.
   Revalidar si cambia el producto (otro ancho de impresión).
 - `MECANISMO:` verifier-repair — el recorte es determinista y seguro,
   la puerta lo repara y re-verifica en vez de solo bloquear.
+- `CALIBRACIÓN:` bbox seguro COMP_AREA_MIN 150px / COMP_DIM_MIN 8px;
+  composición COMP_MARGEN_MIN máx(6px, 0.4%); toque de borde del
+  final TOQUE_BORDE_MIN 2px; fidelidad FID_ASPECTO_MAX 1.5% /
+  FID_BANDA_MAX 2% — calibrado 2026-10-18 contra el lote real
+  p038-p057 (16 crudos completos, 16 prints mutilados, 16 finales
+  corregidos verificados) + canónico vitals (margen seguro 24-50px).
+  Detalle y cobertura honesta en CHANGELOG v0.5.0. Revalidar si un
+  diseño legítimo trae elementos reales menores que el filtro de
+  componentes (motas, estrellas sueltas <150px).
 
 ## Reglas con motivo
 

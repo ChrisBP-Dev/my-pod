@@ -41,17 +41,60 @@ Gates mecánicos (código):
      >=300 DPI al ancho máximo de colocación (ancho nominal x
      ZOOM_HEADROOM=1.20). Si falla: escalar el arte
      (scripts/upscale-arte-fsrcnn.py) y re-verificar ANTES del draft.
+ 10. composicion_completa (SOLO con --es-original, sobre el CRUDO de
+     generación, ANTES de cualquier recorte — corrección 2026-10-18):
+     el contenido que toca el borde del lienzo original es señal de
+     truncamiento (la generación cortó el diseño, o un paso posterior
+     lo desbordó). Se mide con el bbox SEGURO (componentes reales, ver
+     bbox_seguro) por lado: cada margen debe ser >= max(6px, 0.4% del
+     lado). Calibración 2026-10-18 (lote p038-p057): los 16 crudos
+     completos dejan >= 0.86% por lado; los 16 prints mutilados tocan
+     el borde (margen seguro 0) en los CUATRO lados. Un elemento que
+     llega al borde con trazo ACABADO (motivo de diseño, p. ej. una
+     línea EKG que cruza) se adjudica VISUALMENTE — la puerta marca,
+     el humano decide; no se asume completo ni cortado.
+ 11. contenido_intacto (finales): el bbox seguro del archivo final NO
+     puede tocar el borde del lienzo (margen seguro >= 2px por lado).
+     Este flujo es recorte-al-contenido + pad: si el contenido toca el
+     borde del archivo, algo fue rebanado. Calibración: prints
+     mutilados del lote = 0px en los 4 lados (16/16); buenos conocidos
+     todos >= 12px (v2 corregidos = su pad de 12px; vitals canónico
+     24-50px; p036/p037 126-258px).
+ 12. fidelidad_recorte (SOLO con --original <crudo>): el archivo final
+     debe contener TODO el contenido del crudo. Dos mediciones
+     deterministas sobre los bbox seguros: (a) el aspecto del contenido
+     final vs el del crudo no puede desviarse > 1.5% (un recorte
+     anisotrópico deforma); (b) pérdida por banda: normalizando ambas
+     máscaras a su bbox seguro en una rejilla 200x200, el contenido del
+     crudo en su banda externa (3%) debe tener contraparte en el final
+     (tolerancia 1 celda); pérdida > 2% en cualquier lado = FAIL.
+     Calibración 2026-10-18: pares fieles (crudo -> v2 corregido)
+     pérdida 0.0 en los 16 y aspecto <= 0.5%; pares mutilados: esta
+     puerta caza 10/16 (los desbordes tipo fill y los recortes con
+     pérdida de banda/aspecto). Los 6 restantes (amputaciones finas
+     del trim por masa y el desborde más leve, p052) no los separa
+     esta métrica a esa magnitud (medido: el registro por template
+     tiene piso de ruido ~0.5%/lado, igual que las pérdidas leves) —
+     pero los 16/16 caen en contenido_intacto (gate 11: tocan el
+     borde del archivo) y la clase se previene en el MECANISMO:
+     --autotrim usa el bbox SEGURO. No se declara cobertura que no hay.
 
-Reparación: --autotrim --salida <png> recorta al bbox + 4px y verifica
-el resultado (verifier-repair). Limpieza: scripts/limpiar-fondo.py
+Reparación: --autotrim --salida <png> recorta al bbox SEGURO + 4px
+(antes: bbox por masa 0.05% — amputaba extremos de baja masa: hojas
+finas, guirnaldas, iconos; causa raíz del lote A 2026-10-18) y
+verifica el resultado (verifier-repair). Si el bbox seguro no se
+puede calcular (sin cv2/scipy), cae al bbox por masa y lo declara en
+la salida ("autotrim_bbox"). Limpieza: scripts/limpiar-fondo.py
 elimina el blanco puro global (ver método canónico en SKILL.md).
 
 Gate humano (no lo cubre el código):
   - counters: agujeros de letras (a, e, o, P...) sin fondo metido.
 
 Uso:
+  verificar-arte.py --archivo crudo.png --es-original
   verificar-arte.py --archivo arte.png --ancho-pulgadas 10.5
   verificar-arte.py --archivo arte.png --autotrim --salida arte-trim.png
+  verificar-arte.py --archivo arte.png --original crudo.png
 
 Salida JSON {"veredicto": "PASS"|"FAIL", "criterio_violado": ...}.
 Exit 0 = PASS, 1 = FAIL, 2 = error de uso.
@@ -86,6 +129,19 @@ BLANCO_SPREAD_MAX = 45     # max-min <= esto (un color saturado no es "blanco")
 BLANCO_INTERIOR_MAX = 8.0  # % del bbox: más que esto = fondo sin limpiar (FAIL)
 BLANCO_ADJUDICAR = 2.0     # % del bbox: entre esto y el max = adjudicación visual
 # (ASPECTO_MAX eliminado 2026-10-15: el aspecto no bloquea — corrección suya)
+# --- bbox SEGURO y puertas de composición/fidelidad (2026-10-18) ---
+COMP_AREA_MIN = 150   # px: un componente menor es ruido/speck, no diseño
+COMP_DIM_MIN = 8      # px: min(ancho, alto) del componente — filtra los
+                      # slivers de borde (p. ej. el speck 144x4 de p041,
+                      # residuo de borde que NO es contenido cortado)
+COMP_MARGEN_MIN_PX = 6     # margen seguro mínimo por lado en el crudo
+COMP_MARGEN_MIN_PCT = 0.4  # % del lado (el tope efectivo es el mayor)
+TOQUE_BORDE_MIN = 2   # px: margen seguro mínimo del FINAL por lado
+FID_ASPECTO_MAX_PCT = 1.5  # desviación de aspecto crudo->final tolerada
+FID_BANDA_MAX = 0.02  # fracción del contenido de la banda externa que
+                      # puede faltar en el final (pares fieles = 0.0)
+FID_GRID = 200        # rejilla de normalización para la banda
+FID_BANDA_PCT = 3.0   # ancho de la banda externa, % del lado
 
 
 def bbox_contenido(im):
@@ -125,6 +181,126 @@ def bbox_contenido(im):
         a = im.getchannel("A").point(
             lambda v: 255 if v >= ALFA_CONTENIDO else 0)
         return a.getbbox()
+
+
+def mascara_contenido(im):
+    """Máscara booleana del contenido (numpy), para alfa o para opaco.
+
+    - Con transparencia real (fracción de alfa<250 apreciable): alfa>=128.
+    - Opaco (crudo de generación sobre fondo sólido): distancia RGB al
+      color de fondo (mediana de las 4 esquinas) > 40. Sirve para fondos
+      claros u oscuros; solo se usa para MEDIR márgenes/extensión."""
+    import numpy as np
+    arr = np.array(im)
+    alfa = arr[..., 3]
+    if float((alfa < 250).mean()) > 0.001:
+        return alfa >= ALFA_CONTENIDO
+    rgb = arr[..., :3].astype(float)
+    h, w = rgb.shape[:2]
+    p = min(24, h // 4, w // 4)
+    esquinas = np.concatenate([
+        rgb[:p, :p].reshape(-1, 3), rgb[:p, -p:].reshape(-1, 3),
+        rgb[-p:, :p].reshape(-1, 3), rgb[-p:, -p:].reshape(-1, 3)])
+    fondo = np.median(esquinas, axis=0)
+    return np.sqrt(((rgb - fondo) ** 2).sum(axis=2)) > 40
+
+
+def _stats_componentes(mask):
+    """Stats (l, t, w, h, area) por componente conexo. cv2 -> scipy ->
+    None (sin librería de componentes, el bbox seguro no es calculable
+    y las puertas que lo necesitan lo declaran, no lo inventan)."""
+    try:
+        import cv2
+        n, _lab, stats, _c = cv2.connectedComponentsWithStats(
+            mask.astype("uint8"), 8)
+        return [(int(stats[i, cv2.CC_STAT_LEFT]), int(stats[i, cv2.CC_STAT_TOP]),
+                 int(stats[i, cv2.CC_STAT_WIDTH]), int(stats[i, cv2.CC_STAT_HEIGHT]),
+                 int(stats[i, cv2.CC_STAT_AREA])) for i in range(1, n)]
+    except ImportError:
+        pass
+    try:
+        from scipy import ndimage
+        lab, n = ndimage.label(mask)
+        out = []
+        for i, sl in enumerate(ndimage.find_objects(lab), start=1):
+            if sl is None:
+                continue
+            hh = sl[0].stop - sl[0].start
+            ww = sl[1].stop - sl[1].start
+            out.append((int(sl[1].start), int(sl[0].start), int(ww), int(hh),
+                        int((lab[sl] == i).sum())))
+        return out
+    except ImportError:
+        return None
+
+
+def bbox_seguro(im):
+    """BBox del contenido REAL por componentes: unión de los componentes
+    con área >= COMP_AREA_MIN y min(ancho, alto) >= COMP_DIM_MIN.
+
+    A diferencia del bbox por masa (que recorta hasta acumular 0.05% y
+    AMPUTA los extremos de baja masa: la punta de una guirnalda, una
+    hoja fina, un icono pequeño), el bbox seguro conserva TODO
+    componente real — es el bbox que el ojo ve. Devuelve (l, t, r, b)
+    o None si no hay componentes que califiquen o no se pudo calcular."""
+    mask = mascara_contenido(im)
+    stats = _stats_componentes(mask)
+    if not stats:
+        return None
+    kept = [s for s in stats
+            if s[4] >= COMP_AREA_MIN and min(s[2], s[3]) >= COMP_DIM_MIN]
+    if not kept:
+        return None
+    l = min(s[0] for s in kept)
+    t = min(s[1] for s in kept)
+    r = max(s[0] + s[2] for s in kept)
+    b = max(s[1] + s[3] for s in kept)
+    return (l, t, r, b)
+
+
+def margenes_de_bbox(bbox, w, h):
+    l, t, r, b = bbox
+    return {"izq": l, "arr": t, "der": w - r, "aba": h - b}
+
+
+def _normalizada(mask, bbox):
+    """Máscara recortada a su bbox y reescalada a FID_GRID x FID_GRID
+    (bool, umbral 0.35 tras interpolar): base de la pérdida por banda."""
+    import numpy as np
+    from PIL import Image as _Im
+    l, t, r, b = bbox
+    crop = (mask[t:b, l:r].astype("uint8") * 255)
+    img = _Im.fromarray(crop, "L").resize((FID_GRID, FID_GRID), _Im.BILINEAR)
+    return np.array(img) >= int(0.35 * 255)
+
+
+def _dilatar3(m):
+    """Dilatación 3x3 (tolerancia de 1 celda en la banda)."""
+    import numpy as np
+    p = np.pad(m, 1)
+    out = np.zeros_like(m)
+    for dy in range(3):
+        for dx in range(3):
+            out |= p[dy:dy + m.shape[0], dx:dx + m.shape[1]]
+    return out
+
+
+def perdida_por_banda(mask_o, bbox_o, mask_f, bbox_f):
+    """Fracción del contenido del crudo en su banda externa sin
+    contraparte en el final, por lado. Pares fieles miden 0.0."""
+    A = _normalizada(mask_o, bbox_o)
+    B = _dilatar3(_normalizada(mask_f, bbox_f))
+    banda = max(1, int(round(FID_GRID * FID_BANDA_PCT / 100.0)))
+    res = {}
+    zonas = {"izq": A[:, :banda], "der": A[:, -banda:],
+             "arr": A[:banda, :], "aba": A[-banda:, :]}
+    zonas_b = {"izq": B[:, :banda], "der": B[:, -banda:],
+               "arr": B[:banda, :], "aba": B[-banda:, :]}
+    for lado, zona in zonas.items():
+        tot = int(zona.sum())
+        res[lado] = round(float((zona & ~zonas_b[lado]).sum()) / tot, 4) \
+            if tot else 0.0
+    return res
 
 
 def blancos_interiores(im, bbox):
@@ -168,6 +344,33 @@ def verificar(im, formato, a):
     g1 = formato == "PNG" and "A" in im.getbands()
     gates["formato"] = {"pass": g1, "formato": formato}
     violado = violado or (None if g1 else "formato_invalido")
+    # Modo --es-original: SOLO composición completa sobre el crudo.
+    # El crudo es opaco o trae aire por diseño; las puertas de final
+    # (fondo_limpio, recorte, dpi...) no aplican aquí.
+    if getattr(a, "es_original", False):
+        w0, h0 = im.size
+        bs0 = bbox_seguro(im)
+        if bs0 is None:
+            gates["composicion_completa"] = {
+                "pass": False, "motivo": "bbox_seguro_no_calculable"}
+            violado = violado or "composicion_no_evaluable"
+        else:
+            marg0 = margenes_de_bbox(bs0, w0, h0)
+            med["margenes_seguros_px"] = marg0
+            med["margenes_seguros_pct"] = {
+                k: round(100.0 * v / (w0 if k in ("izq", "der") else h0), 2)
+                for k, v in marg0.items()}
+            tope_x = max(COMP_MARGEN_MIN_PX, COMP_MARGEN_MIN_PCT / 100.0 * w0)
+            tope_y = max(COMP_MARGEN_MIN_PX, COMP_MARGEN_MIN_PCT / 100.0 * h0)
+            fallan = [k for k in ("izq", "der") if marg0[k] < tope_x] \
+                + [k for k in ("arr", "aba") if marg0[k] < tope_y]
+            g10 = not fallan
+            gates["composicion_completa"] = {
+                "pass": g10, "lados_que_tocan": fallan,
+                "minimo_px": COMP_MARGEN_MIN_PX,
+                "minimo_pct": COMP_MARGEN_MIN_PCT}
+            violado = violado or (None if g10 else "composicion_toca_borde")
+        return gates, violado, med
     alfa = im.getchannel("A")
     w, h = im.size
     # G2: esquinas transparentes
@@ -235,6 +438,51 @@ def verificar(im, formato, a):
         g8 = bool(pct_puro <= 0.3)
     gates["sin_blanco_puro"] = {"pass": g8, "maximo_pct": 0.3}
     violado = violado or (None if g8 else "blanco_puro_fondo_sin_limpiar")
+    # G11: contenido intacto — el bbox SEGURO del final no puede tocar
+    # el borde del lienzo (flujo recorte-al-contenido + pad: tocar el
+    # borde = algo fue rebanado). Calibración 2026-10-18: mutilados
+    # 0px en los 4 lados (16/16); buenos conocidos >= 12px.
+    bs = bbox_seguro(im)
+    if bs is None:
+        gates["contenido_intacto"] = {
+            "pass": True, "motivo": "sin_componentes_calificados"}
+        med["margenes_seguros_px"] = None
+    else:
+        marg_s = margenes_de_bbox(bs, w, h)
+        med["margenes_seguros_px"] = marg_s
+        tocan = [k for k, v in marg_s.items() if v < TOQUE_BORDE_MIN]
+        g11 = not tocan
+        gates["contenido_intacto"] = {"pass": g11, "lados_que_tocan": tocan,
+                                       "minimo_px": TOQUE_BORDE_MIN}
+        violado = violado or (None if g11 else "contenido_toca_borde")
+    # G12: fidelidad de recorte contra el crudo (solo con --original):
+    # aspecto del contenido + pérdida por banda externa. Si no se puede
+    # verificar, NO pasa (fidelidad no demostrada != fidelidad).
+    orig_path = getattr(a, "original", None)
+    if orig_path:
+        try:
+            oim = Image.open(orig_path).convert("RGBA")
+        except Exception:
+            oim = None
+        bso = bbox_seguro(oim) if oim is not None else None
+        if oim is None or bs is None or bso is None:
+            gates["fidelidad_recorte"] = {
+                "pass": False, "motivo": "original_ilegible_o_sin_bbox_seguro"}
+            violado = violado or "fidelidad_no_verificable"
+        else:
+            ao = (bso[2] - bso[0]) / max(1, (bso[3] - bso[1]))
+            af = (bs[2] - bs[0]) / max(1, (bs[3] - bs[1]))
+            desv = abs(ao - af) / ao * 100.0
+            perd = perdida_por_banda(mascara_contenido(oim), bso,
+                                     mascara_contenido(im), bs)
+            med["fidelidad_desviacion_aspecto_pct"] = round(desv, 2)
+            med["fidelidad_perdida_banda"] = perd
+            g12 = desv <= FID_ASPECTO_MAX_PCT \
+                and max(perd.values()) <= FID_BANDA_MAX
+            gates["fidelidad_recorte"] = {
+                "pass": g12, "aspecto_max_pct": FID_ASPECTO_MAX_PCT,
+                "banda_max": FID_BANDA_MAX}
+            violado = violado or (None if g12 else "fidelidad_recorte_perdida")
     # G7: aspecto (INFORMATIVO, no bloquea — corrección suya 2026-10-15)
     # Los diseños altos están permitidos; el criterio va en la COLOCACIÓN
     # (scale-to-fit en publicar-printify-etsy): el diseño debe verse
@@ -272,6 +520,14 @@ def main():
                          "(el dueño agranda la colocación al revisar)")
     ap.add_argument("--autotrim", action="store_true")
     ap.add_argument("--salida", default=None)
+    ap.add_argument("--es-original", action="store_true",
+                    help="modo crudo: solo composición completa (el "
+                         "contenido no puede tocar el borde del lienzo "
+                         "de generación); correr ANTES de procesar")
+    ap.add_argument("--original", default=None,
+                    help="crudo de origen: activa fidelidad_recorte "
+                         "(el final debe contener todo el contenido "
+                         "del crudo: aspecto + banda externa)")
     a = ap.parse_args()
 
     try:
@@ -285,10 +541,18 @@ def main():
         return 1
 
     reparado = None
+    autotrim_bbox = None
     if a.autotrim:
         if not a.salida:
             ap.error("--autotrim requiere --salida")
-        bbox = bbox_contenido(im)
+        # Recorte al bbox SEGURO (componentes reales): el bbox por masa
+        # amputaba extremos de baja masa (lote A, 2026-10-18). Si el
+        # seguro no se puede calcular, se cae al de masa y se declara.
+        bbox = bbox_seguro(im)
+        autotrim_bbox = "seguro" if bbox else None
+        if bbox is None:
+            bbox = bbox_contenido(im)
+            autotrim_bbox = "masa_fallback" if bbox else None
         if bbox:
             l, t, r, b = bbox
             im = im.crop((max(0, l - TRIM_PAD), max(0, t - TRIM_PAD),
@@ -301,7 +565,7 @@ def main():
     veredicto = "PASS" if violado is None else "FAIL"
     print(json.dumps({"veredicto": veredicto, "criterio_violado": violado,
                       "gates": gates, "mediciones": med,
-                      "reparado": reparado,
+                      "reparado": reparado, "autotrim_bbox": autotrim_bbox,
                       "gate_humano_pendiente": "counters (agujeros de letras)"},
                      ensure_ascii=False, indent=1))
     return 0 if veredicto == "PASS" else 1
