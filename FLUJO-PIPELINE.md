@@ -116,7 +116,6 @@ lifestyles diferentes, hero = lifestyle).
 - `paquete-listing-etsy` — genera paquete comercial
 - `publicar-printify-etsy` — flujo de publicación
 - `puerta-pinterest-pin` — valida pins
-- `puerta-publicacion-pod` — (legacy, solo para mockups propios archivados)
 
 
 ## Crear tienda desde cero (para nuevas tiendas/nichos)
