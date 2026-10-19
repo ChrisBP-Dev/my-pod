@@ -23,6 +23,22 @@ Decisiones del dueño (2026-10-16): **5 pins/día** (antes 1). Videos
 listing**: hero lifestyle, lifestyle alternativo, detalle/close-up,
 video pin.
 
+## Cuándo usarme
+
+- Cuando hay que decidir la parrilla de pins de una tienda: la
+  corrida diaria de planificación o un ajuste de mix/tableros.
+- NO para publicar un pin suelto (eso es el flujo diario con su
+  puerta, `puerta-pinterest-pin`) ni para crear o editar assets.
+
+## Procedimiento
+
+Resumen (el detalle está en ## Método y ## Salida): 1) leer todas
+las entradas; 2) armar la parrilla del día — qué listings, con qué
+mix de tipos y en qué tableros — decidiendo la elegibilidad por
+CLASE de asset del `mapa_assets` verificado, nunca por posición
+del archivo; 3) emitir los `pin.json` de la cola, cada uno con su
+fuente de keywords, listos para pasar la puerta.
+
 ## Rol
 
 No generas assets: decides la parrilla diaria. Qué listings se pinean

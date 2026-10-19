@@ -27,6 +27,22 @@ viven en `~/.config/my-pod/etsy-api-<shop>.json` (0600, nunca en
 repo/chat/logs) y los scripts las leen directo. Si el sistema de
 conectores soporta el esquema en el futuro, migrar.
 
+## Cuándo usarme
+
+- Cuando una tienda de la app se conecta al API de Etsy por primera
+  vez, o hay que re-conectar: tokens revocados, scopes nuevos,
+  Seller App nueva.
+- NO para el día a día de una tienda ya conectada: eso va por los
+  scripts y skills que consumen la conexión ya registrada.
+
+## Procedimiento
+
+Resumen (el detalle paso a paso está en ## Flujo): 1) crear la
+Seller App en la cuenta del dueño; 2) OAuth con PKCE, con el clic
+del dueño; 3) verificación con una llamada real — sin esto no está
+"conectado"; 4) registro de la conexión en el config de la tienda.
+Es interactivo: el paso 2 exige la presencia del dueño.
+
 ## Flujo
 
 ### 1. Seller App (navegador, cuenta del dueño)
