@@ -30,10 +30,13 @@ la versión pineada y la objetivo.
   existente queda en violación** (nota de migración v0.12.0 en
   `rameli/MIGRACIONES.md`).
 
-**Fusión a main: pendiente del dale del dueño** (paso 4 del
-proceso del framework), con este registro como resultado
-verificado presentado en el chat de la migración. Al fusionar,
-la rama se borra (local y remota) y el worktree se retira.
+**Fusión a main: ejecutada el 2026-10-19 con el dale explícito
+del dueño en el chat de la migración** (paso 4 del proceso del
+framework): fast-forward `56d8325 → 60729d5`, pin 0.12.1
+verificado en el árbol principal tras la fusión, con los 3
+cambios sin commitear de otros frentes intactos (la fusión no
+toca `data/`). Rama borrada (local y remota) y worktree retirado
+al cerrar, verificado con `git status` y `git branch -a`.
 
 ## Alcance aplicado
 
