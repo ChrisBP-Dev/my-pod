@@ -1,7 +1,26 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.11.1** (pineado en `rameli.json`).
+App construida con Rameli **v0.12.1** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.12.1 (2026-10-19)
+
+Adoptada por encargo del dueño, siguiendo `rameli/MIGRACIONES.md`:
+pin en `rameli.json`, en el frontmatter de los **9 skills** y en
+las declaraciones vivas de sus CHANGELOG. El delta 0.11.1 →
+0.12.1 es aditivo y sin cambios rompientes: v0.12.0 suma la ruta
+de lectura por tarea (canon del constructor), la auditoría de
+adopción como pieza obligada de la fase de mejora y la
+delimitación de orquestación (la Pieza 4 como capacidades
+disponibles dentro de la doctrina única de workers, no como
+camino rival — esta app ya lo declara así en
+`docs/DELIMITACIONES-ADOPCION.md` §2); v0.12.1 es un parche del
+cierre de versiones del framework (exige Release de GitHub
+publicado), sin efecto en el comportamiento de la app. La ruta
+de lectura se adopta en la fase de mejora que esta migración
+abre, cuya auditoría de adopción NO es diferible (el delta trae
+capacidades nuevas). Ningún dato se tocó. Registro completo:
+`docs/MIGRACION-RAMELI-V0121.md`.
 
 ## Migración a Rameli v0.11.1 (2026-10-19)
 

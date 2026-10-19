@@ -4,7 +4,7 @@ description: "Conecta la API de Etsy (v3, OAuth 2.0 + PKCE) para UNA tienda: cre
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.1"
-  framework_version: "0.11.1"
+  framework_version: "0.12.1"
 ---
 
 # Conectar API de Etsy por tienda

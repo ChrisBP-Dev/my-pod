@@ -1,5 +1,5 @@
 # Changelog — puerta-arte-propuesta
-Skill de app. Pineado a Rameli v0.11.1.
+Skill de app. Pineado a Rameli v0.12.1.
 
 ## v0.5.1 — 2026-10-19 (flujo de propuestas v2, idea del dueño)
 - Nueva sección "Entrega para aprobación del dueño": el PASS de

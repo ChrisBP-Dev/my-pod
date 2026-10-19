@@ -4,7 +4,7 @@ description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: des
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.2"
-  framework_version: "0.11.1"
+  framework_version: "0.12.1"
 ---
 
 # Onboarding de tienda POD

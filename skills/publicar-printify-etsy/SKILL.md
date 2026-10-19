@@ -4,7 +4,7 @@ description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): t
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.7.2"
-  framework_version: "0.11.1"
+  framework_version: "0.12.1"
   regression_suite: "evals/"
 ---
 
