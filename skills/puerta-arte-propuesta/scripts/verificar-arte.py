@@ -78,6 +78,34 @@ Gates mecánicos (código):
      pero los 16/16 caen en contenido_intacto (gate 11: tocan el
      borde del archivo) y la clase se previene en el MECANISMO:
      --autotrim usa el bbox SEGURO. No se declara cobertura que no hay.
+ 13. sin_counters_rellenos (2026-10-20, caso p046 "ICU: I Care U"
+     cazado por el dueño en Printify): los huecos CERRADOS de las
+     letras pueden traer el fondo horneado como píxeles opacos sin
+     que ningún gate anterior lo vea — el fondo encerrado no es
+     blanco puro (media ~249/245/237: sin_blanco_puro medía 0.0%) ni
+     pesa contra el bbox completo (sin_blancos_interiores medía
+     0.69%). Detector: componentes de la semilla acromática clara
+     (alfa>128, media>=200, spread<=18 — el canon de color de la app:
+     los claros de diseño son crema cálido, spread>18; lo acromático
+     claro es fondo o damero) con área >= 1500px, densidad
+     (área/bbox) >= 0.25 Y grosor (radio inscrito máximo) >= 13px =
+     mancha maciza en ambas dimensiones (relleno). Calibración
+     2026-10-20: conocidos-buenos (vitals canónico, p036 v3, p037
+     v2, p028 y p033 publicados) — ningún componente >=1500px supera
+     densidad 0.108; p046 malo — 4 rellenos: área 2245-51632,
+     densidad 0.42-0.68, radio 14.0-99.5. Recalibración del mismo
+     día (barrido de todo el registro): la densidad sola daba
+     falsos positivos — líneas decorativas (p043, radio <=2.8) y
+     brillos finos (p045/p062, <=12.8) con densidad hasta 0.66; el
+     grosor los separa de lo macizo. Sin grosor suficiente, el
+     componente sale en mediciones como counters_sospechosos y NO
+     bloquea: zona gris medida (rellenos chicos reales de p052
+     conviven con brillos de diseño de p054) que adjudica el ojo.
+     Si falla: scripts/limpiar-counters.py (solo limpia rellenos
+     duros; los sospechosos exigen --incluir-sospechosos tras
+     adjudicar) y re-verificar. Cobertura honesta: rellenos chicos
+     (<1500px), tenues o de tono cálido NO los caza este gate —
+     siguen en el gate humano de counters.
 
 Reparación: --autotrim --salida <png> recorta al bbox SEGURO + 4px
 (antes: bbox por masa 0.05% — amputaba extremos de baja masa: hojas
@@ -87,8 +115,10 @@ puede calcular (sin cv2/scipy), cae al bbox por masa y lo declara en
 la salida ("autotrim_bbox"). Limpieza: scripts/limpiar-fondo.py
 elimina el blanco puro global (ver método canónico en SKILL.md).
 
-Gate humano (no lo cubre el código):
-  - counters: agujeros de letras (a, e, o, P...) sin fondo metido.
+Gate humano (lo que el código no cubre):
+  - counters: los rellenos GRANDES acromáticos los caza el gate 13;
+    quedan para el ojo los chicos, tenues o de tono cálido, y la
+    adjudicación de cualquier mancha dudosa.
 
 Uso:
   verificar-arte.py --archivo crudo.png --es-original
@@ -142,6 +172,24 @@ FID_BANDA_MAX = 0.02  # fracción del contenido de la banda externa que
                       # puede faltar en el final (pares fieles = 0.0)
 FID_GRID = 200        # rejilla de normalización para la banda
 FID_BANDA_PCT = 3.0   # ancho de la banda externa, % del lado
+# --- gate sin_counters_rellenos (2026-10-20, caso p046) ---
+COUNTER_MEDIA_MIN = 200     # semilla: claro acromático (media>=200,
+COUNTER_SPREAD_MAX = 18     # spread<=18) = fondo/damero, no diseño
+COUNTER_AREA_MIN = 1500     # px: un relleno es mancha, no un brillo
+COUNTER_DENSIDAD_MIN = 0.25  # área/bbox (buenos <=0.108; p046 0.42-0.68)
+COUNTER_RADIO_MIN = 13      # grosor (radio inscrito máx): macizo en
+                             # AMBAS dimensiones. Recalibración
+                             # 2026-10-20 (barrido del registro): la
+                             # densidad sola daba falsos positivos —
+                             # líneas decorativas (p043, radio <=2.8) y
+                             # brillos finos (p045/p062, <=12.8) con
+                             # densidad 0.27-0.66. Rellenos p046:
+                             # radio 14.0-99.5. Sin grosor suficiente
+                             # el componente es SOSPECHOSO (se reporta
+                             # en mediciones, no bloquea): zona gris
+                             # medida donde conviven rellenos chicos
+                             # reales (p052, radio 7.6-14.8) y diseño
+                             # legítimo (brillo de ojo p054, 20.8).
 
 
 def bbox_contenido(im):
@@ -438,6 +486,73 @@ def verificar(im, formato, a):
         g8 = bool(pct_puro <= 0.3)
     gates["sin_blanco_puro"] = {"pass": g8, "maximo_pct": 0.3}
     violado = violado or (None if g8 else "blanco_puro_fondo_sin_limpiar")
+    # G13: sin counters rellenos (2026-10-20, caso p046): manchas
+    # macizas de fondo acromático claro encerradas en huecos de
+    # letras. Los gates de % global no las ven (0.0% blanco puro,
+    # 0.69% interiores en p046); este mide COMPONENTES: semilla
+    # acromática clara con área y densidad de mancha. Si falla,
+    # correr scripts/limpiar-counters.py y re-verificar.
+    if bbox is None:
+        g13, med["counters_rellenos"] = False, []
+        med["counters_sospechosos"] = []
+    else:
+        import numpy as _np2
+        arr13 = _np.array(im)
+        rgb13 = arr13[..., :3].astype(int)
+        media13 = rgb13.mean(axis=2)
+        spread13 = rgb13.max(axis=2) - rgb13.min(axis=2)
+        semilla13 = (arr13[..., 3] > 128) & (media13 >= COUNTER_MEDIA_MIN) \
+            & (spread13 <= COUNTER_SPREAD_MAX)
+        rellenos13, sospechosos13 = [], []
+        try:
+            import cv2 as _cv2
+            n13, lab13, stats13, _c13 = _cv2.connectedComponentsWithStats(
+                semilla13.astype("uint8"), 8)
+            comps13 = [(int(stats13[i, _cv2.CC_STAT_LEFT]),
+                        int(stats13[i, _cv2.CC_STAT_TOP]),
+                        int(stats13[i, _cv2.CC_STAT_WIDTH]),
+                        int(stats13[i, _cv2.CC_STAT_HEIGHT]),
+                        int(stats13[i, _cv2.CC_STAT_AREA]), i)
+                       for i in range(1, n13)]
+        except ImportError:
+            lab13 = None
+            comps13 = [(l, t, w, h, ar, None)
+                       for (l, t, w, h, ar) in (_stats_componentes(semilla13)
+                                                or [])]
+        for (l13, t13, w13, h13, area13, id13) in comps13:
+            dens13 = area13 / float(w13 * h13) if w13 and h13 else 0.0
+            if area13 < COUNTER_AREA_MIN or dens13 < COUNTER_DENSIDAD_MIN:
+                continue
+            radio13 = None
+            if lab13 is not None and id13 is not None:
+                import cv2 as _cv2b
+                import numpy as _np3
+                local13 = (lab13[t13:t13 + h13, l13:l13 + w13] == id13)
+                # Acolchar con 1px de ceros: un componente que llena
+                # su bbox (línea rectangular) sin ceros alrededor
+                # hace que distanceTransform devuelva FLT_MAX
+                # (bug cazado por el fixture P6, 2026-10-20).
+                radio13 = float(_cv2b.distanceTransform(
+                    _np3.pad(local13.astype("uint8"), 1),
+                    _cv2b.DIST_L2, 5).max())
+            item13 = {"bbox": [l13, t13, w13, h13], "area_px": area13,
+                      "densidad": round(dens13, 3),
+                      "radio": round(radio13, 1) if radio13 is not None
+                      else None}
+            # Sin grosor medible o insuficiente -> sospechoso (no
+            # bloquea): la zona gris la adjudica el ojo, declarado.
+            if radio13 is not None and radio13 >= COUNTER_RADIO_MIN:
+                rellenos13.append(item13)
+            else:
+                sospechosos13.append(item13)
+        med["counters_rellenos"] = rellenos13
+        med["counters_sospechosos"] = sospechosos13
+        g13 = not rellenos13
+    gates["sin_counters_rellenos"] = {
+        "pass": g13, "area_min_px": COUNTER_AREA_MIN,
+        "densidad_min": COUNTER_DENSIDAD_MIN,
+        "radio_min_px": COUNTER_RADIO_MIN}
+    violado = violado or (None if g13 else "counters_rellenos")
     # G11: contenido intacto — el bbox SEGURO del final no puede tocar
     # el borde del lienzo (flujo recorte-al-contenido + pad: tocar el
     # borde = algo fue rebanado). Calibración 2026-10-18: mutilados
@@ -566,7 +681,7 @@ def main():
     print(json.dumps({"veredicto": veredicto, "criterio_violado": violado,
                       "gates": gates, "mediciones": med,
                       "reparado": reparado, "autotrim_bbox": autotrim_bbox,
-                      "gate_humano_pendiente": "counters (agujeros de letras)"},
+                      "gate_humano_pendiente": "counters chicos/tenues o de tono calido (la puerta caza los rellenos grandes acromaticos); adjudicar cualquier relleno dudoso"},
                      ensure_ascii=False, indent=1))
     return 0 if veredicto == "PASS" else 1
 

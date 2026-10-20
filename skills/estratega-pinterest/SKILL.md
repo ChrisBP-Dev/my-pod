@@ -11,7 +11,7 @@ metadata:
 
 # Estratega de Pinterest
 
-**Versión 0.1.2** (2026-10-18: elegibilidad por CLASE de asset del
+**Versión 0.1.3** (2026-10-18: elegibilidad por CLASE de asset del
 mapa verificado — la parrilla se arma desde el `mapa_assets` del
 listing, nunca por posición del archivo) · 0.1.0 (2026-10-16).
 Rama de publicidad: Pinterest es un
@@ -121,6 +121,15 @@ PASS no hay cola.
 - Consistencia > volumen: 5 pins todos los días, no 20 un día y cero
   al siguiente.
 - Nada de teoría: cada parrilla cita qué listings rotaron y por qué.
+- **Cierre con commit (2026-10-20):** la corrida que publica pins
+  ESCRIBE el registro (`pins_pinterest`, `pin_ultimo`) y mueve los
+  pin.json a `data/pins-publicados/` — y lo COMMITEA en la misma
+  corrida (regla de la app: escribir = commitear). La corrida del
+  2026-10-20 dejó el registro y 5 pin.json sin commitear en el
+  árbol: el hueco era que ni este skill ni el cron lo decían.
+  Convención del registro: `pin_ultimo` guarda la URL del pin más
+  reciente del listing (así se usa desde el 2026-10-19) y
+  `pins_pinterest` acumula todas las URLs.
 
 ## Calibraciones (mecanismo vs aplicación)
 
