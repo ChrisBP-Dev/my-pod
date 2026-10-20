@@ -1,5 +1,8 @@
 # CHANGELOG — estratega-tienda
 
+## v0.5.3 (2026-10-19)
+- Fase de mejora v0.14.0, P2: declarada la herramienta compartida `scripts/reporte-seo.py` (cruce banco de keywords × ledger) como entrada de la dirección semanal.
+
 ## v0.5.2 (2026-10-19)
 - La directriz y el config viven ahora en `data/tiendas/<tienda-id>/` (reorden de datos por tienda, decisión del dueño 2026-10-19) y la salida declara la regla de commit en la misma corrida.
 

@@ -121,9 +121,15 @@ las propuestas de ejecución de arriba:
   (pausado, verificado hoy): con la secuencia fijada por el
   dueño — primero pulir la personalización en su chat, recién
   entonces reactivarlo como prueba integral del sistema.
-- **Re-revisión de ubicación de p055/p056** recreadas tras la
-  incidencia neck (ya resuelta): la hace el dueño en otro
-  chat.
+- **Corrección del dueño (2026-10-19):** este inventario
+  traía una «re-revisión de p055/p056» como pendiente del
+  dueño; **nunca fue decisión suya** — era un remanente del
+  resumen del asistente al cerrar la incidencia neck, que
+  está cerrada. Se retira de los pendientes: esos drafts
+  siguen el flujo normal (revisión en Printify, etapa 3),
+  como cualquier draft. **El único pendiente que queda del
+  lado del dueño es la personalización** (su chat ya creado),
+  del que depende la reactivación del cron de arriba.
 
 De la fase post-v0.12.1 no queda nada abierto: sus dos
 propuestas (P1 ruta de lectura, P2 fuga de
@@ -131,6 +137,35 @@ propuestas (P1 ruta de lectura, P2 fuga de
 y ambas se revalidaron en esta auditoría.
 
 ---
+
+## Estado de ejecución (2026-10-19, dale del dueño en este chat)
+
+El dueño ordenó ejecutar la fase completa en este chat
+— «aplicar todo» y sin dejar remanentes: lo único que queda
+pendiente de su lado es la personalización — y fijó las
+opciones recomendadas (P1-A, P2 con `reporte-seo.py` en
+estratega-tienda, P3-A). Ejecutada en la rama
+`mejora-v0140`:
+
+| Propuesta | Estado | Evidencia |
+|---|---|---|
+| P1 (B1) — canónico dentro del repo | **Ejecutada** | `vitals-stable-print-300dpi.png` copiado a `skills/puerta-arte-propuesta/evals/fixtures/` (sha256 idéntico al origen: `6549b13b…27a135`; el original NO se movió de su hogar canónico); `K` en la suite apunta ahora a `evals/fixtures`, con origen y hash registrados en el propio script. Suite de arte **13/13** y **prueba de frío real**: la suite corre 13/13 con `HOME` apuntando a un directorio vacío — ya no lee nada fuera del repo. `rameli validar`: el FALLO del chequeo 3 desapareció. |
+| P2 (B2) — declarar los 3 scripts | **Ejecutada** | `procesar-arte-propuesta.py` y `reparar-fondo-casi-blanco.py` declarados en `puerta-arte-propuesta` (nueva sección «Herramientas de procesamiento», v0.5.3) y en la ruta F1 de `FLUJO-PIPELINE.md`; `reporte-seo.py` declarado en `estratega-tienda` (entrada 9, v0.5.3) y en la ruta F4. Verificación por declaración en skill + ruta (no por la salida de `validar`, que ya venía enmascarada). |
+| P3 (B3) — matiz `cola-pins` | **Ejecutada** | Opción A: `data/cola-pins/.gitkeep` versionado; `.gitignore` pasa de ignorar el directorio a ignorar su contenido con excepción del `.gitkeep` (probado: un archivo de prueba dentro sigue ignorado, el `.gitkeep` es versionable). En el worktree de la fase el directorio existe desde el clon y el aviso del chequeo 4 no se reproduce. |
+
+**Puertas de la fase:** lint VERDE e idéntico al antes;
+regresión VERDE total (48 casos, 0 fugas de temporales);
+**`rameli validar` VERDE total por primera vez: 0 fallos,
+0 avisos** (antes de la fase: 1 fallo / 3 avisos en el árbol
+principal). Ningún criterio de ninguna puerta cambió,
+ningún dato de producción se tocó (el único archivo nuevo
+bajo `data/` es el `.gitkeep` vacío de P3), y el cron de
+propuestas **sigue pausado** en su secuencia.
+
+**Corrección incorporada en esta ejecución:** la
+«re-revisión de p055/p056» se retiró de los pendientes de
+esta fase y de la auditoría (ver §Inventario): nunca fue
+decisión del dueño.
 
 ## Pendientes del dueño al abrir esta fase
 
@@ -140,6 +175,9 @@ y ambas se revalidaron en esta auditoría.
    `reporte-seo.py` (recomendado: estratega-tienda) y la
    posibilidad de retirar algún script en vez de declararlo;
    P3 opción A/B/C.
-2. Los dos ítems del inventario arrastrado de arriba, a su
-   ritmo: la reactivación del cron de propuestas (tras la
-   personalización) y su re-revisión de p055/p056.
+2. Del inventario arrastrado, solo queda la secuencia ya
+   fijada por él: pulir la personalización en su chat y,
+   recién entonces, reactivar el cron de propuestas como
+   prueba integral. (La «re-revisión de p055/p056» que un
+   borrador listaba aquí fue retirada por su corrección del
+   2026-10-19: nunca fue decisión suya.)

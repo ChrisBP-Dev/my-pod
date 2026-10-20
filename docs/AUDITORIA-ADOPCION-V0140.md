@@ -258,10 +258,16 @@ las opciones quedan para el dueño. → **P3.**
   chat, después reactivar el cron — su reactivación servirá
   de prueba integral de que todo funciona. Es un **dale del
   dueño** pendiente, no una mejora de esta fase.
-- **Re-revisión del dueño de la ubicación** de la playera
-  p055 y la sudadera p056 recreadas (incidencia neck ya
-  resuelta y cerrada el 2026-10-19): la hará él en otro
-  chat; nada de esta fase depende de ella.
+- **Corrección del dueño (2026-10-19, al ejecutar esta
+  fase):** un borrador anterior de este inventario listaba
+  una «re-revisión de ubicación de p055/p056 que el dueño
+  hará en otro chat» como pendiente suyo. **Eso nunca fue
+  una decisión suya**: fue un remanente que el asistente
+  arrastró desde su propio resumen del cierre de la
+  incidencia neck. Se retira: la incidencia está cerrada y
+  esos drafts siguen el flujo normal de cualquier draft
+  (revisión en Printify, etapa 3), sin pendiente especial
+  registrado a su nombre.
 - De la fase de mejora post-v0.12.1 **no queda nada
   abierto**: P2 (fuga de `verificar-video.py`) y P1 (ruta de
   lectura) se ejecutaron y cerraron el 2026-10-19, y la

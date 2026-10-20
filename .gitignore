@@ -1,7 +1,8 @@
 __pycache__/
 *.pyc
 .DS_Store
-data/cola-pins/
+data/cola-pins/*
+!data/cola-pins/.gitkeep
 *.mp4
 *.mp3
 data/ventas-csv/*.csv

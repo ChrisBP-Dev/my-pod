@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.2"
+  version: "0.5.3"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.5.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.5.3** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -48,6 +48,29 @@ después de 12 mockups.
    `sin_blanco_puro`, repetir paso 2 y re-verificar.
 5. **Draft en Printify** → el dueño revisa ubicación en gris.
 6. **Mockups** salen de Printify. Nada propio.
+
+## Herramientas de procesamiento (scripts compartidos de la app)
+
+Declaradas en la fase de mejora v0.14.0 (P2 — eran AVISO del
+chequeo 1 de `rameli validar`: existían en `scripts/` sin que
+ningún documento vivo los nombrara). Viven en los `scripts/`
+compartidos de la app (una sola implementación), no en este
+skill:
+
+- `scripts/procesar-arte-propuesta.py` — procesa un crudo con
+  fondo blanco generado (flood-fill desde las esquinas → alfa,
+  limpieza de alfa, upscale FSRCNN ×2 + Lanczos al tamaño
+  objetivo) y entrega el PNG print-ready corriendo esta puerta
+  con `--autotrim`. Es la vía de entrada cuando el crudo NO
+  nace con fondo transparente (pasos 1b–2b de arriba sobre ese
+  tipo de crudo).
+- `scripts/reparar-fondo-casi-blanco.py` — repara artes ya
+  limpiados cuyo fondo quedó casi-blanco no puro (244–249, que
+  el key canónico de blanco puro no atrapa): flood-fill desde
+  el borde solo sobre píxeles neutros casi-blancos, preservando
+  los blancos de diseño encerrados. Se usa cuando la puerta
+  marca fondo no limpio en un arte que ya pasó la limpieza
+  estándar (caso origen: lote 2026-10-16).
 
 ## Puertas mecánicas
 

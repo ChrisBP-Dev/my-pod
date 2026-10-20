@@ -1,5 +1,8 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.5.3 (2026-10-19)
+- Fase de mejora v0.14.0: P1 — el diseño canónico de calibración de la suite vive ahora en `evals/fixtures/` (copia con origen y sha256 registrados en la suite; `K` ya no apunta fuera del repo). P2 — declaradas en el skill las herramientas compartidas `scripts/procesar-arte-propuesta.py` y `scripts/reparar-fondo-casi-blanco.py`.
+
 ## v0.5.2 (2026-10-19)
 - El registro del diseño (`porque`) vive en `data/tiendas/<tienda-id>/registro-listings.json` (reorden de datos por tienda, 2026-10-19).
 Skill de app. Pineado a Rameli v0.14.0.

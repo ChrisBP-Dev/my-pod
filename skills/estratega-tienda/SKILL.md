@@ -3,14 +3,14 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.2"
+  version: "0.5.3"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Estratega de tienda POD
 
-**Versión 0.5.2** (0.4.0, 2026-10-16: portabilidad de la estrategia de precios —
+**Versión 0.5.3** (0.4.0, 2026-10-16: portabilidad de la estrategia de precios —
 mecanismo + calibración en el skill, valores en el config de cada tienda;
 0.3.0: entrada #7 ledger de ventas — feedback loop M2).
 
@@ -65,6 +65,14 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
    necesidad (canon: `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md`); si un
    análisis requiere un scope ausente, lo pide al dueño en la
    directriz en vez de asumirlo.
+9. Reporte SEO — herramienta compartida `scripts/reporte-seo.py`
+   (declarada en la fase de mejora v0.14.0, P2): cruza el banco de
+   keywords (`data/banco-keywords/`) con los paquetes de listing y
+   el ledger de la tienda, y reporta por nicho la cobertura (qué
+   keywords usa cada listing, qué keywords no usa nadie y qué
+   listings no usan ninguna). Es insumo de la dirección cuando la
+   semana toca decisiones de nicho o de SEO; sin datos de ventas,
+   el reporte muestra cobertura y lo dice explícito.
 
 ## Método
 

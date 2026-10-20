@@ -3,7 +3,15 @@
 set -u
 SKILL="$(cd "$(dirname "$0")/.." && pwd)"
 V="$SKILL/scripts/verificar-arte.py"
-K="$HOME/workspace/goals/pod-etsy-sistema-operativo-q4-2026/files/disenos/canonicos"
+# K = insumos canónicos de calibración, DENTRO del repo (fase de mejora
+# v0.14.0, P1 — antes vivían en $HOME/.../disenos/canonicos, fuera del
+# repo: el FALLO del chequeo 3 de `rameli validar`).
+# vitals-stable-print-300dpi.png: copia de calibración del canónico de
+# producción (que sigue viviendo en su hogar, la carpeta de diseños
+# canónicos del goal POD × Etsy); origen copiado el 2026-10-19,
+# sha256 6549b13b1672535ae678da35035607a6a764d10727bdc4522ef920b29327a135.
+# Si el canónico se regenera, re-copiar y actualizar este hash.
+K="$SKILL/evals/fixtures"
 ok=0; fail=0
 
 run() { # run <nombre> <veredicto-esperado> <criterio-esperado> <args...>
