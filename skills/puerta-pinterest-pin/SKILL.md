@@ -6,7 +6,7 @@ license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.4.1"
-  framework_version: "0.12.1"
+  framework_version: "0.14.0"
   regression_suite: "evals/"
   gate_script: "scripts/verificar-pin.py"
 ---

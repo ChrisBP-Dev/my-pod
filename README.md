@@ -1,7 +1,28 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.12.1** (pineado en `rameli.json`).
+App construida con Rameli **v0.14.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.14.0 (2026-10-19)
+
+Adoptada por encargo del dueño, siguiendo `rameli/MIGRACIONES.md`:
+pin en `rameli.json`, en el frontmatter de los **9 skills** y en
+las declaraciones vivas de sus CHANGELOG. El delta 0.12.1 →
+0.14.0 es aditivo y sin cambios rompientes: v0.13.0 suma la
+validación de colocación (el comando `rameli validar` y su
+protocolo de cierre con registro); v0.14.0 suma el estándar de
+datos multi-unidad y el chequeo 4 de `rameli validar`, que lo
+verifica contra el mapa que cada aplicación declara en su
+`rameli.json` (clave `datos`). El mapa de esta app ya estaba
+declarado (commit `1e73e16`): esta migración lo registra como
+adopción, no lo re-decide. La primera corrida de `rameli validar`
+queda registrada y clasificada en el registro de la migración;
+su hallazgo vigente del chequeo 3 (la suite de arte lee diseños
+canónicos desde fuera del repo) es insumo de la fase de mejora
+que esta migración abre — no se mueve ningún archivo de diseño
+en esta migración —, cuya auditoría de adopción NO es diferible
+(el delta trae capacidades nuevas). Ningún dato se tocó.
+Registro completo: `docs/MIGRACION-RAMELI-V0140.md`.
 
 ## Migración a Rameli v0.12.1 (2026-10-19)
 
