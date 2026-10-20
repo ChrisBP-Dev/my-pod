@@ -10,6 +10,19 @@ manda el sistema. Ejecutada en worktree aislado sobre la rama
 limpio, `main == origin/main`, una sola rama y un solo
 worktree al abrir — verificado, no de memoria).
 
+**Fusión a main: ejecutada el 2026-10-19 bajo la
+autorización del encargo** (fusionar SOLO si las puertas
+comparadas y el registro quedan como manda el sistema —
+cumplido: lint y regresión idénticos byte a byte, verdes):
+antes de fusionar se re-verificó que `main` no se hubiera
+movido (seguía en `1e73e16`, árbol limpio, pese a los crons
+de la app que commitean sobre `main`); fast-forward
+`1e73e16 → 77a7243`, pin 0.14.0 verificado en el árbol
+principal tras la fusión. Rama borrada (local y remota) y
+worktree retirado al cerrar, verificado con `git status` y
+`git branch -a`. Verificación post-fusión: sección al final
+de «Verificación».
+
 **Verificación previa contra los repos (hechos, no memoria):**
 - Rameli: `main` en `6c478f3` = `origin/main`, `VERSION` =
   **0.14.0** (última publicada; tags anotados remotos
@@ -162,6 +175,29 @@ migración**.
   `skills/publicar-printify-etsy/evals/test-regression.sh`,
   que nombran la fase de mejora v0.12.1 que los originó).
   Ninguna declaración viva queda en 0.12.1.
+
+### Verificación post-fusión (sobre `main`, tras el fast-forward)
+
+- `rameli lint`: **VERDE total, idéntico byte a byte** al
+  antes/después de la rama.
+- Regresión (`rameli test`): **VERDE total (48 casos),
+  idéntica byte a byte**, con `TMPDIR` propio y 0 fuga de
+  temporales.
+- `rameli validar`: **1 FALLO, 0 avisos** — el mismo FALLO
+  del chequeo 3 (B1, sin cambio), pero los 3 avisos del
+  chequeo 1 **ya no se reproducen en `main` fusionado**.
+  Causa verificada en el código del validador: su corpus de
+  «documentos vivos» es `README.md` + todo `docs/*.md` +
+  los `SKILL.md`, y los documentos de esta migración y su
+  auditoría **nombran** a los tres scripts — con eso la
+  capa mecánica los da por nombrados. Esto **no cierra B2**:
+  la brecha sustantiva es que ningún skill gobernante ni la
+  ruta de lectura los declara (un chat frío que sigue la
+  ruta sigue sin encontrarlos); solo significa que la señal
+  mecánica quedó enmascarada por el propio registro.
+  Queda anotado en la brecha B2 y en la verificación de la
+  propuesta P2: su cierre se comprueba contra el skill y la
+  ruta, no contra la salida de `rameli validar`.
 
 ## Validación de colocación — registro de cierre (protocolo v0.13.0)
 

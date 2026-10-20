@@ -229,6 +229,13 @@ de lectura los nombra, así que un chat frío no sabe que
 existen, cuándo usarlos ni qué puerta los gobierna — el
 inverso de B1: ahí un insumo declarado vive fuera; aquí
 herramientas colocadas viven sin declarar. → **P2.**
+*Nota post-fusión (cierre de la migración): en `main`
+fusionado, `rameli validar` ya no reproduce estos 3 avisos,
+porque los documentos de la migración/auditoría nombran a
+los scripts y el corpus «vivo» del validador incluye todo
+`docs/*.md`. La brecha sustantiva sigue abierta: la
+declaración que falta es en el skill gobernante y en la
+ruta de lectura, no en un registro fechado.*
 
 ### B3 (C23 chequeo 4, menor) — `data/cola-pins` declarado en el mapa no existe en un clon frío
 

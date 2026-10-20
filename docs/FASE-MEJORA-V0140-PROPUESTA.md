@@ -65,15 +65,22 @@ correcta) y sin tocar su código:
   de dirección, no la producción de un paquete; queda como
   micro-decisión del dueño al dar el dale.
 
-**Impacto:** los 3 AVISOS del chequeo 1 desaparecen y
-`rameli validar` puede llegar a verde total (junto con P1);
-un chat frío descubre las tres herramientas desde el sistema,
-con su cuándo y su puerta, en vez de heredarlas por memoria
-del operador.
+**Impacto:** junto con P1, `rameli validar` puede llegar a
+verde total *por las razones correctas* (hoy los avisos del
+chequeo 1 ya no se reproducen, pero enmascarados por los
+registros de la migración — ver la nota de riesgo); un chat
+frío descubre las tres herramientas desde el sistema, con
+su cuándo y su puerta, en vez de heredarlas por memoria del
+operador.
 
-**Riesgo: bajo.** Solo documentación y punteros; la
-verificación es mecánica (`rameli validar` sin los avisos y
-punteros de la ruta resolviendo). Si al documentar alguno el
+**Riesgo: bajo.** Solo documentación y punteros. Ojo con la
+verificación: `rameli validar` ya no reproduce los avisos en
+`main`, porque los registros de la migración/auditoría
+nombran a los scripts y cuentan como corpus vivo — la
+verificación de P2 es **declaración presente en el skill
+gobernante y en la ruta de lectura, con sus punteros
+resolviendo**, no la ausencia del aviso. Si al documentar
+alguno el
 dueño juzga que ya no tiene uso, la alternativa por script es
 **retirarlo** (borrado con huella en el registro, según el
 ciclo de vida de activos) en vez de declararlo — también con
