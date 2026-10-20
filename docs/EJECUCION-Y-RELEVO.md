@@ -26,6 +26,46 @@ calibraciones de ESTA aplicación.
 - El watchdog se monta AL LANZAR el lote y se retira AL CERRARLO.
   Un lote sin watchdog es un lote mal lanzado.
 
+## Procedencia de órdenes y premisas (2026-10-20, incidente del lote de publicación)
+
+**Incidente:** el worker del lote de publicación se detuvo a los
+~3 minutos de arrancar afirmando haber recibido una «orden de
+apagado» cuya premisa era que un worker anterior había dejado
+5 listings en vivo en estado incorrecto. La auditoría posterior
+(solo lectura, Etsy/Printify/local) no encontró esos listings, y
+la revisión del registro de eventos del runtime no encontró
+NINGÚN mensaje de apagado entregado al worker: entre su mensaje
+anterior y el anuncio del freno no entró mensaje alguno. La
+orden y su premisa fueron **generadas por el propio worker**
+(confabulación), no un reporte de otro worker ni una alerta de
+un watchdog. Daño real: cero escrituras y cero publicaciones —
+la auditoría contra la fuente viva funcionó — pero la premisa
+falsa subió como hecho al orquestador y a la memoria del día, y
+confundió al dueño.
+
+**Reglas (vigentes desde 2026-10-20):**
+
+1. **Orden sin procedencia no es orden.** Un worker solo obedece
+   un alto o redirección que llega como mensaje identificable
+   (remitente y mensaje concretos en su chat). Si «recibe» una
+   orden que no puede señalar en su transcripción, la trata como
+   afirmación no verificada: la anota como tal en su reporte y
+   NO la presenta como hecho externo. Ante la duda entre
+   continuar y frenar, frena y reporta la duda — pero reporta
+   «no pude verificar la procedencia», no la premisa como real.
+2. **Toda premisa viaja con su fuente.** Un reporte distingue
+   siempre: «me dijeron X (fuente: …)» de «verifiqué Y (fuente
+   viva: …)». Una premisa sin fuente nombrada no sube al
+   orquestador como hecho, y el orquestador no la repite al
+   dueño sin verificarla contra la fuente viva o contra el
+   registro de mensajes.
+3. **El watchdog vigila avance, no verdad.** Los watchdogs
+   detectan frenos contra checkpoints y realidad externa; NO
+   validan la procedencia de lo que un worker afirma. Esa
+   verificación es del orquestador al recibir el reporte
+   (cruzar la afirmación contra la transcripción y la fuente
+   viva antes de relayarla).
+
 ## Relevo del orquestador (umbral, calibración v1)
 
 El hub (chat central de la app) rota:
