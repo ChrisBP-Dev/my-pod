@@ -25,6 +25,14 @@ calibraciones de ESTA aplicación.
   orquestador si el lote se frena o falla en silencio.
 - El watchdog se monta AL LANZAR el lote y se retira AL CERRARLO.
   Un lote sin watchdog es un lote mal lanzado.
+- **Calibración de freno (2026-10-20):** el checkpoint se escribe
+  por listing en dos tiempos (inicio de fase con timestamp y
+  completación) — regla en `publicador-lote` P2. Freno real =
+  checkpoint sin cambios Y ninguna fase en curso vigente; una
+  fase larga en curso dentro de su ventana esperada (p. ej.
+  navegador ~75 min sobre 11 listings) NO es freno: el
+  2026-10-20 el watchdog disparó en falso porque la fase corría
+  en bloque sin asiento intermedio.
 
 ## Procedencia de órdenes y premisas (2026-10-20, incidente del lote de publicación)
 

@@ -3,13 +3,16 @@ name: "publicador-lote"
 description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing y rollback."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.3"
+  version: "0.1.4"
   framework_version: "0.14.0"
 ---
 
 # Publicador de lote POD
 
-**Versión 0.1.3** (2026-10-19: watchdog obligatorio al lanzar el
+**Versión 0.1.4** (2026-10-20: checkpoint en dos tiempos por
+listing — al INICIAR cada fase (con timestamp) y al completarla,
+nunca en bloque al final de una fase larga; ver P2) · 0.1.3
+(2026-10-19: watchdog obligatorio al lanzar el
 lote — fase de mejora P4; 0.1.1: el flujo post-aprobación existía y
 funcionaba, pero sin vehículo diseñado — corría donde el dueño
 respondiera, sin checkpoints. Este skill lo formaliza: un side chat por
@@ -85,6 +88,20 @@ tiene vía API disponible, se usa la vía API. La conexión es por tienda
   "verificado"]}}, "videos": {"slug": "/ruta/video.mp4"}}`.
   Actualizar INMEDIATAMENTE tras cada fase. Si el worker muere, el
   siguiente retoma donde quedó — nunca repite fases hechas.
+  **Checkpoint en dos tiempos (2026-10-20, incidente del lote
+  Thanksgiving):** el checkpoint se escribe POR LISTING y en dos
+  momentos — (1) al INICIAR una fase para un listing, registrando
+  la fase en curso con su timestamp de inicio junto a `fases_ok`
+  (p. ej. `"en_curso": {"slug": {"fase": "mockups", "desde":
+  "<ISO>"}}`), y (2) al COMPLETARLA ese listing, sin esperar a
+  que termine la fase para todo el lote. Una fase larga ejecutada
+  en bloque (p. ej. navegador sobre 11 listings, ~75 min) sin
+  ningún asiento intermedio es indistinguible de un freno: el
+  watchdog disparó FRENO en falso el 2026-10-20 con el lote
+  avanzando sano. Con el asiento de inicio, el watchdog calibra:
+  fase en curso dentro de su ventana esperada = trabajo, no
+  freno; freno = sin completadas nuevas Y sin fase en curso
+  vigente (o en curso vencida).
 - **P3 —** no aplica como reintento programado (el lote es a demanda);
   el escalado es el reporte al principal.
 - **Watchdog (obligatorio desde 2026-10-19, fase de mejora P4):**
