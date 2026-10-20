@@ -58,9 +58,13 @@ revisión no la muestra) — mandó el sistema. La guía NO es canon.
    con el piloto (su draft nunca se publicó).
 3. **Aprobación automática de respaldo:** sigue sin confirmar en ajustes
    de tienda; la operación no depende de ella.
-4. **Limpieza al cerrar la fase de pruebas:** borrar de Printify el
-   producto sandbox y los drafts de prueba (PROP-PERS-001, TEST-BORDADO
-   sudadera/beanie). Costo hundido total: $0.20.
+4. **Limpieza al cerrar la fase de pruebas: EJECUTADA (2026-10-20, con
+   el dale del dueño).** Borrados de Printify el producto sandbox,
+   PROP-PERS-001 y los 2 TEST-BORDADO (verificados Not found); el
+   listing de Etsy (4597779358) cayó en la cascada de Printify
+   (verificado 404 — la API de Etsy exigía scope `listings_d`, no
+   otorgado; la vía Printify lo resolvió). Costo hundido total: $0.20.
+   Cero remanentes de prueba en ambas plataformas.
 5. **Piloto (Paso 6):** 4 listings con diseños NUEVOS y únicos según la
    tabla del config; regla de retiro a 30 días. Recién con su veredicto,
    palabra separada del dueño para reactivar el cron de propuestas con
