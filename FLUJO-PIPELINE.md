@@ -37,6 +37,12 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   (Flujo v2, idea del dueño 2026-10-19: el dale creativo se mueve al
   punto más barato — antes el arte se revisaba recién en Printify,
   con el trabajo de drafts ya gastado.)
+- **Diseño personalizable:** la entrega trae el arte real (zonas
+  vacías) **más la simulación** del resultado esperado (compuesta
+  sobre el arte real con el ejemplo estándar en las zonas medidas),
+  y el porqué declara producto destino y plan de zonas — detalle en
+  `puerta-arte-propuesta` (entrega, variante personalizable). Su
+  aprobación cubre diseño + producto + zonas.
 
 ### 2. Propuesta (drafts en Printify) — Fase B: solo aprobados
 - **Track MPL:** un draft por producto de la composición (default:
@@ -44,6 +50,10 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   "unpublished" = propuesta pendiente. Los componentes NUNCA se publican
   por separado.
 - **Track single:** un draft del producto indicado.
+- **Track single personalizable:** un draft del producto indicado con
+  los campos de personalización montados en Printify (ruta
+  automatizada, `publicar-printify-etsy` §Track Single-P). El diseño
+  es siempre nuevo y único; nunca se convierte un diseño del MPL.
 - El tipo de lote (mpl/single/mixto) lo define la estratega en
   `data/tiendas/29222324/config-propuestas.json` (dinámico por semana).
 - Posición inicial: centrada, 78% ancho, ~14% desde arriba (ajustable).

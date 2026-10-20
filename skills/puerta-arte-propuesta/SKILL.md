@@ -295,3 +295,31 @@ registro del diseño (`porque` en `data/tiendas/<tienda-id>/registro-listings.js
 para que lo hereden la producción y el paquete comercial. Sin
 aprobación del dueño en esta entrega, el diseño no entra a
 producción (flujo v2 en `FLUJO-PIPELINE.md`).
+
+### Variante personalizable (2026-10-20, pedido del dueño)
+
+El arte personalizable llega con las zonas VACÍAS: solo con eso el
+dueño no puede juzgar el resultado. La entrega trae **dos imágenes**:
+
+- **El arte real** — el PNG de producción, con las zonas vacías tal
+  cual entrará a Printify.
+- **La SIMULACIÓN** — el resultado esperado: un compuesto
+  determinista **sobre el arte real** (nunca una generación paralela:
+  la referencia se deriva del arte verdadero) con el ejemplo estándar
+  de la tienda colocado en cada zona según su geometría medida —
+  Maria en la zona del nombre, RN - ICU en la de la credencial, una
+  foto de muestra en el marco si el diseño lleva imagen. Se entrega
+  declarada como simulación: aproxima la tipografía y el color de la
+  capa prevista; el render definitivo es el mockup del draft en la
+  revisión de Printify.
+
+Y el porqué de un personalizable declara además, explícito:
+
+- **Producto destino** (el que la estratega fijó en el config de
+  propuestas — al aprobar el arte, el dueño aprueba diseño +
+  producto + plan de zonas junto).
+- **Plan de zonas:** qué dato va en cada zona, con sus límites de
+  caracteres y, si una decisión es cerrada, su dropdown.
+- Qué mirar: cómo se lee cada zona vacía vs. llena en la simulación,
+  contraste del dato sobre la prenda más clara, y si la composición
+  sigue cerrando con el dato puesto.

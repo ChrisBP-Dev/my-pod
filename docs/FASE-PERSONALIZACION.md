@@ -16,6 +16,7 @@ post-piloto.
 | Ruta automatizada (procedimiento P1–P7) | `skills/publicar-printify-etsy` v0.8.0, §Track Single-P |
 | Criterios de arte personalizable | `skills/puerta-arte-propuesta` v0.6.0, sección propia |
 | Cupo + tabla del piloto (precios con costos reales) | `data/tiendas/29222324/config-propuestas.json` → `personalizados` (cupo en flujo diario = 0 hasta el veredicto del piloto) |
+| Entrega al dueño con SIMULACIÓN (alineación flujo v2, pedido del dueño 2026-10-20) | `skills/puerta-arte-propuesta` v0.6.0 (entrega, variante personalizable) + puntero en `FLUJO-PIPELINE.md` etapa 1 |
 | Campo `personalizados` del contrato | `docs/CONTRATO-TIPO-PRODUCTO.md` |
 | Sandbox registrado + favorito p056 | `data/tiendas/29222324/registro-listings.json` (`sandbox-personalizacion`, `p056.favorito_dueno`) |
 
