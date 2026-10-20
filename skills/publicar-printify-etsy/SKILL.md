@@ -3,13 +3,17 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.7.3"
+  version: "0.8.0"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.8.0** — Ruta AUTOMATIZADA de personalización (§Track Single-P):
+los campos se montan en Printify y se sincronizan a Etsy con Live Preview;
+verificada en vivo en el sandbox (2026-10-20). La caja nativa de Etsy +
+fulfillment manual queda como excepción consciente (§P8).
 **Versión 0.7.3** (0.7.0 — Estándar API-vs-navegador (canon central en docs/, este skill apunta); tablas de precios por talla leídas del config de tienda (doctrina precio con colchón 2026-10-16))
 **Versión 0.6.1** — Esquema de mockups/videos movido al config de tienda
 (organización a nivel tienda, 2026-10-15). Printify es la fuente de verdad;
@@ -46,10 +50,14 @@ los expone). La conexión es por tienda: `data/tiendas/<id>/config.json
 
 **¿El diseño es personalizable (lleva nombre/texto del comprador)?**
 
-- **SÍ → Track SINGLE** (este skill, §Track Single). El MPL nativo de
-  Printify NO soporta personalización — ni manual ni automática
-  (verificado en help.printify.com 2026-10-15). Los diseños
-  personalizables viven como producto individual, siempre.
+- **SÍ → Track SINGLE con ruta AUTOMATIZADA** (este skill, §Track
+  Single-P). El MPL nativo de Printify NO soporta personalización — ni
+  manual ni automática (verificado en help.printify.com 2026-10-15).
+  Los diseños personalizables viven como producto individual, siempre,
+  y nacen como diseños NUEVOS y únicos: reutilizar un diseño que ya
+  vive en un MPL (aunque la copia sea la personalizable) es duplicado
+  penalizado por Etsy (regla verificada 2026-10-16, corrección del
+  dueño 2026-10-19).
 - **NO → Track MPL** (este skill, §Track MPL). El listing es un
   Multi-Product Listing nativo de Printify: varios productos, un solo
   listing en Etsy.
@@ -284,9 +292,12 @@ Nada se da por sentado. Verificar contra el listing vivo:
 
 ---
 
-## Track Single — procedimiento (diseños personalizables)
+## Track Single — procedimiento
 
-El flujo single clásico (v0.5.0), vigente para diseños personalizables:
+El flujo single clásico (v0.5.0): pasos 1–10 para todo single.
+Si el diseño es personalizable, se suma §Track Single-P (la ruta
+automatizada manda sobre cualquier mención anterior a la caja
+nativa de Etsy):
 
 1. **Login** (protocolo Google-first, §M0).
 2. **Draft en Printify:** subir arte, crear producto draft (producto
@@ -304,10 +315,117 @@ El flujo single clásico (v0.5.0), vigente para diseños personalizables:
 7. **Publicar** en Printify → sincroniza a Etsy.
 8. **Completar en Etsy:** videos, título, descripción, 13 tags,
    categoría, atributos, production partner = Printify, envío,
-   políticas, **caja de personalización** (nativa de Etsy) si aplica,
-   precios por variación verificados.
+   políticas, precios por variación verificados. La personalización
+   NO se completa aquí: llega sincronizada desde Printify (§Track
+   Single-P) y en Etsy solo se VERIFICA.
 9. **Registrar** en `data/tiendas/<tienda-id>/registro-listings.json` con `tipo: "single"`.
 10. **Pinterest** (`puerta-pinterest-pin`).
+
+---
+
+## Track Single-P — personalización AUTOMATIZADA (default desde 2026-10-20)
+
+La personalización se define **en Printify** (capas marcadas
+personalizables) y se sincroniza a Etsy: el comprador escribe/sube en
+la página del listing, ve Live Preview (DTG) y la orden llega con el
+diseño aplicado. Verificado en vivo en el sandbox de la tienda
+(2026-10-20, fase de personalización). Los criterios de ARTE (zonas,
+geometría, contraste) viven en `puerta-arte-propuesta`; aquí vive el
+procedimiento.
+
+### P1. Producto NUEVO, diseño NUEVO
+- La personalización solo se monta en productos **nuevos** de
+  Printify; no se convierte un producto existente ni un componente
+  de MPL.
+- El diseño personalizable es un diseño nuevo y único (§0: duplicar
+  un diseño del MPL = duplicado penalizado).
+
+### P2. Campos — se montan en el editor de Printify, congelados con la aprobación
+- Capas de texto y/o imagen con su opción de personalización activa
+  (imagen: toggle **"Personalizable image"**).
+- **Nombre de capa = contenido + zona** (`Name — red banner`,
+  `Credential — below banner`, `Photo — buyer upload`): ese nombre es
+  el título que el comprador ve sobre su campo en Etsy.
+- **Instrucciones** con dónde va el dato y ejemplo entre corchetes:
+  `Enter the name to print in gold script on the red banner [Example: Maria]`.
+- **Límites por diseño, nunca el default 1024:** nombre **15**,
+  credencial **12** caracteres de partida (más cortos si la zona es
+  más angosta). Required ON cuando el diseño no tiene sentido sin
+  el dato.
+- **Ejemplo realista obligatorio** (política de Etsy: prohibido
+  "Your text here" y foto principal en blanco en personalizables):
+  estándar de tienda **Maria / RN - ICU**, coherente en la capa
+  (mockups), las instrucciones y la primera imagen. El texto de
+  ejemplo de la capa lo fija quien tenga el editor abierto — en la
+  práctica el dueño en su revisión (~10 s); el paquete verifica que
+  quedó puesto.
+- **Decisiones cerradas = dropdown, no texto libre:** credencial
+  (RN/LPN/CNA/NP…), color de hilo en bordado, etc.
+- Máximo **5 campos** por listing (texto + imagen combinados).
+- Los campos quedan **congelados con la aprobación del dueño**;
+  publicación solo verifica. **Jamás se editan desde Etsy** (rompe
+  el mapeo y el preview). **La API de Printify NO expone la
+  configuración de personalización** (verificado 2026-10-20 por GET:
+  las capas no traen esos campos): corregir un campo = editor de
+  Printify + push selectivo de la personalización + re-verificar.
+
+### P3. Comportamiento verificado (sandbox, 2026-10-20)
+- **Texto:** el texto del comprador se **escala a la caja** de su
+  capa — un nombre largo se achica, no desborda. La caja manda.
+- **Imagen:** relleno **FIT** — la foto entra ENTERA con su
+  proporción original dentro de la caja (cotas máximas), sin recorte
+  y sin deformación, y se imprime como parche rectangular con su
+  propio fondo. El comprador **no** tiene herramientas de ajuste
+  (solo subir/quitar/reemplazar). Formatos PNG/JPG <100 MB; la foto
+  **HEIC de iPhone es excepción manual** (no la acepta el campo).
+  El marco del arte se diseña tipo passe-partout (puerta-arte).
+- **Live Preview:** disponible en DTG (verificado en Gildan 18000);
+  **el bordado está EXCLUIDO** — en bordado las fotos del listing
+  venden la confianza. Elegibilidad por blueprint: solo se confirma
+  creando el producto y viendo si ofrece preview (sin lista pública).
+- **Sandbox de pruebas** (protocolo de la fase): las pruebas sin
+  Etsy se hacen en drafts ($0). Las que necesitan Etsy usan UN
+  listing inactivo ya pagado como sandbox (IDs en el registro de la
+  tienda): limpiar/montar → republicar → precio disuasorio alto →
+  activar solo minutos → capturar renders → **desactivar y verificar
+  inactivo**. Editar/reactivar antes del vencimiento no cobra fee.
+
+### P4. Publicar y verificar (Fase C-P)
+- Publicar desde Printify con la personalización marcada en
+  "Details to publish" (push selectivo si el listing ya vive).
+- Verificar contra el listing vivo, además de la Fase C general:
+  - Los campos visibles en la página pública = nombres, instrucciones
+    y límites aprobados (conteo ≤5).
+  - La primera imagen muestra el ejemplo realista puesto.
+  - Live Preview (DTG) responde con un nombre corto y uno largo:
+    sin desborde, legible.
+  - Precio = tabla de personalizados de la tienda (con colchón),
+    no el precio estándar del producto.
+
+### P5. Órdenes
+- La orden llega con el diseño **ya aplicado** y marca
+  **"Review needed"**: se aprueba (panel de Printify o API) y pasa
+  a producción. Sin edición manual por orden.
+- La aprobación automática de respaldo tras X horas **no está
+  verificada** (la guía v1 la afirmaba; la doc de revisión no la
+  muestra): la operación NO cuenta con ella — aprueba Jarvis.
+
+### P6. Bordado personalizado
+- Texto con **fuentes pre-digitalizadas**: se escala sin digitalizar
+  por orden (máx. 6 colores de hilo, paleta de 15). La digitalización
+  del diseño base es gratis (≤36 h, una vez por diseño).
+- Sin Live Preview (§P3): el listing vende con fotos y el ejemplo.
+- Handling de bordado ≈10 días → corte práctico de Navidad ~8–10 dic.
+- Costos base reales y precios del piloto: config de tienda →
+  `personalizados` (leídos de drafts reales, no estimados).
+
+### P7. Ruta manual — excepción consciente (NO el default)
+La caja nativa de Etsy + fulfillment manual por orden queda solo
+para el esquema **multi-producto manual** (un listing cuyas
+variaciones se conectan por SKU a productos Printify distintos),
+donde la ruta automatizada no llega: ahí no hay Live Preview ni
+diseño aplicado y cada orden se trabaja a mano. Requiere dale
+expreso del dueño por listing, sabiendo el costo operativo.
 
 ---
 

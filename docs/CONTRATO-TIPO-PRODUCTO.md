@@ -77,6 +77,16 @@ junto con `data/tiendas/29222324/direccion-tienda.md` en cada corrida semanal.
 - `flujo_bifurcado`: siempre `true`. Aunque `tipo_lote` sea `"mpl"`,
   un diseño marcado como **personalizable** va por track single
   (el MPL nativo no soporta personalización — orden del dueño).
+- `personalizados` (opcional, 2026-10-20): bloque de la tienda para el
+  flujo de personalizados — `estado` (piloto/en flujo/pausado),
+  `cupo_en_flujo_diario` (cuántas de las N propuestas del día pueden
+  ser personalizadas; cuentan dentro del reparto single) y, durante
+  un piloto, su tabla de listings con precios verificados y regla de
+  retiro. Los diseños personalizables son siempre **nuevos y únicos**
+  (nunca un diseño que vive en un MPL) y se producen por la ruta
+  automatizada (`publicar-printify-etsy` §Track Single-P) con los
+  criterios de `puerta-arte-propuesta`. Sin este bloque: no se
+  proponen personalizados.
 - `temas`: reparto de foco (tema, n, ángulos). Suma de `n` = N.
 - `precios`: tabla por producto (base S–XL + recargos). La publica el
   agente con la fórmula del skill; la estratega solo fija la base.
@@ -102,6 +112,11 @@ El concepto "el único draft" ya no aplica. Estados reales:
   El contenedor MPL vive en otra pestaña y se crea en la conversión
   (§M4 del skill) — NO antes.
 - **Propuesta single** = 1 diseño × 1 draft.
+- **Propuesta single personalizable** = 1 diseño NUEVO único × 1 draft
+  con los campos de personalización montados en Printify (producto
+  nuevo; nombres/instrucciones/límites según §Track Single-P). No se
+  detecta como MPL ni como single común: el draft declara su
+  personalización en el detalle del producto (conteo de campos).
 - **Regla:** los componentes de un MPL **nunca** se publican por
   separado. Un draft componente publicado solo = error a corregir
   (revertir o completar el MPL).

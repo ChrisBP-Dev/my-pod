@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.3"
+  version: "0.6.0"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.5.3** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.6.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -173,6 +173,58 @@ skill:
 - **Gate humano**: counters — agujeros de letras (a, e, o, P...) sin fondo
   metido. El código no distingue un counter limpio de un diseño sin letras;
   va en el checklist del aprobador.
+
+## Diseños personalizables — criterios de arte (2026-10-20, fase de personalización)
+
+Un arte personalizable pasa TODAS las puertas de arriba **más** estas.
+El procedimiento de campos/publicación vive en `publicar-printify-etsy`
+(§Track Single-P); aquí vive el criterio de diseño.
+
+- **Nace con su zona integrada.** El arte se genera ya con la zona del
+  dato integrada; nada de pegar capas sobre un diseño terminado (error
+  de la prueba p005: capas chicas, pegadas al borde, 2ª línea tapada).
+  La referencia visual del resultado se deriva del arte real, nunca se
+  genera en paralelo.
+- **La forma sigue al diseño y al mercado — no hay plantilla** (corrección
+  del dueño 2026-10-19): franja/banner, texto integrado en la ilustración
+  o en curva, marco de foto, pecho bordado… Las zonas de esta sección son
+  caja de herramientas, no una fórmula de recuadros.
+- **Geometría medida, no a ojo:** toda zona se mide desde los píxeles
+  del arte final (bbox de la cara/zona) antes de montar capas.
+  - Nombre: caja ≈60–65% del ancho de la cara de su franja, ENTERA
+    dentro de la cara con margen en los 4 lados, UNA línea. Capa de
+    texto 2.5–3× más grande que el intento p005 (capa chica = nombre
+    ilegible).
+  - Dato bajo el diseño: pegado visualmente al bloque (separación
+    ≈0.15–0.3"), nunca flotando; el arte deja el hueco con su ratio
+    (zona + dato completos dentro del área de impresión).
+  - **Contraste fuerte obligatorio** sobre la prenda más clara del
+    listing: dorado tenue sobre blanco = FAIL.
+- **Foto del comprador (verificado en vivo 2026-10-20):** la foto entra
+  ENTERA con su proporción (FIT) y su propio fondo — la caja es cota
+  máxima, no molde, y el comprador no puede ajustarla. El marco del
+  arte se diseña **tipo passe-partout**: fondo y borde que absorban
+  fotos verticales u horizontales (la foto tocará solo 2 lados de la
+  caja si su ratio difiere). Formas no rectangulares NO disponibles:
+  la forma la aporta el marco dibujado, no la foto. El listing lleva
+  instrucciones de foto (clara, iluminada, sujeto centrado).
+- **Bordado (pecho 4×4"):** texto corto y bold, sin degradados ni
+  detalle fino; solo fuentes pre-digitalizadas. Sin Live Preview:
+  el arte y las fotos del listing cargan la confianza.
+- **Brief de generación:** el prompt pide la zona explícita (franja
+  vacía de ancho útil ≥60%, marco integrado…) con el resto de la
+  composición completa y cerrada; el gate de composición sigue
+  aplicando igual.
+- **Diseño personalizable = diseño NUEVO y único.** Nunca se convierte
+  ni se copia un diseño que vive en un MPL (duplicado penalizado por
+  Etsy aunque uno sea personalizable — regla 2026-10-16/19). Un diseño
+  existente solo puede inspirar el FORMATO (ej. la franja de p056),
+  no ser la base.
+- **Puerta visual de personalización:** ningún draft personalizable se
+  reporta "listo" sin inspección visual de las capturas del editor con
+  el ejemplo estándar puesto (Maria / RN - ICU): nombre centrado en su
+  zona con márgenes, dato pegado sin solapar, tamaños proporcionales.
+  Los números de un worker no bastan (puerta aprendida 2026-10-18).
 
 ## Calibraciones (mecanismo vs aplicación)
 

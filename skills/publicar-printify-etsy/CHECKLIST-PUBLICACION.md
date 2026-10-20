@@ -1,4 +1,4 @@
-# Checklist de Publicación (2026-10-15, v0.6.0 — flujo MPL)
+# Checklist de Publicación (2026-10-15, v0.6.0 — flujo MPL; 2026-10-20 — track single alineado a la ruta automatizada de personalización, §Track Single-P)
 
 **Regla: ningún listing se declara "publicado" hasta que TODO lo de su
 track esté verificado contra el listing vivo. No hay publicación parcial.
@@ -103,14 +103,17 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] SEO: título ≤140, descripción con disclosure IA, 13 tags (puerta PASS)
 - [ ] Mockups esquema single: 9 (flat ×3 + folded decorado ×3 + 3 lifestyles diferentes, hero = lifestyle)
 - [ ] Rotación de héroes vs el lote (no repetir modelo/color del anterior)
+- [ ] **Personalización (§Track Single-P):** producto y diseño NUEVOS; capas personalizables con nombre contenido+zona, instrucciones con ejemplo [Maria], límites por diseño (nombre 15 / credencial 12 — nunca 1024), ejemplo estándar puesto en la capa, dropdowns en decisiones cerradas; conteo de campos ≤5
+- [ ] Inspección visual de las capturas del editor con el ejemplo (puerta-arte v0.6.0)
 
 ### Publicar + Etsy
-- [ ] Publicar en Printify → estado "Published"
+- [ ] Publicar en Printify (personalización marcada en "Details to publish") → estado "Published"
 - [ ] Videos subidos en Etsy (V1 on-model/lifestyle, V2 flat/folded), puerta PASS
 - [ ] Título, descripción, 13 tags, categoría, atributos verificados
 - [ ] Production partner = Printify; perfil de envío; políticas
-- [ ] **Caja de personalización** configurada (nativa de Etsy) si el diseño la lleva
-- [ ] Precio final verificado por variación en el listing vivo
+- [ ] **Campos de personalización verificados en la página pública** = nombres/instrucciones/límites aprobados (llegan de Printify; JAMÁS se editan en Etsy)
+- [ ] Primera imagen muestra el ejemplo realista puesto; Live Preview (DTG) probado con nombre corto y largo sin desborde
+- [ ] Precio final verificado por variación en el listing vivo (tabla de personalizados, no la estándar)
 - [ ] Registro en `data/tiendas/<tienda-id>/registro-listings.json`, `tipo: "single"`, estado "publicado_completo"
 - [ ] Calendario de descuentos: si `data/tiendas/<id>/config.json → calendario_descuentos` tiene ventanas vigentes que apliquen a este listing, agregarlo (navegador: Marketing → Sales and discounts → editar la oferta/evento → incluir el listing). Nota: las ofertas con 'All listings' incluyen futuros listings automáticamente; los sales events pueden requerir alta manual
 

@@ -83,9 +83,9 @@ históricos conservan la terminología de su época.
 | `estratega-pinterest` | v0.1.2 | Parrilla de Pinterest: 5 pins/día, mix por listing |
 | `onboarding-tienda` | v0.1.3 | Playbook de puesta en marcha: de cero a tienda operativa |
 | `paquete-listing-etsy` | v0.2.0 | Paquete comercial del listing: título, descripción, tags, keywords |
-| `publicar-printify-etsy` | v0.7.3 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
+| `publicar-printify-etsy` | v0.8.0 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
 | `publicador-lote` | v0.1.3 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
-| `puerta-arte-propuesta` | v0.5.3 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
+| `puerta-arte-propuesta` | v0.6.0 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro |
 | `puerta-pinterest-pin` | v0.4.1 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
 
 ## Principios operativos (para quien opere esta app)
