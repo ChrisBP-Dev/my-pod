@@ -167,6 +167,18 @@ propuestas **sigue pausado** en su secuencia.
 esta fase y de la auditoría (ver §Inventario): nunca fue
 decisión del dueño.
 
+**Cierre (2026-10-19):** rama `mejora-v0140` (commit
+`01e931a`) fusionada a `main` en fast-forward
+(`9100c95 → 01e931a`) tras re-verificar que `main` no se
+había movido; rama borrada (local y remota) y worktree
+retirado. **Verificación post-fusión sobre `main`: lint
+VERDE idéntico, regresión VERDE total idéntica a la de la
+rama (48 casos) y `rameli validar` VERDE total — 0 fallos,
+0 avisos — también en el árbol principal.** De esta fase no
+queda nada abierto: el único pendiente del sistema es la
+personalización, en su chat, y la reactivación del cron que
+de ella depende.
+
 ## Pendientes del dueño al abrir esta fase
 
 1. **Dale (o diferimiento con motivo) para P1, P2 y P3** —
