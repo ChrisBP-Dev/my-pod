@@ -65,3 +65,14 @@ revisión no la muestra) — mandó el sistema. La guía NO es canon.
    tabla del config; regla de retiro a 30 días. Recién con su veredicto,
    palabra separada del dueño para reactivar el cron de propuestas con
    cupo de personalizados > 0.
+
+## Cierre (2026-10-20)
+
+Fusionado a `main` con el dale del dueño (fast-forward tras integrar
+`origin/main`, que había recibido el barrido counters: la personalización
+de puerta-arte se renumeró **v0.6.3** sobre su v0.6.2, sin perder
+contenido de ningún lado). Verificación post-fusión en main: lint VERDE,
+regresión VERDE, `rameli validar` 0/0. Rama `personalizacion-paso5`
+borrada (local + remota) y worktree retirado. Siguiente paso de la fase:
+**Paso 6 — piloto**; el cron de propuestas sigue pausado hasta el
+veredicto del piloto y la palabra separada del dueño.
