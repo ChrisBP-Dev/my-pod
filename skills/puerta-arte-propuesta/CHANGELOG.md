@@ -1,5 +1,31 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.6.1 (2026-10-20) — recalibración por grosor (barrido del registro)
+La validación integral que pidió el dueño tras el rescate de p046
+barrió los 47 artes vigentes del registro con el detector v0.6.0 y
+lo adjudicó visualmente: la densidad (área/bbox) sola NO es la
+propiedad — líneas decorativas finas (p043, densidad hasta 0.55)
+y brillos metálicos/ojos (p045/p054/p062) la cruzan igual que un
+relleno. Medido el GROSOR (radio del mayor círculo inscrito):
+rellenos verdaderos de p046 = 14.0–99.5px; líneas = ≤2.8px;
+brillos finos = ≤12.8px.
+- Gate de dos pisos: RELLENO (FAIL) exige ahora también radio
+  >=13px. Sin grosor suficiente el componente se reporta en
+  mediciones como `counters_sospechosos` y no bloquea: zona gris
+  honesta donde conviven rellenos chicos reales (p052: counters
+  de D/R de titular, radio 7.6–14.8) y diseño legítimo.
+- `limpiar-counters.py` limpia por defecto SOLO rellenos duros
+  (con v0.6.0 habría podido comerse las líneas de un diseño bueno);
+  los sospechosos exigen `--incluir-sospechosos` tras adjudicar.
+- Fixture nuevo `arte-lineas-finas.png` (caso P6 de la suite).
+- Hallazgos del barrido (detalle en
+  `docs/AUDITORIA-COUNTERS-2026-10-20.md`): vivos con sospechosos
+  por adjudicar: p043/p045 (falsos positivos confirmados), p052/
+  p054/p055/p056/p058/p062/p063/p067 y publicados p002/p021/p022/
+  p031/p032/p034 (manchas chicas, 1.5–10k px c/u). p047 —que
+  marcaba 19 componentes— fue eliminado por el dueño el mismo
+  2026-10-20 revisando drafts: fuera de alcance.
+
 ## v0.6.0 (2026-10-20) — gate de counters rellenos (caso p046)
 Contexto: p046 "ICU: I Care U" (draft MPL en Printify) traía los
 huecos cerrados de las letras de "Care" (C, a, r, e) con el fondo

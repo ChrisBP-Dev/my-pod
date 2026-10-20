@@ -11,20 +11,31 @@ así que ningún gate lo veía — sin_blanco_puro medía 0.0% y
 sin_blancos_interiores 0.69% (los rellenos son chicos contra el
 bbox completo del diseño).
 
-Detector calibrado (2026-10-20, contra artes buenos y el malo):
+Detector calibrado (2026-10-20, contra artes buenos y el malo;
+recalibrado el mismo día tras el barrido de todo el registro):
 - Semilla: píxel opaco (alfa>128) claro acromático (media>=200,
   spread<=18) — el canon de color de la app: los claros DE DISEÑO
   son crema cálido (spread>18); lo acromático claro es fondo o
   damero, nunca diseño (misma base que la limpieza del damero,
   SKILL.md regla 2026-10-17).
-- Un componente de semilla es RELLENO si área >= 1500px Y densidad
-  (área / bbox) >= 0.25: es una mancha maciza encerrada, no un
-  brillo de trazo ni un sliver de borde.
+- Un componente de semilla es RELLENO (duro) si área >= 1500px Y
+  densidad (área / bbox) >= 0.25 Y GROSOR (radio del mayor círculo
+  inscrito) >= 13px: mancha maciza en AMBAS dimensiones. La
+  densidad sola no basta — el barrido cazó falsos positivos con
+  densidad 0.27-0.66: líneas decorativas de 5-10px de alto (p043,
+  radio <=2.8) y brillos metálicos finos (p045/p062, radio <=12.8).
+  Los 4 rellenos de p046: radio 14.0-99.5.
+- Componentes con área/densidad pero radio < 13 = SOSPECHOSOS:
+  zona gris medida (rellenos chicos reales, p. ej. counters de
+  letras de titular en p052 radio 7.6-14.8, conviven con elementos
+  de diseño como el brillo de un ojo, p054 radio 20.8 — ni el
+  grosor separa esa zona). NO se limpian sin --incluir-sospechosos
+  y adjudicación visual previa; la puerta los reporta, no bloquea.
 - Calibración: conocidos-buenos (vitals canónico, p036 v3, p037 v2,
   p028 y p033 publicados) — ningún componente >=1500px supera
-  densidad 0.108. p046 malo: sus 4 rellenos miden área 2245-51632 y
-  densidad 0.42-0.68. La puerta (gate sin_counters_rellenos en
-  verificar-arte.py) usa este mismo detector.
+  densidad 0.108. p046 malo: área 2245-51632, densidad 0.42-0.68.
+  La puerta (gate sin_counters_rellenos en verificar-arte.py) usa
+  este mismo detector de dos pisos.
 - Cobertura honesta: rellenos chicos (<1500px), tenues o de tono
   cálido NO los caza este detector — siguen en el gate humano.
 
@@ -54,6 +65,7 @@ SEED_MEDIA_MIN = 200
 SEED_SPREAD_MAX = 18
 RELLENO_AREA_MIN = 1500
 RELLENO_DENSIDAD_MIN = 0.25
+RELLENO_RADIO_MIN = 13
 CRECE_MEDIA_MIN = 150
 CRECE_SPREAD_MAX = 55
 RESIDUO_PAD = 6
@@ -72,29 +84,52 @@ def _componentes(mask):
     return out, lab
 
 
-def detectar_rellenos(a):
-    """Rellenos según el detector calibrado, sobre el array RGBA."""
+def _radio_max(mascara_local):
+    """Radio del mayor círculo inscrito en el componente (grosor).
+    El recorte se acolcha con 1px de ceros: si el componente llena
+    su bbox entero (una línea rectangular), sin acolchar no hay
+    ningún cero y distanceTransform devuelve FLT_MAX (bug cazado
+    por el fixture P6, 2026-10-20)."""
+    import cv2
+    padded = np.pad(mascara_local.astype("uint8"), 1)
+    dt = cv2.distanceTransform(padded, cv2.DIST_L2, 5)
+    return float(dt.max())
+
+
+def detectar_rellenos(a, incluir_sospechosos=False):
+    """(rellenos, sospechosos, semilla) según el detector de dos
+    pisos, sobre el array RGBA. Relleno = área+densidad+GROSOR;
+    sospechoso = área+densidad sin grosor (zona gris, adjudicar)."""
     rgb = a[..., :3].astype(int)
     media = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
     semilla = (a[..., 3] > 128) & (media >= SEED_MEDIA_MIN) \
         & (spread <= SEED_SPREAD_MAX)
     comps, lab = _componentes(semilla)
-    rellenos = []
+    rellenos, sospechosos = [], []
     for c in comps:
         densidad = c["area"] / float(c["w"] * c["h"])
-        if c["area"] >= RELLENO_AREA_MIN and densidad >= RELLENO_DENSIDAD_MIN:
-            rellenos.append({**c, "densidad": round(densidad, 3),
-                             "mascara": lab == c["id"]})
-    return rellenos, semilla
+        if c["area"] < RELLENO_AREA_MIN or densidad < RELLENO_DENSIDAD_MIN:
+            continue
+        local = (lab[c["t"]:c["t"] + c["h"],
+                     c["l"]:c["l"] + c["w"]] == c["id"])
+        radio = _radio_max(local)
+        item = {**c, "densidad": round(densidad, 3),
+                "radio": round(radio, 1), "mascara": lab == c["id"]}
+        if radio >= RELLENO_RADIO_MIN or incluir_sospechosos:
+            rellenos.append(item)
+        else:
+            sospechosos.append(item)
+    return rellenos, sospechosos, semilla
 
 
-def limpiar(path_in, path_out):
+def limpiar(path_in, path_out, incluir_sospechosos=False):
     im = Image.open(path_in).convert("RGBA")
     a = np.array(im)
-    rellenos, _ = detectar_rellenos(a)
+    rellenos, sospechosos, _ = detectar_rellenos(a, incluir_sospechosos)
     if not rellenos:
-        return {"rellenos": [], "eliminados_px": 0}
+        return {"rellenos": [], "eliminados_px": 0,
+                "sospechosos_no_tocados": len(sospechosos)}
     rgb = a[..., :3].astype(int)
     media = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
@@ -110,6 +145,7 @@ def limpiar(path_in, path_out):
         zonas.append({"bbox": [r["l"], r["t"], r["w"], r["h"]],
                       "semilla_px": r["area"],
                       "densidad": r["densidad"],
+                      "radio": r["radio"],
                       "quitado_px": int(crecida.sum())})
     # Residuo: componentes opacos chicos enteramente dentro de la
     # zona de un relleno (manchas de textura del fondo).
@@ -131,10 +167,10 @@ def limpiar(path_in, path_out):
     a[quitar, 3] = 0
     if path_out:
         Image.fromarray(a).save(path_out)
-    for z in zonas:
-        z["quitado_px"] += 0  # el residuo se reporta agregado, no por zona
     return {"rellenos": zonas, "residuo_px": n_residuo,
-            "eliminados_px": total}
+            "eliminados_px": total,
+            "sospechosos_no_tocados": 0 if incluir_sospechosos
+            else len(sospechosos)}
 
 
 def main():
@@ -142,8 +178,12 @@ def main():
     ap.add_argument("--archivo", required=True)
     ap.add_argument("--salida", default=None,
                     help="sin --salida solo reporta (no escribe)")
+    ap.add_argument("--incluir-sospechosos", action="store_true",
+                    help="limpia también la zona gris (radio<13): "
+                         "SOLO tras adjudicación visual del dueño/"
+                         "revisor; por defecto no se tocan")
     args = ap.parse_args()
-    res = limpiar(args.archivo, args.salida)
+    res = limpiar(args.archivo, args.salida, args.incluir_sospechosos)
     res["escribio"] = bool(args.salida)
     print(json.dumps(res, ensure_ascii=False, indent=1))
 

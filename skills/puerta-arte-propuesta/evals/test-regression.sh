@@ -57,6 +57,9 @@ else fail=$((fail+1)); echo "FALLA: F9 autotrim seguro esperaba seguro/(1409, 80
 # Buenos de referencia medidos: vitals/p036v3/p037v2/p028/p033 <= 0.108.
 run "F10 counters rellenos" FAIL counters_rellenos --archivo "$SKILL/evals/fixtures/arte-counters-rellenos.png" --ancho-pulgadas 10.5
 run "P5 counters limpios" PASS None --archivo "$SKILL/evals/fixtures/arte-counters-limpios.png" --ancho-pulgadas 10.5
+# P6: líneas finas brillantes de diseño (caso real p043: radio <=2.8,
+# densidad hasta 0.55) NO son rellenos: salen como sospechosos y pasan.
+run "P6 lineas finas de diseno" PASS None --archivo "$SKILL/evals/fixtures/arte-lineas-finas.png" --ancho-pulgadas 10.5
 # La limpieza de counters rescata el fixture malo y la puerta lo pasa.
 python3 "$SKILL/scripts/limpiar-counters.py" --archivo "$SKILL/evals/fixtures/arte-counters-rellenos.png" --salida /tmp/counters-f10.png >/dev/null 2>&1
 out=$(python3 "$V" --archivo /tmp/counters-f10.png --ancho-pulgadas 10.5 2>/dev/null)

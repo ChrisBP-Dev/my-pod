@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.6.0"
+  version: "0.6.1"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.6.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.6.1** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -137,16 +137,24 @@ skill:
   puede calcular (sin cv2/scipy), cae al de masa y lo declara
   (`"masa_fallback"`).
 - **sin_blanco_puro**: blanco puro ≤0.3% (método canónico 2026-10-15).
-- **sin_counters_rellenos** (2026-10-20): ningún componente de la
-  semilla acromática clara (alfa>128, media ≥200, spread ≤18) puede
-  ser una mancha maciza: área ≥1500px Y densidad (área/bbox) ≥0.25.
-  Mide COMPONENTES, no % global — los rellenos de p046 pesaban 0.69%
-  del bbox y 0.0% de blanco puro y pasaban todo. Calibración
-  2026-10-20: buenos conocidos (vitals canónico, p036 v3, p037 v2,
-  p028/p033 publicados) ≤0.108 de densidad en todo componente
-  ≥1500px; los 4 rellenos de p046: 0.42–0.68. Limpieza:
-  `scripts/limpiar-counters.py`. Cobertura honesta: rellenos chicos
-  (<1500px), tenues o cálidos no los caza — siguen en el gate humano.
+- **sin_counters_rellenos** (2026-10-20, recalibrado el mismo día):
+  ningún componente de la semilla acromática clara (alfa>128, media
+  ≥200, spread ≤18) puede ser una mancha maciza en AMBAS dimensiones:
+  área ≥1500px, densidad (área/bbox) ≥0.25 Y grosor (radio inscrito
+  máximo) ≥13px. Mide COMPONENTES, no % global — los rellenos de
+  p046 pesaban 0.69% del bbox y 0.0% de blanco puro y pasaban todo.
+  Calibración: buenos conocidos ≤0.108 de densidad en todo
+  componente ≥1500px; rellenos de p046: densidad 0.42–0.68, radio
+  14.0–99.5. La densidad sola daba falsos positivos (líneas
+  decorativas de p043, radio ≤2.8; brillos finos de p045/p062,
+  ≤12.8): sin grosor, el componente se reporta como
+  `counters_sospechosos` en mediciones y NO bloquea — zona gris
+  medida que adjudica el ojo (ahí conviven rellenos chicos reales,
+  p. ej. p052, con brillos de diseño). Limpieza:
+  `scripts/limpiar-counters.py` (solo rellenos duros; sospechosos
+  solo con `--incluir-sospechosos` tras adjudicar). Cobertura
+  honesta: rellenos <1500px, tenues o cálidos no los caza — siguen
+  en el gate humano.
 - **dpi**: ≥300 al ancho de impresión del producto.
 - **dimensiones**: lado menor ≥3000px (archivo de impresión).
 - **sin_blancos_interiores**: blanco/casi-blanco opaco dentro del bbox ≤8%
