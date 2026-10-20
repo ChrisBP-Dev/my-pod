@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.3"
+  version: "0.6.0"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.5.3** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.6.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -40,6 +40,14 @@ después de 12 mockups.
    Puertas mecánicas; sin este paso el PNG conserva el aire del lienzo
    de generación y el diseño entra chico a Printify — corrección del
    dueño 2026-10-17).
+2c. **Counters rellenos** (2026-10-20): si la verificación marca
+   `sin_counters_rellenos`, limpiar con
+   `scripts/limpiar-counters.py --archivo ARTE.png --salida ARTE-v2.png`
+   y re-verificar. El fondo encerrado en huecos de letras NO es blanco
+   puro ni llega con flood-fill desde el exterior (el contorno lo
+   encierra): el detector es por COMPONENTES (ver Puertas mecánicas)
+   y la limpieza crece solo dentro del contorno oscuro, sin tocar el
+   diseño (verificable por diff: 0 cambios fuera de las zonas).
 3. **Correr** `scripts/verificar-arte.py` (`--archivo`, `--ancho-pulgadas`,
    `--exigir-margen-zoom` en el flujo de propuestas) y, cuando exista
    el crudo, **`--original CRUDO.png`** para la fidelidad de recorte.
@@ -129,6 +137,16 @@ skill:
   puede calcular (sin cv2/scipy), cae al de masa y lo declara
   (`"masa_fallback"`).
 - **sin_blanco_puro**: blanco puro ≤0.3% (método canónico 2026-10-15).
+- **sin_counters_rellenos** (2026-10-20): ningún componente de la
+  semilla acromática clara (alfa>128, media ≥200, spread ≤18) puede
+  ser una mancha maciza: área ≥1500px Y densidad (área/bbox) ≥0.25.
+  Mide COMPONENTES, no % global — los rellenos de p046 pesaban 0.69%
+  del bbox y 0.0% de blanco puro y pasaban todo. Calibración
+  2026-10-20: buenos conocidos (vitals canónico, p036 v3, p037 v2,
+  p028/p033 publicados) ≤0.108 de densidad en todo componente
+  ≥1500px; los 4 rellenos de p046: 0.42–0.68. Limpieza:
+  `scripts/limpiar-counters.py`. Cobertura honesta: rellenos chicos
+  (<1500px), tenues o cálidos no los caza — siguen en el gate humano.
 - **dpi**: ≥300 al ancho de impresión del producto.
 - **dimensiones**: lado menor ≥3000px (archivo de impresión).
 - **sin_blancos_interiores**: blanco/casi-blanco opaco dentro del bbox ≤8%
@@ -170,9 +188,10 @@ skill:
   > in warm cream/off-white tones (never pure white); transparent inside
   > letter counters and enclosed gaps; complete composition, nothing
   > cropped at the edges"
-- **Gate humano**: counters — agujeros de letras (a, e, o, P...) sin fondo
-  metido. El código no distingue un counter limpio de un diseño sin letras;
-  va en el checklist del aprobador.
+- **Gate humano**: counters — los rellenos grandes acromáticos los caza
+  el gate mecánico `sin_counters_rellenos` (2026-10-20); el ojo sigue
+  revisando los agujeros de letras (a, e, o, P...) por rellenos chicos,
+  tenues o de tono cálido, y adjudica cualquier mancha dudosa.
 
 ## Calibraciones (mecanismo vs aplicación)
 
@@ -205,6 +224,16 @@ skill:
   fondo de un color, fondo metido dentro de las letras. El primero lo
   atrapa `fondo_limpio`; el segundo lo revisa el ojo (gate humano
   declarado, no promesa falsa del código).
+- (2026-10-20, caso p046 "ICU: I Care U", cazado por el dueño en
+  Printify) **Counters con el fondo HORNEADO:** el PNG nació
+  "transparente" y pasaba todas las puertas, pero los huecos cerrados
+  de C-a-r-e traían el fondo crema-blanco como píxeles opacos (media
+  ~249/245/237: ni blanco puro, ni conectado al borde, ni pesado
+  contra el bbox). Lección medida: un % global nunca caza una mancha
+  localizada — la propiedad real es el COMPONENTE (tamaño ×
+  densidad × color acromático). Gate `sin_counters_rellenos` +
+  `scripts/limpiar-counters.py` calibrados el mismo día; el gate
+  humano de counters queda para lo chico/tenue/cálido, declarado.
 - (2026-10-17, caso p036 ICU Thankful Heart, cazado por el dueño en el
   mockup) **Damero de "transparencia falsa" horneado en el arte:** el
   generador dibuja los cuadros grises del damero como píxeles reales y

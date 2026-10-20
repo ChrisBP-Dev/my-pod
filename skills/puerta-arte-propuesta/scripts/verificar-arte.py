@@ -78,6 +78,25 @@ Gates mecánicos (código):
      pero los 16/16 caen en contenido_intacto (gate 11: tocan el
      borde del archivo) y la clase se previene en el MECANISMO:
      --autotrim usa el bbox SEGURO. No se declara cobertura que no hay.
+ 13. sin_counters_rellenos (2026-10-20, caso p046 "ICU: I Care U"
+     cazado por el dueño en Printify): los huecos CERRADOS de las
+     letras pueden traer el fondo horneado como píxeles opacos sin
+     que ningún gate anterior lo vea — el fondo encerrado no es
+     blanco puro (media ~249/245/237: sin_blanco_puro medía 0.0%) ni
+     pesa contra el bbox completo (sin_blancos_interiores medía
+     0.69%). Detector: componentes de la semilla acromática clara
+     (alfa>128, media>=200, spread<=18 — el canon de color de la app:
+     los claros de diseño son crema cálido, spread>18; lo acromático
+     claro es fondo o damero) con área >= 1500px Y densidad
+     (área/bbox) >= 0.25 = mancha maciza encerrada (relleno), no
+     brillo de trazo ni sliver de borde. Calibración 2026-10-20:
+     conocidos-buenos (vitals canónico, p036 v3, p037 v2, p028 y
+     p033 publicados) — ningún componente >=1500px supera densidad
+     0.108; p046 malo — sus 4 rellenos: área 2245-51632, densidad
+     0.42-0.68. Si falla: scripts/limpiar-counters.py (crecimiento
+     acotado por el contorno oscuro) y re-verificar. Cobertura
+     honesta: rellenos chicos (<1500px), tenues o de tono cálido NO
+     los caza este gate — siguen en el gate humano de counters.
 
 Reparación: --autotrim --salida <png> recorta al bbox SEGURO + 4px
 (antes: bbox por masa 0.05% — amputaba extremos de baja masa: hojas
@@ -87,8 +106,10 @@ puede calcular (sin cv2/scipy), cae al bbox por masa y lo declara en
 la salida ("autotrim_bbox"). Limpieza: scripts/limpiar-fondo.py
 elimina el blanco puro global (ver método canónico en SKILL.md).
 
-Gate humano (no lo cubre el código):
-  - counters: agujeros de letras (a, e, o, P...) sin fondo metido.
+Gate humano (lo que el código no cubre):
+  - counters: los rellenos GRANDES acromáticos los caza el gate 13;
+    quedan para el ojo los chicos, tenues o de tono cálido, y la
+    adjudicación de cualquier mancha dudosa.
 
 Uso:
   verificar-arte.py --archivo crudo.png --es-original
@@ -142,6 +163,12 @@ FID_BANDA_MAX = 0.02  # fracción del contenido de la banda externa que
                       # puede faltar en el final (pares fieles = 0.0)
 FID_GRID = 200        # rejilla de normalización para la banda
 FID_BANDA_PCT = 3.0   # ancho de la banda externa, % del lado
+# --- gate sin_counters_rellenos (2026-10-20, caso p046) ---
+COUNTER_MEDIA_MIN = 200     # semilla: claro acromático (media>=200,
+COUNTER_SPREAD_MAX = 18     # spread<=18) = fondo/damero, no diseño
+COUNTER_AREA_MIN = 1500     # px: un relleno es mancha, no un brillo
+COUNTER_DENSIDAD_MIN = 0.25  # área/bbox: macizo encerrado vs sliver
+                             # (buenos <=0.108; rellenos p046 0.42-0.68)
 
 
 def bbox_contenido(im):
@@ -438,6 +465,38 @@ def verificar(im, formato, a):
         g8 = bool(pct_puro <= 0.3)
     gates["sin_blanco_puro"] = {"pass": g8, "maximo_pct": 0.3}
     violado = violado or (None if g8 else "blanco_puro_fondo_sin_limpiar")
+    # G13: sin counters rellenos (2026-10-20, caso p046): manchas
+    # macizas de fondo acromático claro encerradas en huecos de
+    # letras. Los gates de % global no las ven (0.0% blanco puro,
+    # 0.69% interiores en p046); este mide COMPONENTES: semilla
+    # acromática clara con área y densidad de mancha. Si falla,
+    # correr scripts/limpiar-counters.py y re-verificar.
+    if bbox is None:
+        g13, med["counters_rellenos"] = False, []
+    else:
+        import numpy as _np2
+        arr13 = _np.array(im)
+        rgb13 = arr13[..., :3].astype(int)
+        media13 = rgb13.mean(axis=2)
+        spread13 = rgb13.max(axis=2) - rgb13.min(axis=2)
+        semilla13 = (arr13[..., 3] > 128) & (media13 >= COUNTER_MEDIA_MIN) \
+            & (spread13 <= COUNTER_SPREAD_MAX)
+        stats13 = _stats_componentes(semilla13)
+        rellenos13 = []
+        if stats13:
+            for (l13, t13, w13, h13, area13) in stats13:
+                dens13 = area13 / float(w13 * h13) if w13 and h13 else 0.0
+                if area13 >= COUNTER_AREA_MIN \
+                        and dens13 >= COUNTER_DENSIDAD_MIN:
+                    rellenos13.append({"bbox": [l13, t13, w13, h13],
+                                       "area_px": area13,
+                                       "densidad": round(dens13, 3)})
+        med["counters_rellenos"] = rellenos13
+        g13 = not rellenos13
+    gates["sin_counters_rellenos"] = {
+        "pass": g13, "area_min_px": COUNTER_AREA_MIN,
+        "densidad_min": COUNTER_DENSIDAD_MIN}
+    violado = violado or (None if g13 else "counters_rellenos")
     # G11: contenido intacto — el bbox SEGURO del final no puede tocar
     # el borde del lienzo (flujo recorte-al-contenido + pad: tocar el
     # borde = algo fue rebanado). Calibración 2026-10-18: mutilados
@@ -566,7 +625,7 @@ def main():
     print(json.dumps({"veredicto": veredicto, "criterio_violado": violado,
                       "gates": gates, "mediciones": med,
                       "reparado": reparado, "autotrim_bbox": autotrim_bbox,
-                      "gate_humano_pendiente": "counters (agujeros de letras)"},
+                      "gate_humano_pendiente": "counters chicos/tenues o de tono calido (la puerta caza los rellenos grandes acromaticos); adjudicar cualquier relleno dudoso"},
                      ensure_ascii=False, indent=1))
     return 0 if veredicto == "PASS" else 1
 

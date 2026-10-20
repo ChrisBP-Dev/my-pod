@@ -50,5 +50,19 @@ tam=$(python3 -c "from PIL import Image; print(Image.open('/tmp/trim-f9.png').si
 if [[ "$tipo" == "seguro" && "$tam" == "(1409, 809)" ]]; then ok=$((ok+1));
 else fail=$((fail+1)); echo "FALLA: F9 autotrim seguro esperaba seguro/(1409, 809), dio '$tipo'/'$tam'"; fi
 
+# Calibración 2026-10-20 (p046 "ICU: I Care U", cazado por el dueño en
+# Printify): counters de letras con el fondo horneado — pasaba TODAS las
+# puertas (% global de blanco casi cero). El gate mide componentes:
+# mancha acromática clara maciza (área>=1500, densidad>=0.25).
+# Buenos de referencia medidos: vitals/p036v3/p037v2/p028/p033 <= 0.108.
+run "F10 counters rellenos" FAIL counters_rellenos --archivo "$SKILL/evals/fixtures/arte-counters-rellenos.png" --ancho-pulgadas 10.5
+run "P5 counters limpios" PASS None --archivo "$SKILL/evals/fixtures/arte-counters-limpios.png" --ancho-pulgadas 10.5
+# La limpieza de counters rescata el fixture malo y la puerta lo pasa.
+python3 "$SKILL/scripts/limpiar-counters.py" --archivo "$SKILL/evals/fixtures/arte-counters-rellenos.png" --salida /tmp/counters-f10.png >/dev/null 2>&1
+out=$(python3 "$V" --archivo /tmp/counters-f10.png --ancho-pulgadas 10.5 2>/dev/null)
+got=$(echo "$out" | python3 -c "import json,sys; print(json.load(sys.stdin)['veredicto'])")
+if [[ "$got" == "PASS" ]]; then ok=$((ok+1));
+else fail=$((fail+1)); echo "FALLA: F10b limpieza de counters esperaba PASS tras limpiar, dio '$got'"; fi
+
 echo "--- $ok ok, $fail fallas ---"
 [[ $fail -eq 0 ]]

@@ -1,5 +1,37 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.6.0 (2026-10-20) — gate de counters rellenos (caso p046)
+Contexto: p046 "ICU: I Care U" (draft MPL en Printify) traía los
+huecos cerrados de las letras de "Care" (C, a, r, e) con el fondo
+crema-blanco horneado como píxeles opacos. El PNG pasaba TODAS las
+puertas (blanco_puro 0.0%, blancos interiores 0.69%): el fondo
+encerrado no es blanco puro (media ~249/245/237), no toca el borde
+y pesa poco contra el bbox completo. Lo cazó el dueño revisando en
+Printify — la clase vivía solo en el gate humano.
+- Nuevo gate `sin_counters_rellenos`: componentes de la semilla
+  acromática clara (alfa>128, media>=200, spread<=18) con área
+  >=1500px y densidad (área/bbox) >=0.25 = relleno. Calibración
+  2026-10-20: buenos conocidos (vitals canónico, p036 v3, p037 v2,
+  p028/p033 publicados) — densidad <=0.108 en todo componente
+  >=1500px; p046 malo — 4 rellenos, densidad 0.42-0.68. Fixtures
+  nuevos `arte-counters-rellenos.png` (FAIL) y
+  `arte-counters-limpios.png` (PASS); suite 16/16.
+- Nuevo `scripts/limpiar-counters.py`: quita los rellenos
+  detectados creciendo sobre la franja clara contigua (el contorno
+  oscuro y saturado actúa de pared; no cruza al diseño) + residuo
+  encerrado. Rescate de p046 verificado por diff: 129,558px, solo
+  alfa->0, 0 cambios de RGB, 0 cambios fuera de las 4 zonas;
+  resultado `p046-print-300dpi-v2.png` con PASS completo
+  (incl. dpi_al_zoom). El reemplazo en los drafts de Printify lo
+  hace el dueño (él reacomoda y aprueba).
+- Cobertura honesta: rellenos <1500px, tenues o de tono cálido
+  siguen fuera del gate mecánico (gate humano, declarado).
+- Hallazgo de la calibración: p047 (mismo lote, "sin tocar" en la
+  corrección de recortes) marca la misma clase en varios
+  componentes (densidad 0.26-0.68) — reportado al dueño, sin tocar:
+  su revisión de ese draft sigue pendiente y el alcance pedido
+  fue p046.
+
 ## v0.5.3 (2026-10-19)
 - Fase de mejora v0.14.0: P1 — el diseño canónico de calibración de la suite vive ahora en `evals/fixtures/` (copia con origen y sha256 registrados en la suite; `K` ya no apunta fuera del repo). P2 — declaradas en el skill las herramientas compartidas `scripts/procesar-arte-propuesta.py` y `scripts/reparar-fondo-casi-blanco.py`.
 
