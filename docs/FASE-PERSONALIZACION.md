@@ -82,3 +82,11 @@ veredicto del piloto y la palabra separada del dueño.
 - **Piloto Paso 6, etapa 1:** 4 diseños producidos y entregados con simulación; el dueño corrigió el criterio de fondo (diseño + franja ≠ personalización con razón) y los 4 quedaron **parqueados como prueba de flujo** — el pipeline mecánico quedó probado, no avanzan a drafts.
 - **Estudio de criterios** (worker de investigación, con fuentes): tipología de 5 razones, patrones P1–P9 con encaje, formatos reales (firma ANCC, vocabulario cerrado, ≤15 caracteres, 1–3 campos). Vive en la carpeta de la fase en el workspace de goals; su contenido operativo quedó escrito en los skills (abajo).
 - **Criterios escritos en el sistema (rama `criterios-personalizacion`):** puerta-arte-propuesta **v0.7.0** (ficha de razón, prueba de borrado, formato profesional, encaje con regla de oro, técnica de zona por lógica de objeto, comodín Maria/RN-ICU retirado, lecciones de proceso del piloto), estratega-tienda **v0.6.0** (doctrina de patrones y ocasiones), publicar-printify-etsy **v0.8.1** (puntero), FLUJO-PIPELINE alineado, config con el piloto marcado parqueado.
+
+**Fusión de criterios (2026-10-20):** rama `criterios-personalizacion`
+fusionada a `main` con el dale del dueño (fast-forward). Verificación
+post-fusión en main: lint VERDE, regresión VERDE, `rameli validar` 0/0.
+Rama borrada (local + remota) y worktree retirado. Estado de la fase:
+el sistema de personalización está COMPLETO (ruta + criterios con
+razón); queda el piloto nuevo bajo el criterio y, tras su veredicto,
+la palabra separada para reactivar el cron de propuestas.
