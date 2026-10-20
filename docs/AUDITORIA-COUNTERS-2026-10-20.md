@@ -97,3 +97,50 @@ Pedida por el dueño tras el rescate de p046: si el flujo está
 Rescate de p046 y corrección del sistema en la rama
 `correccion-p046-counters`; la fusión a main se registra en el
 commit de cierre de esta unidad.
+
+## 7. Addendum del mismo día — adjudicación completa y correcciones aplicadas
+
+Con el dale del dueño («aprovecha que los encontraste y
+corrígelos y mejóralos»), se adjudicó con zooms a resolución
+completa CADA componente marcado en los 15 diseños del barrido
+y se aplicaron las correcciones. Resultado que CORRIGE la
+sección 5 de esta auditoría:
+
+- **El único relleno real del registro era p046.** Los
+  componentes duros de p052 (válvula del tensiómetro), p054
+  (dientes de la enfermera), p063 (fondo crema del bloque
+  tipográfico), p002 (disco del estetoscopio), p022 (luz de la
+  lámpara) y p032 (blanco del ojo del pavo) son DISEÑO. Los
+  sospechosos de p052/p062/p021/p034 son el bisel 3D crema de
+  las letras; los de p043/p045/p053/p055/p056/p058/p067/p031,
+  brillos, líneas y detalles finos. La frase de la sección 5
+  «p052: rellenos chicos probablemente reales» era INCORRECTA:
+  era el bisel. Ningún arte vivo se limpió: limpiar a ciegas
+  habría destruido diseño bueno.
+- **Veredictos registrados** en el registro
+  (`adjudicacion_counters_2026_10_20` en las 15 entradas) para
+  que un barrido futuro no re-marque lo ya juzgado.
+- **Corrección de sistema (puerta-arte-propuesta v0.6.2):** el
+  FAIL de `sin_counters_rellenos` queda definido como
+  «adjudica con el ojo» (paso 2c: zoom por zona → veredicto →
+  recién entonces limpieza), y `limpiar-counters.py` exige el
+  flag `--adjudicado` para escribir (suite 18 casos, F10c
+  nuevo). La lección de calibración: en arte ilustrado de este
+  nicho, geometría y color NO separan relleno de diseño; el
+  gate correcto es el que obliga a mirar barato, en la etapa de
+  propuesta del flujo v2, no el que decide solo.
+- **Los 3 skills sin suite NO son un hueco:** conectar-etsy-api,
+  estratega-pinterest y publicador-lote declaran la ausencia
+  como DECISIÓN (auditoría de adopción 2026-10-19, Propuesta 2,
+  aprobada por el dueño) con su justificación en cada SKILL.md.
+  La recomendación de la sección 6 («crear evals mínimos»)
+  queda RETIRADA: no se repropone trabajo ya decidido.
+- **Pinterest:** el hueco real era de CIERRE, no de contenido:
+  la corrida publica y registra pero ningún documento le decía
+  que commiteara. Corregido en estratega-pinterest v0.1.3
+  (regla de cierre con commit) y en el cron
+  `equipo-pod-pinterest-diario` (paso 6: commit + push +
+  verificación). La corrida del 2026-10-20 quedó saneada a mano
+  en el commit de este cierre. `pin_ultimo`: la convención de
+  facto (URL del pin más reciente) quedó escrita en el skill y
+  en el cron.

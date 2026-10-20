@@ -1,5 +1,28 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.6.2 (2026-10-20) — adjudicación completa: el FAIL es «mira», no «limpia»
+
+Adjudicación con zooms de los 15 diseños que el detector marcaba
+en el registro, y corrección de rumbo:
+
+- **Resultado:** el único relleno real del registro era p046.
+  Los componentes DUROS de p052 (válvula), p054 (dientes), p063
+  (fondo sticker), p002 (estetoscopio), p022 (luz de lámpara) y
+  p032 (ojo) son DISEÑO; los sospechosos de p052/p062/p021/p034
+  son biseles 3D de las letras; el resto, brillos y detalles
+  finos. La v0.6.1 sugería que p052 traía "rellenos chicos
+  probablemente reales": era el bisel — corregido aquí y en
+  SKILL.md.
+- **El FAIL de `sin_counters_rellenos` significa «adjudica con
+  el ojo»** (SKILL.md paso 2c reescrito: zoom por zona →
+  veredicto → recién entonces limpieza). Su valor real: el caso
+  p046 ya no llega a Printify sin que nadie lo mire.
+- **`limpiar-counters.py` exige `--adjudicado` para escribir**
+  (`--salida` sin el flag = error y no escribe; caso F10c nuevo
+  en la suite). Sin esto, correrlo sobre un FAIL habría borrado
+  los dientes de p054 o el ojo de p032.
+- Suite: 18 casos, verde.
+
 ## v0.6.1 (2026-10-20) — recalibración por grosor (barrido del registro)
 La validación integral que pidió el dueño tras el rescate de p046
 barrió los 47 artes vigentes del registro con el detector v0.6.0 y

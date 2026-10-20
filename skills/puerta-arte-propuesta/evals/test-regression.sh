@@ -60,8 +60,14 @@ run "P5 counters limpios" PASS None --archivo "$SKILL/evals/fixtures/arte-counte
 # P6: líneas finas brillantes de diseño (caso real p043: radio <=2.8,
 # densidad hasta 0.55) NO son rellenos: salen como sospechosos y pasan.
 run "P6 lineas finas de diseno" PASS None --archivo "$SKILL/evals/fixtures/arte-lineas-finas.png" --ancho-pulgadas 10.5
+# Sin --adjudicado el script NO escribe (seguridad del barrido
+# 2026-10-20: la mayoría de los duros del registro eran diseño).
+rm -f /tmp/counters-f10c.png
+python3 "$SKILL/scripts/limpiar-counters.py" --archivo "$SKILL/evals/fixtures/arte-counters-rellenos.png" --salida /tmp/counters-f10c.png >/dev/null 2>&1
+if [[ ! -f /tmp/counters-f10c.png ]]; then ok=$((ok+1));
+else fail=$((fail+1)); echo "FALLA: F10c sin --adjudicado no debio escribir"; fi
 # La limpieza de counters rescata el fixture malo y la puerta lo pasa.
-python3 "$SKILL/scripts/limpiar-counters.py" --archivo "$SKILL/evals/fixtures/arte-counters-rellenos.png" --salida /tmp/counters-f10.png >/dev/null 2>&1
+python3 "$SKILL/scripts/limpiar-counters.py" --archivo "$SKILL/evals/fixtures/arte-counters-rellenos.png" --salida /tmp/counters-f10.png --adjudicado >/dev/null 2>&1
 out=$(python3 "$V" --archivo /tmp/counters-f10.png --ancho-pulgadas 10.5 2>/dev/null)
 got=$(echo "$out" | python3 -c "import json,sys; print(json.load(sys.stdin)['veredicto'])")
 if [[ "$got" == "PASS" ]]; then ok=$((ok+1));

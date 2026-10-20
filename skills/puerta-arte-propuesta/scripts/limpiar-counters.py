@@ -26,11 +26,17 @@ recalibrado el mismo día tras el barrido de todo el registro):
   radio <=2.8) y brillos metálicos finos (p045/p062, radio <=12.8).
   Los 4 rellenos de p046: radio 14.0-99.5.
 - Componentes con área/densidad pero radio < 13 = SOSPECHOSOS:
-  zona gris medida (rellenos chicos reales, p. ej. counters de
-  letras de titular en p052 radio 7.6-14.8, conviven con elementos
-  de diseño como el brillo de un ojo, p054 radio 20.8 — ni el
-  grosor separa esa zona). NO se limpian sin --incluir-sospechosos
-  y adjudicación visual previa; la puerta los reporta, no bloquea.
+  zona gris que NO se limpia sin --incluir-sospechosos y
+  adjudicación visual previa; la puerta los reporta, no bloquea.
+- ADJUDICACIÓN DEL BARRIDO (2026-10-20, zooms sobre los 47
+  artes): los componentes DUROS de p052 (válvula del tensiómetro),
+  p054 (dientes), p063 (fondo crema del bloque), p002
+  (estetoscopio), p022 (luz de la lámpara) y p032 (blanco del ojo)
+  son DISEÑO, y los sospechosos de p052/p062 resultaron biseles
+  3D de las letras. El único relleno real era p046. Conclusión
+  operativa: este script NUNCA se corre a ciegas sobre un FAIL
+  del gate — escribir exige el flag --adjudicado, que declara
+  que cada zona ya se vio en zoom y se juzgó relleno.
 - Calibración: conocidos-buenos (vitals canónico, p036 v3, p037 v2,
   p028 y p033 publicados) — ningún componente >=1500px supera
   densidad 0.108. p046 malo: área 2245-51632, densidad 0.42-0.68.
@@ -182,7 +188,19 @@ def main():
                     help="limpia también la zona gris (radio<13): "
                          "SOLO tras adjudicación visual del dueño/"
                          "revisor; por defecto no se tocan")
+    ap.add_argument("--adjudicado", action="store_true",
+                    help="obligatorio para ESCRIBIR (--salida): "
+                         "declara que cada zona marcada ya se vio "
+                         "en zoom y se juzgó RELLENO, no diseño "
+                         "(barrido 2026-10-20: 6 de 7 duros del "
+                         "registro eran diseño — dientes, ojos, "
+                         "biseles; limpiar a ciegas los destruye)")
     args = ap.parse_args()
+    if args.salida and not args.adjudicado:
+        ap.error("--salida exige --adjudicado: genera primero el "
+                 "zoom de cada zona del gate y adjudica con el ojo "
+                 "(SKILL.md paso 2c); sin adjudicar, corre sin "
+                 "--salida para solo reportar")
     res = limpiar(args.archivo, args.salida, args.incluir_sospechosos)
     res["escribio"] = bool(args.salida)
     print(json.dumps(res, ensure_ascii=False, indent=1))

@@ -12,7 +12,7 @@ metadata:
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.6.1** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.6.2** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -40,14 +40,25 @@ después de 12 mockups.
    Puertas mecánicas; sin este paso el PNG conserva el aire del lienzo
    de generación y el diseño entra chico a Printify — corrección del
    dueño 2026-10-17).
-2c. **Counters rellenos** (2026-10-20): si la verificación marca
-   `sin_counters_rellenos`, limpiar con
-   `scripts/limpiar-counters.py --archivo ARTE.png --salida ARTE-v2.png`
-   y re-verificar. El fondo encerrado en huecos de letras NO es blanco
-   puro ni llega con flood-fill desde el exterior (el contorno lo
-   encierra): el detector es por COMPONENTES (ver Puertas mecánicas)
-   y la limpieza crece solo dentro del contorno oscuro, sin tocar el
-   diseño (verificable por diff: 0 cambios fuera de las zonas).
+2c. **Counters rellenos** (2026-10-20, adjudicación primero —
+   corrección del mismo día tras el barrido completo): si la
+   verificación marca `sin_counters_rellenos`, NO se limpia a
+   ciegas: un componente macizo claro puede ser RELLENO (fondo
+   horneado, caso p046) o DISEÑO (dientes, blanco del ojo, luz de
+   lámpara, bisel 3D de las letras — en el barrido del registro,
+   6 de 7 diseños marcados eran diseño; limpiarlos habría borrado
+   partes del arte). Procedimiento: (1) generar el zoom de cada
+   zona reportada sobre fondo negro y adjudicar con el ojo;
+   (2) si es diseño, registrar el veredicto en el registro del
+   diseño (`adjudicacion_counters`) y seguir; (3) si es relleno,
+   limpiar con `scripts/limpiar-counters.py --archivo ARTE.png
+   --salida ARTE-v2.png --adjudicado` (el flag es obligatorio: sin
+   él el script no escribe) y re-verificar. El fondo encerrado en
+   huecos de letras NO es blanco puro ni llega con flood-fill
+   desde el exterior (el contorno lo encierra): el detector es por
+   COMPONENTES (ver Puertas mecánicas) y la limpieza crece solo
+   dentro del contorno oscuro, sin tocar el diseño (verificable
+   por diff: 0 cambios fuera de las zonas).
 3. **Correr** `scripts/verificar-arte.py` (`--archivo`, `--ancho-pulgadas`,
    `--exigir-margen-zoom` en el flujo de propuestas) y, cuando exista
    el crudo, **`--original CRUDO.png`** para la fidelidad de recorte.
@@ -149,12 +160,19 @@ skill:
   decorativas de p043, radio ≤2.8; brillos finos de p045/p062,
   ≤12.8): sin grosor, el componente se reporta como
   `counters_sospechosos` en mediciones y NO bloquea — zona gris
-  medida que adjudica el ojo (ahí conviven rellenos chicos reales,
-  p. ej. p052, con brillos de diseño). Limpieza:
+  que adjudica el ojo. **Calibración honesta (barrido completo
+  del registro, adjudicado con zooms el 2026-10-20):** ni con
+  grosor se separa la clase en arte ilustrado — los componentes
+  DUROS de p052 (válvula), p054 (dientes), p063 (fondo sticker),
+  p002 (estetoscopio), p022 (luz de lámpara) y p032 (ojo) son
+  TODOS diseño; el único relleno real del registro era p046.
+  Por eso el FAIL de este gate significa «adjudica con el ojo»
+  (paso 2c), nunca «limpia directo»: su valor es que el caso
+  p046 ya no llega a Printify sin que nadie lo mire. Limpieza:
   `scripts/limpiar-counters.py` (solo rellenos duros; sospechosos
-  solo con `--incluir-sospechosos` tras adjudicar). Cobertura
-  honesta: rellenos <1500px, tenues o cálidos no los caza — siguen
-  en el gate humano.
+  solo con `--incluir-sospechosos` tras adjudicar; escribir
+  exige `--adjudicado`). Cobertura honesta: rellenos <1500px,
+  tenues o cálidos no los caza — siguen en el gate humano.
 - **dpi**: ≥300 al ancho de impresión del producto.
 - **dimensiones**: lado menor ≥3000px (archivo de impresión).
 - **sin_blancos_interiores**: blanco/casi-blanco opaco dentro del bbox ≤8%
