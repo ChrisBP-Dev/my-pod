@@ -1,5 +1,8 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.8.1 (2026-10-20)
+- §Track Single-P: puntero al vocabulario cerrado y al formato profesional (firma ANCC) que ahora viven en puerta-arte-propuesta v0.7.0; el diseño personalizado llega con su ficha de razón y sus campos definidos (≤3 del comprador por criterio; 5 sigue siendo el tope técnico).
+
 ## v0.8.0 (2026-10-20)
 - **Ruta AUTOMATIZADA de personalización (§Track Single-P)** — cierra el hueco señalado por el dueño el 2026-10-17 (el skill solo contemplaba caja nativa de Etsy + fulfillment manual; la personalización nativa de Printify nunca entró). Procedimiento P1–P7 verificado en vivo en el sandbox de la tienda: campos montados en Printify (producto y diseño NUEVOS; duplicar un diseño del MPL = duplicado penalizado), congelados con la aprobación, jamás editados desde Etsy; la API no expone la configuración de personalización (corrección = editor). Comportamiento verificado: texto escala a la caja; imagen FIT entera con su ratio (sin ajuste del comprador; HEIC = excepción manual); Live Preview en DTG sí, en bordado NO; máx. 5 campos. Órdenes: llegan aplicadas con "Review needed" y se aprueban (la aprobación automática de respaldo queda registrada como NO verificada). Bordado: fuentes pre-digitalizadas, digitalización gratis ≤36 h, handling ~10 días. La ruta manual queda como excepción consciente para el esquema multi-producto manual (P7). Protocolo sandbox para pruebas con Etsy (precio disuasorio, ventana de minutos, desactivar y verificar).
 

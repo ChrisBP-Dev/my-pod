@@ -76,3 +76,9 @@ regresión VERDE, `rameli validar` 0/0. Rama `personalizacion-paso5`
 borrada (local + remota) y worktree retirado. Siguiente paso de la fase:
 **Paso 6 — piloto**; el cron de propuestas sigue pausado hasta el
 veredicto del piloto y la palabra separada del dueño.
+
+## Seguimiento post-cierre (2026-10-20)
+
+- **Piloto Paso 6, etapa 1:** 4 diseños producidos y entregados con simulación; el dueño corrigió el criterio de fondo (diseño + franja ≠ personalización con razón) y los 4 quedaron **parqueados como prueba de flujo** — el pipeline mecánico quedó probado, no avanzan a drafts.
+- **Estudio de criterios** (worker de investigación, con fuentes): tipología de 5 razones, patrones P1–P9 con encaje, formatos reales (firma ANCC, vocabulario cerrado, ≤15 caracteres, 1–3 campos). Vive en la carpeta de la fase en el workspace de goals; su contenido operativo quedó escrito en los skills (abajo).
+- **Criterios escritos en el sistema (rama `criterios-personalizacion`):** puerta-arte-propuesta **v0.7.0** (ficha de razón, prueba de borrado, formato profesional, encaje con regla de oro, técnica de zona por lógica de objeto, comodín Maria/RN-ICU retirado, lecciones de proceso del piloto), estratega-tienda **v0.6.0** (doctrina de patrones y ocasiones), publicar-printify-etsy **v0.8.1** (puntero), FLUJO-PIPELINE alineado, config con el piloto marcado parqueado.

@@ -3,14 +3,14 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.0"
+  version: "0.8.1"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.8.0** — Ruta AUTOMATIZADA de personalización (§Track Single-P):
+**Versión 0.8.1** — Ruta AUTOMATIZADA de personalización (§Track Single-P):
 los campos se montan en Printify y se sincronizan a Etsy con Live Preview;
 verificada en vivo en el sandbox (2026-10-20). La caja nativa de Etsy +
 fulfillment manual queda como excepción consciente (§P8).
@@ -360,7 +360,11 @@ procedimiento.
   práctica el dueño en su revisión (~10 s); el paquete verifica que
   quedó puesto.
 - **Decisiones cerradas = dropdown, no texto libre:** credencial
-  (RN/LPN/CNA/NP…), color de hilo en bordado, etc.
+  (RN/LPN/CNA/NP…), color de hilo en bordado, etc. El vocabulario
+  cerrado vigente y el formato profesional (firma ANCC) viven en
+  `puerta-arte-propuesta` ("Formato profesional real"); el diseño
+  llega con su ficha de razón y sus campos ya definidos (≤3 del
+  comprador por criterio; el tope técnico de la plataforma es 5).
 - Máximo **5 campos** por listing (texto + imagen combinados).
 - Los campos quedan **congelados con la aprobación del dueño**;
   publicación solo verifica. **Jamás se editan desde Etsy** (rompe

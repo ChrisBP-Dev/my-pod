@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.6.3"
+  version: "0.7.0"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.6.3** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.7.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -219,27 +219,89 @@ skill:
   revisando los agujeros de letras (a, e, o, P...) por rellenos chicos,
   tenues o de tono cálido, y adjudica cualquier mancha dudosa.
 
-## Diseños personalizables — criterios de arte (2026-10-20, fase de personalización)
+## Diseños personalizables — criterios (2026-10-20; razón primero, técnica después)
 
 Un arte personalizable pasa TODAS las puertas de arriba **más** estas.
 El procedimiento de campos/publicación vive en `publicar-printify-etsy`
-(§Track Single-P); aquí vive el criterio de diseño.
+(§Track Single-P); aquí vive el criterio de diseño. La base de evidencia
+es el **estudio de criterios de personalización** (2026-10-20: tipología
+de razones, patrones P1–P9 con su encaje, formatos reales); su doctrina
+de patrones vive en `estratega-tienda`.
+
+### La ficha de razón (sin ficha completa, no hay entrega)
+
+Toda propuesta personalizada se entrega con su ficha:
+
+- **Razón** en una frase verificable — identidad / relación / ocasión /
+  conmemoración / pertenencia — nombrando el dato, su dueño y el vínculo
+  ("el nombre de SU mascota junto al de la dueña: la pieza dice
+  'nosotras'"). Si la frase vale igual para un diseño sin personalizar,
+  la propuesta se rechaza: el mercado paga el vínculo, no el hueco.
+- **Prueba de borrado:** sin el dato del comprador, el diseño debe verse
+  INCOMPLETO (un club sin nombre, un badge sin titular, una manga sin
+  los nombres); con el dato, es la pieza terminada. La simulación se
+  entrega en los dos estados.
+- **Campos:** máximo 3 del comprador, cada uno con tipo (texto /
+  dropdown / imagen), límite y opciones. **Nombre ≤15 caracteres;
+  credencial, título y club SOLO desde dropdown** con el vocabulario
+  cerrado de abajo — jamás texto libre para un dato con vocabulario
+  cerrado; año de 4 dígitos.
+- **Comprador / destinatario / ocasión** nombrados; sin ocasión
+  plausible en el calendario de la tienda, la propuesta espera.
+- **Clase de encaje** del patrón (ver § de encaje): (a) automatizable es
+  la norma; (b)/(c) exigen justificación escrita y aprobación expresa
+  como excepción manual — nunca entran disfrazados de automatizables.
+- **Ejemplo de simulación derivado del concepto** (NO un comodín único
+  de tienda): el que un comprador real pondría en ESE concepto, con su
+  formato real; y el **peor caso renderizado** (nombre de 15, roster
+  completo) además del ejemplo bonito.
+
+### Formato profesional real (enfermería)
+
+- **Firma ANCC:** grado más alto → licencia → designación estatal →
+  certificación nacional, con comas y sin puntos: `Jane Smith, BSN, RN,
+  RN-BC`; NP: `Sam Taylor, MSN, APRN, FNP-BC`. Nunca dos grados si hay
+  uno mayor. En formato badge: línea 1 nombre, línea 2 credencial ·
+  unidad. Un formato inventado (el "RN - ICU" sin criterio de la prueba)
+  mata la credibilidad ante una compradora que ES enfermera.
+- **Vocabulario cerrado observado en listings que venden:** RN · BSN ·
+  MSN · LPN · LVN · CNA · PCT · NP · APRN · FNP · PA · MA · CCRN ·
+  unidades ICU · NICU · ER · OR · L&D · Med-Surg · School Nurse ·
+  Emergency Department.
+- **Instrucción al comprador** (patrón de los listings top): ejemplo
+  literal entre paréntesis ("(ex: Melissa, RN)"), límite explícito,
+  "escríbelo EXACTAMENTE como debe aparecer", y qué pasa si lo deja
+  vacío.
+
+### Encaje (regla de oro)
+
+Si el patrón necesita que un humano TOQUE el dato o la imagen antes de
+imprimir (convertir fecha→romanos, ilustrar un retrato, componer un
+personaje), es **manual (b)**. La ruta automatizada **(a)** solo imprime
+tal cual, a escala de caja, lo que el comprador escribió o subió:
+badge pecho/manga, nombre+credencial con dropdown, club+nombre+año,
+roster en UN campo con zona diseñada para lista, foto tal cual en marco
+(con su pérdida declarada). Texto libre genérico sin razón ("tu texto
+aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
+
+### Técnica de zona (la caja de herramientas — manda la razón, no la forma)
 
 - **Nace con su zona integrada.** El arte se genera ya con la zona del
   dato integrada; nada de pegar capas sobre un diseño terminado (error
   de la prueba p005: capas chicas, pegadas al borde, 2ª línea tapada).
   La referencia visual del resultado se deriva del arte real, nunca se
   genera en paralelo.
-- **La forma sigue al diseño y al mercado — no hay plantilla** (corrección
-  del dueño 2026-10-19): franja/banner, texto integrado en la ilustración
-  o en curva, marco de foto, pecho bordado… Las zonas de esta sección son
-  caja de herramientas, no una fórmula de recuadros.
+- **La forma sigue al objeto real que imita** (corrección del dueño
+  2026-10-19, afinada por el estudio): pecho = identidad (título /
+  credencial), manga/muñeca = persona (nombre, roster, iniciales),
+  espalda = nombre grande tipo jersey. Franjas genéricas sin lógica de
+  objeto = la fórmula rechazada el 2026-10-20.
 - **Geometría medida, no a ojo:** toda zona se mide desde los píxeles
-  del arte final (bbox de la cara/zona) antes de montar capas.
-  - Nombre: caja ≈60–65% del ancho de la cara de su franja, ENTERA
-    dentro de la cara con margen en los 4 lados, UNA línea. Capa de
-    texto 2.5–3× más grande que el intento p005 (capa chica = nombre
-    ilegible).
+  del arte final (bbox de la cara/zona) antes de montar capas, y se
+  dimensiona para el PEOR caso del campo.
+  - Nombre: caja ≈60–65% del ancho de la cara de su zona, ENTERA dentro
+    con margen en los 4 lados, UNA línea. Capa de texto 2.5–3× más
+    grande que el intento p005 (capa chica = nombre ilegible).
   - Dato bajo el diseño: pegado visualmente al bloque (separación
     ≈0.15–0.3"), nunca flotando; el arte deja el hueco con su ratio
     (zona + dato completos dentro del área de impresión).
@@ -256,19 +318,31 @@ El procedimiento de campos/publicación vive en `publicar-printify-etsy`
 - **Bordado (pecho 4×4"):** texto corto y bold, sin degradados ni
   detalle fino; solo fuentes pre-digitalizadas. Sin Live Preview:
   el arte y las fotos del listing cargan la confianza.
-- **Brief de generación:** el prompt pide la zona explícita (franja
-  vacía de ancho útil ≥60%, marco integrado…) con el resto de la
-  composición completa y cerrada; el gate de composición sigue
-  aplicando igual.
+- **Brief de generación:** el prompt pide la zona explícita con el
+  resto de la composición completa y cerrada; el gate de composición
+  sigue aplicando igual. Y si el diseño trae elementos que se leen
+  blancos (pelaje, nieve), el prompt los exige **sombreados en crema o
+  gris, nunca blanco puro**: `limpiar-fondo` se come el blanco puro
+  también cuando es diseño (PIL-02 v1 perdió el gorro así; v2 con el
+  pelaje sombreado pasó limpia).
+- **Orden de proceso (verificado 2026-10-20):** cualquier resize va
+  ANTES de `limpiar-fondo`/`limpiar-counters` y con **alfa
+  premultiplicado** — el Lanczos directo sangra el blanco de los
+  píxeles transparentes y recrea la película en los counters después
+  de limpios.
+- **El motivo, íntegro:** los elementos del oficio (estetoscopio y
+  demás) se dibujan completos y conectados con la composición — nunca
+  fragmentos sueltos ni piezas partidas (corrección del dueño
+  2026-10-20: un estetoscopio roto delata generación sin criterio ante
+  quien lo usa a diario). Se verifica por inspección visual del arte
+  final antes de la entrega.
 - **Diseño personalizable = diseño NUEVO y único.** Nunca se convierte
   ni se copia un diseño que vive en un MPL (duplicado penalizado por
-  Etsy aunque uno sea personalizable — regla 2026-10-16/19). Un diseño
-  existente solo puede inspirar el FORMATO (ej. la franja de p056),
-  no ser la base.
+  Etsy aunque uno sea personalizable — regla 2026-10-16/19).
 - **Puerta visual de personalización:** ningún draft personalizable se
   reporta "listo" sin inspección visual de las capturas del editor con
-  el ejemplo estándar puesto (Maria / RN - ICU): nombre centrado en su
-  zona con márgenes, dato pegado sin solapar, tamaños proporcionales.
+  el ejemplo del concepto puesto (y su peor caso): nombre centrado en
+  su zona con márgenes, dato pegado sin solapar, tamaños proporcionales.
   Los números de un worker no bastan (puerta aprendida 2026-10-18).
 
 ## Calibraciones (mecanismo vs aplicación)
@@ -360,15 +434,22 @@ dueño no puede juzgar el resultado. La entrega trae **dos imágenes**:
   cual entrará a Printify.
 - **La SIMULACIÓN** — el resultado esperado: un compuesto
   determinista **sobre el arte real** (nunca una generación paralela:
-  la referencia se deriva del arte verdadero) con el ejemplo estándar
-  de la tienda colocado en cada zona según su geometría medida —
-  Maria en la zona del nombre, RN - ICU en la de la credencial, una
-  foto de muestra en el marco si el diseño lleva imagen. Se entrega
+  la referencia se deriva del arte verdadero) con el **ejemplo derivado
+  del concepto** colocado en cada zona según su geometría medida — el
+  dato que un comprador real pondría en ESE diseño, con su formato
+  real (ver "Formato profesional real" en los criterios), y una foto
+  de muestra en el marco si el diseño lleva imagen. Se entrega
   declarada como simulación: aproxima la tipografía y el color de la
   capa prevista; el render definitivo es el mockup del draft en la
-  revisión de Printify.
+  revisión de Printify. (El comodín único "Maria / RN - ICU" de la
+  primera prueba quedó RETIRADO el 2026-10-20: era un ejemplo casual
+  del dueño aplicado sin criterio — cada concepto trae el suyo.)
 
-Y el porqué de un personalizable declara además, explícito:
+Y el porqué de un personalizable trae su **ficha de razón completa**
+(ver "Diseños personalizables — criterios"): razón en una frase,
+prueba de borrado en dos estados (vacío / con el ejemplo), campos con
+tipo y límites, comprador/destinatario/ocasión, clase de encaje y el
+peor caso renderizado. Y declara además, explícito:
 
 - **Producto destino** (el que la estratega fijó en el config de
   propuestas — al aprobar el arte, el dueño aprueba diseño +

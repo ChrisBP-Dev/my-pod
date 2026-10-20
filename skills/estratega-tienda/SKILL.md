@@ -3,14 +3,14 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.5.3"
+  version: "0.6.0"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Estratega de tienda POD
 
-**Versión 0.5.3** (0.4.0, 2026-10-16: portabilidad de la estrategia de precios —
+**Versión 0.6.0** (0.4.0, 2026-10-16: portabilidad de la estrategia de precios —
 mecanismo + calibración en el skill, valores en el config de cada tienda;
 0.3.0: entrada #7 ledger de ventas — feedback loop M2).
 
@@ -160,6 +160,42 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
    en el config. Esta directriz fija % de cupones + precios juntos.
 7. **Qué NO hacer.** Lista explícita de temas/productos descartados esta
    semana, con motivo.
+
+## Personalizados — doctrina de la razón (2026-10-20, estudio de criterios)
+
+Cuando la directriz pida personalizados (cupo en el config, bloque
+`personalizados`), cada propuesta nace con su **ficha de razón** — el
+detalle de puerta vive en `puerta-arte-propuesta` ("Diseños
+personalizables — criterios"); aquí vive qué patrones proponer y por qué.
+
+- **Las 5 razones** (una por propuesta, declarada en una frase):
+  identidad (el nombre profesional con su credencial, en su formato
+  real), relación (los nombres de SU gente: nietos, amigas, la mascota
+  y su dueña), ocasión (graduación/pinning, aniversario, Navidad de
+  regalo), conmemoración (una fecha o memoria que se guarda),
+  pertenencia (club/turno/unidad + nombre + año). Sin razón declarable
+  no hay propuesta: el mercado paga el vínculo, no el hueco de texto
+  (corrección del dueño 2026-10-20 — "diseño + franja con nombre" es el
+  anti-patrón; los 4 del primer piloto quedaron parqueados por eso).
+- **Patrones que venden y encajan en la ruta automatizada (a):**
+  badge profesional (título/unidad fijo por listing, nombre en manga o
+  pecho — tiendas enteras viven de esta mecánica sobre Printify),
+  nombre + credencial con dropdown cerrado, club + nombre + año EST,
+  roster de relación en UN campo con zona diseñada para lista, foto tal
+  cual en marco passe-partout (declarando la pérdida frente al retrato).
+- **Lo que NO se propone como automatizable:** retrato ilustrado desde
+  foto y fecha convertida a romanos (exigen que un humano toque cada
+  orden = manual (b), solo como excepción aprobada), personaje elegible
+  abierto (c), y texto libre genérico sin razón (c — prohibido por
+  criterio aunque sea imprimible).
+- **Geometría por lógica de objeto:** pecho = identidad, manga/muñeca
+  = persona, espalda = nombre tipo jersey. La estratega declara la
+  zona anatómica en la propuesta; la puerta mide los píxeles.
+- **La ocasión manda el calendario:** personalizados se proponen
+  atados a la ocasión que los compra (Navidad = regalo con nombre,
+  graduaciones de enfermería, Nurse Week, Día de la Madre para el
+  roster de abuela) y al destinatario típico (pareja/familia que regala
+  a la enfermera, o auto-compra de pertenencia al turno).
 
 ## Salida (dos archivos, misma corrida)
 

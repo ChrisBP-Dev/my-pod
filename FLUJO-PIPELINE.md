@@ -39,10 +39,12 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   con el trabajo de drafts ya gastado.)
 - **Diseño personalizable:** la entrega trae el arte real (zonas
   vacías) **más la simulación** del resultado esperado (compuesta
-  sobre el arte real con el ejemplo estándar en las zonas medidas),
-  y el porqué declara producto destino y plan de zonas — detalle en
-  `puerta-arte-propuesta` (entrega, variante personalizable). Su
-  aprobación cubre diseño + producto + zonas.
+  sobre el arte real con el ejemplo derivado del concepto en las
+  zonas medidas), y su **ficha de razón completa** (razón, prueba de
+  borrado, campos, ocasión, encaje, peor caso) con producto destino
+  y plan de zonas — detalle en `puerta-arte-propuesta` (criterios de
+  personalizables + entrega, variante personalizable). Sin ficha no
+  hay entrega. Su aprobación cubre diseño + producto + zonas.
 
 ### 2. Propuesta (drafts en Printify) — Fase B: solo aprobados
 - **Track MPL:** un draft por producto de la composición (default:
