@@ -332,3 +332,70 @@ En `~/workspace/respaldos/my-pod-pre-v0160-2026-10-20/`:
   externo de medios, P4 micro-decisión `.webp`), **sin
   ejecutar** — espera el dale del dueño, como manda el
   framework cuando la orden no lo incluye.
+
+## Mini-purga .webp y remanentes solo-historia (2026-10-21)
+
+Unidad adicional ordenada por el dueño el 2026-10-21
+(«nada corregible queda para después»). El chequeo 5 de
+v0.16.0 no veía fuera de `data/` ni incluía `.webp` en su
+lista (el framework lo corrige en v0.16.1: lista extendida
+webp/avif/heic/heif/gif/bmp/tif/tiff). El censo extendido
+de TODO el historial (las 18 extensiones, por `ls-tree`
+commit a commit — `rev-list --objects` omite blobs reales,
+verificado dos veces: subcuenta 2 rutas de `tmp/`) encontró
+**6 rutas de medios solo-historia** (ausentes del árbol
+actual), todas remanentes ya adjudicados en su día:
+
+- `skills/puerta-publicacion-pod/evals/fixtures/
+  flatlay-v7-historico.webp` (**314,648 B**, blob
+  `db58d7ac…`) — la ruta ordenada: fixture histórica del
+  skill eliminado en la fase de mejora de v0.11.0.
+- Sus dos fixtures hermanas del mismo set dorado del skill
+  eliminado: `desplazado-dx120.jpg` (802,417 B) y
+  `encogido-85.jpg` (782,853 B) — misma clase y mismo
+  origen (subidas juntas el 2026-10-13); dejarlas habría
+  repetido esta purga por el mismo defecto.
+- `artwork-recuperado/` (3 `.png`: 14,800,722 B +
+  4,711,475 B + 2,051,160 B): arte de instancia fuera de
+  `data/`. El commit `bbb1a15` (auditoría de adopción) ya
+  lo había adjudicado: el final se promovió a
+  `data/artes-print/quiet-night-shift-print-300dpi.png`
+  — **byte-idéntico** al blob histórico (sha256
+  `c9db72cb…` en ambos) — y los intermedios se descartaron
+  como sobrantes de generación.
+
+Ejecución, con el mismo patrón de la cirugía mayor:
+
+- **Respaldo previo verificado** en
+  `~/workspace/respaldos/my-pod-pre-purga-webp-2026-10-21/`
+  (bundle `--all`, historia completa en `9c5e8f2`, sha256
+  `1ad4685b…` registrado): todo lo purgado sobrevive ahí.
+- Reescritura con `git-filter-repo` sobre las 6 rutas
+  exactas; conteo de commits preservado (162). Force-push
+  con lease explícito contra `9c5e8f2`:
+  `9c5e8f2 → 031647e` (forced update, sin actividad ajena).
+- **Verificación post-purga:** los 6 blobs ya no existen
+  (`cat-file -e` falla en los 6); censo extendido del
+  historial = **0 `.webp`, 0 bajo `data/`, 0 trackeados
+  bajo `data/`**; lo único que permanece en el historial
+  son dos clases adjudicadas y fuera de esta unidad: los
+  15 fixtures VIVOS de `puerta-arte-propuesta` (calibración
+  del sistema, en HEAD) y los 30 `.jpg` de
+  `tmp/videos-pendientes/` (P2 de la fase de mejora,
+  congelada por orden expresa del dueño en esta misma
+  unidad). Pack: 65.21 MiB → **42.99 MiB**.
+- **La media física de `data/` no se tocó:** manifiesto
+  sha256 **551/551 OK** y 1,770,117,400 bytes idénticos
+  antes y después; el `tmp/` sin trackear intacto (hash
+  `6dc145e9…`).
+- **Puertas post-purga:** lint VERDE; `rameli validar`
+  **0 fallos, 0 avisos**; regresión **VERDE: 53 casos
+  (13+4+3+18+15), 0 fallas**, idéntica a la línea base de
+  la migración, con los mismos 4 avisos preexistentes de
+  skills sin `evals/`.
+- Con esta purga, la propuesta **P4** de la fase de mejora
+  (micro-decisión `.webp`) queda **absorbida**: la lista
+  extendida ya es canon del framework (v0.16.1) y el único
+  `.webp` del repo ya no existe ni en el historial. Las
+  demás propuestas (P1–P3) siguen sin ejecutar, a decisión
+  del dueño.
