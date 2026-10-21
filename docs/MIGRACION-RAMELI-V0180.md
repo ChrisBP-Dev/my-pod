@@ -188,6 +188,9 @@ alineación — no se resolvió en silencio):**
    ritual al registro vivo, unificar las reglas en la
    revisión de viernes, o retirar el ritual conservando
    sus funciones únicas en otro cron.
+   **RESUELTO (2026-10-21)** por decisión del dueño
+   (10:33 EDT, opción A) en la unidad de resolución H12
+   — ver §Resolución del hallazgo #5, abajo.
 6. `equipo-pod-estratega-semanal` — su cuerpo conserva
    una «NOTA 2026-10-19» anclada a la reevaluación del
    override de esa semana (ya ejecutada: la directriz
@@ -227,6 +230,79 @@ alineación — no se resolvió en silencio):**
     barrido automático (extracción de rutas de crons,
     skills, scripts y docs) quedó limpio salvo los
     falsos positivos clasificados arriba.
+
+## Resolución del hallazgo #5 — ritual de viernes H12 (2026-10-21)
+
+**Decisión del dueño (2026-10-21 10:33 EDT): opción A** —
+portar H11/H13 a la app, re-apuntar el ritual al registro
+vivo y unificar la regla de matar en **30 días sin
+tracción**, mandando `equipo-pod-revision-viernes`, con
+verificación de cero contradicciones entre los dos flujos
+de viernes. Brief:
+`~/workspace/migraciones-v0170/brief-pod-h12-resolucion.md`.
+El ritual **no** se retiró y ni su hora ni su cadencia
+cambiaron (viernes 17:50; próxima corrida vie 2026-10-23).
+
+**Ejecutado:**
+
+- **Reglas portadas:** `docs-migrados/reglas-revision-
+  viernes-h11-h13.md` — H11 (formato de registro, reglas
+  de listings, fee bleed, calendario) y H13 (4 condiciones
+  de activación de Ads, reglas de kill de Ads, checklist)
+  con su procedencia registrada (archivos del workspace
+  del goal + fecha). La regla de matar quedó escrita
+  **una sola vez**, en su forma unificada. Los archivos
+  del goal **no** se editaron ni se borraron: quedan como
+  historia y el documento portado declara que la fuente
+  viva es la de la app desde el 2026-10-21.
+- **Ritual re-apuntado** (`cron.update` sobre
+  `pod-ritual-viernes-h12`, verificado con `cron.view` y
+  diff contra el cuerpo previo — el cambio se acota a los
+  pasos 1, 2 y 5): lee el **registro vivo** de la tienda
+  (`data/tiendas/29222324/registro-listings.json` — 56
+  listings — y `ledger-ventas.json`) en vez del ledger
+  congelado de 14 filas; lee las reglas desde su nueva
+  casa en la app; el centro de comando se regenera con la
+  **ruta absoluta declarada** de su script
+  (`~/workspace/goals/pod-etsy-sistema-operativo-q4-2026/
+  hidden_files/centro-de-comando.py` — vive en el goal por
+  diseño del hub). Pasos 3, 4 y 6 intactos; la mecánica
+  de commit D1 ya vigente no cambió.
+- **Alineaciones adicionales cazadas en la misma unidad**
+  (del mismo tipo, dentro de H11): la regla de
+  **observación** de H11 (30 días sin favoritos ni ventas)
+  describía exactamente el estado «sin tracción» — quedó
+  absorbida por la regla de matar unificada y observación
+  queda para lo tibio; el **fee bleed** anclaba su ventana
+  a los 60 días de la regla muerta — quedó anclado a
+  observación/desactivados. Ambas registradas en la tabla
+  de alineación del documento portado.
+
+**Tabla de cero contradicciones — los dos flujos de viernes:**
+
+| Regla | `equipo-pod-revision-viernes` | `pod-ritual-viernes-h12` | Fuente única |
+|---|---|---|---|
+| Matar | sin tracción en 30 días | la misma forma, citada del documento portado | `docs-migrados/reglas-revision-viernes-h11-h13.md` §1.1 |
+| Observación | observar lo tibio | lo tibio: señal sin ventas, sin cumplir la regla de matar | ídem §1.2 |
+| Escala | escalar lo que convierte | convierte + margen verificado (H02) → candidato | ídem §1.3 |
+| Ads (activación y kill) | no lo enuncia — no es su función | 4 condiciones H13 + reglas de kill de Ads | ídem §2 |
+| Fee bleed | no lo enuncia — no es su función | barrido mensual; auto-renew OFF en observación/desactivados | ídem §1.4 |
+| Datos que lee | `registro-listings.json` (vivo) | `registro-listings.json` + `ledger-ventas.json` (vivos) | registro vivo de la tienda |
+| Acta | `revisiones/<fecha>.md` | `revisiones/<fecha>-ritual-h12.md` (misma carpeta, nombre distinto — sin colisión) | cuerpos de ambos crons |
+| Decisiones del dueño | acta para sus decisiones | desactivar/escalar/activar Ads se PRESENTAN, no se ejecutan | cuerpos de ambos crons |
+
+**Marcado (no alineable en esta unidad, nada en
+silencio):** el script del centro de comando
+(`hidden_files/centro-de-comando.py`, propiedad del goal)
+sigue parseando el `ledger-registros.md` congelado del
+goal para su sección de ledger. Corregirlo exige editar
+un archivo del workspace del goal, prohibido en esta
+unidad; queda como pendiente del lado del goal, no de la
+app. La directriz fechada de tienda (semana 2026-10-19,
+`direccion-tienda.md`) cita «la regla de 60 días / 30
+días» como foto de su semana: no es fuente viva y no se
+reescribe historia — las directrices nuevas nacen ya con
+la forma unificada disponible en la app.
 
 ## Fase de mejora v0.17.0 — EJECUTADA (cierre)
 
@@ -271,7 +347,14 @@ nacen de esta unidad, no restos de la fase.
 - **Estado final:** app en Rameli **v0.18.0** con la
   separación de registros **declarada**; fase de mejora
   v0.17.0 **ejecutada completa**; barrido cerrado con
-  cero referencias muertas conocidas en la app, salvo
-  los dos hallazgos marcados para el dueño (§Barrido,
-  ítems 5–6), que son decisiones de producto y quedan
-  vivos en este registro hasta que él los resuelva.
+  cero referencias muertas conocidas en la app. De los
+  dos hallazgos marcados (§Barrido, ítems 5–6): el **#6**
+  quedó cerrado el 2026-10-21 (la NOTA fechada fue
+  retirada del cuerpo de `equipo-pod-estratega-semanal`;
+  verificado por `cron.view` en la unidad de resolución
+  H12: el cuerpo vigente ya no la contiene) y el **#5**
+  quedó **RESUELTO** el 2026-10-21 por decisión del
+  dueño (opción A) en su unidad propia — ver §Resolución
+  del hallazgo #5. **Ningún hallazgo del barrido queda
+  vivo.** (Actualización de este párrafo: unidad de
+  resolución H12, 2026-10-21.)

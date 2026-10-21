@@ -154,3 +154,10 @@ vigente.
   silencio. El ritual NO se retiró en esta unidad: tiene
   funciones no duplicadas (condiciones de activación de
   Ads, fee bleed mensual, centro de comando).
+  **Resolución (2026-10-21):** el dueño aprobó la opción
+  A (portar H11/H13 a `docs-migrados/`, re-apuntar el
+  ritual al registro vivo y unificar la regla de matar
+  en 30 días sin tracción) y la unidad de resolución H12
+  la ejecutó — registro completo y tabla de cero
+  contradicciones en `docs/MIGRACION-RAMELI-V0180.md`,
+  §Resolución del hallazgo #5.
