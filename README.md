@@ -25,9 +25,10 @@ purga de los blobs de medios bajo `data/` de los 161 commits
 histórico) y restauración de la media física a su hogar,
 verificada byte a byte (manifiesto sha256: 551/551 archivos,
 1,770,117,400 bytes, idénticos antes y después). `.git` pasó de
-1.82 GiB de objetos sueltos a un pack de 65.21 MiB; el repo total,
-de 3.6 GB a ~250 MB. Ningún listing se tocó; el archivo sin
-trackear de `tmp/` quedó intacto. Registro completo:
+1.82 GiB de objetos sueltos a un pack de 65.21 MiB y un clon
+limpio del repo pesa 111 MB (el árbol en disco de la instancia,
+con su media física local, 1.8 GB). Ningún listing se tocó; el
+archivo sin trackear de `tmp/` quedó intacto. Registro completo:
 `docs/MIGRACION-RAMELI-V0160.md`.
 
 ## Migración a Rameli v0.15.0 (2026-10-20)

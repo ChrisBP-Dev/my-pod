@@ -266,23 +266,27 @@ En `~/workspace/respaldos/my-pod-pre-v0160-2026-10-20/`:
 - **`rameli validar`**: antes 0 fallos / 1 aviso; después
   **0 fallos, 0 avisos** — chequeo 5 en verde (cero medios
   trackeados bajo `data/` con la política declarada).
-- **Tamaños antes/después:** repo total 3.6 GB → ~250 MB
-  (con la media física restaurada en el árbol); `.git`
-  1.82 GiB de objetos sueltos → pack de **65.21 MiB**;
-  `data/` físico idéntico: 551 archivos / 1,770,117,400
-  bytes antes y después (sha256 551/551).
+- **Tamaños antes/después:** `.git` 1.82 GiB de objetos
+  sueltos → pack de **65.21 MiB**; clon limpio del repo
+  (lo que viaja y se comparte): **111 MB** en total; el
+  árbol en disco de esta instancia pasa de 3.6 GB a 1.8 GB
+  — el resto es la media física local (1.77 GB), que por
+  diseño ya no vive en git. `data/` físico idéntico:
+  551 archivos / 1,770,117,400 bytes antes y después
+  (sha256 551/551).
 - **Prueba de frío:** `git clone` limpio del remoto en
-  `/tmp/clon-frio-v0160` (~70 MB) y `rameli validar` sobre
-  el clon: **sin FALLO** (chequeo 5 en verde en el clon: el
-  clon no contiene ni trackea medio alguno bajo `data/`).
-  Los avisos que el clon muestra son los de ámbito de
-  instancia esperados (zonas de datos que solo existen en
-  esta instancia: p. ej. `data/mockups/` — 250 archivos
-  físicos locales sin ningún archivo de texto — no existe
-  en un clon fresco, y su hogar de historial de instancia
-  se comporta como aviso, no como fallo): es el
-  comportamiento que el estándar v0.16.0 define para un
-  clon de otro dueño o fresco.
+  `/tmp/clon-frio-v0160` (**111 MB**, 300 archivos
+  trackeados, 143 bajo `data/` — todos de texto — y **0
+  medios**) y `rameli validar` sobre el clon: **0 fallos**
+  (chequeo 5 en verde: el clon no contiene ni trackea medio
+  alguno bajo `data/`), con exactamente 2 avisos, ambos el
+  comportamiento de ámbito de instancia que el estándar
+  v0.16.0 define para un clon fresco o de otro dueño:
+  `data/mockups` declarado en el mapa pero ausente (zona de
+  medios puros: 250 archivos físicos solo existen en esta
+  instancia) y `data/auditoria-2026-10-15` declarado en
+  `historial_instancia` pero ausente (aviso de instancia,
+  no declaración podrida).
 - **Consistencia de jobs post-cirugía:** los jobs del Paso 0
   operan sobre este mismo árbol de trabajo (no hay otras
   copias vivas del repo: un solo worktree), ya reescrito y
@@ -294,6 +298,37 @@ En `~/workspace/respaldos/my-pod-pre-v0160-2026-10-20/`:
 
 ## Fusión y cierre
 
-(Se completa en el commit de cierre, como en la migración
-v0.15.0: hashes finales, force-push verificado sin ahead y
-borrado de la rama.)
+- Rama `migracion-rameli-v0160` (commit `8e3a06a` sobre la
+  historia reescrita), fusionada a `main` por fast-forward.
+- **Force-push de la historia reescrita** con lease
+  explícito contra el hash esperado
+  (`--force-with-lease=main:65c2721…`): el remoto seguía en
+  `65c2721` — sin actividad ajena durante la operación — y
+  quedó en `8e3a06a`
+  (`+ 65c2721...8e3a06a main -> main (forced update)`).
+  Era la única rama reescrita (la app vive en una sola rama
+  y un solo worktree); la rama de migración nunca se empujó
+  y se borró local al fusionar.
+- Verificación post-push: `git status -sb` =
+  `## main...origin/main` **sin ahead ni behind** (único
+  rastro en el árbol: el `tmp/paso1-investigacion-
+  personalizacion.md` sin trackear de otro trabajo,
+  intacto, con su hash `6dc145e9…` verificado antes y
+  después); `git ls-remote origin main` = `8e3a06a` =
+  `main` local. Guardia durante el proceso: un `git fetch`
+  intermedio se detuvo a tiempo al detectarse que
+  descargaba la historia vieja completa (el repo local ya
+  no la contiene); su pack temporal parcial se eliminó y
+  `.git` quedó en sus 65.21 MiB.
+- **Consistencia de jobs:** los jobs del Paso 0 que hacen
+  git operan sobre este mismo árbol, ya sobre la historia
+  nueva y sincronizado con el remoto — su próximo
+  `add/commit/push` (Pinterest, mié 2026-10-21 08:50) parte
+  de `main = origin/main` verificado. Ningún job requirió
+  cambios de contenido ni de horario.
+- **La fase de mejora queda abierta con su propuesta**
+  (`docs/FASE-MEJORA-V0160-PROPUESTA.md`: P1 registros de la
+  instancia, P2 `tmp/videos-pendientes/`, P3 respaldo
+  externo de medios, P4 micro-decisión `.webp`), **sin
+  ejecutar** — espera el dale del dueño, como manda el
+  framework cuando la orden no lo incluye.
