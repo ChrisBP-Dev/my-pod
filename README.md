@@ -1,7 +1,34 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.15.0** (pineado en `rameli.json`).
+App construida con Rameli **v0.16.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.16.0 (2026-10-20)
+
+Adoptada por encargo del dueño (My POD en pausa, confirmado por
+él), siguiendo `rameli/MIGRACIONES.md`: pin en `rameli.json`, en
+el frontmatter de los **9 skills** y en las declaraciones vivas
+de sus CHANGELOG. El delta 0.15.0 → 0.16.0 es aditivo y sin
+cambios rompientes: el **estándar de datos de instancia**
+(`rameli/docs/DATOS-INSTANCIA.md`) y el **chequeo 5** de
+`rameli validar`, con el ámbito de instancia del chequeo 4.
+Adopción ejecutada: política
+`datos.politica_instancia.medios_en_git: false` declarada,
+`.gitignore` con el bloque de medios bajo `data/` (el que genera
+`rameli init`) y la zona `data/auditoria-2026-10-15` reclasificada
+de `historial` a `historial_instancia`. Como la app ya versionaba
+medios, la migración incluyó la **cirugía de historial** (ruta de
+reescritura con filtro de la nota de migración): respaldo íntegro
+verificado antes (bundle `--all` + copia del árbol de datos),
+purga de los blobs de medios bajo `data/` de los 161 commits
+(407 rutas: 355 en HEAD + 52 solo históricas, más 1 `.webp`
+histórico) y restauración de la media física a su hogar,
+verificada byte a byte (manifiesto sha256: 551/551 archivos,
+1,770,117,400 bytes, idénticos antes y después). `.git` pasó de
+1.82 GiB de objetos sueltos a un pack de 65.21 MiB; el repo total,
+de 3.6 GB a ~250 MB. Ningún listing se tocó; el archivo sin
+trackear de `tmp/` quedó intacto. Registro completo:
+`docs/MIGRACION-RAMELI-V0160.md`.
 
 ## Migración a Rameli v0.15.0 (2026-10-20)
 

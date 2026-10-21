@@ -9,3 +9,16 @@ data/ventas-csv/*.csv
 data/tiendas/29222324/estado-propuestas.json
 data/tiendas/29222324/estado-pinterest.json
 data/tiendas/29222324/estado-publicacion.json
+# Política de medios — datos de instancia (Rameli, docs/DATOS-INSTANCIA.md):
+# los medios (binarios pesados de producción) viven locales bajo la raíz
+# de datos y NUNCA se trackean en el repo del sistema.
+data/**/*.mp4
+data/**/*.mov
+data/**/*.mkv
+data/**/*.webm
+data/**/*.mp3
+data/**/*.wav
+data/**/*.flac
+data/**/*.png
+data/**/*.jpg
+data/**/*.jpeg

@@ -9,7 +9,7 @@
 
 ## v0.1.2 (2026-10-19)
 - Insumos reubicados a la carpeta de la tienda: `data/tiendas/<tienda-id>/registro-listings.json`, `direccion-tienda.md` y `ledger-ventas.json` (reorden 2026-10-19).
-Skill de app. Pineado a Rameli v0.15.0.
+Skill de app. Pineado a Rameli v0.16.0.
 
 ## v0.1.1 — 2026-10-18
 - Elegibilidad por CLASE de asset del `mapa_assets` verificado del
