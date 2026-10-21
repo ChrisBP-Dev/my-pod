@@ -2,7 +2,7 @@
 
 # Ficha de nicho — _plantilla (H04)
 
-> Copiar como `docs/investigacion/nichos/<slug>.md`. Nada inventado: lo no verificado queda PENDIENTE.
+> Copiar como `docs-migrados/nichos/<slug>.md` (casa vigente de las fichas de nicho en esta app desde el portado del 2026-10-11; corrección de ruta del cierre de alineación v0.18.0, 2026-10-21 — la ruta original `docs/investigacion/nichos/` es la del workspace del goal, no la de esta app). Nada inventado: lo no verificado queda PENDIENTE.
 
 - **Término exacto:**
 - **Producto:**

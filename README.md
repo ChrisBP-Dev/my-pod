@@ -1,7 +1,33 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.17.0** (pineado en `rameli.json`).
+App construida con Rameli **v0.18.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.18.0 — cierre de alineación completo (2026-10-21)
+
+Adoptada como **actualización completa** por mandato del dueño
+(2026-10-21 08:50 EDT), siguiendo `rameli/MIGRACIONES.md` (nota
+0.17.0 → 0.18.0 y la doctrina de actualización completa): pin en
+`rameli.json`, en el frontmatter de los **9 skills** y en las
+declaraciones vivas de sus CHANGELOG. El delta es aditivo y sin
+cambios rompientes: la **declaración del repo de registros**
+(`datos.repo_datos`, `rameli/docs/DATOS-INSTANCIA.md` §4), el
+**ámbito de instancia por separación** en el chequeo 4 de
+`rameli validar` y la doctrina de actualización completa.
+Adopción: la separación D1 ejecutada en v0.17.0 gana su
+declaración canónica — `datos.repo_datos` apunta al repo
+privado **`my-pod-datos`** — y la validación se probó en los
+dos estados: instancia restaurada **0 fallos, 0 avisos** y clon
+de solo sistema **sin FALLO de hogar** (AVISO «registros sin
+restaurar en esta copia»). En la misma operación se ejecutó la
+**fase de mejora v0.17.0 completa**: P1 vía el framework
+(Rameli v0.18.0, PR #9) y P2 en esta app (rutas del ritual de
+los lunes corregidas al layout vigente, con evidencia de
+función propia frente a la investigación semanal), más el
+barrido de referencias muertas en crons vivos, skills, scripts
+y docs operativos. Registro completo:
+`docs/MIGRACION-RAMELI-V0180.md`; auditoría de adopción del
+delta: `docs/AUDITORIA-ADOPCION-V0180.md`.
 
 ## Migración a Rameli v0.17.0 + separación de registros D1 (2026-10-21)
 
