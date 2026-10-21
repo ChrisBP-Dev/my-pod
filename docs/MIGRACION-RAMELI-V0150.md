@@ -145,6 +145,15 @@ en la orden de esta sesión.** Resumen de la auditoría
 
 ## Fusión y cierre
 
-*(Se completa al fusionar: SHA de main resultante, push
-verificado con `git status -sb` sin ahead, rama borrada y
-worktree retirado.)*
+- Rama `migracion-rameli-v0150` (commit `688debc`),
+  fusionada a `main` por fast-forward y empujada:
+  `origin/main = 688debc`, verificado con
+  `git status -sb` (sin ahead; único rastro en el árbol: el
+  `tmp/paso1-investigacion-personalizacion.md` sin trackear
+  de otro trabajo, intacto).
+- Rama `migracion-rameli-v0150` borrada (local; nunca se
+  empujó) y worktrees de la migración y de la base retirados.
+- **La fase de mejora (P1: cerrar B1) se ejecuta a
+  continuación en su rama `mejora-v0150`**, con la
+  autorización de la orden de trabajo de esta sesión; su
+  resultado queda en `docs/FASE-MEJORA-V0150-PROPUESTA.md`.
