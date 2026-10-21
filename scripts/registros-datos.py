@@ -31,7 +31,10 @@ Qué es «registro» (y qué no):
   extensiones del chequeo 5 de Rameli: video/audio/ráster),
   checkpoints locales `data/tiendas/*/estado-*.json`, CSV
   crudos de `data/ventas-csv/` y el contenido transitorio de
-  `data/cola-pins/` (salvo su `.gitkeep`).
+  `data/cola-pins/`.
+- Los `.gitkeep` son **esqueleto**, no registros: cada repo
+  trackea los suyos y el puente NO los sincroniza (ni los
+  copia ni los retira en ningún sentido).
 
 Uso:
     python3 scripts/registros-datos.py commit -m "Pinterest diario 2026-10-21: registro de pins publicados"
@@ -70,6 +73,8 @@ def es_registro(rel):
         return False
     partes = rel.split("/")
     nombre = partes[-1]
+    if nombre == ".gitkeep":
+        return False  # esqueleto: lo trackea cada repo, no se sincroniza
     if os.path.splitext(nombre)[1].lower() in MEDIA_EXTS:
         return False
     # Checkpoints locales de corrida: jamás versionados.
