@@ -242,5 +242,36 @@ nacen de esta unidad, no restos de la fase.
 
 ## Cierre y fusión
 
-_(Se completa en el commit de cierre, tras la fusión —
-como en las unidades anteriores.)_
+- **Rama y fusión:** la unidad se trabajó en la rama
+  `migracion-rameli-v0180` (commits `9b72c0a` — pin,
+  declaración `repo_datos`, README y corrección de la
+  plantilla — y `6118939` — registro, auditoría y fase de
+  mejora ejecutada), fusionada a `main` por
+  **fast-forward** bajo la autorización del brief
+  (`af00e35 → 6118939`), rama local borrada (nunca se
+  empujó al remoto) y push verificado: `git status -sb` =
+  `## main...origin/main` **sin ahead ni behind**;
+  `my-pod-datos` igual, sin ahead (su HEAD del día,
+  `0843bcb`, es de la operación normal vía el puente).
+- **Verificación post-fusión en `main`:** `rameli
+  validar` **0 fallos, 0 avisos**; pin **0.18.0** y
+  `datos.repo_datos` leídos de `rameli.json` ya fusionado;
+  el archivo sin trackear de otro trabajo
+  (`tmp/paso1-investigacion-personalizacion.md`, sha256
+  `6dc145e9…`) intacto antes y después.
+- **Crons tocados en esta unidad (3):**
+  `pod-ritual-lunes-h04` (P2: rutas corregidas +
+  mecánica de commit; verificado con `cron.view`,
+  próxima corrida lun 2026-10-26 07:50),
+  `equipo-pod-propuestas-diarias` (pin v0.18.0 en su
+  cuerpo; sigue **pausado**, como estaba) y
+  `printify-upload-watch` (dato del PNG corregido a 68
+  bytes; predicción de permisos del conector
+  restaurada). Ningún otro cron cambió.
+- **Estado final:** app en Rameli **v0.18.0** con la
+  separación de registros **declarada**; fase de mejora
+  v0.17.0 **ejecutada completa**; barrido cerrado con
+  cero referencias muertas conocidas en la app, salvo
+  los dos hallazgos marcados para el dueño (§Barrido,
+  ítems 5–6), que son decisiones de producto y quedan
+  vivos en este registro hasta que él los resuelva.
