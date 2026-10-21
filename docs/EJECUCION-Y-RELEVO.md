@@ -6,6 +6,35 @@ el registro de adopción por flujo de
 `rameli/docs/EJECUCION-POR-WORKERS.md`. Aquí viven solo las
 calibraciones de ESTA aplicación.
 
+## Corte en las puertas que la ficha declara (Rameli v0.15.0)
+
+Adoptado en la fase de mejora v0.15.0 (P1, 2026-10-20), sobre
+la auditoría `docs/AUDITORIA-ADOPCION-V0150.md` (capacidad
+C24, brecha B1). La doctrina es del framework:
+`rameli/docs/EJECUCION-POR-WORKERS.md`, sección «El corte en
+las puertas que la ficha declara». La regla local: **quien
+corta una unidad para un worker lee primero la ficha de la
+tienda** (`data/tiendas/<id>/config.json`) **y su
+`registro-flujo.md`, y corta la unidad EN la siguiente puerta
+que esos registros declaran**; el brief o manifiesto declara
+su corte. La ausencia de una puerta aplicable se registra,
+no se presume. Por flujo, según la auditoría:
+
+- **F2 Publicación por lote — aplica:** la puerta es la
+  aprobación registrada del dueño sobre MPLs unpublished
+  revisados; el corte vive en `publicador-lote` (paso 0 de
+  su invocación). Un remanente nunca entra en un lote
+  aprobado.
+- **F9 Flujos ad-hoc multi-paso con brief — aplica:** todo
+  brief nuevo declara su corte contra la ficha y el registro
+  de la tienda, o registra que no hay puerta aplicable.
+- **F1 Propuestas — puerta equivalente operando:** la
+  aprobación del dueño entre la Fase A y la Fase B, exigida
+  por el propio flujo con aprobados registrados.
+- **F3–F8 — no aplica**, con el motivo registrado en la
+  auditoría (unidades prefijadas por reloj, vías guiadas con
+  el dueño en vivo, u órdenes directas del dueño).
+
 ## Registro de flujo (calibración)
 
 - Cada tienda lleva su registro de flujo versionado junto a su

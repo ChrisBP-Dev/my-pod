@@ -3,13 +3,20 @@ name: "publicador-lote"
 description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing y rollback."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.5"
+  version: "0.1.6"
   framework_version: "0.15.0"
 ---
 
 # Publicador de lote POD
 
-**Versión 0.1.5** (2026-10-20: la regla «no regenerar» protege
+**Versión 0.1.6** (2026-10-20: chequeo previo al corte en
+## Invocación paso 0 — antes de resolver el manifiesto, el
+agente principal lee la ficha de la tienda y su registro y
+corta el manifiesto EN la puerta de aprobación del dueño:
+solo MPLs unpublished revisados y aprobados; el remanente
+nunca entra y se reporta aparte; el manifiesto declara su
+corte — mecanismo de Rameli v0.15.0, cierra la brecha B1 de
+la auditoría de adopción) · 0.1.5 (2026-10-20: la regla «no regenerar» protege
 videos VÁLIDOS — un video que reprueba la puerta se regenera en
 la fuente; manipularlo para pasar = trampa, ver M6 de
 `publicar-printify-etsy` v0.8.2, incidente p046) · 0.1.4
@@ -48,6 +55,21 @@ al worker; 3) el worker ejecuta el pipeline por listing
 
 ## Invocación (la ejecuta el agente principal, no el worker)
 
+0. **Corte en la puerta que la ficha declara (Rameli v0.15.0).**
+   Antes de resolver el manifiesto, el agente principal lee la
+   ficha de la tienda (`data/tiendas/<id>/config.json`) y su
+   `registro-flujo.md`, y **corta el manifiesto EN la puerta de
+   aprobación del dueño**: solo entra lo que el dueño revisó y
+   aprobó como MPL unpublished — el criterio del dueño
+   (2026-10-20): un producto suelto que nunca se volvió MPL NO
+   fue revisado por él, NO está aprobado y ni siquiera lo
+   conoce; es un remanente de un ensamblaje mal hecho, no
+   parte de ninguna aprobación. Un remanente NUNCA entra en un
+   lote aprobado: se reporta aparte, al cerrar, para que el
+   dueño decida si se ensambla/corrige para su revisión. El
+   manifiesto **declara su corte**: qué puerta lo corta (la
+   aprobación registrada del dueño), qué quedó dentro y qué
+   remanentes quedaron fuera.
 1. El dueño aprueba: responde "publica todos" o dicta la lista en el
    chat de reporte (o en el principal).
 2. El agente principal **resuelve el manifiesto**: lista explícita de

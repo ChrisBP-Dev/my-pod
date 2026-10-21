@@ -54,5 +54,27 @@ documento.
 
 ## Estado de ejecución
 
-*(Se completa al ejecutar la fase en su rama propia; la
-migración no la ejecuta.)*
+**P1 EJECUTADA y cerrada (2026-10-20)**, con la autorización
+de la orden de trabajo de esta sesión (la misma que ordenó la
+contribución a Rameli y las dos migraciones). Cambios:
+
+- `skills/publicador-lote` **v0.1.5 → v0.1.6**: paso 0 en
+  ## Invocación — antes de resolver el manifiesto, el agente
+  principal lee la ficha de la tienda y su registro y corta
+  el manifiesto EN la puerta de aprobación del dueño (solo
+  MPLs unpublished revisados y aprobados; el remanente nunca
+  entra y se reporta aparte al cerrar); el manifiesto
+  declara su corte. Su CHANGELOG gana la entrada v0.1.6 y la
+  nota del desfase histórico (las entradas v0.1.4/v0.1.5 no
+  se escribieron en su día; viven en el encabezado del
+  SKILL.md).
+- `docs/EJECUCION-Y-RELEVO.md`: sección «Corte en las
+  puertas que la ficha declara (Rameli v0.15.0)» con la
+  regla local y la tabla por flujo de la auditoría (F2 y F9
+  aplican, F1 con puerta equivalente, F3–F8 no aplica).
+
+**La brecha B1 de la auditoría de adopción v0.15.0 queda
+cerrada.** Verificación de la fase: lint de la aplicación en
+VERDE, regresión idéntica a la línea base de la migración
+(53 casos, 0 fallas) y `rameli validar` 0/0. Ningún dato de
+producción tocado.
