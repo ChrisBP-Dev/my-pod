@@ -33,12 +33,16 @@ en su ámbito (framework y flujo, respectivamente).
   + `registros-datos.py pull`) valida 0/0 y el clon
   solo-sistema marca FALLO: la señal es honesta pero ciega
   a la causa.
-- **Impacto:** cualquier app que adopte D1 (My Channels
-  está ejecutando la misma separación en su unidad)
-  valida con la semántica correcta en los dos estados
-  (con y sin registros restaurados), y la declaración del
-  repo de datos viaja con el sistema: un clon frío sabe
-  dónde buscar los registros de su instancia.
+- **Impacto:** cualquier app que adopte D1 valida con la
+  semántica correcta en los dos estados (con y sin
+  registros restaurados), y la declaración del repo de
+  datos viaja con el sistema: un clon frío sabe dónde
+  buscar los registros de su instancia. Evidencia de que
+  la necesidad es real: My Channels, en su propia unidad
+  de separación (cerrada la misma noche), ya declaró un
+  puntero `repo_datos` en su `rameli.json` por su cuenta —
+  dos apps inventando el mismo campo es la señal de que
+  el campo debe ser del framework, no de cada app.
 - **Riesgo:** bajo-medio — toca el validador del framework
   (chequeo 4) y el esquema de `rameli.json`; exige sus
   fixtures en la regresión del framework y versión nueva

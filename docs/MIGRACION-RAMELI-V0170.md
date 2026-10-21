@@ -231,5 +231,112 @@ los lunes) — **sin ejecutar**: espera el dale del dueño.
   clon del sistema) valida `rameli validar` sin fallos —
   el detalle va en «Fusión y cierre».
 
-<!-- La sección «Fusión y cierre» se completa tras la purga
-     y los pushes, con los hashes finales de ambos repos. -->
+## Fusión y cierre
+
+- **Rama y fusión:** la migración se trabajó en la rama
+  `migracion-rameli-v0170` (commit `e0041d6` sobre
+  `85c75fa`), fusionada a `main` por fast-forward y borrada
+  (local; nunca se empujó), como manda la puerta de fase.
+  Sobre esa punta se ejecutó la purga; la historia final de
+  `main` es la reescrita (`4ed3ae6` = la migración ya sin
+  `data/`), más dos commits posteriores a la purga: la
+  corrección del puente (`ff872e0`: los `.gitkeep` son
+  esqueleto y no se sincronizan) y el esqueleto (`7144d37`).
+- **Push del sistema (reescritura):** force-push con lease
+  explícito contra el hash esperado
+  (`--force-with-lease=main:85c75fa…`): el remoto seguía en
+  `85c75fa` — sin actividad ajena durante la operación — y
+  quedó en `7144d37` (`+ 85c75fa...7144d37 main -> main
+  (forced update)`). Verificación post-push: `git status
+  -sb` = `## main...origin/main` **sin ahead ni behind**
+  (único rastro en el árbol: el `tmp/` sin trackear de otro
+  trabajo, intacto, sha256 `6dc145e9…` verificado antes y
+  después); `git ls-remote origin main` = `7144d37` = `main`
+  local. Pack final: **29.69 MiB** (de 29.81 MiB: los
+  registros eran texto liviano — el peso del repo es el
+  sistema y sus fixtures de calibración, como debe ser).
+  Commits: 165 → **121** (la purga podó los commits que
+  solo tocaban registros; su historia vive en el repo de
+  datos).
+- **Push de datos:** repo `my-pod-datos` creado vacío y
+  privado en GitHub por el navegador y empujado por SSH:
+  `main` en `19bffd0` (88 commits de historia de registros
+  + el commit de nacimiento con README y `.gitignore`),
+  **sin ahead** (`## main...origin/main`).
+- **Efecto conocido de la purga, resuelto en la unidad:**
+  el `reset --hard` de `git-filter-repo` retiró del árbol
+  de trabajo los 143 archivos que estaban trackeados bajo
+  `data/`; se restauraron en el acto desde el repo de datos
+  con el propio puente (`registros-datos.py pull`) y la
+  verificación contra el manifiesto previo dio **551/551
+  sha256 idénticos** (la media física nunca salió del
+  disco: los 405 archivos de medios y los 3 checkpoints,
+  sin trackear, no los tocó la purga). El árbol físico
+  final tiene 559 archivos: los 551 previos + los 8
+  `.gitkeep` nuevos del esqueleto.
+- **Puertas de cierre (evidencia):**
+  - `rameli validar` sobre la instancia viva (framework en
+    v0.17.0): **0 fallos, 0 avisos** — chequeo 5 en verde,
+    sin aviso de staging.
+  - **Lint** (`rameli lint`, 9 skills): **VERDE** total.
+  - **Regresión** (`rameli test`, 9 skills): **VERDE, 53
+    casos (13+4+3+18+15), 0 fallas**, idéntica a la línea
+    base, con los mismos 4 avisos de skills sin `evals/`.
+    (Las dos suites largas — puerta-arte 18 y
+    puerta-pinterest-pin 15 — se verificaron además por
+    separado con conteos idénticos: su salida conjunta
+    quedó truncada dos veces por el artefacto de corrida
+    en segundo plano, no por la suite.)
+  - **Sistema — clon frío** desde GitHub: **61 MB**, 133
+    archivos trackeados; bajo `data/` solo el esqueleto
+    (**12 `.gitkeep`**); censo de su historial completo por
+    `ls-tree`: **0 rutas de registros** (0 rutas bajo
+    `data/` que no sean `.gitkeep`, en árbol y en los 121
+    commits).
+  - **Datos — clon frío** desde GitHub: 145 archivos
+    trackeados (143 bajo `data/` + README + `.gitignore`),
+    89 commits; su árbol de registros es **idéntico blob a
+    blob (143/143)** al inventario previo al corte.
+  - **Instancia restaurada (prueba combinada):** clon del
+    sistema + clon de datos + `registros-datos.py pull`
+    (139 registros restaurados, hogar de la tienda
+    completo) → `rameli validar`: **0 fallos** y 1 aviso,
+    el de ámbito de instancia por `data/auditoria-
+    2026-10-15` (zona de esta instancia cuyos medios viven
+    solo en la máquina original — el comportamiento que el
+    estándar define). El clon **solo-sistema** sin
+    restaurar marca, en cambio, «hogar incompleto» (los 4
+    archivos requeridos de la tienda): es la señal honesta
+    de una instancia sin sus registros y el hallazgo
+    **B1-17** de la auditoría (propuesta P1 al framework).
+  - **Media física:** manifiesto final contra el previo —
+    los **551 archivos previos, sha256 idénticos**; la
+    media no se movió ni se borró.
+  - **Push sin ahead en AMBOS repos** (verificado con
+    `git status -sb` y `git ls-remote` en cada uno).
+- **Consistencia de crons (verificada uno a uno con
+  `cron.view` y por diff contra su copia previa):** los 8
+  cuerpos con mecánica de commit quedaron re-apuntados
+  solo en ese fragmento — `equipo-pod-pinterest-diario`
+  (próxima corrida: **hoy mié 2026-10-21 08:50**, ya sobre
+  la mecánica nueva), `pod-trend-scan` (jue 2026-10-22
+  09:50), `equipo-pod-revision-viernes` y
+  `pod-ritual-viernes-h12` (vie 2026-10-23 17:50),
+  `equipo-pod-investigacion-semanal` (lun 2026-10-26
+  08:50), `equipo-pod-estratega-semanal` (lun 2026-10-26
+  10:50), `equipo-pod-propuestas-diarias` (deshabilitado;
+  además su línea de pin pasó de v0.12.1 a v0.17.0) y
+  `etsy-sale-25-to-20-oct31` (runonce 2026-10-31; se le
+  sumó el paso de commit de registros que le faltaba).
+  Sin cambios, por no escribir registros en este repo:
+  `equipo-pod-watchdog` y `vigia-actualizaciones-v0170-
+  apps` (solo lectura; leen los archivos físicos, que no se
+  movieron), `pod-ritual-lunes-h04` (sin mecánica git sobre
+  `my-pod`; sus rutas obsoletas son la propuesta P2 de la
+  fase de mejora) y `printify-upload-watch` (no toca el
+  repo).
+- **La fase de mejora v0.17.0 queda abierta con su
+  propuesta** (`docs/FASE-MEJORA-V0170-PROPUESTA.md`: P1
+  declaración del repo de registros en el framework, P2
+  rutas del ritual de los lunes), **sin ejecutar** — espera
+  el dale del dueño.
