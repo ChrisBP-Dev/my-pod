@@ -3,13 +3,17 @@ name: "publicador-lote"
 description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing y rollback."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.4"
+  version: "0.1.5"
   framework_version: "0.14.0"
 ---
 
 # Publicador de lote POD
 
-**Versión 0.1.4** (2026-10-20: checkpoint en dos tiempos por
+**Versión 0.1.5** (2026-10-20: la regla «no regenerar» protege
+videos VÁLIDOS — un video que reprueba la puerta se regenera en
+la fuente; manipularlo para pasar = trampa, ver M6 de
+`publicar-printify-etsy` v0.8.2, incidente p046) · 0.1.4
+(2026-10-20: checkpoint en dos tiempos por
 listing — al INICIAR cada fase (con timestamp) y al completarla,
 nunca en bloque al final de una fase larga; ver P2) · 0.1.3
 (2026-10-19: watchdog obligatorio al lanzar el
@@ -119,6 +123,12 @@ tiene vía API disponible, se usa la vía API. La conexión es por tienda
   regla del sistema).
 - **REGLA DURA:** si `videos.<slug>` existe en disco y el archivo es
   válido → NO regenerar. El video es el paso caro del pipeline.
+  **Alcance exacto:** «válido» = pasó la puerta. Un video que
+  REPRUEBA `verificar-video.py` no está protegido por esta regla:
+  se regenera en la fuente hasta pasar por mérito propio, y está
+  PROHIBIDO reencuadrarlo/recortarlo para inflar la métrica
+  (incidente p046, 2026-10-20; regla completa en M6 de
+  `publicar-printify-etsy` v0.8.2).
 
 ## Fallos: aislados, nunca bloquean el lote
 

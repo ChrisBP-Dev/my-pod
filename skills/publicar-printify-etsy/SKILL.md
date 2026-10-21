@@ -3,13 +3,17 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.1"
+  version: "0.8.2"
   framework_version: "0.14.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.8.2** (2026-10-20: M7 idempotencia de publicación —
+verificar antes de reintentar, el clic de Publish es acción con
+costo; M6 corrección en la fuente — prohibido manipular un video
+reprobado para pasar la puerta. Incidentes p052 y p046.)
 **Versión 0.8.1** — Ruta AUTOMATIZADA de personalización (§Track Single-P):
 los campos se montan en Printify y se sincronizan a Etsy con Live Preview;
 verificada en vivo en el sandbox (2026-10-20). La caja nativa de Etsy +
@@ -259,11 +263,46 @@ El esquema de videos vive en `data/tiendas/<tienda-id>/config.json` →
 - Scripts: `scripts/generar-video-listing.py`; puerta:
   `scripts/verificar-video.py` (movimiento mínimo 3.0) + manifiesto.
 - Criterio: `CRITERIO-VIDEO.md`.
+- **Si la puerta FALLA, se corrige en la FUENTE (2026-10-20,
+  incidente p046 — doctrina del dueño: «eso es hacer trampa para
+  pasar»):** el video se REGENERA con el generador (otra toma del
+  esquema o parámetros corregidos) hasta pasar por mérito propio.
+  **PROHIBIDO** reencuadrar, recortar, acelerar o manipular el
+  artefacto reprobado para inflar la métrica: eso pasa la
+  medición, no la propiedad. Las decisiones de composición del
+  esquema se toman ANTES de generar, nunca como reacción a un
+  FAIL. Si el esquema genuinamente no puede cumplirse, se escala
+  al orquestador ANTES de subir — jamás se documenta después
+  como hecho consumado. (La regla de `publicador-lote` «no
+  regenerar» protege videos VÁLIDOS; un video reprobado no es
+  válido y se regenera.)
 
 ### M7. Publicar el MPL
 - En Printify: publicar el MPL (los componentes ya están adentro).
 - Se sincroniza a Etsy automáticamente (canal conectado).
 - Verificar estado = "Published".
+
+**Idempotencia y resultado incierto (2026-10-20, incidente p052
+— costó $0.20 reales):** cada clic en Publish crea un listing en
+Etsy y cobra su tarifa de publicación; **el clic es una acción
+con costo, no un reintento gratis.** Reglas:
+1. **Antes de publicar:** verificar que el MPL no tenga ya
+   `external.id` ni exista un listing vivo en Etsy originado en
+   él. Si ya existe, NO se publica de nuevo — se adopta el
+   existente y se sigue desde ahí.
+2. **Un solo clic.** Tras clic, la única verdad es la
+   VERIFICACIÓN (poll a `external.id` del producto y a la API de
+   Etsy), nunca el estado de la fila en la UI: está OBSERVADO
+   (p052) que la fila puede volver a «Unpublished» tras una
+   publicación que SÍ se creó en silencio.
+3. **Resultado incierto = STOP y verificar por API.** Jamás un
+   segundo clic sobre un resultado no verificado: el duplicado
+   cuesta otra tarifa, contamina la tienda y su rollback
+   (desactivar) NO devuelve la tarifa cobrada.
+4. Si un barrido posterior detecta un duplicado: desactivarlo de
+   inmediato, registrarlo en la entrada del diseño con el
+   impacto en tarifa, y reportarlo como defecto del sistema, no
+   como nota menor.
 
 ### M8. Verificación en Etsy — FASE C (exhaustiva, 2026-10-15)
 Nada se da por sentado. Verificar contra el listing vivo:
