@@ -1,5 +1,8 @@
 # CHANGELOG — onboarding-tienda
 
+## v0.1.4 (2026-10-21)
+- Separación de registros D1 (migración a Rameli v0.17.0): el cierre de la Fase 6 commitea en el repo que toca — sistema en este repo y registros de la tienda nueva en el repo privado de datos (`my-pod-datos`) vía `scripts/registros-datos.py commit` — verificando ambos sin "ahead".
+
 ## v0.1.3 (2026-10-19)
 - La estructura de tienda nueva nace con su operación dentro de `data/tiendas/<tienda-id>/` (dirección, config, registro, ledger, checkpoints, investigaciones/, revisiones/) — reorden 2026-10-19.
 

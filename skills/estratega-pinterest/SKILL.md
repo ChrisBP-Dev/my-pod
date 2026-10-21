@@ -5,8 +5,8 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.2"
-  framework_version: "0.16.0"
+  version: "0.1.4"
+  framework_version: "0.17.0"
 ---
 
 # Estratega de Pinterest
@@ -121,10 +121,15 @@ PASS no hay cola.
 - Consistencia > volumen: 5 pins todos los días, no 20 un día y cero
   al siguiente.
 - Nada de teoría: cada parrilla cita qué listings rotaron y por qué.
-- **Cierre con commit (2026-10-20):** la corrida que publica pins
+- **Cierre con commit (2026-10-20; re-apuntado por la separación
+  D1, 2026-10-21):** la corrida que publica pins
   ESCRIBE el registro (`pins_pinterest`, `pin_ultimo`) y mueve los
   pin.json a `data/pins-publicados/` — y lo COMMITEA en la misma
-  corrida (regla de la app: escribir = commitear). La corrida del
+  corrida (regla de la app: escribir = commitear). El registro y
+  los pin.json son **registros de la instancia**: el commit va al
+  repo privado de datos (`my-pod-datos`), con
+  `python3 scripts/registros-datos.py commit -m "<mensaje>"`
+  desde la raíz de la app. La corrida del
   2026-10-20 dejó el registro y 5 pin.json sin commitear en el
   árbol: el hueco era que ni este skill ni el cron lo decían.
   Convención del registro: `pin_ultimo` guarda la URL del pin más

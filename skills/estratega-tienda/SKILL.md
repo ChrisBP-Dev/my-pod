@@ -3,8 +3,8 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.6.0"
-  framework_version: "0.16.0"
+  version: "0.6.1"
+  framework_version: "0.17.0"
   regression_suite: "evals/"
 ---
 
@@ -208,15 +208,24 @@ personalizables — criterios"); aquí vive qué patrones proponer y por qué.
    producto, reparto mixto, `flujo_bifurcado: true`, temas, precios,
    vigencia, notas (overrides del dueño). Los dos archivos deben decir
    lo mismo; el JSON es lo que el cron lee.
-3. **Commit en la misma corrida (regla 2026-10-19):** la corrida que
-   escribe la directriz y el config los **commitea y pushea en el
-   acto** (`git status -sb` sin "ahead" al verificar). Una directriz
-   escrita y no commiteada es trabajo sin respaldar y fuente de
-   divergencia entre frentes; la versión anterior queda en el
-   historial de git — ese es el archivo de directrices pasadas, no
-   se crean copias paralelas. Lo mismo aplica a todo documento vivo
-   de la tienda que cualquier agente escriba (registro, ledger,
-   investigaciones, actas): escribir = commitear en la misma corrida.
+3. **Commit en la misma corrida (regla 2026-10-19; re-apuntada por
+   la separación D1, 2026-10-21):** la corrida que escribe la
+   directriz y el config los **commitea y pushea en el acto**. La
+   directriz y el config son **registros de la instancia**: el
+   commit va al repo privado de datos (`my-pod-datos`), con
+   `python3 scripts/registros-datos.py commit -m "<mensaje>"`
+   desde la raíz de la app — el script sincroniza los archivos
+   físicos de `data/` al repo de datos, commitea, pushea y
+   verifica que no quede "ahead". Una directriz escrita y no
+   commiteada es trabajo sin respaldar y fuente de divergencia
+   entre frentes; la versión anterior queda en el historial
+   **del repo de datos** — ese es el archivo de directrices
+   pasadas, no se crean copias paralelas. Lo mismo aplica a todo
+   documento vivo de la tienda que cualquier agente escriba
+   (registro, ledger, investigaciones, actas): escribir =
+   commitear en la misma corrida, **en el repo que toca** —
+   registros al repo de datos (vía el script) y sistema
+   (skills/docs/scripts) con git en este repo.
 
 ## Reglas
 

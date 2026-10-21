@@ -99,21 +99,37 @@ accesible por la app.
   Las investigaciones y las actas, que vivían solo en el log de
   memoria fuera de la app, tienen casa propia en la tienda
   (`investigaciones/`, `revisiones/`).
-- **Escribir = commitear en la misma corrida (regla 2026-10-19):**
+- **Escribir = commitear en la misma corrida (regla 2026-10-19;
+  re-apuntada por la separación D1, 2026-10-21):**
   todo documento vivo de una tienda que un agente escriba
   (directriz, config, registro, ledger, investigación, acta) se
   commitea y pushea en la corrida que lo escribe, con verificación
-  (`git status -sb` sin "ahead"). Un documento vivo sin commitear
+  (sin "ahead" en el repo que toca). Un documento vivo sin commitear
   es trabajo sin respaldar y la causa raíz de registros divergentes
   entre frentes (caso real: la directriz del 2026-10-19 quedó un
   día entero sin guardar).
+- **Mapa de repos (D1, 2026-10-21 — dos repos por aplicación):**
+  el **repo del sistema** (este, `my-pod`) versiona solo sistema
+  (skills, docs, scripts) y el esqueleto de datos (`.gitkeep` de
+  los hogares declarados); los **registros de la instancia** —
+  todo el texto bajo `data/`, por tienda y global — se versionan
+  en el repo privado **`my-pod-datos`** (clon local en
+  `~/workspace/my-pod-datos`), que es además su respaldo (D2).
+  Los archivos físicos no se movieron: viven en `data/` como
+  siempre y los flujos los leen ahí. El puente de versionado es
+  `scripts/registros-datos.py`: `commit -m "<mensaje>"` sincroniza
+  los registros físicos al repo de datos, commitea y pushea;
+  `pull` restaura el árbol físico desde el repo de datos. Los
+  medios no se versionan en ningún repo (política de instancia)
+  y los checkpoints `estado-*.json` tampoco (son locales).
 - **Versiones anteriores de documentos vivos:** la directriz y el
   config son UN archivo vivo por tienda; al rotar se sobrescriben
-  y la versión anterior queda en el historial de git (ese es su
-  archivo — no se crean copias `direccion-anterior.md` ni
-  carpetas paralelas). Investigaciones y actas son fechadas por
-  nombre y se acumulan en su carpeta: son el insumo histórico que
-  la estratega lee, no se sobrescriben ni se borran al rotar.
+  y la versión anterior queda en el historial **del repo de
+  datos** (ese es su archivo — no se crean copias
+  `direccion-anterior.md` ni carpetas paralelas). Investigaciones
+  y actas son fechadas por nombre y se acumulan en su carpeta:
+  son el insumo histórico que la estratega lee, no se
+  sobrescriben ni se borran al rotar.
 
 ## Ciclo de vida de los activos (2026-10-19, criterio del dueño)
 

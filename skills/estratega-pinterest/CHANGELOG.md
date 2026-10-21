@@ -1,5 +1,8 @@
 # Changelog — estratega-pinterest
 
+## v0.1.4 (2026-10-21)
+- Separación de registros D1 (migración a Rameli v0.17.0): el cierre con commit de la corrida de pins se re-apunta al repo privado de datos (`my-pod-datos`) vía `scripts/registros-datos.py commit`. (El frontmatter venía en 0.1.2 con el changelog ya en v0.1.3; esta versión los deja en fase.)
+
 ## v0.1.3 (2026-10-20)
 - Regla de cierre con commit: la corrida que registra pins
   commitea en la misma corrida (la del 2026-10-20 dejó el
@@ -9,7 +12,7 @@
 
 ## v0.1.2 (2026-10-19)
 - Insumos reubicados a la carpeta de la tienda: `data/tiendas/<tienda-id>/registro-listings.json`, `direccion-tienda.md` y `ledger-ventas.json` (reorden 2026-10-19).
-Skill de app. Pineado a Rameli v0.16.0.
+Skill de app. Pineado a Rameli v0.17.0.
 
 ## v0.1.1 — 2026-10-18
 - Elegibilidad por CLASE de asset del `mapa_assets` verificado del

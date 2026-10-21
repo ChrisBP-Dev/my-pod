@@ -1,7 +1,34 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.16.0** (pineado en `rameli.json`).
+App construida con Rameli **v0.17.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.17.0 + separación de registros D1 (2026-10-21)
+
+Adoptada por encargo del dueño (paquete completo confirmado por
+él: D1 + D2), siguiendo `rameli/MIGRACIONES.md`: pin en
+`rameli.json`, en el frontmatter de los **9 skills** y en las
+declaraciones vivas de sus CHANGELOG. El delta 0.16.x → 0.17.0
+es aditivo y sin cambios rompientes: el **ciclo de vida del
+staging** (`rameli/docs/DATOS-INSTANCIA.md` §8) y el aviso de
+`zonas_staging` en el chequeo 5 — adopción ya ejecutada de
+hecho por esta app (`datos.zonas_staging: []` declarado, regla
+en `FLUJO-PIPELINE.md` §5.1 y la purga de `tmp/videos-pendientes/`
+como ejecución de P2), aquí registrada y verificada. En la
+misma unidad se ejecutó la **separación de registros (D1)**,
+la P1 de la fase de mejora v0.16.0: los registros de la
+instancia (todo el texto bajo `data/`) se versionan desde hoy
+en el repo privado **`my-pod-datos`** — creado en GitHub, con
+la historia de los registros separada por rutas (88 commits) —
+y este repo del sistema queda **sin registros en el árbol ni
+en el historial**, conservando el esqueleto de datos
+(`.gitkeep`). Los archivos físicos no se movieron; el ciclo
+«escribir = commitear» commitea en el repo que toca vía
+`scripts/registros-datos.py`. **D2** quedó resuelta por
+decisión del dueño: el respaldo de los registros ES el repo
+de datos en GitHub; los medios quedan sin respaldo externo
+por decisión explícita. Registro completo:
+`docs/MIGRACION-RAMELI-V0170.md`.
 
 ## Migración a Rameli v0.16.0 (2026-10-20)
 
@@ -129,9 +156,9 @@ históricos conservan la terminología de su época.
 | Skill | Versión | Qué puerta |
 |---|---|---|
 | `conectar-etsy-api` | v0.1.1 | Conexión API Etsy por tienda: Seller App → OAuth PKCE → tokens → registro |
-| `estratega-tienda` | v0.6.0 | Dirección semanal de tienda: reparto de foco, mix, guía de precios, NO-hacer |
-| `estratega-pinterest` | v0.1.2 | Parrilla de Pinterest: 5 pins/día, mix por listing |
-| `onboarding-tienda` | v0.1.3 | Playbook de puesta en marcha: de cero a tienda operativa |
+| `estratega-tienda` | v0.6.1 | Dirección semanal de tienda: reparto de foco, mix, guía de precios, NO-hacer |
+| `estratega-pinterest` | v0.1.4 | Parrilla de Pinterest: 5 pins/día, mix por listing |
+| `onboarding-tienda` | v0.1.4 | Playbook de puesta en marcha: de cero a tienda operativa |
 | `paquete-listing-etsy` | v0.2.0 | Paquete comercial del listing: título, descripción, tags, keywords |
 | `publicar-printify-etsy` | v0.8.1 | Drafts en Printify → ensamblaje MPL → publicación en Etsy |
 | `publicador-lote` | v0.1.3 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
@@ -171,6 +198,11 @@ operador original:
 - `docs/REGLA-DELIVERY-CHATS.md` — reportes automáticos en chat nuevo, nunca en archivados.
 
 ## Datos
+
+Los archivos viven físicamente bajo `data/`, como siempre;
+desde la separación D1 (2026-10-21) su **versionado** vive en
+el repo privado `my-pod-datos` (este repo conserva solo el
+esqueleto). Ver el mapa en `ARQUITECTURA-DATOS.md`.
 
 - `data/tiendas/29222324/registro-listings.json` — registro de diseños y listings con sus assets finales aprobados (45 claves, 21 publicados completos al 2026-10-19).
 - `data/banco-keywords/` — bancos de keywords por nicho.

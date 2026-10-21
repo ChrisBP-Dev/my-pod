@@ -3,8 +3,8 @@ name: "onboarding-tienda"
 description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento, conexiones (Etsy API, Printify), activaciones de Etsy, calibración de productos y crons operativos con patrones de resiliencia."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.3"
-  framework_version: "0.16.0"
+  version: "0.1.4"
+  framework_version: "0.17.0"
 ---
 
 # Onboarding de tienda POD
@@ -177,9 +177,14 @@ el reintento lo relee, no lo duplica.
 1. Correr cada gate/eval afectado en verde (`evals/`).
 2. Primera corrida de propuestas supervisada: el dueño revisa los
    drafts en Printify.
-3. Commit + push de todo lo portable (skills, docs, scripts, config
-   **sin secretos**). Verificar `git status` limpio y `origin/main`
-   idéntico.
+3. Commit + push en el repo que toca (separación D1, 2026-10-21):
+   lo portable (skills, docs, scripts) en el repo del sistema, y
+   los registros de la tienda nueva (config **sin secretos**,
+   directriz, registro, ledger) en el repo privado de datos de la
+   instancia (`my-pod-datos`), con
+   `python3 scripts/registros-datos.py commit -m "<mensaje>"`.
+   Verificar **ambos** repos sin "ahead" y `origin/main` idéntico
+   en cada uno.
 4. Estado de ejecución (checkpoints, tokens, colas) → gitignoreado,
    nunca commiteado.
 

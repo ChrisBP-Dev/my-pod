@@ -203,6 +203,7 @@ su ruta en el mismo cambio.**
 | **Conectar Etsy API de una tienda** (F6) | `skills/conectar-etsy-api/SKILL.md` · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
 | **Onboarding de tienda nueva** (F5) | `skills/onboarding-tienda/SKILL.md` · este doc (§Crear tienda desde cero) · `docs/PATRONES-RESILIENCIA.md` (cómo nacen sus crons) |
 | **Trabajos largos con dependencia externa** (cualquier flujo) | `docs/PATRONES-RESILIENCIA.md` (health-check, checkpoints con resume, reintentos acotados) · `docs/REGLA-DELIVERY-CHATS.md` (cómo se entrega el resultado) |
+| **Versionado de registros** (cualquier flujo que escriba bajo `data/`) | `ARQUITECTURA-DATOS.md` (mapa de repos D1: qué se commitea en cada repo) · `scripts/registros-datos.py` (el puente: `commit` sincroniza los registros físicos al repo privado `my-pod-datos`, commitea y pushea; `pull` restaura el árbol físico) |
 | **Mantenimiento del sistema** (F9: migraciones, fases de mejora, contribuciones) | `rameli.json` (pin vigente) · `../rameli/MIGRACIONES.md` y `../rameli/CHANGELOG.md` (proceso y delta) · `../rameli/docs/CONTRIBUCIONES.md` (si el trabajo sube al framework) · `docs/DELIMITACIONES-ADOPCION.md` (§§2–3: orquestación y capa de juicio) · `docs/EJECUCION-Y-RELEVO.md` (registro y relevo) · `data/tiendas/29222324/registro-flujo.md` (estado de los flujos de la tienda) |
 
 Cobertura verificada al adoptar (2026-10-19): los **9 skills

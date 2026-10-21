@@ -6,7 +6,7 @@ license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.7.0"
-  framework_version: "0.16.0"
+  framework_version: "0.17.0"
   regression_suite: "evals/"
 ---
 

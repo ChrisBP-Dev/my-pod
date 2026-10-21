@@ -22,3 +22,10 @@ data/**/*.flac
 data/**/*.png
 data/**/*.jpg
 data/**/*.jpeg
+# Registros de la instancia (D1, 2026-10-21 — repo privado
+# my-pod-datos): el texto bajo data/ se versiona SOLO en el repo
+# de datos, nunca en este repo del sistema. Aquí viaja únicamente
+# el esqueleto: los .gitkeep de los hogares declarados.
+data/**
+!data/**/
+!data/**/.gitkeep

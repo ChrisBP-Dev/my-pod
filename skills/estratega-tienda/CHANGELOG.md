@@ -1,5 +1,8 @@
 # CHANGELOG — estratega-tienda
 
+## v0.6.1 (2026-10-21)
+- Separación de registros D1 (migración a Rameli v0.17.0): el commit de cierre de la directriz y el config-propuestas se re-apunta al repo privado de datos (`my-pod-datos`) vía `scripts/registros-datos.py commit`; la regla «escribir = commitear» ahora nombra el repo que toca (registros → datos, sistema → este repo).
+
 ## v0.6.0 (2026-10-20)
 - **Doctrina de personalizados por la RAZÓN** (estudio de criterios del 2026-10-20 + corrección del dueño): sección nueva — las 5 razones (identidad/relación/ocasión/conmemoración/pertenencia), los patrones que venden y encajan en la ruta automatizada (badge pecho/manga, credencial con dropdown, club+año, roster en un campo, foto en marco), lo que no se propone como automatizable (retrato, romanos, personaje abierto, texto libre sin razón), geometría por lógica de objeto y la ocasión mandando el calendario. Cada propuesta personalizada de la directriz nace con su ficha de razón; el detalle de puerta vive en puerta-arte-propuesta v0.7.0.
 

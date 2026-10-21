@@ -14,12 +14,18 @@ son decisiones de alcance mayor (B1), de material cuyo dueño
 de flujo debe confirmar (B2) o de gasto/servicio (B3), y
 quedan registradas aquí con impacto, riesgo y orden.
 
-**Actualización de estado (2026-10-21):** **P2 EJECUTADA**
+**Actualización de estado (2026-10-21, cierre):** **P1
+EJECUTADA** (decisión D1 del dueño, confirmada el
+2026-10-21 01:09 EDT; evidencia en su sección y en
+`docs/MIGRACION-RAMELI-V0170.md`), **P2 EJECUTADA**
 (decisión del dueño de 2026-10-21 00:39 EDT; evidencia en
-su sección) y **P4 ABSORBIDA** (Rameli v0.16.1 extendió la
-lista canónica y la mini-purga eliminó el único `.webp`;
-nota en su sección). **P1 y P3 siguen en propuesta**,
-pendientes de su decisión.
+su sección), **P3 RESUELTA por la decisión D2 del dueño**
+(el respaldo de los registros ES el repo de datos de D1;
+los medios quedan sin respaldo externo por decisión
+explícita; nota en su sección) y **P4 ABSORBIDA** (Rameli
+v0.16.1 extendió la lista canónica y la mini-purga eliminó
+el único `.webp`; nota en su sección). **La fase de mejora
+v0.16.0 queda CERRADA: sus cuatro propuestas resueltas.**
 
 ## P1 — Separar los registros de la instancia del repo del sistema (B1)
 
@@ -43,6 +49,27 @@ pendientes de su decisión.
   este repo». Exige su propio brief, su ventana con la
   tienda en pausa y migración de los flujos por fases.
 - **Orden:** 3 — después de P2/P3, y solo con brief propio.
+
+- **EJECUTADA el 2026-10-21 — decisión D1 del dueño**
+  (paquete completo confirmado el 2026-10-21 01:09 EDT),
+  como alcance de la unidad «actualización oficial a Rameli
+  v0.17.0 + separación de registros», con su brief propio
+  (`~/workspace/migraciones-v0170/brief-my-pod-v0170.md`).
+  **Evidencia:** repo privado `my-pod-datos` creado en
+  GitHub (cuenta ChrisBP-Dev, por el navegador); la historia
+  de los registros se separó por rutas `data/` desde los 164
+  commits del sistema (88 commits tocan registros; árbol de
+  registros idéntico blob a blob, 143/143); el repo del
+  sistema se reescribió sin registros en árbol ni en
+  historial, conservando el esqueleto (`.gitkeep` de los
+  hogares declarados); la regla «escribir = commitear» se
+  re-apuntó en `ARQUITECTURA-DATOS.md`, en los skills
+  estratega-tienda v0.6.1, estratega-pinterest v0.1.4 y
+  onboarding-tienda v0.1.4 y en los cuerpos de los crons
+  vivos de la tienda — registros al repo de datos vía
+  `scripts/registros-datos.py`, sistema a este repo — y la
+  media física quedó intacta (manifiesto sha256 551/551).
+  Registro completo: `docs/MIGRACION-RAMELI-V0170.md`.
 
 ## P2 — Resolver `tmp/videos-pendientes/` (B2)
 
@@ -124,6 +151,24 @@ pendientes de su decisión.
   lo que el estándar exige es que sea explícita.
 - **Orden:** 2 — decisión suya; la ejecución, si la elige,
   es mecánica.
+
+- **RESUELTA el 2026-10-21 por la decisión D2 del dueño**
+  (conversación de la actualización a v0.17.0, confirmada
+  con el paquete el 2026-10-21 01:09 EDT): **sin servicios
+  pagos, sin cuentas nuevas y sin flujos extra de respaldo**
+  — el respaldo versionado de los registros ES el repo
+  privado de datos de P1 (`my-pod-datos` en GitHub, gratis;
+  el sistema commitea solo, el respaldo es el flujo), y los
+  **medios quedan sin respaldo externo por decisión
+  explícita**: son temporales por diseño, los finales viven
+  en las plataformas (Etsy/Printify) y el staging se purga
+  al cierre de su flujo; el riesgo de perder crudos no
+  publicados si la máquina cayera queda aceptado. La copia
+  local verificada de la migración a v0.16.0
+  (`~/workspace/respaldos/my-pod-pre-v0160-2026-10-20/`)
+  sigue como referencia local. No queda decisión: la
+  responsabilidad de respaldo de cada clase quedó cerrada
+  por decisión, como exige el estándar.
 
 ## P4 — Micro-decisión: `.webp` en el bloque local de `.gitignore`
 
