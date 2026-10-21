@@ -4,7 +4,7 @@ description: "Estratega/administrador de la tienda POD: revisa investigación, t
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.6.0"
-  framework_version: "0.14.0"
+  framework_version: "0.15.0"
   regression_suite: "evals/"
 ---
 

@@ -1,7 +1,29 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.14.0** (pineado en `rameli.json`).
+App construida con Rameli **v0.15.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.15.0 (2026-10-20)
+
+Adoptada por encargo del dueño, siguiendo `rameli/MIGRACIONES.md`:
+pin en `rameli.json`, en el frontmatter de los **9 skills** y en
+las declaraciones vivas de sus CHANGELOG. El delta 0.14.0 →
+0.15.0 es un solo mecanismo, aditivo y sin cambios rompientes:
+el deber del orquestador de leer la ficha y cortar la unidad en
+las puertas que la ficha declara (contribución PR #8 de Rameli).
+Antes de migrar se verificó el trabajo en vuelo: el lote de
+publicación Thanksgiving gestionado desde otro chat quedó
+**cerrado y commiteado** (11/11, `9ba2776`) minutos antes de
+abrir la migración — nada en curso que pisar; el archivo sin
+trackear de `tmp/` (investigación de otro trabajo) no se tocó.
+La auditoría de adopción (no diferible) auditó flujo por flujo
+dónde aplica el deber: aplica en la publicación por lote y en
+los briefs ad-hoc (brecha B1: el corte no estaba escrito donde
+la app corta), con puerta equivalente dentro del flujo de
+propuestas y no-aplica motivado en el resto; su implementación
+es la fase de mejora de esta migración, ejecutada con el dale
+del dueño dado en la orden de la sesión. Ningún dato se tocó.
+Registro completo: `docs/MIGRACION-RAMELI-V0150.md`.
 
 ## Migración a Rameli v0.14.0 (2026-10-19)
 
