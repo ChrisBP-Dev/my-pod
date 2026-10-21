@@ -40,3 +40,12 @@ Script origen: `especialistas-pod/files/disenos/propuestas-2026-10-11/p003/scrat
 
 ## Implementación
 Script: `scripts/generar-video-listing.py` (réplica del script origen)
+
+## Staging y ciclo de vida
+Los intermedios de la generación (frames, tomas de trabajo,
+manifiestos) viven en una zona de staging **declarada** en
+`datos.zonas_staging` de `rameli.json` y se purgan al cierre
+verificado del flujo, como parte del cierre — la regla
+completa vive en `FLUJO-PIPELINE.md` §5.1. Los videos
+finales viven en `data/videos/`; ningún consumidor lee el
+staging.

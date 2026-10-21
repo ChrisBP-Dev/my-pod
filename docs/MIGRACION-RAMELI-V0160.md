@@ -399,3 +399,25 @@ Ejecución, con el mismo patrón de la cirugía mayor:
   `.webp` del repo ya no existe ni en el historial. Las
   demás propuestas (P1–P3) siguen sin ejecutar, a decisión
   del dueño.
+
+## Ejecución de P2 — eliminación de `tmp/videos-pendientes/` (2026-10-21)
+
+Por decisión del dueño (2026-10-21 00:39 EDT) se ejecutó
+la propuesta **P2** de la fase de mejora: eliminar
+`tmp/videos-pendientes/` por completo — tracking, historial
+y disco. El registro completo de la ejecución (decisión,
+criterio y evidencia) vive en
+`docs/FASE-MEJORA-V0160-PROPUESTA.md`, sección P2. Resumen
+verificable: respaldo previo en
+`~/workspace/respaldos/my-pod-pre-purga-p2-2026-10-21/`
+(bundle verificado en `cec7aac`); force-push con lease
+`cec7aac → 9379608`; censo de la ruta **0 en disco y 0 en
+los 163 commits**; pack 42.99 MiB → **29.81 MiB**; el
+censo extendido del historial completo queda solo con los
+15 fixtures vivos del sistema; `data/` físico intacto
+(551/551). La ejecución trajo además, por orden suya, el
+**criterio de ciclo de vida del staging al canon local**:
+regla escrita en `FLUJO-PIPELINE.md` §5.1 (puntero en
+`CRITERIO-VIDEO.md`) y declaración `datos.zonas_staging:
+[]` en `rameli.json` — la app no reconoce hoy ninguna zona
+de staging viva. P1 y P3 siguen en propuesta.

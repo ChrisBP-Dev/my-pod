@@ -108,6 +108,44 @@ lifestyles diferentes, hero = lifestyle).
 - Criterio: `CRITERIO-VIDEO.md` (1080×1080, 9.5s, zoom sin temblor, fade 0.5s).
 - Puerta: `scripts/verificar-video.py`.
 
+### 5.1 Staging de video — ciclo de vida (2026-10-21)
+
+Regla de la app, alineada con el estándar de datos de
+instancia del framework (`rameli/docs/DATOS-INSTANCIA.md`):
+
+- Toda zona de staging — la carpeta temporal donde un
+  flujo deposita frames, tomas intermedias, manifiestos de
+  generación o cualquier material de trabajo — **nace
+  declarada**: antes de crearla, o en el mismo acto, se
+  anota en `datos.zonas_staging` de `rameli.json` con su
+  flujo dueño y su condición de cierre. Una zona de
+  staging no declarada es un remanente en formación.
+- Al **cierre verificado** del flujo (salidas publicadas o
+  promovidas a su hogar canónico y registro completo), el
+  staging **se purga como parte del cierre**: sale del
+  tracking, del historial si llegó a versionarse, y del
+  disco. El cierre no está completo mientras el staging
+  siga vivo.
+- Un staging **solo sobrevive** con un consumidor vivo
+  declarado en su misma declaración (quién lo lee y para
+  qué) **y fecha de revisión**; vencida la fecha sin
+  consumidor, se purga en la corrida que lo detecte.
+- Los medios de staging no se versionan como si fueran
+  datos. Si un intermedio merece conservarse, se
+  **promueve** a su hogar canónico (`data/videos/` para
+  los videos finales) con su registro; lo demás es
+  desechable por diseño.
+- **Caso fundacional:** `tmp/videos-pendientes/`, staging
+  de la sesión de videos del 2026-10-16. El flujo cerró y
+  publicó ese mismo día, pero la carpeta sobrevivió 5
+  días sin consumidor ni declaración hasta que un censo la
+  cazó. Eliminada el 2026-10-21 por decisión del dueño
+  (evidencia en `docs/FASE-MEJORA-V0160-PROPUESTA.md`,
+  propuesta P2, y en `docs/MIGRACION-RAMELI-V0160.md`).
+  Hoy la app no reconoce ninguna zona de staging viva:
+  `datos.zonas_staging` va vacío, y la regla queda escrita
+  igual.
+
 ### 6. Paquete de listing
 - Skill `paquete-listing-etsy`: título, descripción, 13 tags, copy.
 - **Track MPL:** re-optimización COMPLETA para TODOS los productos:

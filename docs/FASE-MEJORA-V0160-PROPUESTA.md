@@ -14,6 +14,13 @@ son decisiones de alcance mayor (B1), de material cuyo dueño
 de flujo debe confirmar (B2) o de gasto/servicio (B3), y
 quedan registradas aquí con impacto, riesgo y orden.
 
+**Actualización de estado (2026-10-21):** **P2 EJECUTADA**
+(decisión del dueño de 2026-10-21 00:39 EDT; evidencia en
+su sección) y **P4 ABSORBIDA** (Rameli v0.16.1 extendió la
+lista canónica y la mini-purga eliminó el único `.webp`;
+nota en su sección). **P1 y P3 siguen en propuesta**,
+pendientes de su decisión.
+
 ## P1 — Separar los registros de la instancia del repo del sistema (B1)
 
 - **Qué:** crear el respaldo versionado de la instancia
@@ -56,6 +63,47 @@ quedan registradas aquí con impacto, riesgo y orden.
 - **Orden:** 1 — rápido y de bajo riesgo cuando el dueño
   confirme si el material es vivo o remanente.
 
+- **EJECUTADA el 2026-10-21 — decisión del dueño
+  (2026-10-21 00:39 EDT): ELIMINAR por completo**
+  (tracking, historial y disco), por encima de la opción
+  conservadora de conservar los `.mp4`. Su criterio: el
+  flujo de videos cerró y se publicó el 2026-10-16
+  (registro con `videos_pendientes=false` en las 21
+  entradas), las salidas viven en Etsy y el set canónico
+  local está en `data/videos/`, y el flujo de Pinterest
+  consume solo `data/videos/` (puerta-pinterest-pin: el
+  asset del pin de video es el MP4 final del listing en
+  `data/videos/`, «nada generado ad-hoc») — ningún
+  consumidor vivo necesita la carpeta.
+  **Evidencia:** respaldo previo verificado (bundle
+  `--all`, historia completa en `cec7aac`, sha256
+  `8b3573f1…`) en
+  `~/workspace/respaldos/my-pod-pre-purga-p2-2026-10-21/`;
+  purga de la ruta en todo el historial con
+  `git-filter-repo` y borrado de la carpeta del disco
+  (50 archivos, 38,343,335 B; los 10 `.mp4` nunca
+  trackeados se eliminaron del disco con la carpeta, como
+  manda la decisión de eliminar «por completo» — su
+  contenido vive publicado en Etsy); force-push con lease
+  (`cec7aac → 9379608`, sin actividad ajena). Censo de la
+  ruta: **0 en disco y 0 en los 163 commits** (por
+  `ls-tree` y por `rev-list --objects`); el censo extendido
+  (18 extensiones) del historial completo queda solo con
+  los 15 fixtures vivos de `puerta-arte-propuesta`. Pack:
+  42.99 MiB → **29.81 MiB**. `data/` físico intacto
+  (sha256 551/551, 1,770,117,400 B) y el archivo vivo de
+  `tmp/` (investigación de personalización, de otro
+  trabajo) intacto. Puertas post-purga en verde (lint,
+  regresión 53 casos, `rameli validar` 0/0) en el commit
+  de cierre de esta ejecución.
+  **Criterio destilado a canon por orden suya:** la regla
+  de ciclo de vida del staging vive ahora en
+  `FLUJO-PIPELINE.md` §5.1 (con puntero en
+  `CRITERIO-VIDEO.md`) y `rameli.json` declara
+  `datos.zonas_staging: []` — ninguna zona viva; toda zona
+  futura nace declarada y se purga en el cierre de su
+  flujo.
+
 ## P3 — Decisión de respaldo externo de medios (B3)
 
 - **Qué:** el dueño elige el respaldo de los medios fuera
@@ -89,6 +137,17 @@ quedan registradas aquí con impacto, riesgo y orden.
   repite en otra app, nacería como contribución a Rameli).
 - **Orden:** 4 — junto con cualquier toque futuro del
   `.gitignore`, o nunca si el formato no reaparece.
+- **ABSORBIDA el 2026-10-21 (sin ejecutar como estaba
+  planteada):** Rameli **v0.16.1** extendió la lista
+  canónica del framework (webp/avif/heic/heif/gif/bmp/
+  tif/tiff) en los tres lugares — ya no es una línea local
+  pendiente — y la mini-purga del 2026-10-21 eliminó el
+  único `.webp` del historial de esta app. No queda
+  decisión: si un flujo produce `.webp` bajo `data/`, el
+  chequeo extendido ya lo detecta (el framework corre en
+  v0.16.1 sin que la app cambie su pin) y el bloque de
+  `.gitignore` extendido entrará con la próxima migración
+  que lo adopte.
 
 ## Lo que esta fase NO propone
 
