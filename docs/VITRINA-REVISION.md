@@ -8,8 +8,9 @@ sueltos en un chat. Idea del dueño (2026-10-20): revisar así ahorra
 créditos (cada reacción en un chat largo re-lee el contexto completo) y
 deja las decisiones estructuradas para que Jarvis las procese de una vez.
 
-**Estado:** plantilla v1.2 (pulidos del dueño 2026-10-22, ver §Pulido
-v1.1 y §Operación) + piloto con el lote 2026-10-19 (p058–p067).
+**Estado:** plantilla v2.0 (modelo de bandeja continua, corrección
+del dueño 2026-10-22 que reemplaza la regla de cola/anti-cruce de la
+v1.2 — ver §Operación) + piloto con el lote 2026-10-19 (p058–p067).
 La canonización en `puerta-arte-propuesta` (como canal de entrega) se
 decide cuando el piloto esté validado por el uso real del dueño.
 
@@ -42,37 +43,47 @@ decide cuando el piloto esté validado por el uso real del dueño.
    muestran el diseño COMPLETO (ajuste «contain», mismo margen y fondo
    en todas), fiel al recorte real del archivo — un encuadre que corte
    el diseño falsea la evaluación del recorte.
-9. **Cerrar es un resultado, no un botón suelto.** «Terminar revisión»
-   aparece solo cuando no quedan pendientes, dentro de un panel de
-   cierre con el resumen y la explicación de qué pasa al terminar.
-   Con pendientes > 0 no existe forma de cerrar.
+9. **Nada bloquea a nada.** La vitrina es una bandeja continua: los
+   lotes se suman, las decisiones conviven y todo sigue editable
+   mientras el diseño esté en la vitrina. No hay «cierre de lote» ni
+   requisito de cero pendientes para que entre trabajo nuevo
+   (corrección del dueño 2026-10-22 que reemplaza el cierre de la
+   v1.1/v1.2: la fecha es un indicador, no una puerta).
 
 ## Flujo de uso
 
-1. **Preparación (Jarvis):** con el lote en PASS de la puerta de arte,
+1. **Siembra (el flujo):** con un lote en PASS de la puerta de arte,
    se genera el paquete de datos (§Contrato de entrada) con
-   `scripts/generar-datos-vitrina.py` y se crea (o se actualiza) la
-   instancia de la vitrina de la tienda sembrada con ese paquete.
+   `scripts/generar-datos-vitrina.py` y se **siembra** en la vitrina
+   de la tienda (§Operación: la siembra es aditiva y nunca bloquea).
 2. **Revisión (el dueño):** entra a la vitrina — la vista inicial es
    **Pendientes** (no hay vista «todas»: la lista se va limpiando a
    medida que decide; las demás vistas son aprobadas / rechazadas /
-   mejoradas, para consultar lo ya decidido) —, abre cada diseño, lee
-   su porqué, alterna el fondo con el control segmentado etiquetado
-   «Fondo: Oscuro / Claro» (estado activo inconfundible en ambos
-   modos), inspecciona el arte en el visor con zoom (pellizco, doble
-   toque, botones; abre con el diseño completo) y decide en el
-   detalle: **Aprobar**, **Rechazar** o **Mejorar** (con nota de qué
-   mejorar; la nota también es bienvenida en un rechazo). Cuando no
-   quedan pendientes, el panel de cierre ofrece **«Terminar
-   revisión»**.
-3. **Lectura de vuelta (Jarvis):** lee las decisiones guardadas
-   (§Contrato de salida) y las vuelca al checkpoint del sistema
-   (`data/tiendas/<tienda-id>/estado-propuestas.json`): los aprobados
-   entran en `aprobados`
-   con `{slug, fecha_aprobacion}`; los rechazados salen del lote con su
-   motivo si lo dio; los marcados «mejorar» quedan señalados para
-   regenerar solo lo pedido. La Fase B produce **solo** lo aprobado,
-   como manda el flujo v2. Nada se produce desde la vitrina.
+   mejoradas, para consultar lo ya decidido y cambiar de opinión
+   cuando quiera) —, abre cada diseño, lee su porqué, alterna el
+   fondo con el control segmentado etiquetado «Fondo: Oscuro /
+   Claro» (estado activo inconfundible en ambos modos), inspecciona
+   el arte en el visor con zoom natural (focal, acotado, sin cierre
+   por gestos) y decide en el detalle: **Aprobar**, **Rechazar** o
+   **Mejorar** (con nota de qué mejorar; la nota también es
+   bienvenida en un rechazo). Cuando quiere, pulsa **«Enviar
+   decisiones a Jarvis»** (visible solo si hay decisiones sin
+   enviar, con su conteo): marca esas decisiones como enviadas —
+   una bandera, no un candado; todo sigue editable y cambiar una
+   decisión le quita la marca.
+3. **Lectura de vuelta (Jarvis):** lee las decisiones enviadas
+   (§Contrato de salida), las vuelca al checkpoint del sistema
+   (`data/tiendas/<tienda-id>/estado-propuestas.json`: aprobados con
+   `{slug, fecha_aprobacion}`; rechazados fuera con su motivo si lo
+   dio; mejorar señalados para regenerar solo lo pedido) y confirma
+   la recogida en la vitrina: aprobados y rechazados **salen** de la
+   vitrina (ya viven en el registro del sistema; los rechazados se
+   purgan, como manda el flujo) y los de mejorar quedan como
+   «Esperando regeneración» hasta que su nueva versión se siembra
+   (vuelve a Pendientes con distintivo «Nueva versión» y la nota
+   anterior visible en su detalle). La Fase B produce **solo** lo
+   aprobado, como manda el flujo v2. Nada se produce desde la
+   vitrina.
 
 ## Contrato de entrada — `datos-vitrina.json`
 
@@ -112,31 +123,35 @@ tienda y el checkpoint; es la única fuente que la instancia consume.
   según la variante de entrega de `puerta-arte-propuesta`); el detalle
   muestra arte real y simulación, etiquetadas como tales.
 
-## Contrato de salida — decisiones
+## Contrato de salida — decisiones (v2, bandeja continua)
 
 Una decisión por diseño, guardada en la instancia al momento de tocar:
 
 ```json
-{"slug": "p058", "decision": "aprobado|rechazado|mejorar",
+{"slug": "p058", "lote_fecha": "2026-10-19",
+ "decision": "aprobado|rechazado|mejorar",
  "nota": "texto libre del dueño o cadena vacía",
- "fecha": "2026-10-22T21:05:00-04:00"}
+ "fecha": "2026-10-22T21:05:00-04:00",
+ "enviada": true, "fecha_envio": "2026-10-22T21:20:00-04:00",
+ "nueva_version": false}
 ```
 
-Y un registro de revisión por lote: `{estado: "en_curso|terminada",
-fecha_terminada}`. Jarvis procesa las decisiones cuando la revisión
-está **terminada** (o cuando el dueño avise en el chat que ya revisó);
-una decisión sin terminar es un borrador del dueño, no una orden.
+No hay registro de «revisión terminada»: el flujo de recogida es
+continuo. Jarvis procesa las decisiones marcadas `enviada` (o las que
+el dueño avise en el chat) y confirma la recogida por slug (§Flujo
+de uso, paso 3). Una decisión no enviada es un borrador del dueño,
+no una orden; una enviada sigue siendo editable, y editarla le
+quita la marca hasta que vuelva a enviarla.
 
-## Qué hace «Terminar revisión» (funcionamiento, sin magia)
+## Qué hace «Enviar decisiones a Jarvis» (funcionamiento, sin magia)
 
-Marca el registro de revisión del lote como `terminada` con su fecha —
-es una **señal**, no una acción sobre la tienda: la vitrina no produce,
-no publica y no toca Printify. La señal le dice a Jarvis «ya puedes
-recoger»: Jarvis lee las decisiones (contrato de salida), las vuelca al
-checkpoint de la tienda y el flujo v2 sigue su curso (la Fase B produce
-solo lo aprobado, con la palabra que el flujo exija). Cambiar cualquier
-decisión después devuelve la revisión a `en_curso` automáticamente y
-el cierre vuelve a ofrecerse al llegar otra vez a cero pendientes.
+Pone la bandera `enviada` con su fecha a las decisiones que aún no la
+tienen — es una **señal**, no una acción sobre la tienda: la vitrina
+no produce, no publica y no toca Printify. La señal le dice a Jarvis
+«ya puedes recoger»: Jarvis lee las decisiones (contrato de salida),
+las vuelca al checkpoint de la tienda, confirma la recogida y el
+flujo v2 sigue su curso (la Fase B produce solo lo aprobado, con la
+palabra que el flujo exija).
 
 ## Pulido v1.1 — correcciones del dueño (2026-10-22, sobre el piloto)
 
@@ -154,7 +169,7 @@ cierre pasa al panel que solo existe con cero pendientes (principios
 7–9 y §anterior). La variante para personalizados se pule cuando
 lleguen propuestas personalizadas (decisión del dueño).
 
-## Operación: UNA instancia por tienda, sembrada por lote (regla anti-cruce)
+## Operación: UNA instancia por tienda, bandeja continua
 
 La vitrina **no se crea por lote ni por día**: existe **una sola
 instancia por tienda**, que vive en la aplicación, y lo que cambia
@@ -162,25 +177,53 @@ es su contenido. Crear instancias nuevas por corrida quemaría trabajo
 de creación y multiplicaría superficies que el dueño tendría que
 buscar; sembrar datos es una llamada, no una construcción.
 
-- **Siembra:** al cerrar la Fase A de un lote, el flujo genera el
-  paquete (`scripts/generar-datos-vitrina.py`) y lo siembra en la
-  instancia de la tienda (acción de siembra de la propia vitrina).
-  La vitrina muestra entonces ese lote, con su fecha; no lee «el día»
-  de ningún reloj: muestra **el lote sembrado**.
-- **Regla anti-cruce (obligatoria):** solo se siembra un lote nuevo
-  si la revisión anterior está **terminada** (sus decisiones ya
-  fueron recogidas y volcadas al checkpoint). Si la revisión anterior
-  sigue abierta, el lote nuevo **espera en cola** (registrado en el
-  checkpoint) y la vitrina sigue mostrando la revisión abierta —
-  nunca se mezclan dos lotes ni se pisan decisiones sin recoger.
+- **Siembra ADITIVA:** al cerrar la Fase A de un lote, el flujo
+  genera el paquete (`scripts/generar-datos-vitrina.py`) y lo siembra
+  en la instancia de la tienda. Sembrar **suma**: los diseños nuevos
+  entran como pendientes (arriba, más recientes primero; su fecha de
+  lote es solo un indicador en la tarjeta) y los ya presentes
+  conservan su decisión y su nota. Un slug sembrado con arte nuevo
+  es una **regeneración**: se actualiza, vuelve a pendiente con
+  distintivo «Nueva versión» y conserva la nota de mejora anterior
+  visible en su detalle.
+- **Sin cola bloqueante (corrección del dueño 2026-10-22, reemplaza
+  la «regla anti-cruce» de la v1.2):** un lote nuevo nunca espera a
+  que el dueño termine de revisar otro. Todos los pendientes son
+  simplemente pendientes del dueño, vengan del día que vengan; los
+  decididos viven en sus vistas (aprobadas / rechazadas / mejoradas)
+  hasta que Jarvis los recoge, y tras la recogida aprobados y
+  rechazados salen de la vitrina (los rechazados se purgan, como
+  manda el flujo) y los de mejorar quedan «Esperando regeneración».
 - **Quién la usa en el flujo:** cuando esta plantilla se canonice,
   el paso de entrega de la Fase A en `puerta-arte-propuesta` dirá:
-  generar el paquete → sembrar la vitrina de la tienda (respetando la
-  regla anti-cruce) → avisar al dueño que revise ahí. Hasta esa
-  canonización, la siembra la hace Jarvis.
+  generar el paquete → sembrar la vitrina de la tienda (aditivo) →
+  avisar al dueño que revise ahí. Hasta esa canonización, la
+  siembra la hace Jarvis.
 - **Costo:** la creación de la instancia ocurre **una vez por
   tienda**. Cada lote cuesta solo la generación del paquete (script
   local determinista) y la llamada de siembra.
+- **Cómo funciona por dentro (para que nadie tenga que imaginarlo):**
+  los diseños y las decisiones son registros en la base de datos
+  propia de la instancia; la interfaz los lee y los modifica ahí
+  (decidir = actualizar el registro del diseño, con su nota). Jarvis
+  los lee y confirma recogidas mediante las acciones de la propia
+  instancia (§Contrato de salida). Nada de esto vive en un chat ni
+  depende de su memoria.
+
+## Pulido v2.0 — visor en iPhone y modelo continuo (2026-10-22)
+
+Tercera pasada del dueño, ya sobre su iPhone: (1) el zoom del visor
+ampliaba siempre desde el centro y al arrastrar hacia un lado la
+vista **se cerraba** (el gesto llegaba a la hoja de debajo) — el
+visor pasa a zoom focal (sigue al gesto), arrastre acotado a los
+límites de la imagen y **ningún gesto cierra el visor** (solo el
+botón Cerrar). (2) El interruptor «Límites» y su damero se retiran:
+con el marco y el borde de la v1.2 los límites ya se leen y el
+interruptor sobraba. (3) El modelo por lote con cola bloqueante se
+reemplaza por la bandeja continua (§Operación y principio 9):
+la preocupación del dueño era perder lo ya decidido al cambiar de
+lote y no poder cambiar de opinión ni gestionar mejoras en paralelo;
+con la bandeja, todo convive y todo sigue editable hasta la recogida.
 
 ## Pulido v1.2 — límites del arte y área segura (2026-10-22)
 
@@ -202,9 +245,9 @@ mínimo en píxeles) en los cuatro lados.
 1. La tienda declara sus propuestas en su registro, como siempre
    (el contrato de entrada no pide nada que el flujo v2 no produzca ya).
 2. Se corre el generador con el id de esa tienda y su lote.
-3. Se crea la instancia de la vitrina (aplicación web con guardado
-   propio) sembrada con el paquete generado, siguiendo los principios
-   de UX y los contratos de este doc — la instancia es desechable por
-   lote; lo durable es esta plantilla.
+3. Se crea la instancia de la vitrina de esa tienda (aplicación web
+   con guardado propio) — **una sola, durable** — y se siembra con el
+   paquete generado, siguiendo los principios de UX y los contratos
+   de este doc; los lotes siguientes solo se siembran.
 4. El dueño revisa; Jarvis lee de vuelta y vuelca al checkpoint de
    esa tienda. Ningún paso depende de la memoria de un chat.
