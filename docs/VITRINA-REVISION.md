@@ -8,7 +8,8 @@ sueltos en un chat. Idea del dueño (2026-10-20): revisar así ahorra
 créditos (cada reacción en un chat largo re-lee el contexto completo) y
 deja las decisiones estructuradas para que Jarvis las procese de una vez.
 
-**Estado:** plantilla v1 + piloto con el lote 2026-10-19 (p058–p067).
+**Estado:** plantilla v1.1 (pulido del dueño 2026-10-22, ver §Pulido
+v1.1) + piloto con el lote 2026-10-19 (p058–p067).
 La canonización en `puerta-arte-propuesta` (como canal de entrega) se
 decide cuando el piloto esté validado por el uso real del dueño.
 
@@ -33,6 +34,18 @@ decide cuando el piloto esté validado por el uso real del dueño.
 6. **Sin celdas vacías ni datos huérfanos.** Todo lo que la puerta
    declara (porqué, qué mirar, nota de la puerta) vive dentro de la
    tarjeta del diseño; ningún archivo adjunto sustituye la presentación.
+7. **La tarjeta no decide; el detalle decide.** La lista es para
+   navegar: tarjeta = arte completo + título + descripción breve +
+   etiquetas + estado, y se entra tocándola. Los botones de decisión
+   viven solo en el detalle (el flujo de revisión es de a uno).
+8. **El arte nunca se recorta en pantalla.** Tarjeta, detalle y visor
+   muestran el diseño COMPLETO (ajuste «contain», mismo margen y fondo
+   en todas), fiel al recorte real del archivo — un encuadre que corte
+   el diseño falsea la evaluación del recorte.
+9. **Cerrar es un resultado, no un botón suelto.** «Terminar revisión»
+   aparece solo cuando no quedan pendientes, dentro de un panel de
+   cierre con el resumen y la explicación de qué pasa al terminar.
+   Con pendientes > 0 no existe forma de cerrar.
 
 ## Flujo de uso
 
@@ -40,12 +53,18 @@ decide cuando el piloto esté validado por el uso real del dueño.
    se genera el paquete de datos (§Contrato de entrada) con
    `scripts/generar-datos-vitrina.py` y se crea (o se actualiza) la
    instancia de la vitrina de la tienda sembrada con ese paquete.
-2. **Revisión (el dueño):** entra a la vitrina, filtra si quiere
-   (todas / pendientes / aprobadas / rechazadas / a mejorar), abre cada
-   diseño, lee su porqué, mira las dos vistas y decide:
-   **Aprobar**, **Rechazar** o **Mejorar** (con nota de qué mejorar;
-   la nota también es bienvenida en un rechazo). Al terminar, marca
-   **«Terminé mi revisión»**.
+2. **Revisión (el dueño):** entra a la vitrina — la vista inicial es
+   **Pendientes** (no hay vista «todas»: la lista se va limpiando a
+   medida que decide; las demás vistas son aprobadas / rechazadas /
+   mejoradas, para consultar lo ya decidido) —, abre cada diseño, lee
+   su porqué, alterna el fondo con el control segmentado etiquetado
+   «Fondo: Oscuro / Claro» (estado activo inconfundible en ambos
+   modos), inspecciona el arte en el visor con zoom (pellizco, doble
+   toque, botones; abre con el diseño completo) y decide en el
+   detalle: **Aprobar**, **Rechazar** o **Mejorar** (con nota de qué
+   mejorar; la nota también es bienvenida en un rechazo). Cuando no
+   quedan pendientes, el panel de cierre ofrece **«Terminar
+   revisión»**.
 3. **Lectura de vuelta (Jarvis):** lee las decisiones guardadas
    (§Contrato de salida) y las vuelca al checkpoint del sistema
    (`data/tiendas/<tienda-id>/estado-propuestas.json`): los aprobados
@@ -106,6 +125,33 @@ Y un registro de revisión por lote: `{estado: "en_curso|terminada",
 fecha_terminada}`. Jarvis procesa las decisiones cuando la revisión
 está **terminada** (o cuando el dueño avise en el chat que ya revisó);
 una decisión sin terminar es un borrador del dueño, no una orden.
+
+## Qué hace «Terminar revisión» (funcionamiento, sin magia)
+
+Marca el registro de revisión del lote como `terminada` con su fecha —
+es una **señal**, no una acción sobre la tienda: la vitrina no produce,
+no publica y no toca Printify. La señal le dice a Jarvis «ya puedes
+recoger»: Jarvis lee las decisiones (contrato de salida), las vuelca al
+checkpoint de la tienda y el flujo v2 sigue su curso (la Fase B produce
+solo lo aprobado, con la palabra que el flujo exija). Cambiar cualquier
+decisión después devuelve la revisión a `en_curso` automáticamente y
+el cierre vuelve a ofrecerse al llegar otra vez a cero pendientes.
+
+## Pulido v1.1 — correcciones del dueño (2026-10-22, sobre el piloto)
+
+Sobre la v1, probada por el dueño en su teléfono: (1) fuera los
+botones rápidos de decisión de las tarjetas — no tenían sentido en un
+flujo de revisión de a uno; (2) fuera la vista «todas» — la vista de
+trabajo es Pendientes y se va limpiando; (3) el conmutador de fondo
+eran «chips raros» sin función evidente ni estado activo legible en
+modo oscuro — pasa a control segmentado etiquetado con estado
+inconfundible; (4) el arte quedaba recortado por el encuadre de la
+tarjeta — pasa a mostrarse completo siempre; (5) faltaba inspección
+fina — visor a pantalla completa con zoom; (6) «Terminé mi revisión»
+y «resumen» estaban en todos lados y sin validación visible — el
+cierre pasa al panel que solo existe con cero pendientes (principios
+7–9 y §anterior). La variante para personalizados se pule cuando
+lleguen propuestas personalizadas (decisión del dueño).
 
 ## Replicación (otra tienda u otro usuario de la aplicación)
 
