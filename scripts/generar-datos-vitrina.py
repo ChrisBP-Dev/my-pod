@@ -107,6 +107,11 @@ def producto_destino(entrada: dict) -> str:
     return entrada.get("track", "")
 
 
+def dimensiones_de(arte_path: Path) -> dict:
+    with Image.open(arte_path) as im:
+        return {"ancho_px": im.width, "alto_px": im.height}
+
+
 def hacer_previa(arte_path: Path, destino: Path, fondo, ancho: int) -> None:
     arte = Image.open(arte_path).convert("RGBA")
     if arte.width > ancho:
@@ -183,6 +188,7 @@ def main() -> int:
             "personalizable": False,
             "simulacion": None,
             "arte_ref": arte_rel,
+            "dimensiones_px": dimensiones_de(arte_path),
             "previa_oscura": f"previas/{slug}-oscura.jpg",
             "previa_clara": f"previas/{slug}-clara.jpg",
         })

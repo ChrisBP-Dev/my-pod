@@ -39,6 +39,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p058-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 6458,
+        "alto_px": 3842
+      },
       "previa_oscura": "previas/p058-oscura.jpg",
       "previa_clara": "previas/p058-clara.jpg"
     },
@@ -62,6 +66,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p059-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 5308,
+        "alto_px": 4648
+      },
       "previa_oscura": "previas/p059-oscura.jpg",
       "previa_clara": "previas/p059-clara.jpg"
     },
@@ -84,6 +92,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p060-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 4940,
+        "alto_px": 5628
+      },
       "previa_oscura": "previas/p060-oscura.jpg",
       "previa_clara": "previas/p060-clara.jpg"
     },
@@ -107,6 +119,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p061-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 4802,
+        "alto_px": 5500
+      },
       "previa_oscura": "previas/p061-oscura.jpg",
       "previa_clara": "previas/p061-clara.jpg"
     },
@@ -129,6 +145,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p062-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 4700,
+        "alto_px": 6006
+      },
       "previa_oscura": "previas/p062-oscura.jpg",
       "previa_clara": "previas/p062-clara.jpg"
     },
@@ -151,6 +171,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p063-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 4962,
+        "alto_px": 5560
+      },
       "previa_oscura": "previas/p063-oscura.jpg",
       "previa_clara": "previas/p063-clara.jpg"
     },
@@ -173,6 +197,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p064-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 5321,
+        "alto_px": 4197
+      },
       "previa_oscura": "previas/p064-oscura.jpg",
       "previa_clara": "previas/p064-clara.jpg"
     },
@@ -195,6 +223,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p065-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 5336,
+        "alto_px": 4747
+      },
       "previa_oscura": "previas/p065-oscura.jpg",
       "previa_clara": "previas/p065-clara.jpg"
     },
@@ -218,6 +250,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p066-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 5224,
+        "alto_px": 5814
+      },
       "previa_oscura": "previas/p066-oscura.jpg",
       "previa_clara": "previas/p066-clara.jpg"
     },
@@ -239,6 +275,10 @@
       "personalizable": false,
       "simulacion": null,
       "arte_ref": "data/artes-print/p067-print-300dpi.png",
+      "dimensiones_px": {
+        "ancho_px": 5010,
+        "alto_px": 5736
+      },
       "previa_oscura": "previas/p067-oscura.jpg",
       "previa_clara": "previas/p067-clara.jpg"
     }

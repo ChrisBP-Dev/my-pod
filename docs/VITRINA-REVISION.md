@@ -8,8 +8,8 @@ sueltos en un chat. Idea del dueño (2026-10-20): revisar así ahorra
 créditos (cada reacción en un chat largo re-lee el contexto completo) y
 deja las decisiones estructuradas para que Jarvis las procese de una vez.
 
-**Estado:** plantilla v1.1 (pulido del dueño 2026-10-22, ver §Pulido
-v1.1) + piloto con el lote 2026-10-19 (p058–p067).
+**Estado:** plantilla v1.2 (pulidos del dueño 2026-10-22, ver §Pulido
+v1.1 y §Operación) + piloto con el lote 2026-10-19 (p058–p067).
 La canonización en `puerta-arte-propuesta` (como canal de entrega) se
 decide cuando el piloto esté validado por el uso real del dueño.
 
@@ -97,6 +97,7 @@ tienda y el checkpoint; es la única fuente que la instancia consume.
     "personalizable": false,
     "simulacion": null,
     "arte_ref": "data/artes-print/p058-print-300dpi.png",
+    "dimensiones_px": {"ancho_px": 6458, "alto_px": 3842},
     "previa_oscura": "previas/p058-oscura.jpg",
     "previa_clara": "previas/p058-clara.jpg"
   }]
@@ -152,6 +153,49 @@ y «resumen» estaban en todos lados y sin validación visible — el
 cierre pasa al panel que solo existe con cero pendientes (principios
 7–9 y §anterior). La variante para personalizados se pule cuando
 lleguen propuestas personalizadas (decisión del dueño).
+
+## Operación: UNA instancia por tienda, sembrada por lote (regla anti-cruce)
+
+La vitrina **no se crea por lote ni por día**: existe **una sola
+instancia por tienda**, que vive en la aplicación, y lo que cambia
+es su contenido. Crear instancias nuevas por corrida quemaría trabajo
+de creación y multiplicaría superficies que el dueño tendría que
+buscar; sembrar datos es una llamada, no una construcción.
+
+- **Siembra:** al cerrar la Fase A de un lote, el flujo genera el
+  paquete (`scripts/generar-datos-vitrina.py`) y lo siembra en la
+  instancia de la tienda (acción de siembra de la propia vitrina).
+  La vitrina muestra entonces ese lote, con su fecha; no lee «el día»
+  de ningún reloj: muestra **el lote sembrado**.
+- **Regla anti-cruce (obligatoria):** solo se siembra un lote nuevo
+  si la revisión anterior está **terminada** (sus decisiones ya
+  fueron recogidas y volcadas al checkpoint). Si la revisión anterior
+  sigue abierta, el lote nuevo **espera en cola** (registrado en el
+  checkpoint) y la vitrina sigue mostrando la revisión abierta —
+  nunca se mezclan dos lotes ni se pisan decisiones sin recoger.
+- **Quién la usa en el flujo:** cuando esta plantilla se canonice,
+  el paso de entrega de la Fase A en `puerta-arte-propuesta` dirá:
+  generar el paquete → sembrar la vitrina de la tienda (respetando la
+  regla anti-cruce) → avisar al dueño que revise ahí. Hasta esa
+  canonización, la siembra la hace Jarvis.
+- **Costo:** la creación de la instancia ocurre **una vez por
+  tienda**. Cada lote cuesta solo la generación del paquete (script
+  local determinista) y la llamada de siembra.
+
+## Pulido v1.2 — límites del arte y área segura (2026-10-22)
+
+Segunda pasada del dueño sobre el piloto: (1) con el fondo uniforme
+expandido no se veía **dónde termina el arte ni cuánto aire lleva el
+recorte** — solución de pura presentación: la imagen va siempre dentro
+de un marco visible (fondo del contenedor distinto + borde + franja
+uniforme) en tarjeta, detalle y visor; el visor suma el interruptor
+«Límites» (contorno de contraste pegado al borde exacto del arte y
+damero sutil fuera del arte) y el detalle muestra las dimensiones
+reales del PNG (`dimensiones_px` en el contrato de entrada, medido
+por el generador — nunca estimado). (2) Los controles del visor
+invadían los extremos de la pantalla — pasan a una barra agrupada
+con márgenes de área segura reales (`env(safe-area-inset-*)` + un
+mínimo en píxeles) en los cuatro lados.
 
 ## Replicación (otra tienda u otro usuario de la aplicación)
 
