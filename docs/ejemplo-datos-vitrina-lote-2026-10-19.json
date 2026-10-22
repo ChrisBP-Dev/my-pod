@@ -1,0 +1,246 @@
+{
+  "version_contrato": 1,
+  "tienda": {
+    "id": "29222324",
+    "nombre": "MyNightShiftShop"
+  },
+  "lote": {
+    "fecha": "2026-10-19",
+    "slugs": [
+      "p058",
+      "p059",
+      "p060",
+      "p061",
+      "p062",
+      "p063",
+      "p064",
+      "p065",
+      "p066",
+      "p067"
+    ]
+  },
+  "disenos": [
+    {
+      "slug": "p058",
+      "titulo": "Quiet ER Christmas Wish",
+      "tema": "navidad",
+      "etiquetas": [
+        "Navidad",
+        "ER",
+        "MPL"
+      ],
+      "frase": "All I Want for Christmas Is a Quiet ER",
+      "tema_angulo": "Navidad, ángulo regalo para enfermería de emergencias (hiper-especialidad ER de la directriz vigente).",
+      "frase_texto": "«All I Want for Christmas Is a Quiet ER» — el deseo imposible del turno de emergencias en Navidad, una guardia tranquila; guiño a «All I Want for Christmas Is You», reconocible al instante.",
+      "iconografia": "la serie de luces navideñas dibuja su cable como línea de EKG (el lenguaje visual de emergencias) y el gorro de Santa corona el pico del latido; copos y acebo cierran la temporada.",
+      "que_mirar": "los counters de las letras grandes (Q, R, A) sin fondo metido; el blanco interior que marca la puerta es el crema de las letras, parte del diseño.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p058-print-300dpi.png",
+      "previa_oscura": "previas/p058-oscura.jpg",
+      "previa_clara": "previas/p058-clara.jpg"
+    },
+    {
+      "slug": "p059",
+      "titulo": "Stable All Through the Night",
+      "tema": "navidad",
+      "etiquetas": [
+        "Navidad",
+        "ICU",
+        "Turno nocturno",
+        "MPL"
+      ],
+      "frase": "Stable All Through the Night",
+      "tema_angulo": "Navidad, hiper-especialidad ICU y territorio «silent night» en variante original (sin reutilizar el Silent Night Unit ya publicado).",
+      "frase_texto": "«Stable All Through the Night» — en ICU la victoria de la noche es que el paciente amanezca estable; la frase toma el aire de «Silent Night» y lo lleva a los signos vitales.",
+      "iconografia": "luna y estrellas del turno nocturno, la corona navideña colgando de la tipografía y la línea de EKG serena que termina en un corazón.",
+      "que_mirar": "los counters (O, A, R, G); este crudo traía el damero de «transparencia falsa» horneado y se limpió con la limpieza acromática documentada del skill — revisa que entre las letras no queden cuadros grises.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN); crudo con damero de transparencia falsa horneado, retirado con la limpieza acromatica documentada del skill (caso p036)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p059-print-300dpi.png",
+      "previa_oscura": "previas/p059-oscura.jpg",
+      "previa_clara": "previas/p059-clara.jpg"
+    },
+    {
+      "slug": "p060",
+      "titulo": "Tiny Miracles, Holy Nights",
+      "tema": "navidad",
+      "etiquetas": [
+        "Navidad",
+        "NICU",
+        "MPL"
+      ],
+      "frase": "Tiny Miracles, Holy Nights",
+      "tema_angulo": "Navidad, regalo para enfermera de NICU (hiper-especialidad de la directriz).",
+      "frase_texto": "«Tiny Miracles, Holy Nights» — en NICU cada bebé es un milagro pequeño y la Navidad es la noche sagrada por excelencia: es el diseño emocional del lote, pensado para regalar.",
+      "iconografia": "el body de bebé colgando de una rama con su estrella (el paciente más pequeño de la unidad), la luna, la guirnalda de hojas y el chupete.",
+      "que_mirar": "los counters de las letras crema; el blanco interior que marca la puerta es el crema del diseño y la nube pálida tras el body es elemento del arte.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p060-print-300dpi.png",
+      "previa_oscura": "previas/p060-oscura.jpg",
+      "previa_clara": "previas/p060-clara.jpg"
+    },
+    {
+      "slug": "p061",
+      "titulo": "Recovering All the Way",
+      "tema": "navidad",
+      "etiquetas": [
+        "Navidad",
+        "PACU",
+        "Turno nocturno",
+        "MPL"
+      ],
+      "frase": "Recovering All the Way",
+      "tema_angulo": "Navidad, hiper-especialidad PACU (recuperación), ángulo regalo.",
+      "frase_texto": "«Recovering All the Way» — juego directo con «Jingle All the Way»: el paciente de PACU se está recuperando todo el camino hasta despertar de la anestesia.",
+      "iconografia": "los cascabeles dorados con moño rojo (los jingle bells de la canción convertidos en recuperación), luna y copos del turno nocturno.",
+      "que_mirar": "los counters (O, R, A, G) y el dorado de los cascabeles sobre prenda oscura.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p061-print-300dpi.png",
+      "previa_oscura": "previas/p061-oscura.jpg",
+      "previa_clara": "previas/p061-clara.jpg"
+    },
+    {
+      "slug": "p062",
+      "titulo": "Sedation Wonderland",
+      "tema": "navidad",
+      "etiquetas": [
+        "Navidad",
+        "Turno nocturno",
+        "MPL"
+      ],
+      "frase": "Sedation Wonderland",
+      "tema_angulo": "Navidad, humor insider de turno nocturno en el territorio de la sedación (cluster con tracción según la directriz; variante original nuestra).",
+      "frase_texto": "«Sedation Wonderland» — «Winter Wonderland» pasado por la jerga de la unidad: el país de las maravillas del turno es un paciente por fin dormido.",
+      "iconografia": "la bolsa de suero colgada como adorno de Navidad de una rama de acebo (el chiste visual central), luna, nieve cayendo y las Z de sueño.",
+      "que_mirar": "los counters (O, A, D) y que la bolsa de suero se lea como adorno y no como error.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p062-print-300dpi.png",
+      "previa_oscura": "previas/p062-oscura.jpg",
+      "previa_clara": "previas/p062-clara.jpg"
+    },
+    {
+      "slug": "p063",
+      "titulo": "Night Shift Before Christmas",
+      "tema": "navidad",
+      "etiquetas": [
+        "Navidad",
+        "Turno nocturno",
+        "MPL"
+      ],
+      "frase": "On the Night Shift Before Christmas",
+      "tema_angulo": "Navidad, turno nocturno general con ángulo regalo.",
+      "frase_texto": "«On the Night Shift Before Christmas» — reescribe el arranque del poema clásico «The Night Before Christmas»: quien vela la víspera no es la casa dormida, es la enfermera de guardia.",
+      "iconografia": "el trineo de Santa cruzando el cielo (él también trabaja de noche), la luna, la taza de café con su vapor — el combustible del turno — y la cruz médica al pie como firma.",
+      "que_mirar": "los counters (O, A, R, G); nota honesta: el primer crudo de este diseño traía un campo de motas decorativas que el recorte rebanaba en el borde y la puerta lo rechazó (contenido_toca_borde) — se regeneró con composición compacta y la versión entregada pasa la puerta completa; el crudo descartado queda guardado como p063-crudo-v1.png.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN); segundo crudo: el primero (p063-crudo-v1.png) fue rechazado en procesamiento por contenido_toca_borde (campo de motas rebanado por el recorte) y se regenero con composicion compacta",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p063-print-300dpi.png",
+      "previa_oscura": "previas/p063-oscura.jpg",
+      "previa_clara": "previas/p063-clara.jpg"
+    },
+    {
+      "slug": "p064",
+      "titulo": "Code Merry",
+      "tema": "navidad",
+      "etiquetas": [
+        "Navidad",
+        "ER",
+        "MPL"
+      ],
+      "frase": "Code Merry",
+      "tema_angulo": "Navidad, hiper-especialidad ER, ángulo regalo con humor.",
+      "frase_texto": "«Code Merry» — en emergencias un «code» es una alarma; este es el único código que el equipo quiere escuchar en Navidad: el código alegre.",
+      "iconografia": "el corazón con gorro de Santa y la línea de EKG cruzándolo (el corazón en código de felicidad), con ramas de acebo a los lados.",
+      "que_mirar": "los counters de la O y la D de CODE y que la línea de EKG se lea sobre el corazón.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p064-print-300dpi.png",
+      "previa_oscura": "previas/p064-oscura.jpg",
+      "previa_clara": "previas/p064-clara.jpg"
+    },
+    {
+      "slug": "p065",
+      "titulo": "Chart It or It Never Happened",
+      "tema": "evergreen-enfermeria",
+      "etiquetas": [
+        "Evergreen",
+        "Turno nocturno",
+        "MPL"
+      ],
+      "frase": "Chart It or It Never Happened",
+      "tema_angulo": "evergreen de enfermería — identidad de profesión con humor de charting (documentación), válido todo el año y pieza de regalo sin fecha.",
+      "frase_texto": "«Chart It or It Never Happened» — la regla de oro no escrita de enfermería: lo que no se documenta, no pasó; cualquier enfermera la reconoce y la cita.",
+      "iconografia": "el clipboard con su checklist ya marcada (el documento cerrado), la pluma y la luna pequeña del turno nocturno.",
+      "que_mirar": "los counters (O, A, R) y las marcas de verificación del clipboard.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p065-print-300dpi.png",
+      "previa_oscura": "previas/p065-oscura.jpg",
+      "previa_clara": "previas/p065-clara.jpg"
+    },
+    {
+      "slug": "p066",
+      "titulo": "Dark Hours, Steady Hands",
+      "tema": "evergreen-enfermeria",
+      "etiquetas": [
+        "Evergreen",
+        "ICU",
+        "Turno nocturno",
+        "MPL"
+      ],
+      "frase": "Dark Hours, Steady Hands",
+      "tema_angulo": "evergreen — identidad de turno nocturno ICU, el sub-nicho que la directriz marca para componer hacia el próximo Q4.",
+      "frase_texto": "«Dark Hours, Steady Hands» — en las horas oscuras, manos firmes: el retrato serio del lote, sin chiste, para quien se identifica con la calma de ICU.",
+      "iconografia": "el estetoscopio cuyo tubo se curva en un corazón con la línea de EKG estable cruzándolo, luna y estrellas.",
+      "que_mirar": "los counters (O, A, R, U) y que el corazón del estetoscopio se lea completo.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p066-print-300dpi.png",
+      "previa_oscura": "previas/p066-oscura.jpg",
+      "previa_clara": "previas/p066-clara.jpg"
+    },
+    {
+      "slug": "p067",
+      "titulo": "Powered by Coffee and Compassion",
+      "tema": "evergreen-enfermeria",
+      "etiquetas": [
+        "Evergreen",
+        "MPL"
+      ],
+      "frase": "Powered by Coffee and Compassion",
+      "tema_angulo": "evergreen — ángulo regalo «gift for nurse» sin fecha, el diseño cálido del lote.",
+      "frase_texto": "«Powered by Coffee and Compassion» — los dos combustibles reales del turno: el café y la compasión.",
+      "iconografia": "la taza con el vapor en forma de corazón, el estetoscopio abrazándola y la luna con estrellas.",
+      "que_mirar": "los counters (O, A, R, D) y un detalle honesto: detrás del diseño se percibe un resplandor grisáceo suave que la puerta mecánica no mide — míralo y decide si te molesta antes de aprobarlo; rechazarlo no cuesta producción, se regenera.",
+      "puerta": "puerta-arte-propuesta v0.5.1 PASS completo (composicion sobre crudo, fidelidad de recorte y margen de zoom; con upscale FSRCNN)",
+      "producto_destino": "MPL — sudadera + playera (un solo listing)",
+      "personalizable": false,
+      "simulacion": null,
+      "arte_ref": "data/artes-print/p067-print-300dpi.png",
+      "previa_oscura": "previas/p067-oscura.jpg",
+      "previa_clara": "previas/p067-clara.jpg"
+    }
+  ]
+}

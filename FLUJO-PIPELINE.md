@@ -34,6 +34,13 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   pide ajuste ANTES de que se produzca nada. Lo aprobado se enlista
   (la cola persiste entre días; no caduca). Lo rechazado no consume
   producción. Lo ajustado vuelve solo a esta etapa.
+- **Superficie alternativa de la misma puerta — Vitrina de revisión
+  (piloto 2026-10-22):** la entrega puede presentarse en la vitrina
+  (plantilla en `docs/VITRINA-REVISION.md`): el dueño decide ahí y sus
+  decisiones quedan guardadas como datos que Jarvis vuelca a este
+  mismo checkpoint. La puerta no cambia — cambian el canal y el
+  registro; la aprobación válida es la decisión guardada en la
+  vitrina con la revisión terminada.
   (Flujo v2, idea del dueño 2026-10-19: el dale creativo se mueve al
   punto más barato — antes el arte se revisaba recién en Printify,
   con el trabajo de drafts ya gastado.)
