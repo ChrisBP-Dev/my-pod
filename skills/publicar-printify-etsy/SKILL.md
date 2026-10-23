@@ -3,13 +3,17 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.9.0"
+  version: "0.9.1"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.9.1** (2026-10-23: lecciones de producción de la Fase B
+del lote 2026-10-19 en §M4 — nada de producción en paralelo en la
+misma cuenta; el Replace de proveedor regenera el ID y rompe la
+referencia del MPL, cierre por re-agregar vía "Your products").
 **Versión 0.9.0** (2026-10-22: alineación ordenada por el dueño —
 ruta MPL ÚNICA: borrador base → conversión → items creados dentro
 del MPL desde el catálogo; la ruta vieja de crear todos los
@@ -240,6 +244,36 @@ conversión → items creados dentro del MPL.
   diseño; el rescate se anota en el registro del diseño. Fuera de
   ese caso, agregar existentes está prohibido: era la ruta vieja
   de ensamblado (crear todos los componentes y unirlos después).
+- **Lecciones de producción (Fase B del lote 2026-10-19, ejecutada
+  2026-10-23; verificadas en vivo, 10 MPLs):**
+  - **NUNCA producción en paralelo en la misma cuenta:** dos
+    ventanas trabajando a la vez en Printify se cruzan — el flujo
+    de una tomó la playera de rescate de otro diseño, la renombró
+    y le cambió el arte (p059/p062). Una unidad a la vez por cuenta.
+  - **El item creado desde el catálogo nace con Printful** (el
+    flujo "Add item" no deja elegir proveedor) y "Replace print
+    provider" **regenera el ID del producto**: el MPL queda
+    apuntando al producto viejo y puede romperse o no dejar
+    guardar (pricing $0.00 en el MPL, p059; MPL que dejó de cargar,
+    p063). Tras el Replace, el cierre fiable es: quitar el item
+    roto del MPL y re-agregar el producto nuevo vía "Your
+    products" — mismo patrón de rescate de arriba, anotado en el
+    registro del diseño.
+  - **La validación del MPL exige nombres de producto distintos:**
+    la playera lleva el título del diseño + " - T-Shirt" como
+    nombre interno (no toca el título del listing ni los nombres
+    de variación "Sweatshirt"/"T-Shirt").
+  - **El diálogo "Your products" puede no listar un producto
+    recién creado** (índice desactualizado de Printify): si no
+    aparece, se espera y se reintenta en otra corrida (patrón de
+    reintentos acotados), no se crea otro duplicado.
+  - **Un componente puede aparecer "Published" sin clic de
+    publicación** (observado en p064: la sudadera base se sincronizó
+    como single a Etsy durante la producción). Si pasa: "Hide on
+    Etsy" de inmediato, verificar por la API de Etsy que el listing
+    quedó `inactive`, y anotar el incidente en el registro — la
+    decisión de fondo (borrar el listing o adoptarlo al publicar
+    el MPL, que conserva la URL del base) es del dueño.
 - Por cada item: verificar placement, colores/tallas, precios.
 - Al terminar: **guardar como borrador SIN publicar**. El resultado
   es UN borrador MPL por diseño, listo para la revisión de
