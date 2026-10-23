@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.6"
+  version: "0.8.7"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.6** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.7** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -437,7 +437,16 @@ recogida), el diseño no entra a producción (flujo v2 en
 2. **Sembrar aditivo** en la instancia de la tienda (bandeja
    continua: una sola instancia por tienda, declarada en
    `vitrina` del `config.json` de la tienda; plantilla y
-   contratos en `docs/VITRINA-REVISION.md`).
+   contratos en `docs/VITRINA-REVISION.md`). **Esta acción
+   explícita del flujo es la ÚNICA siembra que existe:** la
+   instancia nunca se siembra sola (regla de la plantilla,
+   §«Regla de siembra», nacida del incidente de resurrección del
+   2026-10-22). Si al verificar el tablero aparecen diseños que
+   esta entrega NO sembró — en particular diseños ya recogidos
+   que volvieron como pendientes — es un INCIDENTE de la
+   instancia: no se avisa al dueño a decidir sobre ellos ni se
+   recogen como decisiones nuevas; se reporta y se corrige la
+   instancia primero.
 3. **Avisar al dueño en el chat de entrega** (según
    `docs/REGLA-DELIVERY-CHATS.md`): un aviso breve — qué lote
    es, cuántos diseños trae y **el acceso a la vitrina** (su

@@ -188,7 +188,7 @@ históricos conservan la terminología de su época.
 | `paquete-listing-etsy` | v0.2.0 | Paquete comercial del listing: título, descripción, tags, keywords |
 | `publicar-printify-etsy` | v0.9.0 | Producción en Printify (MPL: base → conversión → items creados dentro) → publicación en Etsy |
 | `publicador-lote` | v0.1.3 | Lote aprobado → side chat: manifiesto explícito, checkpoints por listing, reporte |
-| `puerta-arte-propuesta` | v0.8.6 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro; entrega en la vitrina |
+| `puerta-arte-propuesta` | v0.8.7 | Arte listo: PNG 300 DPI, fondo transparente, sin blanco puro; entrega en la vitrina |
 | `puerta-pinterest-pin` | v0.4.1 | Pin listo: asset FINAL del listing, keywords con fuente, URL rastreable |
 
 ## Principios operativos (para quien opere esta app)
