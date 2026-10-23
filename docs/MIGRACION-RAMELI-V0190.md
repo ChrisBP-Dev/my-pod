@@ -106,5 +106,28 @@ libera como **MENOR**:
   de merge, Release de GitHub desde ese tag verificado
   como **Latest**, y borrado de la rama (local + remota).
 
-_(Cierre: se completa con los hashes y la verificación
-final cuando la puerta se ejecute.)_
+## Cierre (2026-10-23, con el dale del dueño en este chat)
+
+- **Merge:** `migracion-rameli-v0190` fusionada a `main`
+  con commit de merge **`ab0f307`** (rama: `2ba26a2` +
+  `2db60ad`, este último con la revalidación de las 4
+  declaraciones «sin suite» a pregunta del dueño); push
+  verificado con `git status -sb` sin «ahead».
+- **Puertas sobre `main`:** `rameli validar` **0 fallos,
+  0 avisos**; lint **VERDE** total; `rameli test`
+  **REGRESIÓN VERDE — 53 casos, 0 fallas** (13+4+3+18+15),
+  mismos 4 avisos revalidados. El archivo sin trackear de
+  otro trabajo quedó intacto (sha256 `6dc145e9…`, el mismo
+  de la línea base).
+- **Tag y Release v1.1.0:** tag **anotado** `v1.1.0` sobre
+  `ab0f307`, empujado y verificado contra el remoto
+  (`v1.1.0^{}` = `ab0f307`); Release «v1.1.0 — Migración a
+  Rameli v0.19.0» publicada y **verificada como Latest por
+  dos vías**: la insignia en la página de Releases y
+  `get_latest_release` de la API de GitHub (publicada
+  2026-10-23 11:59 UTC).
+  https://github.com/ChrisBP-Dev/my-pod/releases/tag/v1.1.0
+- **Rama borrada** local y remota. Cero ramas pendientes.
+  La actualización completa queda **cerrada**: migración
+  + auditoría conforme + fase de mejora sin objeto (con la
+  revalidación registrada) + liberación v1.1.0.
