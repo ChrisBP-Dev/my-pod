@@ -1,5 +1,8 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.9.1 (2026-10-23) — lecciones de producción de la Fase B del lote 2026-10-19
+- §M4 suma las lecciones verificadas al producir los 10 MPLs aprobados: prohibición de producción en paralelo en la misma cuenta (cruce p059/p062); el item de catálogo nace con Printful y "Replace print provider" regenera el ID y rompe la referencia del MPL (cierre fiable: re-agregar vía "Your products", patrón de rescate anotado); la validación del MPL exige nombres de producto distintos (playera = título + " - T-Shirt", solo interno); el diálogo "Your products" puede no listar productos recién creados (esperar y reintentar, no duplicar); un componente puede aparecer "Published" sin clic de publicación (p064: Hide on Etsy inmediato + verificación por API de Etsy + incidente en el registro, decisión de fondo del dueño).
+
 ## v0.9.0 (2026-10-22) — alineación de producción MPL (orden del dueño)
 - **Ruta MPL ÚNICA:** §M1 crea SOLO el borrador base (primer producto de la composición); §M4 lo convierte y los demás items se CREAN dentro del MPL desde el catálogo con el mismo diseño. Printify no crea MPL vacíos desde cero: la conversión del base es la entrada. La ruta vieja (crear todos los componentes como borradores y ensamblar los existentes) queda degradada a **excepción de rescate** para componentes ya creados por lotes anteriores, con anotación en el registro.
 - **Orden de ejecución declarado:** M1 → M4 → M2 → M3 → M5… (la conversión ocurre en la producción/Fase B, no en la publicación).
