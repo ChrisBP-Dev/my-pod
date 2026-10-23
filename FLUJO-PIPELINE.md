@@ -24,23 +24,30 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 - Generar arte en alta calidad: PNG sin fondo, 300 DPI, recortado exacto.
 - Puerta mecánica COMPLETA: `puerta-arte-propuesta` v0.5.0+ (composición
   sobre el crudo, limpieza, autotrim seguro, fidelidad contra el crudo).
-- **Entrega para aprobación:** cada arte que pasa la puerta se entrega
-  en un chat nuevo con su **porqué** (tema y ángulo de la directriz,
-  frase, iconografía y su motivo, y qué mirar al revisar — p. ej. los
-  counters, que la puerta declara pendientes del ojo humano). El
-  porqué se guarda en el registro (`porque` por diseño) y lo hereda
-  el paquete comercial.
-- **Puerta del dueño, por diseño, en el chat:** aprueba, rechaza o
-  pide ajuste ANTES de que se produzca nada. Lo aprobado se enlista
-  (la cola persiste entre días; no caduca). Lo rechazado no consume
-  producción. Lo ajustado vuelve solo a esta etapa.
-- **Superficie alternativa de la misma puerta — Vitrina de revisión
-  (piloto 2026-10-22):** la entrega puede presentarse en la vitrina
-  (plantilla en `docs/VITRINA-REVISION.md`): el dueño decide ahí, las
-  marca listas y avisa en un chat; Jarvis las recoge y las vuelca a
-  este mismo checkpoint. La puerta no cambia — cambian el canal y el
-  registro; la aprobación válida es la decisión guardada en la
-  vitrina y recogida en el checkpoint.
+- **Entrega para aprobación:** cada arte que pasa la puerta se
+  entrega al dueño con su **porqué** (tema y ángulo de la
+  directriz, frase, iconografía y su motivo, y qué mirar al
+  revisar — p. ej. los counters, que la puerta declara
+  pendientes del ojo humano). El porqué se guarda en el registro
+  (`porque` por diseño) y lo hereda el paquete comercial.
+- **Puerta del dueño, por diseño — DOS superficies equivalentes**
+  (vitrina canonizada el 2026-10-22): el dueño aprueba, rechaza
+  o pide ajuste ANTES de que se produzca nada, **en el chat**
+  (entrega en un chat nuevo, como arriba) **o en la vitrina de
+  revisión** de la tienda (plantilla y contratos en
+  `docs/VITRINA-REVISION.md`): el paquete del lote se genera con
+  `scripts/generar-datos-vitrina.py` y se siembra **aditivo** en
+  la instancia de la tienda (bandeja continua, una sola por
+  tienda, declarada en `vitrina` de su `config.json`); el dueño
+  decide ahí, marca las decisiones con «Marcar listas para
+  Jarvis» y avisa en un chat, y la recogida al checkpoint sigue
+  el procedimiento «Recogida de decisiones (vitrina)» de
+  `puerta-arte-propuesta`. Ambas superficies alimentan el MISMO
+  checkpoint (`data/tiendas/<tienda-id>/estado-propuestas.json`)
+  y ninguna aprobación vale hasta estar registrada ahí. Lo
+  aprobado se enlista (la cola persiste entre días; no caduca).
+  Lo rechazado no consume producción. Lo ajustado (mejorar)
+  vuelve solo a esta etapa.
   (Flujo v2, idea del dueño 2026-10-19: el dale creativo se mueve al
   punto más barato — antes el arte se revisaba recién en Printify,
   con el trabajo de drafts ya gastado.)
@@ -54,6 +61,10 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   hay entrega. Su aprobación cubre diseño + producto + zonas.
 
 ### 2. Propuesta (drafts en Printify) — Fase B: solo aprobados
+- **Solo `aprobados` registrados** en el checkpoint
+  (`estado-propuestas.json`), vengan de la aprobación en el chat
+  o de la recogida de la vitrina. Nada se produce desde la
+  vitrina ni desde una decisión no registrada.
 - **Track MPL:** un draft por producto de la composición (default:
   sudadera + playera), cada uno con el arte colocado. Los drafts quedan
   "unpublished" = propuesta pendiente. Los componentes NUNCA se publican
@@ -199,8 +210,9 @@ su ruta en el mismo cambio.**
 
 | Tarea / flujo | Lecturas mínimas gobernantes |
 |---|---|
-| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) |
-| **Propuestas — etapa 2: drafts de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen componentes) |
+| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) · **si la entrega va por vitrina:** `docs/VITRINA-REVISION.md` (plantilla y contratos) + `scripts/generar-datos-vitrina.py` (paquete del lote para sembrar) |
+| **Recogida de decisiones de la vitrina** (el dueño avisa «recoge las decisiones de la vitrina de <tienda>») | `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida de decisiones (vitrina)»: procedimiento completo, validaciones e idempotencia) · `docs/VITRINA-REVISION.md` (contrato de salida) · `data/tiendas/<tienda-id>/config.json` (bloque `vitrina`: la instancia de ESA tienda) · `data/tiendas/<tienda-id>/estado-propuestas.json` (checkpoint destino) · `data/tiendas/<tienda-id>/registro-listings.json` (validación de slugs) |
+| **Propuestas — etapa 2: drafts de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen componentes) · `data/tiendas/29222324/estado-propuestas.json` (los `aprobados` registrados que consume esta fase) |
 | **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` · `CRITERIO-VIDEO.md` (criterio y puerta de video) |
 | **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/tiendas/29222324/registro-listings.json` (lo hereda el paquete) |
 | **Publicación por lote** (F2) | `skills/publicador-lote/SKILL.md` · `skills/publicar-printify-etsy/SKILL.md` (checklist de publicación) · este doc (§Etapa 7) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |

@@ -8,11 +8,19 @@ sueltos en un chat. Idea del dueño (2026-10-20): revisar así ahorra
 créditos (cada reacción en un chat largo re-lee el contexto completo) y
 deja las decisiones estructuradas para que Jarvis las procese de una vez.
 
-**Estado:** plantilla v2.0 (modelo de bandeja continua, corrección
+**Estado:** plantilla v2.1 (modelo de bandeja continua, corrección
 del dueño 2026-10-22 que reemplaza la regla de cola/anti-cruce de la
-v1.2 — ver §Operación) + piloto con el lote 2026-10-19 (p058–p067).
-La canonización en `puerta-arte-propuesta` (como canal de entrega) se
-decide cuando el piloto esté validado por el uso real del dueño.
+v1.2 — ver §Operación), **CANONIZADA en el sistema el 2026-10-22**:
+fusionada a `main`, es una de las dos superficies equivalentes de la
+puerta de la Etapa 1 (`FLUJO-PIPELINE.md` §1) y su procedimiento de
+recogida vive en `skills/puerta-arte-propuesta/SKILL.md`
+(§«Recogida de decisiones (vitrina)»). Piloto real: lote 2026-10-19
+(p058–p067) de MyNightShiftShop, ya recogido.
+
+> Las secciones «Pulido v…» de este doc son **historia fechada** de
+> la plantilla: cuentan lo que cada versión cambió. Si algo de ahí
+> contradice el modelo vigente (§§Principios, Flujo de uso y
+> Operación), manda el modelo vigente.
 
 ## Principios de UX (no negociables de la plantilla)
 
@@ -74,8 +82,13 @@ decide cuando el piloto esté validado por el uso real del dueño.
    recoger — todavía no fueron procesadas») con el mensaje exacto
    para avisar en un chat y su botón **Copiar mensaje**; el recibo
    reaparece, discreto, mientras haya decisiones listas sin recoger.
-3. **Lectura de vuelta (Jarvis):** lee las decisiones enviadas
-   (§Contrato de salida), las vuelca al checkpoint del sistema
+3. **Lectura de vuelta (Jarvis):** con el aviso del dueño en un
+   chat, sigue el procedimiento operativo exacto de
+   `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida de
+   decisiones (vitrina)»: lectura, validaciones, idempotencia,
+   escrituras y confirmación — ese skill ejecuta; este doc
+   declara los contratos). En resumen: lee las decisiones
+   enviadas (§Contrato de salida), las vuelca al checkpoint del sistema
    (`data/tiendas/<tienda-id>/estado-propuestas.json`: aprobados con
    `{slug, fecha_aprobacion}`; rechazados fuera con su motivo si lo
    dio; mejorar señalados para regenerar solo lo pedido) y confirma
@@ -202,11 +215,13 @@ buscar; sembrar datos es una llamada, no una construcción.
   hasta que Jarvis los recoge, y tras la recogida aprobados y
   rechazados salen de la vitrina (los rechazados se purgan, como
   manda el flujo) y los de mejorar quedan «Esperando regeneración».
-- **Quién la usa en el flujo:** cuando esta plantilla se canonice,
-  el paso de entrega de la Fase A en `puerta-arte-propuesta` dirá:
-  generar el paquete → sembrar la vitrina de la tienda (aditivo) →
-  avisar al dueño que revise ahí. Hasta esa canonización, la
-  siembra la hace Jarvis.
+- **Quién la usa en el flujo (canonizado el 2026-10-22):** el paso
+  de entrega de la Fase A en `puerta-arte-propuesta` (§«Entrega
+  para aprobación del dueño», superficie B) ya lo dice: generar el
+  paquete con `scripts/generar-datos-vitrina.py` → sembrar la
+  vitrina de la tienda (aditivo) → avisar al dueño que revise ahí.
+  La instancia de cada tienda se declara en el bloque `vitrina`
+  de su `config.json`; sin esa declaración, nadie inventa el slug.
 - **Costo:** la creación de la instancia ocurre **una vez por
   tienda**. Cada lote cuesta solo la generación del paquete (script
   local determinista) y la llamada de siembra.

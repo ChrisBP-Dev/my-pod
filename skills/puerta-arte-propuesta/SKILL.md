@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.7.0"
+  version: "0.8.0"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.7.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -403,26 +403,42 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   y diseño intacto. Candidato a gate automático cuando se calibre
   contra artes con gris de diseño legítimo (no bloquear por defecto).
 
-## Entrega para aprobación del dueño (flujo v2, 2026-10-19)
+## Entrega para aprobación del dueño (flujo v2, 2026-10-19; vitrina canonizada 2026-10-22)
 
 Un PASS de esta puerta NO va directo a producción: va primero
-al dueño, en un chat nuevo, **por diseño**, con este bloque:
+al dueño, **por diseño**, por UNA de dos superficies equivalentes.
+Ambas alimentan el mismo checkpoint
+(`data/tiendas/<tienda-id>/estado-propuestas.json`) y ninguna
+aprobación vale hasta estar registrada ahí:
 
-- **El arte final** (el PNG que pasó la puerta, adjunto).
-- **El porqué:** tema y ángulo según la directriz vigente, la
-  frase y su sentido, la iconografía y por qué esos elementos
-  (qué significan en el tema; p. ej. qué es propio de la
-  temporada y qué sería de otra).
-- **Qué mirar:** los puntos que la puerta declara pendientes
-  del ojo humano (counters/agujeros de las letras, trazos que
-  llegan al borde adjudicados como motivo) y cualquier duda
-  honesta del generador.
+- **Superficie A — el chat:** en un chat nuevo, con este bloque:
+  - **El arte final** (el PNG que pasó la puerta, adjunto).
+  - **El porqué:** tema y ángulo según la directriz vigente, la
+    frase y su sentido, la iconografía y por qué esos elementos
+    (qué significan en el tema; p. ej. qué es propio de la
+    temporada y qué sería de otra).
+  - **Qué mirar:** los puntos que la puerta declara pendientes
+    del ojo humano (counters/agujeros de las letras, trazos que
+    llegan al borde adjudicados como motivo) y cualquier duda
+    honesta del generador.
+  La decisión del dueño en el chat se registra en el checkpoint
+  en la misma corrida.
+- **Superficie B — la vitrina de revisión:** se genera el
+  paquete de datos con `scripts/generar-datos-vitrina.py`
+  (desde el registro y el checkpoint de la tienda), se siembra
+  **aditivo** en la instancia de la tienda (bandeja continua:
+  una sola instancia por tienda, declarada en `vitrina` del
+  `config.json` de la tienda; plantilla y contratos en
+  `docs/VITRINA-REVISION.md`) y se avisa al dueño. Él decide
+  ahí, marca las decisiones con «Marcar listas para Jarvis» y
+  avisa en un chat; la recogida al checkpoint sigue la sección
+  «Recogida de decisiones (vitrina)» de este skill.
 
 El porqué se escribe al generar (sale de la directriz y del
 brief del diseño, no se inventa al entregar) y se guarda en el
 registro del diseño (`porque` en `data/tiendas/<tienda-id>/registro-listings.json`)
 para que lo hereden la producción y el paquete comercial. Sin
-aprobación del dueño en esta entrega, el diseño no entra a
+aprobación del dueño registrada, el diseño no entra a
 producción (flujo v2 en `FLUJO-PIPELINE.md`).
 
 ### Variante personalizable (2026-10-20, pedido del dueño)
@@ -459,3 +475,108 @@ peor caso renderizado. Y declara además, explícito:
 - Qué mirar: cómo se lee cada zona vacía vs. llena en la simulación,
   contraste del dato sobre la prenda más clara, y si la composición
   sigue cerrando con el dato puesto.
+
+## Recogida de decisiones (vitrina) — canonizada 2026-10-22
+
+**Dónde vive y por qué.** Esta recogida es el cierre de ESTA
+puerta — la misma que entrega —, no un flujo nuevo: consume el
+mismo checkpoint que la Fase B y la decide el mismo dueño. Por
+eso vive como sección de este skill y no como skill aparte: un
+skill separado fragmentaría la puerta entre dos dueños, y la
+Fase B seguiría apuntando aquí. La plantilla de la vitrina y
+sus contratos (entrada/salida, UX, operación) viven en
+`docs/VITRINA-REVISION.md`; **este es el procedimiento
+operativo de recogida** y manda sobre cualquier descripción
+resumida de aquel doc.
+
+**Disparador.** El dueño avisa en un chat: «recoge las
+decisiones de la vitrina de <tienda>» (el recibo de la vitrina
+trae ese aviso como mensaje copiable: «Jarvis, recoge las
+decisiones de la vitrina de My POD (<tienda>)»). Sin ese aviso NO hay
+recogida: la bandera `enviada` por sí sola no dispara nada y
+la vitrina no notifica a nadie.
+
+**Instancia.** Una sola vitrina por tienda, declarada en el
+bloque `vitrina` del `config.json` de la tienda
+(`data/tiendas/<tienda-id>/config.json`, campo `artefacto`).
+Si la tienda no declara su instancia, la recogida se detiene y
+reporta el hueco — nunca se adivina un slug ni se reutiliza la
+instancia de otra tienda. (MyNightShiftShop, id `29222324`,
+declara `vitrina-de-revisi-n-my-pod` en su config.)
+
+**Procedimiento.**
+
+1. **Leer** las decisiones con la acción `leerdecisiones` de
+   la instancia de la tienda (así se publica el nombre; en
+   prosa puede citarse `leerDecisiones`). Devuelve, por
+   diseño: `slug`, `decision`
+   (`aprobado|rechazado|mejorar`), `nota`, `enviada`,
+   `fechaEnviada`, `esperandoRegeneracion`, `esNuevaVersion`
+   y `loteFecha`. (El contrato de la plantilla,
+   `docs/VITRINA-REVISION.md`, nombra los mismos datos como
+   `fecha`/`fecha_envio` de la decisión: son la fecha de la
+   decisión y la de su marca como lista.)
+2. **Filtrar:** solo se recogen las decisiones con
+   `enviada = true`. Una decisión no enviada es un borrador
+   del dueño: no se toca ni se reporta como decisión.
+3. **Validar ANTES de escribir** — si algo falla, se detiene
+   todo y se reporta; nunca se escribe a medias:
+   - Cada slug filtrado existe en el registro de la tienda
+     (`data/tiendas/<tienda-id>/registro-listings.json`) y en
+     el checkpoint (`data/tiendas/<tienda-id>/estado-propuestas.json`).
+   - Los conteos cuadran: total de filtradas = aprobadas +
+     rechazadas + mejorar de esta recogida.
+   - **Idempotencia:** un slug que ya está en `aprobados`,
+     `mejorar` o `rechazados` del checkpoint, o que la vitrina
+     ya devuelve con `esperandoRegeneracion = true`, YA fue
+     recogido: se excluye de esta recogida y se reporta como
+     ya recogido. Jamás se duplica su entrada ni se reescribe
+     (una entrada de `mejorar` puede llevar trabajo posterior
+     — p. ej. su bloque de regeneración — que no es de esta
+     recogida). Si tras excluir no queda nada nuevo, la
+     recogida termina aquí: se reporta «nada nuevo por
+     recoger» y no se escribe ni se confirma nada.
+4. **Escribir** en el checkpoint
+   `data/tiendas/<tienda-id>/estado-propuestas.json`
+   (checkpoint local de corrida: no se versiona en ningún
+   repo, por diseño de `scripts/registros-datos.py`):
+   - `aprobado` → array `aprobados`, agregando
+     `{slug, fecha_aprobacion}` — `fecha_aprobacion` = la
+     fecha en que el dueño marcó la decisión como lista
+     (`fechaEnviada` de la vitrina, en formato `YYYY-MM-DD`).
+   - `rechazado` → array `rechazados`, agregando
+     `{slug, fecha_decision, motivo}` — `fecha_decision`
+     con la misma regla de `fechaEnviada`; `motivo` = la nota
+     del dueño si la dio, si no `null`. Un rechazado no entra
+     jamás a `aprobados`, `mejorar` ni `producidos`.
+   - `mejorar` → array `mejorar`, agregando
+     `{slug, nota, fecha_decision, estado: "esperando_regeneracion"}`
+     — `fecha_decision` con la misma regla de `fechaEnviada`
+     de arriba.
+   - Bloque `recogida_vitrina` (reemplaza al anterior; es el
+     registro de la ÚLTIMA recogida): `{fecha_recogida,
+     fecha_envio_dueno, lote_fecha, tienda_id, total,
+     aprobados, mejorar, rechazados, fuente}` — conteos de
+     ESTA recogida; `fecha_envio_dueno` = la mayor
+     `fechaEnviada` de las decisiones recogidas;
+     `fuente` = `<slug de la instancia> (leerdecisiones)`.
+5. **Confirmar en la vitrina** con la acción
+   `confirmarrecogida` y las listas por resultado:
+   `{aprobados: [slugs], rechazados: [slugs], mejorar: [slugs]}`
+   — solo lo efectivamente escrito en el paso 4. Efecto:
+   aprobados y rechazados **salen** de la vitrina; los de
+   mejorar quedan «Esperando regeneración» hasta que su nueva
+   versión se siembre. Si la escritura falló, no se confirma
+   nada.
+6. **Reportar al dueño en el chat donde avisó:** conteos por
+   resultado, qué quedó registrado en el checkpoint y qué
+   sigue (la Fase B produce solo los `aprobados` registrados,
+   con la palabra que el flujo exija; los `mejorar` se
+   regeneran solo en lo que pide su nota). La recogida NO
+   produce drafts, NO publica y NO siembra nada.
+
+**Modo lectura (dry-run).** Si el dueño pide revisar sin
+recoger — o ante cualquier duda sobre el estado — se ejecutan
+solo los pasos 1–3 y se reporta qué se recogería (o que no hay
+nada nuevo), sin escribir el checkpoint ni confirmar en la
+vitrina.

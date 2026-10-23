@@ -1,5 +1,10 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.0 (2026-10-22) — vitrina de revisión canonizada: entrega dual + recogida de decisiones
+- **La entrega para aprobación tiene DOS superficies equivalentes** (chat y vitrina de revisión) que alimentan el mismo checkpoint `estado-propuestas.json`; ninguna aprobación vale hasta estar registrada ahí. La superficie vitrina se sembraba desde la plantilla `docs/VITRINA-REVISION.md` (rama `vitrina-revision`, fusionada a main el 2026-10-22) sin que ningún skill la nombrara como canal de entrega.
+- **Nueva sección «Recogida de decisiones (vitrina)»:** procedimiento ejecutable completo — disparador (aviso del dueño en un chat), instancia declarada en `vitrina` del `config.json` de la tienda, lectura por `leerdecisiones` solo de decisiones `enviada=true`, validaciones previas (slug en registro y checkpoint, conteos, **idempotencia** contra el checkpoint y contra `esperandoRegeneracion`), escrituras exactas por resultado (`aprobados`/`rechazados`/`mejorar` + bloque `recogida_vitrina`), confirmación con `confirmarrecogida`, reporte en el chat del aviso y modo lectura (dry-run). Vive en este skill, dueño de la puerta, y no en un skill aparte (justificación en la propia sección).
+- Sin cambios en los gates mecánicos ni en los criterios de personalizables.
+
 ## v0.7.0 (2026-10-20) — criterios de personalización con RAZÓN (estudio + corrección del dueño)
 - **La sección de personalizables se reescribe con la razón gobernando:** ficha de razón obligatoria en la entrega (razón en una frase — identidad/relación/ocasión/conmemoración/pertenencia —, prueba de borrado en dos estados, campos ≤3 cerrados, comprador/destinatario/ocasión, clase de encaje, peor caso renderizado). Base: el estudio de criterios de personalización del 2026-10-20 y la corrección del dueño del mismo día (los 4 diseños del piloto, "diseño + franja con texto", quedaron parqueados como prueba de flujo por no tener razón).
 - **Formato profesional real:** firma ANCC (grado → licencia → designación → certificación, con comas), vocabulario cerrado de títulos/unidades para los dropdowns, patrón de instrucción al comprador de los listings top.

@@ -20,7 +20,7 @@ Uso:
         --salida ~/workspace/vitrina-piloto \
         [--slugs p058,p059] [--ancho-previa 1100]
 
-Sin `--slugs`, toma el lote actual de `data/estado-propuestas.json`.
+Sin `--slugs`, toma el lote actual de `data/tiendas/<tienda-id>/estado-propuestas.json`.
 Las previas se componen determinísticamente desde el PNG de impresión
 (el de producción): fondo oscuro #17181c y fondo claro #f4f1ea, para que
 el dueño juzgue el arte como se verá sobre prenda oscura o clara.
