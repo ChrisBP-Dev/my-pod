@@ -146,34 +146,46 @@ No predecimos con mockups propios; usamos los de Printify directamente.
 - Elimina los rechazados. Los que quedan = aprobados para continuar.
 - Avisa cuáles están listos.
 
-### 4. Mockups (desde Printify)
-**Esquema MPL — 10 imágenes (APROBADO por el dueño 2026-10-15):**
-1. Sudadera lifestyle hero (principal) · 2. Sudadera lifestyle 2 (distinto)
-3. Sudadera flat-lay · 4. Sudadera flat-lay otro color
-5. Sudadera folded decorado/ambientado · 6. Playera on-model
-7. Playera on-model distinto · 8. Playera flat-lay
-9. Tabla de tallas sudadera · 10. Tabla de tallas playera.
-Reglas: nunca repetir pose/modelo en colores diferentes; todos los
-productos/colores vendidos representados; hero = lifestyle.
-**Track single:** esquema de 9 (flat ×3 + folded decorado ×3 + 3
-lifestyles diferentes, hero = lifestyle).
+### 4. Mockups (desde Printify — selección del worker por algoritmo, v0.11.0)
+La lista fija de imágenes se retiró. La selección la hace el
+**worker** (el dueño nunca elige mockups; su revisión de la
+etapa 3 es solo ubicación + colores y va ANTES de esta etapa,
+así que los colores que él agregue los absorbe esta selección):
+- El worker genera el **manifiesto de selección** con
+  `publicar-printify-etsy/scripts/generar-manifiesto-mockups.py`
+  desde los colores FINALES del borrador (post-etapa 3), el
+  **catálogo canónico de tomas de cada producto**
+  (`data/productos/<producto>.json` → `tomas_preferidas`) y los
+  **pesos de la composición** (`config.json` → `mpl.esquema_mockups`:
+  total 10 imágenes, principal 5 espacios visuales, secundario 3,
+  1 tabla de tallas por producto). Algoritmo y garantías mínimas:
+  skill `publicar-printify-etsy` §M5.
+- Puerta: `verificar-mockups.py` en PASS (imagen principal
+  correcta, garantías por producto, sin pose repetida, sin
+  tomas a evitar). Sin PASS no se publica. Los colores
+  vendidos sin espacio quedan **declarados en el manifiesto**
+  (la regla «todos representados» era imposible y se retiró).
 - Rotación de héroes entre productos (modelo y color no se repiten en
   consecutivos).
-- Descargar los mockups seleccionados.
-- Puerta: el dueño los revisa en Printify.
+- Descargar los mockups seleccionados (los del manifiesto).
 - ⚠️ 2026-10-15 (lección): en Printify, **mockups SELECCIONADOS ≠ vistas
   descargables**. Solo los mockups con checkbox marcado se sincronizan a Etsy.
-  Para 10 imágenes en Etsy hay que marcar las 10 vistas en el producto ANTES de
-  publicar (o republicar solo-mockups después). Verificar el conteo "N/20
-  selected" en el producto.
+  Hay que marcar ANTES de publicar exactamente las vistas del
+  manifiesto (o republicar solo-mockups después). Verificar el conteo "N/20
+  selected" **contra el manifiesto**. Los que Printify deje
+  marcados por defecto NO son una selección válida.
 
 ### 5. Videos
-- Descargar mockups de Printify.
-- Generar videos con `scripts/generar-video-listing.py`:
-  - **Track MPL:** Video 1 = 3 lifestyles de sudadera (distintos);
-    Video 2 = 3 tomas de playera (distintas).
-  - **Track single:** Video 1 = on-model/lifestyle; Video 2 = flat/folded.
-- Criterio: `CRITERIO-VIDEO.md` (1080×1080, 9.5s, zoom sin temblor, fade 0.5s).
+- Generar videos con `scripts/generar-video-listing.py` SOLO
+  desde las tomas del **manifiesto de mockups** de la etapa 4,
+  con los **escenarios A–D** del skill `publicar-printify-etsy`
+  §M6 (A: MPL de 2 productos · B: producto con 1–2 colores
+  cubiertos · C: single · D: composición futura según su peso
+  y su catálogo). Escenario vigente por tienda:
+  `config.json` → `mpl.esquema_videos`.
+- Formato técnico (única fuente: §M6 del skill): 1080×1080,
+  30 fps, 9.5s, H.264 yuv420p rango limitado, zoom sin
+  temblor, fade 0.5s.
 - Puerta: `scripts/verificar-video.py`.
 
 ### 5.1 Staging de video — ciclo de vida (2026-10-21)
@@ -265,7 +277,7 @@ su ruta en el mismo cambio.**
 | **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) · `docs/VITRINA-REVISION.md` (plantilla y contratos de la superficie única de entrega) + `scripts/generar-datos-vitrina.py` (paquete del lote para sembrar) |
 | **Recogida de decisiones de la vitrina** (el dueño avisa «recoge las decisiones de la vitrina de <tienda>») | `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida de decisiones (vitrina)»: procedimiento completo, validaciones e idempotencia) · `docs/VITRINA-REVISION.md` (contrato de salida) · `data/tiendas/<tienda-id>/config.json` (bloque `vitrina`: la instancia de ESA tienda) · `data/tiendas/<tienda-id>/estado-propuestas.json` (checkpoint destino) · `data/tiendas/<tienda-id>/registro-listings.json` (validación de slugs) |
 | **Producción — etapa 2: borradores de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen su MPL producido) · `data/tiendas/29222324/estado-propuestas.json` (los `aprobados` registrados que consume esta fase) |
-| **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` · `CRITERIO-VIDEO.md` (criterio y puerta de video) |
+| **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` (§M5 algoritmo y manifiesto de mockups · §M6 escenarios y formato técnico de video, única fuente desde v0.11.0) |
 | **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/tiendas/29222324/registro-listings.json` (lo hereda el paquete) |
 | **Publicación por lote** (F2) | `skills/publicador-lote/SKILL.md` · `skills/publicar-printify-etsy/SKILL.md` (checklist de publicación) · este doc (§Etapa 7) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
 | **Pinterest diario** (F3) | `skills/estratega-pinterest/SKILL.md` (parrilla) · `skills/puerta-pinterest-pin/SKILL.md` (puerta del pin) · este doc (§Etapa 8) · `data/tiendas/29222324/config.json` (links rastreables Share & Save) |

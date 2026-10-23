@@ -255,7 +255,7 @@ esqueleto). Ver el mapa en `ARQUITECTURA-DATOS.md`.
 ## Criterios canónicos
 
 - `FLUJO-PIPELINE.md` — el flujo end-to-end Printify-first + MPL vigente.
-- `CRITERIO-VIDEO.md` — criterio de los videos de listing (1080×1080, 9.5 s, zoom sin temblor).
+- El criterio de los videos de listing (formato técnico 1080×1080, 9.5 s, zoom sin temblor, yuv420p rango limitado + escenarios A–D desde el manifiesto de mockups) vive en `skills/publicar-printify-etsy/SKILL.md` §M6 — única fuente desde v0.11.0; el antiguo `CRITERIO-VIDEO.md` de la raíz se retiró por duplicarla y contradecirla.
 - `ARQUITECTURA-DATOS.md` — qué dato vive dónde (global vs por tienda) y el ciclo de vida de los activos.
 - `docs/PATRONES-RESILIENCIA.md` — health-check, checkpoints con resume y reintentos acotados.
 - `docs/CONTRATO-TIPO-PRODUCTO.md` — contrato estratega → propuestas → publicación (tipo de lote).
