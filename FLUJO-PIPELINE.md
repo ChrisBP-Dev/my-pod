@@ -6,7 +6,8 @@ del 2026-10-14 como default. Alineación 2026-10-22 (orden del dueño):
 ruta MPL única — borrador base → conversión → items creados dentro
 del MPL — y aprobación creativa SOLO en la vitrina antes de producir
 (etapa 1); lo de Printify es producción (etapa 2) y revisión de
-ubicación (etapa 3), nunca propuesta creativa.**
+ubicación + colores (etapa 3, alcance de colores desde 2026-10-23),
+nunca propuesta creativa.**
 
 ## Principio
 Printify es la fuente de verdad para cómo se ve el producto.
@@ -80,7 +81,7 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   el mismo diseño (Printify no crea un MPL vacío desde cero: la
   conversión del base es la entrada). Resultado: **un borrador MPL
   por diseño**, "unpublished", pendiente de la revisión de
-  UBICACIÓN (etapa 3). Crear los componentes como borradores
+  UBICACIÓN + COLORES (etapa 3). Crear los componentes como borradores
   sueltos y ensamblarlos después es la ruta VIEJA, descartada —
   solo vive como rescate de componentes ya creados por lotes
   anteriores, anotado en el registro (detalle: `publicar-printify-etsy`
@@ -96,13 +97,36 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   ancho del área, 95% del alto), centrada horizontal, borde
   superior al 8–12% del alto del área (sesgo arriba). El 78%/14%
   anterior quedó descartado (se veía chico y bajo).
+- **Selección de colores del diseño (criterio del dueño,
+  consolidado 2026-10-23):** al crear cada item, con el arte ya
+  colocado, producción elige sus colores **juzgando ESTE arte**
+  (tonos dominantes → fondos que contrasten; verificación
+  visual del arte sobre cada candidata antes de decidir;
+  procedimiento completo en el skill) — **máx. 4 por prenda** —
+  y deja solo los elegidos habilitados (desmarcar el resto es
+  parte de crear el item). **Repetir el trío histórico
+  (White/Sand/Sport Grey · White/Athletic Heather/Natural)
+  sin ese juicio es incumplimiento**: fue el hábito que el
+  dueño corrigió (Fase B: 9/10 con el mismo trío; el distinto
+  lo cambió él a mano). **No hay paleta canónica** en ninguna parte: la
+  selección vive solo en el borrador. Antes de entregar a la
+  etapa 3 se corre la puerta de conteo
+  (`publicar-printify-etsy/scripts/verificar-variantes.py`).
+  Detalle y glosario: skill `publicar-printify-etsy`
+  §Selección de colores del diseño.
 - Detección de borradores: agrupar por diseño (título real); no
   duplicar diseños que ya tienen su MPL producido (ver contrato §E).
 
-### 3. Revisión del dueño (ubicación, en Printify)
-- **Solo ubicación, dentro del editor del MPL** (por item): es la
-  segunda validación del dueño; la creativa fue la etapa 1 en la
-  vitrina. No hay revisión por borrador componente suelto.
+### 3. Revisión del dueño (ubicación + colores, en Printify)
+- **Ubicación y colores, dentro del editor del MPL** (por item):
+  es la segunda validación del dueño; la creativa fue la etapa 1
+  en la vitrina. No hay revisión por borrador componente suelto.
+  En colores: ve la selección que producción eligió por diseño
+  (máx. 4 por prenda) y la ajusta si quiere — desmarcar/marcar
+  es reversible y no toca arte, ubicación ni precios. Su aviso
+  de «listos» aprueba **ubicación y colores**, y lo que deja en
+  el borrador es lo que se publica: las etapas siguientes leen
+  los colores **del borrador**, nunca de una lista guardada.
 - **Piloto flujo nocturno (desde lun 2026-10-19, decisión del dueño
   2026-10-18, piloto de 1 semana; orden actualizado por el flujo v2
   del 2026-10-19):** la corrida de las 18:00 entrega las artes para

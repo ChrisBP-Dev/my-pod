@@ -17,7 +17,11 @@ está autorizado. El ojo del dueño es la puerta visual final.**
   95% alto), centrado horizontal, sesgo arriba 8–12%, sin desborde)
 - [ ] Ningún otro componente creado como borrador suelto (la ruta vieja
   de crear todos y ensamblar está descartada; solo rescate anotado)
-- [ ] Colores del base = paleta validada contra el diseño (criterio color-diseño)
+- [ ] Colores del base = selección de colores del diseño (elegidos por
+  contraste con el arte colocado, máx. 4; el resto del catálogo
+  desmarcado — sin paleta canónica, ver skill §Selección de colores)
+- [ ] Puerta de conteo corrida (`scripts/verificar-variantes.py`):
+  colores por item ≤4 y variantes totales del MPL ≤400, o aviso al dueño
 - [ ] Precios escalonados APLICADOS en el borrador base ANTES de publicar:
   - [ ] Precios según `estrategia_precios` del config de la tienda
     (ej. 29222324: sudadera S–XL $40.99 · 2XL $44.99 · 3XL $46.99;
@@ -31,8 +35,8 @@ está autorizado. El ojo del dueño es la puerta visual final.**
   catálogo con el mismo diseño (nunca agregado desde un borrador suelto,
   salvo rescate anotado en el registro)
 - [ ] Placement, colores/tallas y precios verificados POR ITEM dentro
-  del editor del MPL (ej. playera: White + Athletic Heather + Natural,
-  todas las tallas del proveedor)
+  del editor del MPL (colores = selección del diseño, máx. 4 por item,
+  todas las tallas que el proveedor ofrezca por color elegido)
 - [ ] Nombres de variación: "Sweatshirt" / "T-Shirt" (campo "Variation name for Etsy listing")
 - [ ] Shipping profile único asignado al MPL
 - [ ] Borrador MPL guardado SIN publicar; revisión de UBICACIÓN del dueño

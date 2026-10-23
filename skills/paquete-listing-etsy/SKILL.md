@@ -2,7 +2,7 @@ name: "paquete-listing-etsy"
 description: "Genera el paquete completo de listing para Etsy: título SEO, descripción estructurada, 13 tags y copy de anuncio, siguiendo la metodología validada en listings publicados."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.2.0"
+  version: "0.2.1"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -58,7 +58,15 @@ Estructura fija (precedente listings #1, #2, #3):
 ## Procedimiento
 
 1. **Leer** `data/banco-keywords/<nicho>.md` para keywords y fórmula.
-2. **Recibir** del dueño o del registro: descripción del diseño, colores, tallas, precio.
+2. **Recibir** del dueño o del registro: descripción del diseño, tallas, precio.
+   **Colores: se LEEN del borrador de Printify por API** — los que el
+   dueño dejó aprobados en su revisión (ubicación + colores) — y con
+   esa lectura se llena el `--colores` de `generar-paquete.py`.
+   **Nunca** colores escritos a mano, ni de una lista guardada, ni
+   del ejemplo del script (que es sintaxis, no dato): no existe
+   paleta canónica (criterio del dueño, 2026-10-23; ver
+   `publicar-printify-etsy` §Selección de colores del diseño).
+   Si el borrador cambió tras generar el paquete, se regenera.
    **REGLA DE COHERENCIA (2026-10-14, lección cara):** antes de generar, ABRIR el
    arte print aprobado y verificar que el concepto/hook/descripción hablen del
    diseño REAL (sujeto, temporada, elementos). Los conceptos heredados del sistema

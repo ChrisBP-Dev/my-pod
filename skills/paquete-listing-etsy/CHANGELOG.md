@@ -1,5 +1,8 @@
 # CHANGELOG — paquete-listing-etsy
 
+## v0.2.1 (2026-10-23) — colores leídos del borrador (criterio del dueño)
+- Paso 2: los **colores del paquete se leen del borrador de Printify por API** (los que el dueño dejó aprobados en su revisión) y con esa lectura se llena `--colores`. Prohibido escribirlos a mano o tomarlos de una lista guardada o del ejemplo del script: **no existe paleta canónica** (ver `publicar-printify-etsy` v0.10.0, §Selección de colores del diseño). Si el borrador cambia, el paquete se regenera.
+
 ## v0.2.0 (2026-10-14)
 - REGLA DE COHERENCIA paquete-vs-arte (lección cara): antes de generar, abrir el
   arte print aprobado y verificar que concepto/hook/descripción hablen del diseño
