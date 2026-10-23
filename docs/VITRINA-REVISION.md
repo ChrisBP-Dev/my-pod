@@ -66,11 +66,14 @@ decide cuando el piloto esté validado por el uso real del dueño.
    el arte en el visor con zoom natural (focal, acotado, sin cierre
    por gestos) y decide en el detalle: **Aprobar**, **Rechazar** o
    **Mejorar** (con nota de qué mejorar; la nota también es
-   bienvenida en un rechazo). Cuando quiere, pulsa **«Enviar
-   decisiones a Jarvis»** (visible solo si hay decisiones sin
-   enviar, con su conteo): marca esas decisiones como enviadas —
-   una bandera, no un candado; todo sigue editable y cambiar una
-   decisión le quita la marca.
+   bienvenida en un rechazo). Cuando quiere, pulsa **«Marcar listas
+   para Jarvis»** (visible solo si hay decisiones sin marcar, con su
+   conteo): las marca como listas — una bandera, no un candado; todo
+   sigue editable y cambiar una decisión le quita la marca. Al
+   marcar, la vitrina muestra un recibo compacto («Listas para
+   recoger — todavía no fueron procesadas») con el mensaje exacto
+   para avisar en un chat y su botón **Copiar mensaje**; el recibo
+   reaparece, discreto, mientras haya decisiones listas sin recoger.
 3. **Lectura de vuelta (Jarvis):** lee las decisiones enviadas
    (§Contrato de salida), las vuelca al checkpoint del sistema
    (`data/tiendas/<tienda-id>/estado-propuestas.json`: aprobados con
@@ -143,15 +146,20 @@ de uso, paso 3). Una decisión no enviada es un borrador del dueño,
 no una orden; una enviada sigue siendo editable, y editarla le
 quita la marca hasta que vuelva a enviarla.
 
-## Qué hace «Enviar decisiones a Jarvis» (funcionamiento, sin magia)
+## Qué hace «Marcar listas para Jarvis» (funcionamiento, sin magia)
 
 Pone la bandera `enviada` con su fecha a las decisiones que aún no la
-tienen — es una **señal**, no una acción sobre la tienda: la vitrina
-no produce, no publica y no toca Printify. La señal le dice a Jarvis
-«ya puedes recoger»: Jarvis lee las decisiones (contrato de salida),
-las vuelca al checkpoint de la tienda, confirma la recogida y el
-flujo v2 sigue su curso (la Fase B produce solo lo aprobado, con la
-palabra que el flujo exija).
+tienen — es una **señal**, no una acción sobre la tienda ni un envío:
+la vitrina no produce, no publica, no toca Printify y **no notifica
+a nadie por sí sola**. La señal dice «estas decisiones ya pueden
+recogerse»; la recogida ocurre cuando el dueño avisa en un chat (el
+recibo de la vitrina trae el mensaje exacto, copiable: «Jarvis,
+recoge las decisiones de la vitrina de My POD (<tienda>)»). Jarvis
+lee las decisiones (contrato de salida), las vuelca al checkpoint de
+la tienda, confirma la recogida y el flujo v2 sigue su curso (la
+Fase B produce solo lo aprobado, con la palabra que el flujo exija).
+Un diseño ya recogido en «Esperando regeneración» no cuenta como
+«sin enviar» ni vuelve a ofrecer la acción de marcar.
 
 ## Pulido v1.1 — correcciones del dueño (2026-10-22, sobre el piloto)
 
