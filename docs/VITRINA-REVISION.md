@@ -59,7 +59,7 @@ decide cuando el piloto esté validado por el uso real del dueño.
 2. **Revisión (el dueño):** entra a la vitrina — la vista inicial es
    **Pendientes** (no hay vista «todas»: la lista se va limpiando a
    medida que decide; las demás vistas son aprobadas / rechazadas /
-   mejoradas, para consultar lo ya decidido y cambiar de opinión
+   por mejorar, para consultar lo ya decidido y cambiar de opinión
    cuando quiera) —, abre cada diseño, lee su porqué, alterna el
    fondo con el control segmentado etiquetado «Fondo: Oscuro /
    Claro» (estado activo inconfundible en ambos modos), inspecciona
@@ -198,7 +198,7 @@ buscar; sembrar datos es una llamada, no una construcción.
   la «regla anti-cruce» de la v1.2):** un lote nuevo nunca espera a
   que el dueño termine de revisar otro. Todos los pendientes son
   simplemente pendientes del dueño, vengan del día que vengan; los
-  decididos viven en sus vistas (aprobadas / rechazadas / mejoradas)
+  decididos viven en sus vistas (aprobadas / rechazadas / por mejorar)
   hasta que Jarvis los recoge, y tras la recogida aprobados y
   rechazados salen de la vitrina (los rechazados se purgan, como
   manda el flujo) y los de mejorar quedan «Esperando regeneración».
