@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.4"
+  version: "0.8.5"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.4** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.5** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -65,8 +65,13 @@ después de 12 mockups.
 4. **PASS** → el arte pasa a aprobación humana (ojo: counters).
    **FAIL** → se devuelve con el criterio violado. Si falla
    `sin_blanco_puro`, repetir paso 2 y re-verificar.
-5. **Draft en Printify** → el dueño revisa ubicación en gris.
-6. **Mockups** salen de Printify. Nada propio.
+5. **Entrega en la vitrina** → el dueño decide ahí (aprobar /
+   rechazar / mejorar); solo lo aprobado y registrado en el
+   checkpoint pasa a producción. Nada se crea en Printify antes
+   de esa aprobación (ver «Entrega para aprobación del dueño»).
+6. **Producción en Printify** (Fase B, skill `publicar-printify-etsy`)
+   → el dueño revisa UBICACIÓN en los borradores producidos.
+   **Mockups** salen de Printify. Nada propio.
 
 ## Herramientas de procesamiento (scripts compartidos de la app)
 

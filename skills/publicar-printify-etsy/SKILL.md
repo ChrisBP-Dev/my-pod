@@ -3,13 +3,19 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.2"
+  version: "0.9.0"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.9.0** (2026-10-22: alineación ordenada por el dueño —
+ruta MPL ÚNICA: borrador base → conversión → items creados dentro
+del MPL desde el catálogo; la ruta vieja de crear todos los
+componentes y ensamblar los existentes queda solo como rescate.
+Y la aprobación creativa vive en la vitrina ANTES de producir:
+nada llega a Printify como propuesta.)
 **Versión 0.8.2** (2026-10-20: M7 idempotencia de publicación —
 verificar antes de reintentar, el clic de Publish es acción con
 costo; M6 corrección en la fuente — prohibido manipular un video
@@ -149,10 +155,23 @@ Antes de pedirle al dueño que inicie sesión manualmente:
 Solo si Google no ofrece cuenta guardada o el login falla, se le pide a
 él que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
 
-### M1. Crear los drafts componentes (uno por producto del MPL)
-Por cada producto de la composición (default: sudadera + playera):
+### M1. Crear el borrador BASE (un solo producto — ruta única, 2026-10-22)
+
+**Orden real de ejecución del track: M1 → M4 → M2 → M3 → M5 → M6 →
+M7 → M8 → M9 → M10** (la numeración es histórica; la conversión
+§M4 ocurre dentro de la producción, antes de la revisión del dueño).
+
+**La ruta normal crea UN solo borrador suelto: el del primer
+producto de la composición (default: sudadera Gildan 18000).** Los
+demás productos NO se crean como borradores separados: nacen
+dentro del MPL en §M4, creados desde el catálogo con el mismo
+diseño. Crear todos los componentes por separado y ensamblarlos
+después es la ruta VIEJA, descartada por el dueño el 2026-10-22 —
+duplicaba trabajo y dejaba componentes sueltos que se confundían
+con propuestas; su único uso vivo es el rescate (§M4, excepción).
 - Subir el arte a Printify (navegador, el CLI está roto).
-- Crear producto draft con el blueprint/provider de la composición.
+- Crear el borrador base con el blueprint/provider del primer
+  producto de la composición.
 - Colocación inicial (RECALIBRADA por el dueño, 2026-10-17 — reemplaza
   el 78%/centrado anterior): escala = min(92% del ancho del área,
   95% del alto del área) — el diseño se ve GRANDE y COMPLETO, NUNCA se
@@ -164,27 +183,34 @@ Por cada producto de la composición (default: sudadera + playera):
   revisión, así que nace corregido. El ajuste fino por diseño sigue
   siendo de su revisión, pero la base ya sale en su criterio.
 - Aplicar la paleta validada contra el diseño (criterio color-diseño) y
-  los precios escalonados de la tabla vigente.
-- En el draft, poner el **título real del diseño** (nunca el nombre
+  los precios escalonados de la tabla vigente (la paleta y los precios
+  de cada item agregado se aplican al crearlo dentro del MPL, §M4).
+- En el borrador, poner el **título real del diseño** (nunca el nombre
   genérico del blueprint) — regla 2026-10-15.
-- Los drafts quedan "unpublished" = propuesta pendiente de revisión.
-- **REGLA: no publicar los componentes single por separado.** Los
-  componentes de un MPL se publican SOLO como parte del MPL. Publicar
-  un componente solo crea un listing single huérfano que compite con el
-  MPL y rompe el flujo.
+- El borrador base queda "unpublished" y pasa de inmediato a la
+  conversión (§M4). **No es una propuesta:** la aprobación creativa
+  ya ocurrió en la vitrina (Fase A, flujo v2); este borrador es
+  PRODUCCIÓN de un diseño aprobado (Fase B), pendiente solo de la
+  revisión de ubicación del dueño (§M2).
+- **REGLA: no publicar el base ni ningún componente single por
+  separado.** Los componentes de un MPL se publican SOLO como parte
+  del MPL. Publicar un componente solo crea un listing single
+  huérfano que compite con el MPL y rompe el flujo.
 
-### M2. Revisión del dueño — placement EN CADA PRODUCTO (2026-10-15)
-- **Variante propuestas diarias (orden del dueño 2026-10-16):** las
-  propuestas llegan como **MPL drafts ensamblados (un draft por
-  diseño)**. El dueño abre cada MPL draft y verifica el placement
-  **por item dentro del editor** (grande según §M1, centrado
-  horizontal, sesgo arriba, dentro del área de impresión, sin
-  desbordamiento — cada blueprint tiene su área).
-  Rechazado = elimina el MPL draft completo. Aprobado = sigue a M3.
-- **Variante publicación directa (diseño ya aprobado):** el dueño
-  revisa CADA draft componente en Printify (mismo criterio por
-  producto). El placement heredado del flujo "same design" NO
-  sustituye la verificación por producto.
+### M2. Revisión del dueño — placement DENTRO del editor del MPL
+- Esta es la SEGUNDA validación del dueño. La primera (la creativa)
+  ocurrió en la vitrina ANTES de producir: **nada llega a Printify
+  como propuesta creativa** (flujo v2, superficie única vitrina).
+- Lo producido en Fase B llega a esta revisión como **un borrador
+  MPL por diseño** (base convertido + items creados dentro,
+  §M1 → §M4), nunca como componentes sueltos. El dueño abre cada
+  borrador MPL y verifica el placement **por item dentro del
+  editor del MPL** (grande según §M1, centrado horizontal, sesgo
+  arriba, dentro del área de impresión, sin desbordamiento — cada
+  blueprint tiene su área). **No existe variante de revisión por
+  borrador componente suelto:** era la forma vieja, eliminada en
+  la alineación del 2026-10-22.
+  Rechazado = elimina el borrador MPL completo. Aprobado = sigue a M3.
 - Corrige la ubicación directamente en el editor si hace falta.
 - Elimina los rechazados. Avisa cuáles están listos.
 
@@ -200,11 +226,24 @@ Por cada producto de la composición (default: sudadera + playera):
   - **13 tags** (≤20 car. c/u) cubriendo ambos productos y el nicho.
 - Puerta: `verificar-paquete.py`.
 
-### M4. Convertir a MPL en Printify
-- En el producto base: "Convert to Multi-Product Listing".
-- "Add item": (a) crear nuevo con EL MISMO diseño desde el catálogo
-  (1 clic), o (b) agregar un producto existente.
+### M4. Convertir a MPL en Printify (dentro de la producción, tras M1)
+Printify no ofrece crear un MPL vacío desde cero: la entrada es
+convertir un producto existente. Por eso la ruta es base →
+conversión → items creados dentro del MPL.
+- En el borrador base: "Convert to Multi-Product Listing".
+- "Add item": **crear nuevo con EL MISMO diseño desde el catálogo**
+  (1 clic) — **ruta ÚNICA normal**. Cada item nace dentro del MPL;
+  no se crea ningún borrador suelto para él.
+- **Excepción de rescate (no es una ruta):** "agregar un producto
+  existente" SOLO cuando un lote anterior a la alineación del
+  2026-10-22 ya dejó un componente creado y verificado del mismo
+  diseño; el rescate se anota en el registro del diseño. Fuera de
+  ese caso, agregar existentes está prohibido: era la ruta vieja
+  de ensamblado (crear todos los componentes y unirlos después).
 - Por cada item: verificar placement, colores/tallas, precios.
+- Al terminar: **guardar como borrador SIN publicar**. El resultado
+  es UN borrador MPL por diseño, listo para la revisión de
+  ubicación del dueño (§M2).
 - **Nombres de variación** (campo "Variation name for Etsy listing"):
   **"Sweatshirt"** / **"T-Shirt"** — cortos, sin el nombre del blueprint.
   (Decisión 2026-10-15, verificado en p005.)
@@ -342,7 +381,10 @@ nativa de Etsy):
 2. **Draft en Printify:** subir arte, crear producto draft (producto
    según directriz), colocación según §M1 (min(92% ancho, 95% alto),
    centrada horizontal, sesgo arriba 8–12% desde el tope),
-   precios escalonados, título real del diseño. Draft = propuesta.
+   precios escalonados, título real del diseño. El borrador es
+   producción de un diseño ya aprobado en la vitrina (Fase A),
+   pendiente de la revisión de ubicación del dueño — nunca una
+   propuesta creativa en Printify.
 3. **Revisión del dueño** en Printify (placement + mockups).
 4. **Paquete de listing** (`paquete-listing-etsy`): título, descripción
    con disclosure IA, 13 tags. Puerta `verificar-paquete.py`.

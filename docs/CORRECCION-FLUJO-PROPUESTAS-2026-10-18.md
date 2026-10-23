@@ -1,5 +1,15 @@
 # Corrección del flujo de propuestas — 2026-10-18 (orden del dueño)
 
+> **Nota de vigencia (2026-10-22):** la división por diseño, el sync
+> en el acto y el registro por script de este documento SIGUEN
+> vigentes. La SECUENCIA de ensamblado que describe («crear
+> componentes → ensamblar») quedó SUPERADA por la alineación del
+> 2026-10-22: la ruta única es borrador base → conversión → items
+> creados dentro del MPL desde el catálogo (skill
+> `publicar-printify-etsy` v0.9.0 §M1/§M4); ensamblar componentes
+> existentes es solo rescate de remanentes anteriores. El resto del
+> documento se conserva como registro histórico de la corrección.
+
 ## Qué pasó
 
 En la era My POD el flujo cerró 2/2 lotes completos (2026-10-16: 67 min +

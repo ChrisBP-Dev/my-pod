@@ -3,7 +3,7 @@ name: "onboarding-tienda"
 description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento, conexiones (Etsy API, Printify), activaciones de Etsy, calibración de productos y crons operativos con patrones de resiliencia."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.4"
+  version: "0.1.5"
   framework_version: "0.18.0"
 ---
 
@@ -159,7 +159,7 @@ Crear el set estándar de crons (ajustar horarios/N por tienda):
 
 | Cron | Ritmo | Hace |
 |---|---|---|
-| propuestas diarias | diario, hora de revisión −X | P1→P2→P3; genera N propuestas según `tipo_lote`; ensambla MPL si aplica; **siembra en la vitrina de la tienda y aviso breve en chat nuevo (sin artes: la revisión es en la vitrina)** |
+| propuestas diarias | diario, hora de revisión −X | P1→P2→P3; dos fases en orden: **Fase B** produce SOLO los diseños ya aprobados en la vitrina (track MPL: borrador base → conversión → items creados dentro del MPL, ruta única de `publicar-printify-etsy` §M1/§M4); **Fase A** genera las N artes nuevas según `tipo_lote`, les corre la puerta y **las siembra en la vitrina de la tienda + aviso breve en chat nuevo (sin artes: la aprobación creativa es en la vitrina, ANTES de producir — nada llega a Printify como propuesta)** |
 | pinterest diario | diario | pins según mix; gate `puerta-pinterest-pin`; URLs rastreables Share & Save |
 | estratega semanal | semanal | `estratega-tienda`: `data/tiendas/<tienda-id>/direccion-tienda.md` (vigencia 7 días) |
 | revisión viernes | semanal | paquetes SEO vs ledger |

@@ -1,5 +1,14 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.9.0 (2026-10-22) — alineación de producción MPL (orden del dueño)
+- **Ruta MPL ÚNICA:** §M1 crea SOLO el borrador base (primer producto de la composición); §M4 lo convierte y los demás items se CREAN dentro del MPL desde el catálogo con el mismo diseño. Printify no crea MPL vacíos desde cero: la conversión del base es la entrada. La ruta vieja (crear todos los componentes como borradores y ensamblar los existentes) queda degradada a **excepción de rescate** para componentes ya creados por lotes anteriores, con anotación en el registro.
+- **Orden de ejecución declarado:** M1 → M4 → M2 → M3 → M5… (la conversión ocurre en la producción/Fase B, no en la publicación).
+- **Aprobación creativa fuera de Printify:** §M1/§M2 reescritos — nada llega a Printify como propuesta; la aprobación creativa vive en la vitrina (Fase A) y la revisión del dueño en Printify es solo de UBICACIÓN, por item dentro del editor del MPL. Eliminada la variante de revisión por borrador componente suelto y todo el lenguaje «draft = propuesta» (también en el track single).
+- Alineados en la misma pasada: `FLUJO-PIPELINE.md` (etapas 2/3/7 + colocación recalibrada), `docs/CONTRATO-TIPO-PRODUCTO.md` §E, `CHECKLIST-PUBLICACION.md` y el cuerpo del cron de propuestas (B3).
+
+## v0.8.2 (2026-10-20)
+- M7 idempotencia de publicación — verificar antes de reintentar; el clic de Publish es acción con costo. M6 corrección en la fuente — prohibido manipular un video reprobado para pasar la puerta. Incidentes p052 y p046. (Entrada registrada retroactivamente en v0.9.0: la versión vivía en el encabezado del skill sin entrada en este changelog.)
+
 ## v0.8.1 (2026-10-20)
 - §Track Single-P: puntero al vocabulario cerrado y al formato profesional (firma ANCC) que ahora viven en puerta-arte-propuesta v0.7.0; el diseño personalizado llega con su ficha de razón y sus campos definidos (≤3 del comprador por criterio; 5 sigue siendo el tope técnico).
 

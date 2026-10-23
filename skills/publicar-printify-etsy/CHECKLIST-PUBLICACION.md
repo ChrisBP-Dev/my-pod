@@ -1,4 +1,4 @@
-# Checklist de Publicación (2026-10-15, v0.6.0 — flujo MPL; 2026-10-20 — track single alineado a la ruta automatizada de personalización, §Track Single-P)
+# Checklist de Publicación (2026-10-15, v0.6.0 — flujo MPL; 2026-10-20 — track single alineado a la ruta automatizada de personalización, §Track Single-P; 2026-10-22 — alineación ruta única MPL, skill v0.9.0)
 
 **Regla: ningún listing se declara "publicado" hasta que TODO lo de su
 track esté verificado contra el listing vivo. No hay publicación parcial.
@@ -11,24 +11,32 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 
 ## Track MPL — Fase A: en Printify (antes de publicar)
 
-### Drafts componentes (uno por producto)
-- [ ] Sudadera Gildan 18000 draft: arte colocado, centrado, sin desborde
-- [ ] Playera Bella+Canvas 3001 draft: arte colocado, centrado, sin desborde
-- [ ] Placement verificado EN CADA producto + revisión del dueño
-- [ ] Colores = paleta validada contra el diseño (criterio color-diseño)
-- [ ] Playera: White + Athletic Heather + Natural, todas las tallas del proveedor
-- [ ] Precios escalonados APLICADOS en cada draft ANTES de publicar:
+### Borrador BASE (un solo producto — ruta única, 2026-10-22)
+- [ ] SOLO el borrador base creado (primer producto de la composición,
+  ej. sudadera Gildan 18000): arte colocado según §M1 (min(92% ancho,
+  95% alto), centrado horizontal, sesgo arriba 8–12%, sin desborde)
+- [ ] Ningún otro componente creado como borrador suelto (la ruta vieja
+  de crear todos y ensamblar está descartada; solo rescate anotado)
+- [ ] Colores del base = paleta validada contra el diseño (criterio color-diseño)
+- [ ] Precios escalonados APLICADOS en el borrador base ANTES de publicar:
   - [ ] Precios según `estrategia_precios` del config de la tienda
     (ej. 29222324: sudadera S–XL $40.99 · 2XL $44.99 · 3XL $46.99;
     playera S–XL $25.99 · 2XL $28.99 · 3XL $32.99)
-- [ ] Título = título REAL del diseño en cada draft (no genérico del blueprint)
-- [ ] Regla: componentes NO publicados single por separado
+- [ ] Título = título REAL del diseño en el borrador (no genérico del blueprint)
+- [ ] Regla: el base NO se publica single por separado
 
-### Conversión a MPL
-- [ ] "Convert to Multi-Product Listing" ejecutado en el producto base
-- [ ] "Add item": segundo producto agregado (mismo diseño / existente)
+### Conversión a MPL (en la producción, tras el base)
+- [ ] "Convert to Multi-Product Listing" ejecutado en el borrador base
+- [ ] "Add item": cada producto restante CREADO dentro del MPL desde el
+  catálogo con el mismo diseño (nunca agregado desde un borrador suelto,
+  salvo rescate anotado en el registro)
+- [ ] Placement, colores/tallas y precios verificados POR ITEM dentro
+  del editor del MPL (ej. playera: White + Athletic Heather + Natural,
+  todas las tallas del proveedor)
 - [ ] Nombres de variación: "Sweatshirt" / "T-Shirt" (campo "Variation name for Etsy listing")
 - [ ] Shipping profile único asignado al MPL
+- [ ] Borrador MPL guardado SIN publicar; revisión de UBICACIÓN del dueño
+  dentro del editor del MPL (la aprobación creativa ya fue en la vitrina)
 
 ### SEO del MPL (re-optimización COMPLETA — regla suya)
 - [ ] Título ≤140 car., incluye AMBOS productos
