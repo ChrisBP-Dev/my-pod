@@ -1,5 +1,8 @@
 # Changelog — puerta-pinterest-pin
 
+## v0.4.2 (2026-10-23)
+- Fuente del `mapa_assets` alineada a `publicar-printify-etsy` v0.11.0: para listings del flujo nuevo, el mapa se deriva del manifiesto de selección de mockups (§M5) y la inspección visual queda como confirmación; los pins consumen el manifiesto, no una elección paralela.
+
 ## v0.4.1 (2026-10-19)
 - El registro se lee desde `data/tiendas/<tienda-id>/registro-listings.json`; `verificar-pin.py` resuelve la tienda por glob `data/tiendas/*/registro-listings.json` (reorden 2026-10-19). Copias del script byte-idénticas.
 Skill de app. Pineado a Rameli v0.19.0.

@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.4.1"
+  version: "0.4.2"
   framework_version: "0.19.0"
   regression_suite: "evals/"
   gate_script: "scripts/verificar-pin.py"
@@ -76,6 +76,17 @@ Si el listing no tiene mapa, el gate da FAIL y el trabajo es
 construirlo primero — nunca adivinarlo. Al registrar mockups nuevos
 de un listing ya publicado se construye/actualiza su mapa en ese
 momento (queda como paso del flujo de publicación, no de Pinterest).
+
+**Fuente del mapa desde 2026-10-23 (publicar-printify-etsy
+v0.11.0):** para listings publicados con el flujo nuevo, el
+mapa se deriva del **manifiesto de selección de mockups** de
+§M5 (cada asset final con su producto/color/toma/rol según el
+catálogo `tomas_preferidas` de su producto) y la hoja de
+contacto + inspección visual de arriba queda como
+**confirmación** de esa derivación (la clase declarada en el
+pin debe seguir coincidiendo con la imagen real). Los pins
+salen de los mockups del manifiesto, nunca de otra elección
+paralela ni de defaults de Printify.
 
 ## Procedimiento
 

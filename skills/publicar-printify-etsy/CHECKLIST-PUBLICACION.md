@@ -18,10 +18,14 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Ningún otro componente creado como borrador suelto (la ruta vieja
   de crear todos y ensamblar está descartada; solo rescate anotado)
 - [ ] Colores del base = selección de colores del diseño (elegidos por
-  contraste con el arte colocado, máx. 4; el resto del catálogo
-  desmarcado — sin paleta canónica, ver skill §Selección de colores)
+  contraste con el arte colocado, guía 3–4 por prenda; extensión a
+  5–6 permitida si el arte lo justifica, con nota; el resto del
+  catálogo desmarcado — sin paleta canónica, ver skill §Selección
+  de colores)
 - [ ] Puerta de conteo corrida (`scripts/verificar-variantes.py`):
-  colores por item ≤4 y variantes totales del MPL ≤400, o aviso al dueño
+  detiene SOLO si el MPL pasa el límite técnico (>400 variantes o
+  >70 opciones); un item con >6 colores = aviso informativo en el
+  reporte, sin detener
 - [ ] Precios escalonados APLICADOS en el borrador base ANTES de publicar:
   - [ ] Precios según `estrategia_precios` del config de la tienda
     (ej. 29222324: sudadera S–XL $40.99 · 2XL $44.99 · 3XL $46.99;
@@ -35,8 +39,10 @@ está autorizado. El ojo del dueño es la puerta visual final.**
   catálogo con el mismo diseño (nunca agregado desde un borrador suelto,
   salvo rescate anotado en el registro)
 - [ ] Placement, colores/tallas y precios verificados POR ITEM dentro
-  del editor del MPL (colores = selección del diseño, máx. 4 por item,
-  todas las tallas que el proveedor ofrezca por color elegido)
+  del editor del MPL (colores = selección del diseño según la guía
+  del skill — 3–4, o 5–6 con nota si el arte lo justifica —, todas
+  las tallas que el proveedor ofrezca por color elegido; el dueño
+  puede cambiar los colores en su revisión sin límite del sistema)
 - [ ] Nombres de variación: "Sweatshirt" / "T-Shirt" (campo "Variation name for Etsy listing")
 - [ ] Shipping profile único asignado al MPL
 - [ ] Borrador MPL guardado SIN publicar; revisión de UBICACIÓN del dueño
@@ -48,26 +54,31 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] 13 tags (≤20 car. c/u) cubriendo ambos productos y el nicho
 - [ ] Puerta `verificar-paquete.py` = PASS
 
-### Mockups — esquema vigente (de `data/tiendas/29222324/config.json` → `mpl.esquema_mockups`; si la composición cambia, el esquema cambia ahí)
-- [ ] 1. Sudadera lifestyle hero (= imagen principal del listing)
-- [ ] 2. Sudadera lifestyle 2 (pose/modelo DIFERENTE)
-- [ ] 3. Sudadera flat-lay
-- [ ] 4. Sudadera flat-lay otro color
-- [ ] 5. Sudadera folded decorado/ambientado (con fondo)
-- [ ] 6. Playera on-model
-- [ ] 7. Playera on-model distinto
-- [ ] 8. Playera flat-lay
-- [ ] 9. Tabla de tallas sudadera
-- [ ] 10. Tabla de tallas playera
-- [ ] Ninguna pose/modelo repetida en colores diferentes
-- [ ] Todos los productos y colores vendidos están representados
-- [ ] Conteo "N/20 selected" en Printify = 10 antes de publicar
+### Mockups — manifiesto + puerta (v0.11.0; pesos en `data/tiendas/29222324/config.json` → `mpl.esquema_mockups`; catálogos en `data/productos/<producto>.json` → `tomas_preferidas`)
+- [ ] Manifiesto de selección generado por el worker con
+  `scripts/generar-manifiesto-mockups.py` desde los colores
+  FINALES post-revisión del dueño (el dueño NO elige mockups;
+  los defaults de Printify no son una selección válida)
+- [ ] Puerta `scripts/verificar-mockups.py` = PASS (imagen
+  principal = toma prioridad 1 del producto principal en su
+  color prioritario; garantías mínimas por producto; ninguna
+  pose/modelo repetida en otro color; ninguna toma a evitar
+  ni fuera de catálogo)
+- [ ] Colores vendidos sin representación visual DECLARADOS
+  en el manifiesto con su motivo (no existe la regla «todos
+  representados»: con 3 espacios visuales no caben 4+ colores)
+- [ ] Lo marcado en Printify coincide EXACTAMENTE con el
+  manifiesto (conteo "N/20 selected" contra el manifiesto,
+  no solo «que sean 10»)
 
-### Videos
-- [ ] Video 1: 3 lifestyles de sudadera (distintos)
-- [ ] Video 2: 3 tomas de playera (distintas)
-- [ ] 1080×1080, 30fps, H.264, 9.5s, sin audio
-- [ ] Puerta `verificar-video.py` = PASS (movimiento ≥3.0) + manifiesto
+### Videos — escenarios A–D del skill §M6, desde el manifiesto
+- [ ] Escenario identificado (A: MPL 2 productos · B: producto
+  con 1–2 colores cubiertos · C: single · D: composición futura)
+- [ ] Tomas de ambos videos = tomas del manifiesto de mockups
+  (Video 1 abre con la imagen principal del manifiesto)
+- [ ] Formato técnico §M6: 1080×1080, 30fps, H.264 yuv420p
+  rango limitado, 9.5s, sin audio
+- [ ] Puerta `verificar-video.py` = PASS (movimiento ≥3.0) + manifiesto de video
 
 ---
 
@@ -88,7 +99,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
     de la tienda (ej. 29222324: sudadera $40.99/$44.99/$46.99;
     playera $25.99/$28.99/$32.99)
 - [ ] SKUs correctos por variación
-- [ ] Orden de imágenes = esquema de 10; hero = lifestyle sudadera
+- [ ] Orden de imágenes = manifiesto de mockups verificado; imagen principal = posición 1 del manifiesto
 - [ ] (Si el orden no se preservó del sync: reordenar en el editor de Etsy)
 - [ ] Video 1 y Video 2 presentes y reproducibles (no se borraron en la conversión)
 - [ ] Título, descripción completa, 13 tags
@@ -113,14 +124,14 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Placement revisado por el dueño en Printify
 - [ ] Colores/tallas según directriz; precios escalonados aplicados en el draft
 - [ ] SEO: título ≤140, descripción con disclosure IA, 13 tags (puerta PASS)
-- [ ] Mockups esquema single: 9 (flat ×3 + folded decorado ×3 + 3 lifestyles diferentes, hero = lifestyle)
+- [ ] Mockups desde el manifiesto (skill §M5: algoritmo + catálogo del producto; hero = toma principal del producto) y puerta `verificar-mockups.py` = PASS
 - [ ] Rotación de héroes vs el lote (no repetir modelo/color del anterior)
 - [ ] **Personalización (§Track Single-P):** producto y diseño NUEVOS; capas personalizables con nombre contenido+zona, instrucciones con ejemplo [Maria], límites por diseño (nombre 15 / credencial 12 — nunca 1024), ejemplo estándar puesto en la capa, dropdowns en decisiones cerradas; conteo de campos ≤5
 - [ ] Inspección visual de las capturas del editor con el ejemplo (puerta-arte v0.6.0)
 
 ### Publicar + Etsy
 - [ ] Publicar en Printify (personalización marcada en "Details to publish") → estado "Published"
-- [ ] Videos subidos en Etsy (V1 on-model/lifestyle, V2 flat/folded), puerta PASS
+- [ ] Videos subidos en Etsy (escenario C de §M6, desde el manifiesto), puerta PASS
 - [ ] Título, descripción, 13 tags, categoría, atributos verificados
 - [ ] Production partner = Printify; perfil de envío; políticas
 - [ ] **Campos de personalización verificados en la página pública** = nombres/instrucciones/límites aprobados (llegan de Printify; JAMÁS se editan en Etsy)

@@ -3,13 +3,34 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.10.0"
+  version: "0.11.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
+videos con estándar** — consolidación de la propuesta aprobada
+por el dueño el 2026-10-23: (1) el tope de 4 colores por prenda
+de v0.10.0 queda **eliminado como techo**: 3–4 es la **guía de
+producción** por juicio del arte, la extensión a 5–6 está
+permitida sin bloqueo con nota operativa, y el dueño en §M2
+agrega o quita colores **sin límite del sistema**; la puerta de
+conteo solo detiene por el límite técnico del MPL (400
+variantes / 70 opciones) y avisa sin detener desde 7 colores
+por item. (2) §M5 deja de ser una lista fija de espacios: la
+selección de mockups la hace el worker con un **algoritmo
+determinista** sobre el **catálogo canónico de tomas por
+producto** (`tomas_preferidas` en `data/productos/<producto>.json`)
+y los **pesos por composición** del config de tienda, y produce
+un **manifiesto de selección** que la puerta
+`scripts/verificar-mockups.py` exige en PASS antes de publicar;
+el dueño **nunca** elige mockups. (3) §M6: los videos se arman
+solo con tomas del manifiesto, con **escenarios A–D** según la
+composición; el formato técnico de video vive ahora en este
+skill y `CRITERIO-VIDEO.md` (raíz) se retiró como fuente
+duplicada que contradecía al esquema.)
 **Versión 0.10.0** (2026-10-23: **selección de colores del
 diseño** — criterio corregido por el dueño: NO existe paleta
 canónica ni quemada en ninguna parte; los colores se eligen
@@ -119,12 +140,18 @@ Default (la estratega puede definir otra composición en
   (blueprint/proveedor). El diseño debe verse bien en cada
   color elegido; no se abarcan colores sin verificación
   visual (regla suya 2026-10-15).
-- **Tope: máximo 4 colores por prenda** (criterio del dueño
-  2026-10-23). Con la composición default (2 prendas), el
-  total de variantes queda lejos del límite del MPL
-  (400 variantes). Por color van TODAS las tallas que el
-  proveedor ofrezca; si un color trae tallas limitadas, se
-  acepta como viene.
+- **Guía de producción: 3–4 colores por prenda** (criterio
+  del dueño 2026-10-23, **sin techo desde v0.11.0**): es la
+  cantidad que producción elige por juicio del arte, **no un
+  límite del sistema para nadie**. Si el juicio sobre ESTE
+  arte lo justifica (ej.: el arte pide fondos claros **y**
+  oscuros), producción puede habilitar **5–6** y el flujo
+  sigue, dejando la nota operativa del paso 5 ampliada con
+  el porqué de la extensión. Por color van TODAS las tallas
+  que el proveedor ofrezca; si un color trae tallas
+  limitadas, se acepta como viene. El único techo real es
+  el técnico del MPL (400 variantes / 70 opciones), que es
+  lo único que la puerta de conteo detiene (§puerta abajo).
 - **El trío histórico NO es punto de partida.** Sudadera
   White/Sand/Sport Grey y playera White/Athletic
   Heather/Natural fue el **hábito heredado** de los primeros
@@ -152,25 +179,36 @@ Default (la estratega puede definir otra composición en
      Printify o composición equivalente) ANTES de decidir.
      Sin esa vista no hay elección — elegir de memoria o
      por hábito es el incumplimiento de arriba.
-  4. **Elegir 3–4** y dejar **solo esas habilitadas**.
+  4. **Elegir según la guía (3–4; 5–6 si el juicio del
+     arte lo justifica, ver arriba)** y dejar **solo esas
+     habilitadas**.
   5. **Nota de producción de una línea** en el registro de
      la corrida (tonos del arte → colores elegidos y por
      qué). Es nota operativa de ESE diseño: no se guarda
      como canónica ni sirve de default para el siguiente.
 - **El dueño es el filtro final** (§M2): en su revisión
-  puede cambiar los colores; su «ya están listos» aprueba
+  puede cambiar los colores **sin límite del sistema**
+  (agrega o quita los que quiera; su juicio manda sobre la
+  guía de producción); su «ya están listos» aprueba
   ubicación **y** colores. Esa elección **no se guarda como
   canónica en ningún registro**: la fuente de verdad al
   publicar es el borrador tal como él lo dejó, y el paquete
   (§M3) y la verificación (§M8) se generan y contrastan
-  **leyendo ese borrador**, nunca una lista previa.
+  **leyendo ese borrador**, nunca una lista previa. Como
+  §M5 corre DESPUÉS de §M2, cualquier color que el dueño
+  agregue lo absorbe el worker al seleccionar los mockups
+  desde los colores finales del borrador — el dueño nunca
+  elige mockups (§M5).
 - **Puerta mecánica (única, de conteo):** antes de mockups
   y antes de publicar, correr
   `scripts/verificar-variantes.py` sobre los items: cuenta
-  colores habilitados por item y variantes totales. Si un
-  item pasa de 4 colores o el MPL pasa de 400 variantes,
-  **avisa al dueño y se detiene** — corrige él o manda
-  corregir; la puerta no compara contra ninguna lista.
+  colores habilitados por item, variantes y opciones del
+  conjunto. **Detiene SOLO por el límite técnico del MPL**
+  (>400 variantes totales o >70 opciones). Si un item pasa
+  de **6** colores, la puerta **avisa sin detener** (el
+  aviso queda en el reporte de la corrida y el flujo
+  sigue): 5–6 colores son una extensión válida, no un
+  error. La puerta no compara contra ninguna lista.
 
 ## Precios escalonados por talla (estándar 2026-10-15, orden del dueño)
 
@@ -259,7 +297,8 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
   siendo de su revisión, pero la base ya sale en su criterio.
 - Aplicar la **selección de colores del diseño** (ver
   «Selección de colores del diseño» arriba: elegir por
-  contraste con el arte ya colocado, máx. 4 por prenda) y
+  contraste con el arte ya colocado, guía 3–4 por prenda,
+  extensión 5–6 permitida con nota) y
   los precios escalonados de la tabla vigente. **Dejar solo
   los colores elegidos habilitados (desmarcar el resto del
   catálogo) es parte de crear el item, no un paso
@@ -303,7 +342,11 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
   el 2026-10-23): ve la selección que producción eligió por
   diseño y la ajusta en el mismo editor si no le convence —
   desmarcar/marcar colores es reversible y no toca arte,
-  ubicación ni precios. Su «ya están listos» aprueba
+  ubicación ni precios, y **no tiene límite del sistema**
+  (la guía 3–4 y su extensión 5–6 atan a producción, no a
+  él). **No revisa ni elige mockups:** en este punto del
+  flujo aún no existen; los selecciona el worker en §M5
+  desde los colores finales que él deje aquí. Su «ya están listos» aprueba
   **ubicación y colores**; lo que él deja en el borrador es
   lo que se publica (§M3 y §M8 leen de ahí).
 - Corrige la ubicación directamente en el editor si hace falta.
@@ -385,32 +428,74 @@ conversión → items creados dentro del MPL.
   - Guardar como draft NO toca el listing vivo.
   - Revert a single disponible tras publicar.
 
-### M5. Mockups — esquema por composición (config de tienda, no quemado)
-El esquema de mockups NO está quemado en este skill: vive en
-`data/tiendas/<tienda-id>/config.json` → `mpl.esquema_mockups`
-(una entrada por slot: producto + tipo + nota). Si la estratega define
-otra composición, define su esquema ahí; el skill lo lee.
+### M5. Mockups — selección del worker por algoritmo (v0.11.0)
 
-**Esquema vigente para la composición default** (APROBADO por el dueño
-2026-10-15) — 10 imágenes, en este orden:
-1. Sudadera lifestyle hero (imagen principal del listing).
-2. Sudadera lifestyle 2 — pose/modelo DIFERENTE al #1.
-3. Sudadera flat-lay.
-4. Sudadera flat-lay, otro color.
-5. Sudadera folded decorado/ambientado (con fondo, NUNCA plano blanco).
-6. Playera on-model.
-7. Playera on-model distinto (pose/modelo diferente al #6).
-8. Playera flat-lay.
-9. Tabla de tallas sudadera.
-10. Tabla de tallas playera.
+**Quién selecciona: el worker (área de publicación), siempre.
+El dueño NUNCA elige mockups** — su revisión (§M2) es solo
+ubicación + colores, y ocurre ANTES de este paso: el algoritmo
+lee los colores FINALES que él dejó en el borrador. **Los
+mockups que Printify deje marcados por defecto NO son una
+selección válida:** sin manifiesto generado y verificado, el
+listing no tiene mockups.
 
-**REGLAS duras** (`mpl.reglas_esquema` en el config):
-- Nunca repetir la misma pose/modelo en colores diferentes.
-- Todos los productos y colores vendidos deben estar representados
-  visualmente (si un color se vende, aparece en alguna imagen).
-- La imagen principal (#1) SIEMPRE es lifestyle de sudadera.
-- Si el catálogo no ofrece los shoots necesarios, REPORTAR la
-  limitación antes de continuar, no improvisar.
+**Insumos (ninguno quemado en este skill):**
+- **Catálogo canónico de tomas por producto:**
+  `data/productos/<producto>.json` → `tomas_preferidas` +
+  `tomas_a_evitar` (cada toma con su identificador documentado,
+  rol, prioridad y fuente). **Producto sin catálogo = este
+  paso se detiene y reporta** (no improvisa, no usa defaults):
+  el alta del catálogo es parte del alta del producto.
+- **Pesos por composición:** `data/tiendas/<tienda-id>/config.json`
+  → `mpl.esquema_mockups` (total de imágenes, espacios
+  visuales del producto principal y del secundario, 1 tabla
+  de tallas por producto). El producto principal es el
+  primero de la composición. Otra composición declara SUS
+  pesos y cada producto trae SU catálogo: nada se hereda en
+  silencio de la composición default.
+
+**Algoritmo (determinista — ejecutor:
+`scripts/generar-manifiesto-mockups.py`):**
+1. Leer los colores finales de cada item del borrador por
+   API (post-§M2, tal como el dueño los dejó), con su tono
+   (claro/oscuro) y el **color prioritario** por item
+   (juicio de contraste del worker + rotación de héroes del
+   lote, ver abajo).
+2. Ordenar los colores: prioritario primero; después
+   alternando un claro y un oscuro.
+3. Repartir los espacios según los pesos de la composición
+   y aplicar las **garantías mínimas por producto**: toma
+   principal en el color prioritario; segunda pose distinta
+   en el siguiente color; plana en el color prioritario.
+   Después, cobertura por turnos de los colores aún no
+   representados y relleno sin repetir par (toma, color).
+4. **Restricciones duras:** nunca repetir la misma pose o
+   modelo en otro color (aplica a tomas con modelo; la
+   plana sí puede repetirse en otro color — evidencia
+   p046); nunca usar una toma de `tomas_a_evitar` ni fuera
+   del catálogo de ese producto. Sustitución reglada: si la
+   toma preferida no está disponible, se baja a la siguiente
+   prioridad del mismo rol y queda registrada.
+5. **La regla «todos los colores representados» queda
+   RETIRADA** (era imposible: la playera tiene 3 espacios
+   visuales y puede vender 4+ colores). La reemplaza la
+   declaración honesta: **todo color vendido sin espacio
+   queda declarado en el manifiesto con su motivo**.
+
+**Salida obligatoria — manifiesto de selección** por diseño
+(mismo patrón que los manifiestos de video): cada espacio =
+{posición, producto, color, toma, etiqueta de cámara, rol} +
+colores sin representación declarados + sustituciones. Los
+checkboxes marcados en Printify deben coincidir
+**exactamente** con el manifiesto.
+
+**Puerta:** `scripts/verificar-mockups.py` contra el
+manifiesto y los colores del borrador — imagen principal
+correcta (producto principal, toma prioridad 1, color
+prioritario), garantías mínimas, sin pose repetida, sin
+tomas a evitar ni fuera de catálogo, sin-representación
+declarados. **Sin PASS, §M7 no corre.** Si falla, el worker
+re-selecciona en la fuente (regenera el manifiesto), jamás
+edita el manifiesto para pasar la medición.
 
 **Rotación de héroes entre productos** (criterio suyo 2026-10-15): en
 cada lote, ROTAR el modelo lifestyle y el color del héroe. Dos
@@ -422,15 +507,56 @@ marca un primario pero al sincronizar el orden puede no preservarse.
 Tras el sync, VERIFICAR en Etsy que la imagen principal sea la
 esperada; si no, reordenar directo en el editor de Etsy.
 
-### M6. Videos — esquema por composición (config de tienda)
-El esquema de videos vive en `data/tiendas/<tienda-id>/config.json` →
-`mpl.esquema_videos`. **Esquema vigente** (APROBADO 2026-10-15):
-- Formato: 1080×1080, 30fps, H.264, 9.5s, sin audio.
-- **Video 1:** 3 lifestyles de SUDADERA (distintos).
-- **Video 2:** 3 tomas de PLAYERA (distintas).
+### M6. Videos — escenarios A–D, siempre desde el manifiesto (v0.11.0)
+
+**Principio único:** los videos se arman SOLO con tomas del
+**manifiesto de mockups de §M5** (seleccionadas por el worker),
+nunca con los defaults de Printify ni con elecciones del
+dueño. Qué escenario aplica lo decide la composición y la
+cobertura del manifiesto, según `mpl.esquema_videos` del
+config de tienda:
+
+- **Escenario A — MPL default (2 productos):** Video 1 =
+  producto principal: 3 tomas de su bloque del manifiesto —
+  la imagen principal primero, otra pose distinta, una plana
+  o detalle; colores distintos entre sí si el manifiesto
+  cubre ≥3 colores de esa prenda. Video 2 = producto
+  secundario, con la misma lógica sobre sus tomas.
+- **Escenario B — un producto con solo 1–2 colores
+  cubiertos:** las tomas de su video varían por **tipo**
+  (modelo, plana, doblada/detalle) en vez de por color; queda
+  registrado en el manifiesto de video.
+- **Escenario C — single (un producto):** Video 1 = tomas
+  con modelo/lifestyle del manifiesto; Video 2 = plana →
+  doblada decorada → detalle, del color principal.
+- **Escenario D — composición futura (otro product
+  listing):** se aplica A/B con el **producto principal
+  según el peso de esa composición** y el catálogo de tomas
+  de ESE producto.
+
+**Formato técnico (única fuente desde v0.11.0 — absorbido
+del retirado `CRITERIO-VIDEO.md` de la raíz, cuya estructura
+de videos contradecía a este esquema):**
+- Resolución 1080×1080 (1:1), 30 fps, H.264 (libx264),
+  duración 9.5s (3 clips de 3.5s con fades solapados de
+  0.5s, offsets 3.0s y 6.0s, xfade fade — nunca corte
+  directo), sin audio, ~1–3 MB.
+- **Pixel format yuv420p de rango LIMITADO (tv)
+  obligatorio** (verificado 2026-10-15): Etsy RECHAZA
+  yuvj420p (rango completo). El flag `-pix_fmt yuv420p`
+  solo NO basta — el filtro debe incluir
+  `scale=out_range=limited,format=yuv420p` (ver
+  `scripts/generar-video-listing.py`).
+- **Movimiento sin temblor:** zoom-in 1.0 → 1.25 con
+  posición absoluta por frame (`z='1+0.25*on/105'`) —
+  NUNCA zoom acumulativo por pasos (trunca a píxeles
+  enteros y tiembla; ver `LECCION-ZOOMPAN-SIN-TEMBLOR.md`).
+  Se escala primero a 2160×2160 y zoompan baja a 1080;
+  centrado `x='iw/2-(iw/zoom/2)'`, `y='ih/2-(ih/zoom/2)'`.
 - Scripts: `scripts/generar-video-listing.py`; puerta:
-  `scripts/verificar-video.py` (movimiento mínimo 3.0) + manifiesto.
-- Criterio: `CRITERIO-VIDEO.md`.
+  `scripts/verificar-video.py` (movimiento mínimo 3.0) +
+  manifiesto de video (que referencia las tomas del
+  manifiesto de mockups usadas).
 - **Si la puerta FALLA, se corrige en la FUENTE (2026-10-20,
   incidente p046 — doctrina del dueño: «eso es hacer trampa para
   pasar»):** el video se REGENERA con el generador (otra toma del
@@ -478,13 +604,19 @@ Nada se da por sentado. Verificar contra el listing vivo:
   colores) — **contra la lectura del borrador de Printify
   tal como el dueño lo dejó** (§M2), que es la fuente de
   verdad; nunca contra una lista previa o «esperada».
-- Conteo previo a publicar (puerta de §M1): ningún item
-  >4 colores ni MPL >400 variantes sin aviso al dueño.
+- Conteo previo a publicar (puerta de §M1): la puerta solo
+  detiene por el límite técnico (MPL >400 variantes o >70
+  opciones); un item con >6 colores genera aviso
+  informativo en el reporte, sin detener ni corregir lo que
+  el dueño dejó.
 - Precios por variación según la tabla vigente de la tienda
   (`estrategia_precios` en su config; ej. 29222324: sudadera
   $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99).
 - SKUs correctos por variación.
-- Orden de imágenes = esquema de 10; hero = lifestyle sudadera.
+- Orden de imágenes = **manifiesto de mockups verificado**
+  (§M5, puerta en PASS); imagen principal = posición 1 del
+  manifiesto (toma principal del producto principal de la
+  composición, en su color prioritario).
 - Videos: los 2 nuevos presentes y reproducibles (que no se hayan
   borrado en la conversión).
 - Título, descripción completa (con "CHOOSE YOUR STYLE"), 13 tags.
@@ -522,11 +654,15 @@ nativa de Etsy):
 3. **Revisión del dueño** en Printify (placement + mockups).
 4. **Paquete de listing** (`paquete-listing-etsy`): título, descripción
    con disclosure IA, 13 tags. Puerta `verificar-paquete.py`.
-5. **Mockups:** esquema single vigente = 9 (flat ×3 colores + folded
-   decorado ×3 + 3 lifestyles diferentes, hero = lifestyle).
-   Rotación de héroes entre productos (§M5).
-6. **Videos:** Video 1 = on-model/lifestyle, Video 2 = flat/folded.
-   1080×1080, 9.5s, sin audio. Puerta `verificar-video.py`.
+5. **Mockups:** también salen del **manifiesto** (§M5: mismo
+   algoritmo, mismo catálogo `tomas_preferidas` del producto;
+   el reparto de espacios del track single se declara en la
+   entrada del manifiesto). Hero = toma principal del
+   producto. Rotación de héroes entre productos (§M5).
+6. **Videos:** **escenario C de §M6** (Video 1 = tomas con
+   modelo del manifiesto; Video 2 = plana → doblada decorada
+   → detalle del color principal). Formato técnico de §M6.
+   Puerta `verificar-video.py`.
 7. **Publicar** en Printify → sincroniza a Etsy.
 8. **Completar en Etsy:** videos, título, descripción, 13 tags,
    categoría, atributos, production partner = Printify, envío,
@@ -674,6 +810,13 @@ expreso del dueño por listing, sabiendo el costo operativo.
 - **verificar-paquete.py**: el paquete comercial es válido (título
   ≤140, 13 tags ≤20 car., disclosure presente; en MPL: título con
   ambos productos y sección "CHOOSE YOUR STYLE").
+- **verificar-variantes.py**: conteo de colores/variantes —
+  detiene solo por el límite técnico del MPL (400 variantes /
+  70 opciones); sin techo de colores (§Selección de colores).
+- **verificar-mockups.py**: el manifiesto de selección de
+  mockups cumple el algoritmo de §M5 (principal correcta,
+  garantías mínimas, sin pose repetida, sin tomas a evitar,
+  sin-representación declarados). Sin su PASS no se publica.
 - **verificar-video.py**: los videos cumplen el criterio (puerta
   mínima de movimiento 3.0).
 - **CHECKLIST-PUBLICACION.md**: ningún listing se declara publicado
@@ -688,10 +831,12 @@ expreso del dueño por listing, sabiendo el costo operativo.
   diseño. Printify-first siempre. El track (MPL/single) lo decide el flujo
   bifurcado (§0).
 - **TIENDA** (`data/tiendas/<id>/config.json` + `data/tiendas/<tienda-id>/config-propuestas.json`):
-  la composición del MPL, los precios base, el esquema de mockups/videos y
-  el tipo de lote los define la tienda (vía la estratega), NO este skill.
-  Agregar un producto nuevo = ficha en `data/productos/` + esquema en el
-  config; el skill no se reescribe.
+  la composición del MPL, los precios base, los pesos de mockups y los
+  escenarios de video los define la tienda (vía la estratega), NO este skill.
+  Agregar un producto nuevo = ficha en `data/productos/` **con su
+  catálogo `tomas_preferidas` sembrado** (§M5: sin catálogo no hay
+  producción) + pesos en el config si entra en una composición;
+  el skill no se reescribe.
 - **CALIBRACIÓN** (Gildan 18000): posición inicial min(92% ancho,
   95% alto), centrada horizontal, 8–12% desde arriba (corrección del
   dueño 2026-10-17; antes 78% ancho centrado — se veía chico con aire

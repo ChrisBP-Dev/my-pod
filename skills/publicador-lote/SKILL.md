@@ -3,12 +3,15 @@ name: "publicador-lote"
 description: "Publica un lote de diseños APROBADOS por el dueño: un side chat por lote, manifiesto explícito, pipeline por listing sobre publicar-printify-etsy (M3→M9), checkpoints con resume por listing y rollback."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.6"
+  version: "0.1.7"
   framework_version: "0.19.0"
 ---
 
 # Publicador de lote POD
 
+**Versión 0.1.7** (2026-10-23: pipeline alineado a
+`publicar-printify-etsy` v0.11.0 — M5 con manifiesto de
+mockups + puerta, M6 con escenarios A–D desde el manifiesto).
 **Versión 0.1.6** (2026-10-20: chequeo previo al corte en
 ## Invocación paso 0 — antes de resolver el manifiesto, el
 agente principal lee la ficha de la tienda y su registro y
@@ -84,8 +87,11 @@ al worker; 3) el worker ejecuta el pipeline por listing
 ## Pipeline por listing
 
 Por cada slug del manifiesto, en orden, delegando en
-`publicar-printify-etsy` (v0.7.1): **M3** paquete SEO → **M5** mockups
-(desde Printify, sin generar propios) → **M6** videos →
+`publicar-printify-etsy` (versión vigente): **M3** paquete SEO → **M5** mockups
+(**manifiesto de selección** generado por el worker con el
+algoritmo de §M5 + puerta `verificar-mockups.py` en PASS; sin
+generar propios y **nunca** con los defaults de Printify) → **M6** videos
+(**escenarios A–D de §M6, solo desde el manifiesto de mockups**) →
 **M7** publicar → **M8** verificación Fase C → **M9** registrar.
 M2 (revisión del dueño) ya ocurrió: es la aprobación que originó el
 lote. M10 (Pinterest) lo cubre el cron de Pinterest con la parrilla.
