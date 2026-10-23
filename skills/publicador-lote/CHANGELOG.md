@@ -1,5 +1,8 @@
 # CHANGELOG — publicador-lote
 
+## v0.1.7 (2026-10-23)
+- Pipeline por listing alineado a `publicar-printify-etsy` v0.11.0: M5 = manifiesto de selección de mockups del worker + puerta `verificar-mockups.py` en PASS (nunca los defaults de Printify); M6 = escenarios A–D, solo desde el manifiesto de mockups.
+
 ## v0.1.6 (2026-10-20)
 - Chequeo previo al corte (## Invocación, paso 0): antes de
   resolver el manifiesto, el agente principal lee la ficha de
