@@ -1,6 +1,8 @@
 # Contrato: tipo de producto de las propuestas (2026-10-15)
 
-**Versión 1.0.** La estratega decide el TIPO de producto de cada lote de
+**Versión 1.0** (§E alineado el 2026-10-22 a la ruta MPL única y al
+flujo vitrina: cambia la semántica de detección, no el formato). La
+estratega decide el TIPO de producto de cada lote de
 propuestas; el cron de propuestas lo lee; el skill de publicación lo
 ejecuta. Este documento define el formato y el contrato entre las tres
 partes. Cambios al formato = bump de `version` + entrada en el CHANGELOG
@@ -103,33 +105,48 @@ precios: tablas vigentes del skill publicar-printify-etsy
 ```
 El cron reporta qué default usó.
 
-## Detección de drafts en realidad MPL (tarea E, 2026-10-15)
+## Detección de borradores en realidad MPL (tarea E, 2026-10-15; alineada 2026-10-22)
 
-El concepto "el único draft" ya no aplica. Estados reales:
+Estados reales (la aprobación creativa vive en la vitrina, etapa 1
+del pipeline; **nada de lo que hay en Printify es una propuesta** —
+todo borrador en Printify es PRODUCCIÓN de un diseño ya aprobado):
 
-- **Propuesta MPL** = 1 diseño × K drafts componentes (uno por producto
-  de `mpl.componentes`), todos "unpublished", en la pestaña de drafts.
-  El contenedor MPL vive en otra pestaña y se crea en la conversión
-  (§M4 del skill) — NO antes.
-- **Propuesta single** = 1 diseño × 1 draft.
-- **Propuesta single personalizable** = 1 diseño NUEVO único × 1 draft
-  con los campos de personalización montados en Printify (producto
-  nuevo; nombres/instrucciones/límites según §Track Single-P). No se
-  detecta como MPL ni como single común: el draft declara su
-  personalización en el detalle del producto (conteo de campos).
+- **Producción MPL** = 1 diseño × **1 borrador MPL** "unpublished":
+  el borrador del producto base (el primero de `mpl.componentes`)
+  convertido a MPL, con los demás productos CREADOS dentro del MPL
+  desde el catálogo con el mismo diseño (ruta única, skill
+  `publicar-printify-etsy` §M1 → §M4; Printify no crea un MPL vacío
+  desde cero). El borrador MPL vive en la pestaña de
+  Multi-Product Listings, pendiente de la revisión de UBICACIÓN.
+- **Producción single** = 1 diseño × 1 borrador.
+- **Producción single personalizable** = 1 diseño NUEVO único × 1
+  borrador con los campos de personalización montados en Printify
+  (producto nuevo; nombres/instrucciones/límites según §Track
+  Single-P). No se detecta como MPL ni como single común: el
+  borrador declara su personalización en el detalle del producto
+  (conteo de campos).
+- **Componente suelto de un diseño MPL** = remanente de la ruta
+  vieja (anterior a la alineación del 2026-10-22) o error: nunca es
+  el estado normal. Se rescata UNA vez (se agrega al MPL del diseño
+  y se anota en su registro) o se elimina con reporte al dueño.
 - **Regla:** los componentes de un MPL **nunca** se publican por
-  separado. Un draft componente publicado solo = error a corregir
+  separado. Un componente publicado solo = error a corregir
   (revertir o completar el MPL).
 
-El cron de propuestas, antes de crear drafts del día:
-1. Lista los drafts "unpublished" en Printify (navegador).
-2. Agrupa por diseño (título real del draft).
-3. Si un diseño ya tiene sus K componentes como drafts pendientes →
+La Fase B, antes de producir los aprobados del día:
+1. Lista los borradores "unpublished" en Printify y los MPL drafts
+   (navegador + sync del registro).
+2. Agrupa por diseño (título real del borrador).
+3. Si un diseño ya tiene su borrador MPL producido y pendiente →
    **no duplicar**; lo salta y lo reporta.
-4. Si un diseño tiene componentes parciales (ej. solo sudadera) →
-   crea solo los faltantes.
-5. Límite de seguridad: si hay ≥ N×2 drafts pendientes sin revisar,
-   no crea más y alerta al dueño (la cola está atorada).
+4. Si un diseño tiene SOLO el borrador base sin convertir → se
+   convierte y se crean los items dentro (§M4), en su unidad.
+5. Si un diseño tiene componentes sueltos sin MPL (remanente) →
+   rescate anotado en el registro (§M4, excepción), nunca crear
+   duplicados.
+6. Límite de seguridad: si hay ≥ N×2 borradores MPL/single
+   pendientes de revisión de ubicación, no produce más y alerta
+   al dueño (la cola está atorada).
 
 ## Versionado
 

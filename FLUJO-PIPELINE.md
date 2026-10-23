@@ -2,7 +2,11 @@
 
 **Estado: actualizado 2026-10-15 con las decisiones del dueño (flujo MPL
 nativo + flujo bifurcado por personalización). Reemplaza el flujo single
-del 2026-10-14 como default.**
+del 2026-10-14 como default. Alineación 2026-10-22 (orden del dueño):
+ruta MPL única — borrador base → conversión → items creados dentro
+del MPL — y aprobación creativa SOLO en la vitrina antes de producir
+(etapa 1); lo de Printify es producción (etapa 2) y revisión de
+ubicación (etapa 3), nunca propuesta creativa.**
 
 ## Principio
 Printify es la fuente de verdad para cómo se ve el producto.
@@ -63,27 +67,42 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   personalizables + entrega, variante personalizable). Sin ficha no
   hay entrega. Su aprobación cubre diseño + producto + zonas.
 
-### 2. Propuesta (drafts en Printify) — Fase B: solo aprobados
+### 2. Producción (borradores en Printify) — Fase B: solo aprobados
 - **Solo `aprobados` registrados** en el checkpoint
   (`estado-propuestas.json`) vía la recogida de la vitrina.
   Nada se produce desde la vitrina ni desde una decisión no
-  registrada.
-- **Track MPL:** un draft por producto de la composición (default:
-  sudadera + playera), cada uno con el arte colocado. Los drafts quedan
-  "unpublished" = propuesta pendiente. Los componentes NUNCA se publican
-  por separado.
-- **Track single:** un draft del producto indicado.
-- **Track single personalizable:** un draft del producto indicado con
+  registrada. **Nada llega a Printify como propuesta:** la
+  aprobación creativa ya ocurrió en la etapa 1 (la vitrina).
+- **Track MPL — ruta ÚNICA (alineación 2026-10-22):** se crea SOLO
+  el borrador del producto base (el primero de la composición),
+  se convierte a MPL («Convert to Multi-Product Listing») y los
+  demás productos se CREAN dentro del MPL desde el catálogo con
+  el mismo diseño (Printify no crea un MPL vacío desde cero: la
+  conversión del base es la entrada). Resultado: **un borrador MPL
+  por diseño**, "unpublished", pendiente de la revisión de
+  UBICACIÓN (etapa 3). Crear los componentes como borradores
+  sueltos y ensamblarlos después es la ruta VIEJA, descartada —
+  solo vive como rescate de componentes ya creados por lotes
+  anteriores, anotado en el registro (detalle: `publicar-printify-etsy`
+  §M1/§M4). Los componentes NUNCA se publican por separado.
+- **Track single:** un borrador del producto indicado.
+- **Track single personalizable:** un borrador del producto indicado con
   los campos de personalización montados en Printify (ruta
   automatizada, `publicar-printify-etsy` §Track Single-P). El diseño
   es siempre nuevo y único; nunca se convierte un diseño del MPL.
 - El tipo de lote (mpl/single/mixto) lo define la estratega en
   `data/tiendas/29222324/config-propuestas.json` (dinámico por semana).
-- Posición inicial: centrada, 78% ancho, ~14% desde arriba (ajustable).
-- Detección de drafts: agrupar por diseño (título real); no duplicar
-  diseños que ya tienen sus componentes pendientes (ver contrato §E).
+- Posición inicial (RECALIBRADA 2026-10-17): escala = min(92% del
+  ancho del área, 95% del alto), centrada horizontal, borde
+  superior al 8–12% del alto del área (sesgo arriba). El 78%/14%
+  anterior quedó descartado (se veía chico y bajo).
+- Detección de borradores: agrupar por diseño (título real); no
+  duplicar diseños que ya tienen su MPL producido (ver contrato §E).
 
 ### 3. Revisión del dueño (ubicación, en Printify)
+- **Solo ubicación, dentro del editor del MPL** (por item): es la
+  segunda validación del dueño; la creativa fue la etapa 1 en la
+  vitrina. No hay revisión por borrador componente suelto.
 - **Piloto flujo nocturno (desde lun 2026-10-19, decisión del dueño
   2026-10-18, piloto de 1 semana; orden actualizado por el flujo v2
   del 2026-10-19):** la corrida de las 18:00 entrega las artes para
@@ -177,10 +196,12 @@ instancia del framework (`rameli/docs/DATOS-INSTANCIA.md`):
 
 ### 7. Publicación
 - Skill `publicar-printify-etsy` (track MPL o single según §Flujo bifurcado).
-- **Track MPL:** convertir a MPL en Printify ("Convert to Multi-Product
-  Listing"), nombres de variación "Sweatshirt"/"T-Shirt", publicar el MPL,
-  verificación exhaustiva en Etsy (Fase C: variaciones, precios, SKUs,
-  orden de imágenes, videos intactos, atributos, políticas, envío).
+- **Track MPL:** el MPL YA viene ensamblado de la etapa 2 (borrador
+  base convertido + items creados dentro; nombres de variación
+  "Sweatshirt"/"T-Shirt") — en esta etapa NO se convierte nada: se
+  publica el MPL tal cual, con verificación exhaustiva en Etsy
+  (Fase C: variaciones, precios, SKUs, orden de imágenes, videos
+  intactos, atributos, políticas, envío).
 - **Track single:** publicar el draft → sincroniza a Etsy → completar
   (videos, caja de personalización si aplica).
 - Subir videos directo en Etsy.
@@ -215,7 +236,7 @@ su ruta en el mismo cambio.**
 |---|---|
 | **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) · `docs/VITRINA-REVISION.md` (plantilla y contratos de la superficie única de entrega) + `scripts/generar-datos-vitrina.py` (paquete del lote para sembrar) |
 | **Recogida de decisiones de la vitrina** (el dueño avisa «recoge las decisiones de la vitrina de <tienda>») | `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida de decisiones (vitrina)»: procedimiento completo, validaciones e idempotencia) · `docs/VITRINA-REVISION.md` (contrato de salida) · `data/tiendas/<tienda-id>/config.json` (bloque `vitrina`: la instancia de ESA tienda) · `data/tiendas/<tienda-id>/estado-propuestas.json` (checkpoint destino) · `data/tiendas/<tienda-id>/registro-listings.json` (validación de slugs) |
-| **Propuestas — etapa 2: drafts de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen componentes) · `data/tiendas/29222324/estado-propuestas.json` (los `aprobados` registrados que consume esta fase) |
+| **Producción — etapa 2: borradores de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen su MPL producido) · `data/tiendas/29222324/estado-propuestas.json` (los `aprobados` registrados que consume esta fase) |
 | **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` · `CRITERIO-VIDEO.md` (criterio y puerta de video) |
 | **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/tiendas/29222324/registro-listings.json` (lo hereda el paquete) |
 | **Publicación por lote** (F2) | `skills/publicador-lote/SKILL.md` · `skills/publicar-printify-etsy/SKILL.md` (checklist de publicación) · este doc (§Etapa 7) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |

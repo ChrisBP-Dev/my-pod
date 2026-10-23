@@ -1,5 +1,8 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.5 (2026-10-22) — pasos 5–6 del procedimiento alineados al flujo vitrina
+- El resumen del procedimiento estándar todavía decía «Draft en Printify → el dueño revisa ubicación» como paso inmediato tras el PASS de la puerta — remanente del flujo en que la propuesta llegaba a Printify. Corregido: paso 5 = entrega en la vitrina y aprobación registrada en el checkpoint; paso 6 = producción en Printify (Fase B) con revisión de ubicación. Sin cambios en la puerta ni en la entrega (ya canonizadas en v0.8.0–v0.8.4).
+
 ## v0.8.4 (2026-10-22) — el aviso no exige frase exacta y los estados se reportan cruzando la vitrina
 - **Disparador de la recogida aclarado:** cualquier mensaje del dueño (texto o audio) que indique que ya decidió o marcó listas sus decisiones en la vitrina ES el aviso; el mensaje copiable del recibo es una ayuda, no una clave. Caso fundacional: aprobó la nueva versión del p063 a las 21:21 ET y avisó por audio a las 21:36 — la recogida corrió con ese aviso (p063 aprobado; la cola de aprobados del lote quedó en 10).
 - **Cruce obligatorio antes de reportar estados:** el checkpoint no conoce lo decidido y enviado en la vitrina sin recoger; quien reporte conteos al dueño cruza primero la lectura de decisiones y lo reporta como «decidido en la vitrina, pendiente de recogida». El watchdog ganó la REGLA VITRINA complementaria (decisiones enviadas sin recoger por más de 24 h = alerta menor, porque viven solo en la vitrina).

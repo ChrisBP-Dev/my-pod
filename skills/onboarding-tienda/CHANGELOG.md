@@ -1,5 +1,8 @@
 # CHANGELOG — onboarding-tienda
 
+## v0.1.5 (2026-10-22)
+- Fila del cron de propuestas diarias alineada al flujo vigente: la fila mezclaba en una frase «ensambla MPL» y «siembra en la vitrina», legible como propuestas → Printify → vitrina. Ahora declara las dos fases en orden (Fase B: solo aprobados de la vitrina, ruta MPL única base→conversión→items dentro; Fase A: artes nuevas a la vitrina, aprobación antes de producir).
+
 ## v0.1.4 (2026-10-21)
 - Separación de registros D1 (migración a Rameli v0.17.0): el cierre de la Fase 6 commitea en el repo que toca — sistema en este repo y registros de la tienda nueva en el repo privado de datos (`my-pod-datos`) vía `scripts/registros-datos.py commit` — verificando ambos sin "ahead".
 
