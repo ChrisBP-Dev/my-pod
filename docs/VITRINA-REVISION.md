@@ -208,6 +208,17 @@ buscar; sembrar datos es una llamada, no una construcción.
   es una **regeneración**: se actualiza, vuelve a pendiente con
   distintivo «Nueva versión» y conserva la nota de mejora anterior
   visible en su detalle.
+- **Regeneraciones — previa compilada antes de sembrar
+  (requisito, 2026-10-22):** la instancia resuelve las previas
+  por `arte_ref` desde su mapa compilado. Antes de sembrar una
+  nueva versión, la previa de ESE `arte_ref` debe existir en el
+  mapa (se compila con la edición de la instancia, desde las
+  previas que genera `scripts/generar-datos-vitrina.py`); si no
+  existe, la instancia muestra «Previa de esta versión aún no
+  cargada» — nunca el arte de otra versión — y el retorno no
+  está completo hasta compilarla y verificar la imagen nueva
+  en el tablero. El procedimiento completo del retorno vive en
+  `puerta-arte-propuesta` (§«Retorno de una mejora»).
 - **Sin cola bloqueante (corrección del dueño 2026-10-22, reemplaza
   la «regla anti-cruce» de la v1.2):** un lote nuevo nunca espera a
   que el dueño termine de revisar otro. Todos los pendientes son

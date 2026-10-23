@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.1"
+  version: "0.8.2"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.1** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.2** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -543,6 +543,15 @@ declara `vitrina-de-revisi-n-my-pod` en su config.)
      recogida). Si tras excluir no queda nada nuevo, la
      recogida termina aquí: se reporta «nada nuevo por
      recoger» y no se escribe ni se confirma nada.
+     **Excepción — decisión sobre una nueva versión:** si la
+     mejora ya se cumplió (su entrada se movió a
+     `mejoras_cumplidas` al sembrarse la regeneración, ver
+     §«Retorno de una mejora») y la vitrina devuelve ese slug
+     como pendiente de una versión nueva con una decisión
+     `enviada = true`, esa decisión es NUEVA: se procesa con
+     normalidad y su entrada se escribe en el array que
+     corresponda, sin que la historia en `mejoras_cumplidas`
+     la bloquee.
 4. **Escribir** en el checkpoint
    `data/tiendas/<tienda-id>/estado-propuestas.json`
    (checkpoint local de corrida: no se versiona en ningún
@@ -587,3 +596,53 @@ recoger — o ante cualquier duda sobre el estado — se ejecutan
 solo los pasos 1–3 y se reporta qué se recogería (o que no hay
 nada nuevo), sin escribir el checkpoint ni confirmar en la
 vitrina.
+
+## Retorno de una mejora (regeneración → nueva versión en la vitrina) — 2026-10-22
+
+El ciclo de un `mejorar` se cierra cuando su nueva versión está
+**visible de verdad** en la vitrina, no cuando el arte nuevo
+existe en disco. Procedimiento (caso fundacional: p063 v2,
+cerrado el 2026-10-22):
+
+1. **Regenerar solo lo pedido** por la nota del dueño, por la
+   misma ruta calibrada del lote original. Sin su palabra no
+   se regenera nada.
+2. **Verificar el arte nuevo** antes de mostrarlo: puerta
+   mecánica completa y adjudicación con el ojo. Si la puerta
+   marca `sin_counters_rellenos` porque el cambio MISMO es un
+   fondo de diseño (el caso p063: el disco crema del medallón),
+   el veredicto se registra en el registro del diseño
+   (`adjudicacion_counters…`: es diseño, no limpiar) y se sigue.
+3. **Actualizar el registro del diseño:** su `arte` apunta a
+   la nueva versión y el bloque de regeneración guarda motivo,
+   cambio y verificación (diff acotado a la zona pedida).
+4. **Previa compilada ANTES de sembrar (requisito duro):** la
+   vitrina resuelve las previas por `arte_ref` desde su mapa
+   compilado; la previa de la nueva versión debe estar en ese
+   mapa (edición de la instancia con las previas generadas por
+   `scripts/generar-datos-vitrina.py`) **antes** de la siembra.
+   Si no está, la instancia muestra «Previa de esta versión
+   aún no cargada» — honesto, pero el retorno NO está completo:
+   nunca se siembra a ciegas ni se avisa al dueño sin ver la
+   imagen nueva en el tablero. (Hueco fundacional: las previas
+   eran estáticas por slug y la siembra habría mostrado el
+   arte viejo como «Nueva versión»; la resolución por
+   `arte_ref` se publicó el 2026-10-22.)
+5. **Sembrar** con `scripts/generar-datos-vitrina.py` +
+   acción de siembra de la instancia, con el `arte_ref`
+   NUEVO: la vitrina marca el diseño «Nueva versión», limpia
+   la decisión anterior, conserva la nota de mejora visible y
+   lo deja pendiente.
+6. **Verificar en el tablero** (acción de lectura del
+   tablero): pendiente, nueva versión marcada, `arte_ref`
+   nuevo y nota anterior presente. Recién entonces el retorno
+   existe.
+7. **Checkpoint:** la entrada del diseño se mueve de `mejorar`
+   a `mejoras_cumplidas` (conservando nota, fechas y bloque de
+   regeneración, más el cumplimiento: fecha de siembra, arte
+   nuevo y verificación). Así, la decisión que el dueño tome
+   sobre la nueva versión es una decisión nueva para la
+   recogida (ver la excepción de idempotencia en
+   §«Recogida de decisiones (vitrina)» paso 3).
+8. **Avisar al dueño en el chat de entrega** con el acceso a
+   la vitrina (sin artes en el chat, como manda la entrega).

@@ -1,5 +1,10 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.2 (2026-10-22) — retorno de una mejora: el ciclo del «mejorar» queda cerrado en el sistema
+- **Nueva sección «Retorno de una mejora (regeneración → nueva versión en la vitrina)»:** procedimiento completo con el caso fundacional p063 v2 — regenerar solo lo pedido, verificación del arte nuevo (con adjudicación registrada cuando el cambio mismo es un fondo de diseño), registro actualizado, **requisito duro de previa compilada por `arte_ref` ANTES de sembrar** (hueco fundacional: las previas eran estáticas por slug y la siembra habría mostrado el arte viejo como «Nueva versión»; la instancia se reparó y publicó el 2026-10-22), siembra, verificación en el tablero y aviso sin artes en el chat.
+- **Contabilidad del checkpoint al cumplirse una mejora:** la entrada se mueve de `mejorar` a `mejoras_cumplidas` (con su cumplimiento), y la recogida gana la excepción explícita: la decisión sobre una nueva versión es NUEVA y se procesa, no la bloquea la idempotencia.
+- Sin cambios en gates, criterios ni en la recogida base.
+
 ## v0.8.1 (2026-10-22) — corrección del dueño: la vitrina es la superficie ÚNICA de la Fase A
 - **La entrega para aprobación ya no tiene dos superficies:** la única es la **vitrina de revisión** de la tienda. El chat deja de ser superficie de aprobación en esta fase (era el flujo anterior a la vitrina; con la vitrina lista, las propuestas por chat dispersan la revisión y llenan el chat de artes — corrección del dueño del 2026-10-22, el mismo día de la canonización: la v0.8.0 había dejado el chat como vía equivalente siguiendo el encargo de canonización, que traía el modelo viejo).
 - **El chat solo avisa:** aviso breve en el chat de entrega (qué lote, cuántos diseños, el acceso a la vitrina con su tarjeta), **sin adjuntar artes ni porqués** — todo eso vive dentro de la vitrina. La entrega queda escrita como procedimiento de 4 pasos (paquete → siembra → aviso → decisión y recogida).
