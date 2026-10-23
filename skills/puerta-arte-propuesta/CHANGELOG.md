@@ -1,5 +1,9 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.4 (2026-10-22) — el aviso no exige frase exacta y los estados se reportan cruzando la vitrina
+- **Disparador de la recogida aclarado:** cualquier mensaje del dueño (texto o audio) que indique que ya decidió o marcó listas sus decisiones en la vitrina ES el aviso; el mensaje copiable del recibo es una ayuda, no una clave. Caso fundacional: aprobó la nueva versión del p063 a las 21:21 ET y avisó por audio a las 21:36 — la recogida corrió con ese aviso (p063 aprobado; la cola de aprobados del lote quedó en 10).
+- **Cruce obligatorio antes de reportar estados:** el checkpoint no conoce lo decidido y enviado en la vitrina sin recoger; quien reporte conteos al dueño cruza primero la lectura de decisiones y lo reporta como «decidido en la vitrina, pendiente de recogida». El watchdog ganó la REGLA VITRINA complementaria (decisiones enviadas sin recoger por más de 24 h = alerta menor, porque viven solo en la vitrina).
+
 ## v0.8.3 (2026-10-22) — la recogida también alinea el registro (hueco detectado por el watchdog)
 - La recogida (§«Recogida de decisiones (vitrina)», paso 4) ahora actualiza en el mismo acto el `estado` de cada diseño recogido en `registro-listings.json` y lo commitea al repo de datos. Causa: la recogida fundacional escribió solo el checkpoint y el watchdog de las 21:09 cruzó registro vs checkpoint y alertó «el registro no refleja la aprobación» — hueco real de la v0.8.0. Los estados del lote 2026-10-19 se alinearon a mano el mismo día (9 aprobados «pendiente Fase B», p063 «nueva versión en vitrina»).
 

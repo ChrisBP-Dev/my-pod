@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.3"
+  version: "0.8.4"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.3** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.4** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -496,12 +496,28 @@ sus contratos (entrada/salida, UX, operación) viven en
 operativo de recogida** y manda sobre cualquier descripción
 resumida de aquel doc.
 
-**Disparador.** El dueño avisa en un chat: «recoge las
+**Disparador.** El dueño avisa en un chat — «recoge las
 decisiones de la vitrina de <tienda>» (el recibo de la vitrina
 trae ese aviso como mensaje copiable: «Jarvis, recoge las
-decisiones de la vitrina de My POD (<tienda>)»). Sin ese aviso NO hay
-recogida: la bandera `enviada` por sí sola no dispara nada y
-la vitrina no notifica a nadie.
+decisiones de la vitrina de My POD (<tienda>)»). **No se exige
+la frase exacta:** cualquier mensaje suyo, en cualquier forma
+(texto o audio), que indique que ya decidió o marcó sus
+decisiones como listas en la vitrina ES el aviso y dispara la
+recogida (caso fundacional 2026-10-22: avisó por audio, sin
+pegar el mensaje copiable, y la recogida corrió). Sin aviso NO
+hay recogida: la bandera `enviada` por sí sola no dispara nada
+y la vitrina no notifica a nadie.
+
+**Cruce obligatorio antes de reportar estados.** El checkpoint
+NO conoce las decisiones que el dueño ya marcó como listas en
+la vitrina y aún no se recogieron. Antes de reportarle conteos
+de aprobados / mejorar / rechazados de un lote, cruza con la
+lectura de decisiones de la instancia: lo decidido y enviado
+se reporta como «decidido en la vitrina, pendiente de
+recogida» — nunca se le repiten los conteos viejos como si su
+decisión no existiera (mismo caso fundacional: el sistema le
+siguió diciendo «uno en mejorar» horas después de que él ya
+había aprobado la nueva versión en la vitrina).
 
 **Instancia.** Una sola vitrina por tienda, declarada en el
 bloque `vitrina` del `config.json` de la tienda
