@@ -1,5 +1,8 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.6 (2026-10-22) — dónde viven la simulación y la ficha en el registro (cierre de vitrina personalizable)
+- La variante personalizable declara ahora su hogar en el sistema: la entrada del registro lleva `personalizable: true`, `simulacion` (ruta del compuesto sobre el arte real) y `ficha_razon` estructurada (razón, prueba de borrado, campos con tipo/límite/opciones y ejemplo, comprador/destinatario/ocasión, clase de encaje, ejemplo de simulación, peor caso, producto destino, plan de zonas). El generador de la vitrina valida ese paquete y falla sin él — la entrega de dos imágenes + ficha deja de depender de que alguien lo recuerde al sembrar.
+
 ## v0.8.5 (2026-10-22) — pasos 5–6 del procedimiento alineados al flujo vitrina
 - El resumen del procedimiento estándar todavía decía «Draft en Printify → el dueño revisa ubicación» como paso inmediato tras el PASS de la puerta — remanente del flujo en que la propuesta llegaba a Printify. Corregido: paso 5 = entrega en la vitrina y aprobación registrada en el checkpoint; paso 6 = producción en Printify (Fase B) con revisión de ubicación. Sin cambios en la puerta ni en la entrega (ya canonizadas en v0.8.0–v0.8.4).
 

@@ -24,6 +24,15 @@ Sin `--slugs`, toma el lote actual de `data/tiendas/<tienda-id>/estado-propuesta
 Las previas se componen determinísticamente desde el PNG de impresión
 (el de producción): fondo oscuro #17181c y fondo claro #f4f1ea, para que
 el dueño juzgue el arte como se verá sobre prenda oscura o clara.
+
+Personalizables (cierre del hueco, 2026-10-22): si la entrada del
+registro trae `personalizable: true`, el paquete incluye la previa de
+la SIMULACIÓN (el compuesto sobre el arte real declarado en
+`simulacion` del registro) en ambos fondos y la `ficha_razon`
+estructurada. Sin simulación o sin ficha completa, el generador
+FALLA: un personalizable sin simulación no se puede juzgar en la
+vitrina (puerta-arte-propuesta, variante personalizable) y sembrarlo
+disfrazado de normal era el hueco.
 """
 import argparse
 import json
@@ -103,8 +112,65 @@ def producto_destino(entrada: dict) -> str:
     if entrada.get("track") == "mpl":
         return "MPL — sudadera + playera (un solo listing)"
     if entrada.get("track") == "single":
+        ficha = entrada.get("ficha_razon") or {}
+        if entrada.get("personalizable") and ficha.get("producto_destino"):
+            return ficha["producto_destino"]
         return "Single — un producto"
     return entrada.get("track", "")
+
+
+# Campos obligatorios de la ficha de razón de un personalizable
+# (puerta-arte-propuesta, «La ficha de razón»). Sin ficha completa
+# no hay entrega: el generador es la puerta mecánica de ese criterio.
+FICHA_CAMPOS = [
+    "razon",
+    "prueba_borrado",
+    "campos",
+    "comprador_destinatario_ocasion",
+    "clase_encaje",
+    "ejemplo_simulacion",
+    "peor_caso",
+    "producto_destino",
+    "plan_zonas",
+]
+
+
+def validar_personalizable(slug: str, entrada: dict, repo: Path) -> dict:
+    """Devuelve {simulacion_path, ficha} o termina con error claro."""
+    sim_rel = entrada.get("simulacion", "")
+    sim_path = repo / sim_rel if sim_rel else None
+    if not sim_path or not sim_path.exists():
+        print(f"ERROR: {slug} es personalizable pero no tiene simulación "
+              f"válida en el registro (`simulacion`: {sim_rel!r}). "
+              "Sin simulación no hay entrega (puerta-arte-propuesta).",
+              file=sys.stderr)
+        raise SystemExit(1)
+    ficha = entrada.get("ficha_razon")
+    if not isinstance(ficha, dict):
+        print(f"ERROR: {slug} es personalizable y no trae `ficha_razon`. "
+              "Sin ficha completa no hay entrega.", file=sys.stderr)
+        raise SystemExit(1)
+    faltan = [c for c in FICHA_CAMPOS if not ficha.get(c)]
+    if faltan:
+        print(f"ERROR: {slug}: ficha_razon incompleta, faltan: "
+              f"{', '.join(faltan)}.", file=sys.stderr)
+        raise SystemExit(1)
+    for campo in ficha["campos"]:
+        if not campo.get("nombre") or not campo.get("tipo"):
+            print(f"ERROR: {slug}: cada campo de la ficha trae `nombre` "
+                  "y `tipo` (texto/dropdown/imagen).", file=sys.stderr)
+            raise SystemExit(1)
+        if campo["tipo"] == "texto" and not campo.get("limite"):
+            print(f"ERROR: {slug}: el campo {campo['nombre']!r} es de "
+                  "texto y no declara `limite` de caracteres.",
+                  file=sys.stderr)
+            raise SystemExit(1)
+        if campo["tipo"] == "dropdown" and not campo.get("opciones"):
+            print(f"ERROR: {slug}: el campo {campo['nombre']!r} es "
+                  "dropdown y no declara `opciones` (vocabulario cerrado).",
+                  file=sys.stderr)
+            raise SystemExit(1)
+    return {"simulacion_path": sim_path, "ficha": ficha}
 
 
 def dimensiones_de(arte_path: Path) -> dict:
@@ -173,11 +239,27 @@ def main() -> int:
         previa_clara = salida / "previas" / f"{slug}-clara.jpg"
         hacer_previa(arte_path, previa_oscura, FONDO_OSCURO, args.ancho_previa)
         hacer_previa(arte_path, previa_clara, FONDO_CLARO, args.ancho_previa)
+        personalizable = entrada.get("personalizable") is True
+        sim_oscura = sim_clara = None
+        ficha = None
+        etiquetas = etiquetas_de(entrada, secciones)
+        if personalizable:
+            valido = validar_personalizable(slug, entrada, repo)
+            ficha = valido["ficha"]
+            sim_oscura_path = salida / "previas" / f"{slug}-sim-oscura.jpg"
+            sim_clara_path = salida / "previas" / f"{slug}-sim-clara.jpg"
+            hacer_previa(valido["simulacion_path"], sim_oscura_path,
+                         FONDO_OSCURO, args.ancho_previa)
+            hacer_previa(valido["simulacion_path"], sim_clara_path,
+                         FONDO_CLARO, args.ancho_previa)
+            sim_oscura = f"previas/{slug}-sim-oscura.jpg"
+            sim_clara = f"previas/{slug}-sim-clara.jpg"
+            etiquetas.append("Personalizable")
         disenos.append({
             "slug": slug,
             "titulo": entrada.get("titulo", slug),
             "tema": entrada.get("tema", ""),
-            "etiquetas": etiquetas_de(entrada, secciones),
+            "etiquetas": etiquetas,
             "frase": frase_corta(secciones),
             "tema_angulo": secciones["tema_angulo"],
             "frase_texto": secciones["frase_texto"],
@@ -185,8 +267,10 @@ def main() -> int:
             "que_mirar": secciones["que_mirar"],
             "puerta": entrada.get("nota_puerta", ""),
             "producto_destino": producto_destino(entrada),
-            "personalizable": False,
-            "simulacion": None,
+            "personalizable": personalizable,
+            "simulacion": sim_oscura,
+            "simulacion_clara": sim_clara,
+            "ficha_razon": ficha,
             "arte_ref": arte_rel,
             "dimensiones_px": dimensiones_de(arte_path),
             "previa_oscura": f"previas/{slug}-oscura.jpg",
