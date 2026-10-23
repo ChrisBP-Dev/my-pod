@@ -8,9 +8,11 @@ sueltos en un chat. Idea del dueño (2026-10-20): revisar así ahorra
 créditos (cada reacción en un chat largo re-lee el contexto completo) y
 deja las decisiones estructuradas para que Jarvis las procese de una vez.
 
-**Estado:** plantilla v2.1 (modelo de bandeja continua, corrección
-del dueño 2026-10-22 que reemplaza la regla de cola/anti-cruce de la
-v1.2 — ver §Operación), **CANONIZADA en el sistema el 2026-10-22**:
+**Estado:** plantilla v2.2 (v2.1 = modelo de bandeja continua,
+corrección del dueño 2026-10-22 que reemplaza la regla de
+cola/anti-cruce de la v1.2 — ver §Operación; v2.2 = variante
+personalizable cerrada, ver §«Cierre de la variante
+personalizable»), **CANONIZADA en el sistema el 2026-10-22**:
 fusionada a `main`, es **LA superficie — la única — de la puerta de
 la Etapa 1** (`FLUJO-PIPELINE.md` §1; el chat solo avisa, sin artes)
 y su procedimiento de recogida vive en
@@ -124,6 +126,8 @@ tienda y el checkpoint; es la única fuente que la instancia consume.
     "producto_destino": "MPL — sudadera + playera (un solo listing)",
     "personalizable": false,
     "simulacion": null,
+    "simulacion_clara": null,
+    "ficha_razon": null,
     "arte_ref": "data/artes-print/p058-print-300dpi.png",
     "dimensiones_px": {"ancho_px": 6458, "alto_px": 3842},
     "previa_oscura": "previas/p058-oscura.jpg",
@@ -135,10 +139,23 @@ tienda y el checkpoint; es la única fuente que la instancia consume.
 - El porqué llega ya partido en sus secciones de entrega (tema y
   ángulo / frase / iconografía / qué mirar), partidas del texto
   canónico del registro; la vitrina no reescribe el porqué.
-- **Personalizables:** `personalizable: true` y `simulacion` con la
-  ruta de la previa de la simulación (compuesta sobre el arte real,
-  según la variante de entrega de `puerta-arte-propuesta`); el detalle
-  muestra arte real y simulación, etiquetadas como tales.
+- **Personalizables:** `personalizable: true`, `simulacion` y
+  `simulacion_clara` con las rutas de las previas de la simulación
+  (compuesta sobre el arte real, según la variante de entrega de
+  `puerta-arte-propuesta`; el generador las compone en ambos fondos
+  desde el PNG declarado en `simulacion` del registro) y
+  `ficha_razon` con el objeto estructurado de la ficha (razón,
+  prueba de borrado, campos con tipo/límite/opciones,
+  comprador/destinatario/ocasión, clase de encaje, ejemplo de
+  simulación, peor caso, producto destino y plan de zonas — los
+  campos viven en la entrada del registro, ver
+  `puerta-arte-propuesta`). El detalle muestra arte real y
+  simulación, etiquetadas como tales («Arte real — zonas vacías» /
+  «Simulación — con el ejemplo»), con el mismo conmutador de fondo,
+  y una sección «Ficha de personalización» con la ficha completa.
+  **El generador es la puerta mecánica:** un personalizable sin
+  simulación válida o sin ficha completa FALLA al generar el
+  paquete — nunca llega a la vitrina disfrazado de normal.
 
 ## Contrato de salida — decisiones (v2, bandeja continua)
 
@@ -244,6 +261,30 @@ buscar; sembrar datos es una llamada, no una construcción.
   los lee y confirma recogidas mediante las acciones de la propia
   instancia (§Contrato de salida). Nada de esto vive en un chat ni
   depende de su memoria.
+
+## Cierre de la variante personalizable (2026-10-22, orden del dueño)
+
+La v1.1 había dejado escrito «la variante para personalizados se
+pule cuando lleguen propuestas personalizadas». El dueño ordenó
+cerrarla ANTES de que lleguen, y queda cerrada en tres capas:
+
+1. **Generador** (`scripts/generar-datos-vitrina.py`): lee
+   `personalizable`, `simulacion` y `ficha_razon` del registro,
+   compone las previas de la simulación en ambos fondos, pasa la
+   ficha estructurada al paquete y ETIQUETA el diseño como
+   «Personalizable». Sin simulación o sin ficha completa, la
+   generación del paquete falla con el error exacto (probado con
+   un diseño de ensayo válido y uno roto: el válido produce
+   paquete completo; el roto, exit 1 sin paquete).
+2. **Contrato** (§Contrato de entrada): campos `simulacion`,
+   `simulacion_clara` y `ficha_razon` declarados arriba.
+3. **Instancia:** el detalle de un personalizable muestra las dos
+   imágenes etiquetadas (arte real con zonas vacías / simulación
+   con el ejemplo) bajo el mismo conmutador de fondo, y la sección
+   «Ficha de personalización» con la ficha completa — verificado
+   con un diseño personalizable DE ENSAYO sembrado en la instancia
+   de MyNightShiftShop y retirado tras la verificación (la
+   mecánica de decisiones y recogida no cambia: opera por diseño).
 
 ## Pulido v2.0 — visor en iPhone y modelo continuo (2026-10-22)
 

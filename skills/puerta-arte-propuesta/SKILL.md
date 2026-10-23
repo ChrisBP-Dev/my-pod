@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.5"
+  version: "0.8.6"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.5** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.6** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -478,6 +478,22 @@ Y el porqué de un personalizable trae su **ficha de razón completa**
 prueba de borrado en dos estados (vacío / con el ejemplo), campos con
 tipo y límites, comprador/destinatario/ocasión, clase de encaje y el
 peor caso renderizado. Y declara además, explícito:
+
+**Dónde vive en el sistema (cierre de vitrina, 2026-10-22):** la
+entrada del diseño en el registro de la tienda declara
+`personalizable: true`, `simulacion` (ruta repo-relativa del PNG de
+la simulación, compuesto sobre el arte real) y `ficha_razon` (objeto
+estructurado: `razon`, `prueba_borrado`, `campos` — cada uno con
+`nombre`, `tipo` y, según el tipo, `limite` u `opciones`, más su
+`ejemplo` —, `comprador_destinatario_ocasion`, `clase_encaje`,
+`ejemplo_simulacion`, `peor_caso`, `producto_destino`,
+`plan_zonas`). El generador de la vitrina
+(`scripts/generar-datos-vitrina.py`) es la puerta mecánica de esta
+entrega: sin simulación válida o sin ficha completa, la generación
+del paquete FALLA — el diseño nunca se siembra disfrazado de
+normal, y la vitrina lo muestra con sus dos imágenes etiquetadas y
+su sección «Ficha de personalización» (plantilla:
+`docs/VITRINA-REVISION.md` §«Cierre de la variante personalizable»).
 
 - **Producto destino** (el que la estratega fijó en el config de
   propuestas — al aprobar el arte, el dueño aprueba diseño +
