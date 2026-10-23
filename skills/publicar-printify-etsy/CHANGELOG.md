@@ -1,5 +1,12 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.10.0 (2026-10-23) — selección de colores del diseño (corrección del dueño)
+- **Sin paleta canónica:** «paleta» como lista fija queda retirada del glosario. La **selección de colores** se elige por diseño al producir (contraste con el arte ya colocado + disponibilidad), **tope 4 por prenda**, y vive solo en el borrador. El trío de playera y el de sudadera bajan de regla fija a **preferencia frecuente / referencia de partida**.
+- **§M1/§M4:** dejar solo los colores elegidos al crear cada item es parte de crearlo, con la advertencia de lectura por API (contar solo variantes `is_enabled`; el GET lista también las deshabilitadas — error de la primera pasada de la auditoría del 2026-10-23, corregido el mismo día: la Fase B SÍ aplicó la selección, 3 colores por item en los 10 MPL verificados).
+- **§M2 = ubicación + colores:** el dueño filtra y puede cambiar los colores en su revisión; su «listos» aprueba ambos, y eso **no se guarda como canónico** — §M3 y §M8 leen los colores del borrador tal como él lo dejó.
+- **Puerta mecánica de conteo** nueva: `scripts/verificar-variantes.py` (colores por item y variantes totales ≤400; avisa al dueño y se detiene, sin comparar contra lista alguna).
+- Alineados: `CHECKLIST-PUBLICACION.md`, `FLUJO-PIPELINE.md` (etapas 2/3/6) y `paquete-listing-etsy` (colores del paquete leídos del borrador por API).
+
 ## v0.9.1 (2026-10-23) — lecciones de producción de la Fase B del lote 2026-10-19
 - §M4 suma las lecciones verificadas al producir los 10 MPLs aprobados: prohibición de producción en paralelo en la misma cuenta (cruce p059/p062); el item de catálogo nace con Printful y "Replace print provider" regenera el ID y rompe la referencia del MPL (cierre fiable: re-agregar vía "Your products", patrón de rescate anotado); la validación del MPL exige nombres de producto distintos (playera = título + " - T-Shirt", solo interno); el diálogo "Your products" puede no listar productos recién creados (esperar y reintentar, no duplicar); un componente puede aparecer "Published" sin clic de publicación (p064: Hide on Etsy inmediato + verificación por API de Etsy + incidente en el registro, decisión de fondo del dueño).
 

@@ -3,13 +3,26 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.9.1"
+  version: "0.10.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.10.0** (2026-10-23: **selección de colores del
+diseño** — criterio corregido por el dueño: NO existe paleta
+canónica ni quemada en ninguna parte; los colores se eligen
+por diseño al producir, según el contraste con el arte
+colocado y la disponibilidad del producto, con tope de 4
+por prenda; el dueño es el filtro final en su revisión
+(§M2 = ubicación + colores) y la fuente de verdad al
+publicar es el borrador tal como él lo dejó. Nace de la
+auditoría del 2026-10-23: la selección SÍ se aplicó en la
+Fase B (verificado por API en los 10 MPL: 3 colores por
+item, 27–31 variantes por MPL), pero vivía solo en prosa —
+sin alcance formal en la etapa 3, sin puerta de conteo y
+con el paquete recibiendo los colores a mano.)
 **Versión 0.9.1** (2026-10-23: lecciones de producción de la Fase B
 del lote 2026-10-19 en §M4 — nada de producción en paralelo en la
 misma cuenta; el Replace de proveedor regenera el ID y rompe la
@@ -90,16 +103,47 @@ Default (la estratega puede definir otra composición en
 - **Sudadera:** Gildan 18000, Printify Choice (blueprint 49, provider 99).
 - **Playera:** Bella+Canvas 3001, Printify Choice.
 
-**Criterio playera** (orden del dueño, regla de tienda hasta que la
-estratega defina mejor): colores White + Athletic Heather + Natural,
-TODAS las tallas que el proveedor ofrezca por color. Si un color trae
-tallas limitadas (ej. Natural solo XL/2XL), se acepta como viene.
-**NO sustituir colores ni detenerse por esto.**
+**Selección de colores del diseño** (criterio del dueño,
+2026-10-15, **corregido y consolidado el 2026-10-23**):
 
-**Criterio color-diseño** (regla suya 2026-10-15): los colores ofrecidos
-por diseño se validan contra el diseño (contraste/legibilidad). No se
-abarcan colores sin verificación visual. La paleta se elige desde el
-inicio y el diseño debe verse bien en cada color. Va en la checklist.
+- **No existe paleta canónica.** Ninguna lista de colores
+  vive quemada en este skill, en la ficha ni en un registro
+  como referencia de validación. «Paleta» como lista fija
+  queda **retirada del glosario** de este tema: lo que existe
+  es la **selección de colores de cada diseño**, que nace
+  con el diseño y vive **solo en su borrador** de Printify.
+- **Quién elige y cuándo:** producción, al producir — con el
+  arte ya colocado en la prenda, viendo el contraste y la
+  legibilidad reales, y según la disponibilidad del producto
+  (blueprint/proveedor). El diseño debe verse bien en cada
+  color elegido; no se abarcan colores sin verificación
+  visual (regla suya 2026-10-15).
+- **Tope: máximo 4 colores por prenda** (criterio del dueño
+  2026-10-23). Con la composición default (2 prendas), el
+  total de variantes queda lejos del límite del MPL
+  (400 variantes). Por color van TODAS las tallas que el
+  proveedor ofrezca; si un color trae tallas limitadas, se
+  acepta como viene.
+- **Preferencias frecuentes (referencia de partida, NO
+  regla):** los artes de esta tienda suelen combinar con
+  sudadera White/Sand/Sport Grey y playera White/Athletic
+  Heather/Natural. Es el punto de partida habitual al
+  elegir, **nunca** una lista contra la que se valide: si el
+  arte pide otros colores, mandan el arte y el criterio.
+- **El dueño es el filtro final** (§M2): en su revisión
+  puede cambiar los colores; su «ya están listos» aprueba
+  ubicación **y** colores. Esa elección **no se guarda como
+  canónica en ningún registro**: la fuente de verdad al
+  publicar es el borrador tal como él lo dejó, y el paquete
+  (§M3) y la verificación (§M8) se generan y contrastan
+  **leyendo ese borrador**, nunca una lista previa.
+- **Puerta mecánica (única, de conteo):** antes de mockups
+  y antes de publicar, correr
+  `scripts/verificar-variantes.py` sobre los items: cuenta
+  colores habilitados por item y variantes totales. Si un
+  item pasa de 4 colores o el MPL pasa de 400 variantes,
+  **avisa al dueño y se detiene** — corrige él o manda
+  corregir; la puerta no compara contra ninguna lista.
 
 ## Precios escalonados por talla (estándar 2026-10-15, orden del dueño)
 
@@ -186,9 +230,22 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
   el diseño se ve chico y bajo; el dueño lo corrige a mano en cada
   revisión, así que nace corregido. El ajuste fino por diseño sigue
   siendo de su revisión, pero la base ya sale en su criterio.
-- Aplicar la paleta validada contra el diseño (criterio color-diseño) y
-  los precios escalonados de la tabla vigente (la paleta y los precios
-  de cada item agregado se aplican al crearlo dentro del MPL, §M4).
+- Aplicar la **selección de colores del diseño** (ver
+  «Selección de colores del diseño» arriba: elegir por
+  contraste con el arte ya colocado, máx. 4 por prenda) y
+  los precios escalonados de la tabla vigente. **Dejar solo
+  los colores elegidos habilitados (desmarcar el resto del
+  catálogo) es parte de crear el item, no un paso
+  posterior** — y lo mismo al agregar cada item dentro del
+  MPL (§M4). Ojo al verificar por API: el GET de un producto
+  lista también las variantes **deshabilitadas** y el
+  universo completo de opciones del blueprint — el conteo
+  válido es solo sobre variantes con `is_enabled` en
+  verdadero (error de lectura ya cometido una vez,
+  2026-10-23: se reportó «catálogo completo habilitado»
+  contando las deshabilitadas). Sin publicar nada, correr
+  la puerta de conteo (`scripts/verificar-variantes.py`)
+  antes de entregar a la revisión del dueño.
 - En el borrador, poner el **título real del diseño** (nunca el nombre
   genérico del blueprint) — regla 2026-10-15.
 - El borrador base queda "unpublished" y pasa de inmediato a la
@@ -201,7 +258,7 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
   del MPL. Publicar un componente solo crea un listing single
   huérfano que compite con el MPL y rompe el flujo.
 
-### M2. Revisión del dueño — placement DENTRO del editor del MPL
+### M2. Revisión del dueño — ubicación + colores DENTRO del editor del MPL
 - Esta es la SEGUNDA validación del dueño. La primera (la creativa)
   ocurrió en la vitrina ANTES de producir: **nada llega a Printify
   como propuesta creativa** (flujo v2, superficie única vitrina).
@@ -215,11 +272,22 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
   borrador componente suelto:** era la forma vieja, eliminada en
   la alineación del 2026-10-22.
   Rechazado = elimina el borrador MPL completo. Aprobado = sigue a M3.
+- **También revisa los COLORES** (alcance ampliado por el dueño
+  el 2026-10-23): ve la selección que producción eligió por
+  diseño y la ajusta en el mismo editor si no le convence —
+  desmarcar/marcar colores es reversible y no toca arte,
+  ubicación ni precios. Su «ya están listos» aprueba
+  **ubicación y colores**; lo que él deja en el borrador es
+  lo que se publica (§M3 y §M8 leen de ahí).
 - Corrige la ubicación directamente en el editor si hace falta.
 - Elimina los rechazados. Avisa cuáles están listos.
 
 ### M3. Paquete de listing — SEO completo para TODOS los productos
 - Generar con el skill `paquete-listing-etsy`.
+- **Colores del paquete = los del borrador, leídos por API**
+  (los que el dueño dejó aprobados en §M2). Nunca escritos a
+  mano ni tomados de una lista guardada: si el borrador
+  cambió, el paquete se regenera desde su lectura vigente.
 - **Regla SEO MPL (suya 2026-10-15):** re-optimización COMPLETA para
   TODOS los productos del listing:
   - **Título** (≤140 car.): incluye AMBOS productos
@@ -379,7 +447,12 @@ con costo, no un reintento gratis.** Reglas:
 
 ### M8. Verificación en Etsy — FASE C (exhaustiva, 2026-10-15)
 Nada se da por sentado. Verificar contra el listing vivo:
-- Variaciones correctas ("Sweatshirt"/"T-Shirt" + tallas + colores).
+- Variaciones correctas ("Sweatshirt"/"T-Shirt" + tallas +
+  colores) — **contra la lectura del borrador de Printify
+  tal como el dueño lo dejó** (§M2), que es la fuente de
+  verdad; nunca contra una lista previa o «esperada».
+- Conteo previo a publicar (puerta de §M1): ningún item
+  >4 colores ni MPL >400 variantes sin aviso al dueño.
 - Precios por variación según la tabla vigente de la tienda
   (`estrategia_precios` en su config; ej. 29222324: sudadera
   $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99).

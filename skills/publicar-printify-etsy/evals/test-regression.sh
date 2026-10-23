@@ -51,5 +51,56 @@ else
 fi
 rm -rf "$TMPH"
 
+# F4/F5: puerta de conteo de variantes (2026-10-23, criterio del
+# dueño: sin paleta canónica, solo topes — 4 colores/item y 400
+# variantes/MPL; contar SOLO is_enabled). Fixtures sintéticos:
+# un producto con 3 colores habilitados (y 40 deshabilitados que
+# NO deben contarse) → OK; uno con 5 colores habilitados → AVISO.
+VV="$SKILL/scripts/verificar-variantes.py"
+FIX="$(mktemp -d)"
+python3 - "$FIX" <<'PYEOF'
+import json, sys
+d = sys.argv[1]
+def prod(nombre, hab, deshab):
+    vals = [{"id": 100+i, "title": c} for i, c in enumerate(
+        ["White", "Sand", "Sport Grey", "Navy", "Maroon", "Black"])]
+    variantes = []
+    vid = 1
+    for c in hab:
+        for t in ["S", "M"]:
+            variantes.append({"id": vid, "title": f"{t} / {c}",
+                              "options": [100 + ["White", "Sand", "Sport Grey", "Navy", "Maroon", "Black"].index(c), 15],
+                              "is_enabled": True})
+            vid += 1
+    for c in deshab:
+        variantes.append({"id": vid, "title": f"S / {c}",
+                          "options": [100 + ["White", "Sand", "Sport Grey", "Navy", "Maroon", "Black"].index(c), 15],
+                          "is_enabled": False})
+        vid += 1
+    return {"title": nombre,
+            "options": [{"type": "color", "name": "Colors", "values": vals},
+                        {"type": "size", "name": "Sizes",
+                         "values": [{"id": 15, "title": "S"}]}],
+            "variants": variantes}
+json.dump(prod("fixture-ok", ["White", "Sand", "Navy"],
+               ["Sport Grey", "Maroon", "Black"] * 13),
+          open(f"{d}/ok.json", "w"))
+json.dump(prod("fixture-aviso", ["White", "Sand", "Navy", "Maroon", "Black"],
+               []), open(f"{d}/aviso.json", "w"))
+PYEOF
+out="$(python3 "$VV" --desde-json "$FIX/ok.json" 2>&1)"; rc=$?
+if [[ $rc -eq 0 && "$out" == *"3 colores"* && "$out" == *"OK"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: fixture-ok no dio OK con 3 colores (rc=$rc)"; echo "$out" | head -5
+fi
+out="$(python3 "$VV" --desde-json "$FIX/aviso.json" 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"AVISO"* && "$out" == *"5 colores"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: fixture-aviso no dio AVISO con 5 colores (rc=$rc)"; echo "$out" | head -5
+fi
+rm -rf "$FIX"
+
 echo "--- $ok ok, $fail fallas ---"
 [[ $fail -eq 0 ]]
