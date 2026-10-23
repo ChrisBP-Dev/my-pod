@@ -1,7 +1,25 @@
 # my-pod — aplicación POD (cuarto limpio)
 
-App construida con Rameli **v0.18.0** (pineado en `rameli.json`).
+App construida con Rameli **v0.19.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
+
+## Migración a Rameli v0.19.0 — actualización completa (2026-10-23)
+
+Adoptada como **actualización completa** por mandato del dueño
+(2026-10-23), siguiendo `rameli/MIGRACIONES.md`: pin en
+`rameli.json`, en el frontmatter de los **9 skills** y en las
+declaraciones vivas de sus CHANGELOG. El delta 0.18.0 → 0.19.0
+trae **solo** la doctrina de **versionado de aplicaciones**
+(`rameli/docs/VERSIONADO-APLICACIONES.md`, PR #10): sin cambios
+rompientes, sin mecanismo nuevo y sin cambios de comportamiento.
+La adopción se verificó contra el canon en
+`docs/AUDITORIA-ADOPCION-V0190.md` — veredicto: **conforme, sin
+brechas** — sobre la v1.0.0 que esta app ya había abierto el
+mismo día (semver propio, `CHANGELOG.md`, tag anotado y Release
+verificado como Latest; el repo de registros no se versiona).
+Esta migración se libera como **My POD v1.1.0** (migración sin
+rompientes = MENOR según el canon). Registro completo:
+`docs/MIGRACION-RAMELI-V0190.md`.
 
 ## Migración a Rameli v0.18.0 — cierre de alineación completo (2026-10-21)
 
