@@ -66,15 +66,60 @@ las decisiones quedan registradas aquí):
 - **Fallos vigentes de lint/regresión:** ninguno; las
   puertas quedan idénticas a la línea base tras el pin
   (ver `docs/MIGRACION-RAMELI-V0190.md`).
-- **Avisos preexistentes:** 4 skills sin `evals/`
-  señalados por `rameli test` (conectar-etsy-api,
-  estratega-pinterest, onboarding-tienda,
-  publicador-lote). Son el estado heredado ya
-  registrado en auditorías anteriores, no un efecto de
-  este delta; crear sus evals es trabajo de capacidad de
-  cada skill, no de esta migración. Queda **inventariado**
-  para la siguiente fase de mejora ordinaria — no se
-  mezcla con esta unidad (alcance cerrado de migración).
+- **Avisos de `rameli test` — 4 skills sin suite en
+  `evals/`, REVALIDADOS en esta unidad (2026-10-23, a
+  pregunta del dueño):** conectar-etsy-api,
+  estratega-pinterest, onboarding-tienda y
+  publicador-lote no tienen suite determinista. No es un
+  olvido ni una validación ausente: los 9 skills pasan
+  `rameli lint` y `rameli validar`; lo que estos 4 no
+  tienen es **regresión automática**, y su estado es una
+  **decisión registrada**, no un arrastre:
+  - **Historia:** la auditoría de adopción v0.11.0
+    (2026-10-19) lo cazó como brecha **B2** — entonces
+    eran 7 los afectados y dos declaraban una suite que
+    estaba vacía (declaración sin sostén). Su Propuesta 2
+    se **ejecutó** (commit `407522a`): suites reales para
+    paquete-listing-etsy, publicar-printify-etsy y
+    estratega-tienda (contrato), y para estos 4, la
+    opción (b) de la propuesta: **declaración explícita
+    de «sin suite — motivo»** en la sección «Regresión»
+    de cada SKILL.md. El validador del framework trata la
+    ausencia como **AVISO, no FALLO** (`bin/rameli`: sin
+    `evals/` → aviso y sigue), en tensión conocida con la
+    regla dura de `docs/formato-skills.md` («sin evals,
+    el skill no se acepta»): la declaración motivada es la
+    salida que el sistema adoptó.
+  - **Revalidación de los 4 motivos (evidencia de hoy):**
+    (1) *conectar-etsy-api* — el flujo sigue siendo
+    interactivo (OAuth con clic del dueño, tokens que
+    rotan); su cobertura declarada es la verificación en
+    vivo de cada conexión. Motivo **vivo**.
+    (2) *estratega-pinterest* — su salida sigue siendo
+    una decisión (la parrilla); lo mecánico lo cubre la
+    suite de `puerta-pinterest-pin`, corrida hoy: **15/15**.
+    Motivo **vivo**. (3) *onboarding-tienda* — playbook
+    guiado con el dueño; su «suite» declarada es la Fase 6
+    (verificación y cierre contra la tienda real), que
+    existe y está vigente en el skill (§ «Fase 6»).
+    Motivo **vivo**. (4) *publicador-lote* — orquesta
+    sistemas externos vivos; su verificación declarada es
+    el pipeline por listing con las puertas de
+    `publicar-printify-etsy`, cuya suite existe y corrió
+    hoy (3 casos, dentro de los 53). Motivo **vivo**.
+  - **Corrección de esta auditoría:** la primera versión
+    de este documento trató los 4 avisos como «estado
+    heredado» y los **difirió** a la siguiente fase sin
+    traer su historia ni revalidar sus motivos —
+    exactamente el patrón que la doctrina prohíbe
+    (inventariar sin cerrar). Corregido en la misma rama,
+    antes del merge: la deuda no es «crear las suites»
+    (eso lo decidió la Propuesta 2 con evidencia), es
+    **revalidar las declaraciones cuando una auditoría
+    las toca** — hecho aquí. Si un motivo muere (un skill
+    gana una parte determinista, como el propio
+    conectar-etsy-api anticipa en su declaración), la
+    suite nace en esa sesión.
 - **Mejora futura que el propio canon nombra:** que
   `rameli validar` compruebe `app_version` y CHANGELOG —
   el canon la deja «fuera de esta contribución» y es del

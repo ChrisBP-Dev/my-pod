@@ -77,12 +77,16 @@ línea base.
 ## Fase de mejora (encadenada, actualización completa)
 
 - **Propuesta:** sin brechas que ejecutar — la auditoría
-  no encontró ninguna; los únicos insumos vivos son los
-  4 avisos preexistentes de skills sin `evals/` (heredados,
-  ajenos a este delta), que quedan inventariados en
-  `docs/AUDITORIA-ADOPCION-V0190.md` para la siguiente
-  fase de mejora ordinaria, y la mejora futura del lado
-  del framework que el propio canon difiere (que
+  no encontró ninguna. Los 4 avisos de `rameli test`
+  (skills sin suite en `evals/`) no son una brecha de
+  este delta ni un pendiente diferido: son declaraciones
+  «sin suite — motivo» adoptadas al ejecutar la
+  Propuesta 2 de la auditoría v0.11.0 (2026-10-19), y esta
+  unidad las **revalidó una por una con evidencia** a
+  pregunta del dueño (los 4 motivos siguen vivos;
+  registro completo en `docs/AUDITORIA-ADOPCION-V0190.md`,
+  § fase de mejora). El otro insumo es la mejora futura
+  del lado del framework que el propio canon difiere (que
   `rameli validar` compruebe `app_version`/CHANGELOG).
 - **Decisión:** registrada en la auditoría — fase de
   mejora **sin ejecución** por falta de objeto, no por
