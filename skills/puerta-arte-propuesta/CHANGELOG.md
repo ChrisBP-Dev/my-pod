@@ -1,7 +1,12 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.1 (2026-10-22) — corrección del dueño: la vitrina es la superficie ÚNICA de la Fase A
+- **La entrega para aprobación ya no tiene dos superficies:** la única es la **vitrina de revisión** de la tienda. El chat deja de ser superficie de aprobación en esta fase (era el flujo anterior a la vitrina; con la vitrina lista, las propuestas por chat dispersan la revisión y llenan el chat de artes — corrección del dueño del 2026-10-22, el mismo día de la canonización: la v0.8.0 había dejado el chat como vía equivalente siguiendo el encargo de canonización, que traía el modelo viejo).
+- **El chat solo avisa:** aviso breve en el chat de entrega (qué lote, cuántos diseños, el acceso a la vitrina con su tarjeta), **sin adjuntar artes ni porqués** — todo eso vive dentro de la vitrina. La entrega queda escrita como procedimiento de 4 pasos (paquete → siembra → aviso → decisión y recogida).
+- Sin cambios en la recogida (sección v0.8.0), los gates ni los criterios.
+
 ## v0.8.0 (2026-10-22) — vitrina de revisión canonizada: entrega dual + recogida de decisiones
-- **La entrega para aprobación tiene DOS superficies equivalentes** (chat y vitrina de revisión) que alimentan el mismo checkpoint `estado-propuestas.json`; ninguna aprobación vale hasta estar registrada ahí. La superficie vitrina se sembraba desde la plantilla `docs/VITRINA-REVISION.md` (rama `vitrina-revision`, fusionada a main el 2026-10-22) sin que ningún skill la nombrara como canal de entrega.
+- **La entrega para aprobación tiene DOS superficies equivalentes** (chat y vitrina de revisión) que alimentan el mismo checkpoint `estado-propuestas.json`; ninguna aprobación vale hasta estar registrada ahí. *(Superado el mismo día por la v0.8.1: superficie única, la vitrina.)* La superficie vitrina se sembraba desde la plantilla `docs/VITRINA-REVISION.md` (rama `vitrina-revision`, fusionada a main el 2026-10-22) sin que ningún skill la nombrara como canal de entrega.
 - **Nueva sección «Recogida de decisiones (vitrina)»:** procedimiento ejecutable completo — disparador (aviso del dueño en un chat), instancia declarada en `vitrina` del `config.json` de la tienda, lectura por `leerdecisiones` solo de decisiones `enviada=true`, validaciones previas (slug en registro y checkpoint, conteos, **idempotencia** contra el checkpoint y contra `esperandoRegeneracion`), escrituras exactas por resultado (`aprobados`/`rechazados`/`mejorar` + bloque `recogida_vitrina`), confirmación con `confirmarrecogida`, reporte en el chat del aviso y modo lectura (dry-run). Vive en este skill, dueño de la puerta, y no en un skill aparte (justificación en la propia sección).
 - Sin cambios en los gates mecánicos ni en los criterios de personalizables.
 

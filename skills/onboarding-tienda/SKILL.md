@@ -159,7 +159,7 @@ Crear el set estándar de crons (ajustar horarios/N por tienda):
 
 | Cron | Ritmo | Hace |
 |---|---|---|
-| propuestas diarias | diario, hora de revisión −X | P1→P2→P3; genera N propuestas según `tipo_lote`; ensambla MPL si aplica; reporte en chat nuevo |
+| propuestas diarias | diario, hora de revisión −X | P1→P2→P3; genera N propuestas según `tipo_lote`; ensambla MPL si aplica; **siembra en la vitrina de la tienda y aviso breve en chat nuevo (sin artes: la revisión es en la vitrina)** |
 | pinterest diario | diario | pins según mix; gate `puerta-pinterest-pin`; URLs rastreables Share & Save |
 | estratega semanal | semanal | `estratega-tienda`: `data/tiendas/<tienda-id>/direccion-tienda.md` (vigencia 7 días) |
 | revisión viernes | semanal | paquetes SEO vs ledger |

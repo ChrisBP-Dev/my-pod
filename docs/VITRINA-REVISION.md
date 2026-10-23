@@ -11,9 +11,10 @@ deja las decisiones estructuradas para que Jarvis las procese de una vez.
 **Estado:** plantilla v2.1 (modelo de bandeja continua, corrección
 del dueño 2026-10-22 que reemplaza la regla de cola/anti-cruce de la
 v1.2 — ver §Operación), **CANONIZADA en el sistema el 2026-10-22**:
-fusionada a `main`, es una de las dos superficies equivalentes de la
-puerta de la Etapa 1 (`FLUJO-PIPELINE.md` §1) y su procedimiento de
-recogida vive en `skills/puerta-arte-propuesta/SKILL.md`
+fusionada a `main`, es **LA superficie — la única — de la puerta de
+la Etapa 1** (`FLUJO-PIPELINE.md` §1; el chat solo avisa, sin artes)
+y su procedimiento de recogida vive en
+`skills/puerta-arte-propuesta/SKILL.md`
 (§«Recogida de decisiones (vitrina)»). Piloto real: lote 2026-10-19
 (p058–p067) de MyNightShiftShop, ya recogido.
 
@@ -217,7 +218,7 @@ buscar; sembrar datos es una llamada, no una construcción.
   manda el flujo) y los de mejorar quedan «Esperando regeneración».
 - **Quién la usa en el flujo (canonizado el 2026-10-22):** el paso
   de entrega de la Fase A en `puerta-arte-propuesta` (§«Entrega
-  para aprobación del dueño», superficie B) ya lo dice: generar el
+  para aprobación del dueño») ya lo dice: generar el
   paquete con `scripts/generar-datos-vitrina.py` → sembrar la
   vitrina de la tienda (aditivo) → avisar al dueño que revise ahí.
   La instancia de cada tienda se declara en el bloque `vitrina`

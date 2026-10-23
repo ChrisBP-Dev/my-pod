@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.0"
+  version: "0.8.1"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.1** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -403,43 +403,50 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   y diseño intacto. Candidato a gate automático cuando se calibre
   contra artes con gris de diseño legítimo (no bloquear por defecto).
 
-## Entrega para aprobación del dueño (flujo v2, 2026-10-19; vitrina canonizada 2026-10-22)
+## Entrega para aprobación del dueño (flujo v2, 2026-10-19; superficie ÚNICA: la vitrina, corrección del dueño 2026-10-22)
 
 Un PASS de esta puerta NO va directo a producción: va primero
-al dueño, **por diseño**, por UNA de dos superficies equivalentes.
-Ambas alimentan el mismo checkpoint
-(`data/tiendas/<tienda-id>/estado-propuestas.json`) y ninguna
-aprobación vale hasta estar registrada ahí:
+al dueño, **por diseño**, por UNA SOLA superficie: **la vitrina
+de revisión de la tienda**. El chat ya NO es superficie de
+aprobación en esta fase (era el flujo anterior a la vitrina;
+el dueño lo retiró el 2026-10-22: las propuestas por chat
+dispersaban la revisión y llenaban el chat de artes). Sin
+aprobación del dueño registrada en el checkpoint
+(`data/tiendas/<tienda-id>/estado-propuestas.json`, vía la
+recogida), el diseño no entra a producción (flujo v2 en
+`FLUJO-PIPELINE.md`).
 
-- **Superficie A — el chat:** en un chat nuevo, con este bloque:
-  - **El arte final** (el PNG que pasó la puerta, adjunto).
-  - **El porqué:** tema y ángulo según la directriz vigente, la
-    frase y su sentido, la iconografía y por qué esos elementos
-    (qué significan en el tema; p. ej. qué es propio de la
-    temporada y qué sería de otra).
-  - **Qué mirar:** los puntos que la puerta declara pendientes
-    del ojo humano (counters/agujeros de las letras, trazos que
-    llegan al borde adjudicados como motivo) y cualquier duda
-    honesta del generador.
-  La decisión del dueño en el chat se registra en el checkpoint
-  en la misma corrida.
-- **Superficie B — la vitrina de revisión:** se genera el
-  paquete de datos con `scripts/generar-datos-vitrina.py`
-  (desde el registro y el checkpoint de la tienda), se siembra
-  **aditivo** en la instancia de la tienda (bandeja continua:
-  una sola instancia por tienda, declarada en `vitrina` del
-  `config.json` de la tienda; plantilla y contratos en
-  `docs/VITRINA-REVISION.md`) y se avisa al dueño. Él decide
-  ahí, marca las decisiones con «Marcar listas para Jarvis» y
-  avisa en un chat; la recogida al checkpoint sigue la sección
-  «Recogida de decisiones (vitrina)» de este skill.
+**La entrega, paso a paso:**
+
+1. **Generar el paquete** de datos con
+   `scripts/generar-datos-vitrina.py` (desde el registro y el
+   checkpoint de la tienda). El paquete lleva, por diseño, el
+   arte y su **porqué completo**: tema y ángulo según la
+   directriz vigente, la frase y su sentido, la iconografía y
+   por qué esos elementos (qué significan en el tema; p. ej.
+   qué es propio de la temporada y qué sería de otra), y
+   **qué mirar**: los puntos que la puerta declara pendientes
+   del ojo humano (counters/agujeros de las letras, trazos que
+   llegan al borde adjudicados como motivo) y cualquier duda
+   honesta del generador.
+2. **Sembrar aditivo** en la instancia de la tienda (bandeja
+   continua: una sola instancia por tienda, declarada en
+   `vitrina` del `config.json` de la tienda; plantilla y
+   contratos en `docs/VITRINA-REVISION.md`).
+3. **Avisar al dueño en el chat de entrega** (según
+   `docs/REGLA-DELIVERY-CHATS.md`): un aviso breve — qué lote
+   es, cuántos diseños trae y **el acceso a la vitrina** (su
+   tarjeta) — **SIN adjuntar artes ni porqués en el chat**:
+   todo eso vive dentro de la vitrina y ahí se revisa.
+4. **El dueño decide en la vitrina**, marca las decisiones con
+   «Marcar listas para Jarvis» y avisa en un chat; la recogida
+   al checkpoint sigue la sección «Recogida de decisiones
+   (vitrina)» de este skill.
 
 El porqué se escribe al generar (sale de la directriz y del
 brief del diseño, no se inventa al entregar) y se guarda en el
 registro del diseño (`porque` en `data/tiendas/<tienda-id>/registro-listings.json`)
-para que lo hereden la producción y el paquete comercial. Sin
-aprobación del dueño registrada, el diseño no entra a
-producción (flujo v2 en `FLUJO-PIPELINE.md`).
+para que lo hereden la producción y el paquete comercial.
 
 ### Variante personalizable (2026-10-20, pedido del dueño)
 
