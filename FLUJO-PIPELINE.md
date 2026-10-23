@@ -99,10 +99,16 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   anterior quedó descartado (se veía chico y bajo).
 - **Selección de colores del diseño (criterio del dueño,
   consolidado 2026-10-23):** al crear cada item, con el arte ya
-  colocado, producción elige sus colores por contraste/
-  legibilidad y disponibilidad — **máx. 4 por prenda** — y
-  deja solo los elegidos habilitados (desmarcar el resto es
-  parte de crear el item). **No hay paleta canónica** en ninguna parte: la
+  colocado, producción elige sus colores **juzgando ESTE arte**
+  (tonos dominantes → fondos que contrasten; verificación
+  visual del arte sobre cada candidata antes de decidir;
+  procedimiento completo en el skill) — **máx. 4 por prenda** —
+  y deja solo los elegidos habilitados (desmarcar el resto es
+  parte de crear el item). **Repetir el trío histórico
+  (White/Sand/Sport Grey · White/Athletic Heather/Natural)
+  sin ese juicio es incumplimiento**: fue el hábito que el
+  dueño corrigió (Fase B: 9/10 con el mismo trío; el distinto
+  lo cambió él a mano). **No hay paleta canónica** en ninguna parte: la
   selección vive solo en el borrador. Antes de entregar a la
   etapa 3 se corre la puerta de conteo
   (`publicar-printify-etsy/scripts/verificar-variantes.py`).

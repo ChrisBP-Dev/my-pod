@@ -18,11 +18,12 @@ colocado y la disponibilidad del producto, con tope de 4
 por prenda; el dueño es el filtro final en su revisión
 (§M2 = ubicación + colores) y la fuente de verdad al
 publicar es el borrador tal como él lo dejó. Nace de la
-auditoría del 2026-10-23: la selección SÍ se aplicó en la
-Fase B (verificado por API en los 10 MPL: 3 colores por
-item, 27–31 variantes por MPL), pero vivía solo en prosa —
-sin alcance formal en la etapa 3, sin puerta de conteo y
-con el paquete recibiendo los colores a mano.)
+auditoría del 2026-10-23: en la Fase B los items salieron
+con 3 colores por item, pero por **hábito** — el mismo trío
+en 9 de 10 sin juicio por arte; el distinto lo cambió el
+dueño a mano. Faltaban el procedimiento de elección, el
+alcance formal en la etapa 3, la puerta de conteo y que el
+paquete leyera los colores del borrador.)
 **Versión 0.9.1** (2026-10-23: lecciones de producción de la Fase B
 del lote 2026-10-19 en §M4 — nada de producción en paralelo en la
 misma cuenta; el Replace de proveedor regenera el ID y rompe la
@@ -124,12 +125,38 @@ Default (la estratega puede definir otra composición en
   (400 variantes). Por color van TODAS las tallas que el
   proveedor ofrezca; si un color trae tallas limitadas, se
   acepta como viene.
-- **Preferencias frecuentes (referencia de partida, NO
-  regla):** los artes de esta tienda suelen combinar con
-  sudadera White/Sand/Sport Grey y playera White/Athletic
-  Heather/Natural. Es el punto de partida habitual al
-  elegir, **nunca** una lista contra la que se valide: si el
-  arte pide otros colores, mandan el arte y el criterio.
+- **El trío histórico NO es punto de partida.** Sudadera
+  White/Sand/Sport Grey y playera White/Athletic
+  Heather/Natural fue el **hábito heredado** de los primeros
+  listings, y repetirlo sin mirar el arte es
+  **incumplimiento de este criterio** — es exactamente el
+  defecto que el dueño señaló el 2026-10-23: en la Fase B,
+  9 de 10 diseños salieron con el mismo trío por inercia, y
+  el único distinto (p058, oscuros) lo había cambiado **el
+  dueño a mano**. Caso de prueba, p059: letras crema sobre
+  White/Sand quedan lavadas, casi ilegibles; ese arte pide
+  fondos oscuros. Si el juicio sobre ESTE arte respalda un
+  color del trío, se usa como cualquier otro candidato —
+  nunca por defecto.
+- **Procedimiento de elección (por item, obligatorio):**
+  1. **Mirar el arte ya colocado:** tonos dominantes del
+     trazo y del texto (¿claro u oscuro?), el elemento más
+     fino que debe leerse y sus colores de línea.
+  2. **Candidatas:** colores disponibles del producto cuyo
+     fondo contraste con esos tonos y mantenga legible lo
+     más fino. Arte claro → fondos oscuros; arte oscuro →
+     fondos claros; arte con fondo propio o bordes
+     marcados → fondos que no peleen con ese borde.
+  3. **Verificación visual por candidata:** ver el arte
+     sobre cada color candidato (preview del editor de
+     Printify o composición equivalente) ANTES de decidir.
+     Sin esa vista no hay elección — elegir de memoria o
+     por hábito es el incumplimiento de arriba.
+  4. **Elegir 3–4** y dejar **solo esas habilitadas**.
+  5. **Nota de producción de una línea** en el registro de
+     la corrida (tonos del arte → colores elegidos y por
+     qué). Es nota operativa de ESE diseño: no se guarda
+     como canónica ni sirve de default para el siguiente.
 - **El dueño es el filtro final** (§M2): en su revisión
   puede cambiar los colores; su «ya están listos» aprueba
   ubicación **y** colores. Esa elección **no se guarda como
