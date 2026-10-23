@@ -1,5 +1,8 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.7 (2026-10-23) — la siembra es solo del flujo; diseños no sembrados = incidente
+- El paso de siembra de la entrega declara que la acción explícita del flujo es la ÚNICA siembra existente (la instancia nunca se siembra sola; regla espejo en la plantilla `VITRINA-REVISION.md` v2.3 §«Regla de siembra», del incidente de resurrección del 2026-10-22: la instancia del piloto resembró el lote recogido al abrirse con la bandeja vacía). Si el tablero muestra diseños que la entrega vigente no sembró, es incidente de la instancia: no se pide decisión sobre ellos ni se recogen; se reporta y se corrige primero.
+
 ## v0.8.6 (2026-10-22) — dónde viven la simulación y la ficha en el registro (cierre de vitrina personalizable)
 - La variante personalizable declara ahora su hogar en el sistema: la entrada del registro lleva `personalizable: true`, `simulacion` (ruta del compuesto sobre el arte real) y `ficha_razon` estructurada (razón, prueba de borrado, campos con tipo/límite/opciones y ejemplo, comprador/destinatario/ocasión, clase de encaje, ejemplo de simulación, peor caso, producto destino, plan de zonas). El generador de la vitrina valida ese paquete y falla sin él — la entrega de dos imágenes + ficha deja de depender de que alguien lo recuerde al sembrar.
 

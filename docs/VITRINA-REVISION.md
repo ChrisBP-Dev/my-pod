@@ -8,7 +8,9 @@ sueltos en un chat. Idea del dueño (2026-10-20): revisar así ahorra
 créditos (cada reacción en un chat largo re-lee el contexto completo) y
 deja las decisiones estructuradas para que Jarvis las procese de una vez.
 
-**Estado:** plantilla v2.2 (v2.1 = modelo de bandeja continua,
+**Estado:** plantilla v2.3 (v2.2 = variante personalizable cerrada;
+v2.3 = regla de siembra y vacío terminal, ver §«Regla de siembra»;
+v2.1 = modelo de bandeja continua,
 corrección del dueño 2026-10-22 que reemplaza la regla de
 cola/anti-cruce de la v1.2 — ver §Operación; v2.2 = variante
 personalizable cerrada, ver §«Cierre de la variante
@@ -261,6 +263,39 @@ buscar; sembrar datos es una llamada, no una construcción.
   los lee y confirma recogidas mediante las acciones de la propia
   instancia (§Contrato de salida). Nada de esto vive en un chat ni
   depende de su memoria.
+
+## Regla de siembra — quién siembra y qué nunca pasa (2026-10-23, incidente de resurrección)
+
+**Quién siembra:** SOLO el flujo que entrega las propuestas (el
+agente de la Fase A), al cerrar su lote, generando el paquete con
+`scripts/generar-datos-vitrina.py` e invocando la acción de siembra
+de la instancia con ese paquete explícito. **La instancia NUNCA se
+siembra sola:** ningún comportamiento de la vitrina puede insertar
+diseños por su cuenta — ni al abrir, ni al encontrar la bandeja
+vacía, ni con datos de ejemplo o de piloto «quemados» en su código.
+Un paquete de piloto o de ensayo vive fuera de la instancia y se
+siembra explícitamente solo donde se ensaya; jamás forma parte de
+la plantilla ni de una instancia de producción.
+
+**El vacío es un estado terminal legítimo:** tras una recogida, la
+bandeja en cero significa «todo decidido y retirado» y la vista
+muestra «Sin pendientes» — nunca «falta la siembra inicial». Para
+que ese vacío sea distinguible, la recogida deja **registro
+permanente de retirados** en la instancia (los diseños que salieron
+por recogida, con su destino), y la siembra **respeta ese registro**:
+un diseño retirado solo puede volver como regeneración explícita
+con arte nuevo sembrada por el flujo, nunca por iniciativa de la
+instancia.
+
+**Origen (incidente real, 2026-10-22 23:50 ET):** la instancia del
+piloto nació con el lote piloto dentro y una auto-siembra al abrir
+con bandeja vacía que ninguna sección de esta plantilla mandaba;
+tras las dos recogidas del lote (bandeja en cero, estado correcto),
+la siguiente apertura resembró los 10 diseños recogidos como
+pendientes. La regla de arriba es la corrección en el punto de
+generación: la plantilla portable no contiene datos de ningún lote
+ni gatillos de siembra — contiene solo el mecanismo (siembra
+explícita con paquete, registro de retirados, vacío terminal).
 
 ## Cierre de la variante personalizable (2026-10-22, orden del dueño)
 
