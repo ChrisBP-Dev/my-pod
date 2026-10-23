@@ -1,5 +1,30 @@
 # CHANGELOG — My POD (aplicación)
 
+## v1.1.0 (2026-10-23) — migración a Rameli v0.19.0 (sin rompientes = MENOR)
+
+- **Pin del framework: 0.18.0 → 0.19.0**, ejecutada como
+  actualización completa por mandato del dueño (migración +
+  auditoría de adopción + fase de mejora encadenada, según
+  `rameli/MIGRACIONES.md`). El delta trae solo la doctrina
+  de **versionado de aplicaciones** (Rameli,
+  `docs/VERSIONADO-APLICACIONES.md`, PR #10): sin cambios
+  rompientes, sin mecanismo nuevo y sin cambios de
+  comportamiento en ningún skill.
+- **Adopción verificada contra el canon** en
+  `docs/AUDITORIA-ADOPCION-V0190.md`: la v1.0.0 abierta hoy
+  cumple cada regla (semver propio en `rameli.json`,
+  CHANGELOG propio, tag anotado sobre el commit que la
+  declara, Release verificado como Latest, repo de
+  registros sin versionar) — veredicto conforme, sin
+  brechas; la fase de mejora no encontró nada que ejecutar.
+- **Pin aplicado** en `rameli.json` (con su nota de
+  migración), en el frontmatter de los 9 skills y en las 3
+  declaraciones vivas «Pineado a Rameli» de los CHANGELOG
+  de skill. Registro: `docs/MIGRACION-RAMELI-V0190.md`.
+- **Skills incluidos (versiones al cierre):** las mismas de
+  v1.0.0 — ningún skill cambió de versión en esta liberación;
+  solo cambió su pin del framework.
+
 ## v1.0.0 (2026-10-23) — primera versión formal de la aplicación
 
 - **Apertura del versionado propio** (doctrina de Rameli

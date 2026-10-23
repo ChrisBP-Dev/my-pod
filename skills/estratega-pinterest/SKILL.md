@@ -6,7 +6,7 @@ license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
   version: "0.1.4"
-  framework_version: "0.18.0"
+  framework_version: "0.19.0"
 ---
 
 # Estratega de Pinterest
