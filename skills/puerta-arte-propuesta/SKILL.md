@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.2"
+  version: "0.8.3"
   framework_version: "0.18.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.2** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.3** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -576,6 +576,17 @@ declara `vitrina-de-revisi-n-my-pod` en su config.)
      ESTA recogida; `fecha_envio_dueno` = la mayor
      `fechaEnviada` de las decisiones recogidas;
      `fuente` = `<slug de la instancia> (leerdecisiones)`.
+   - **Y en el mismo acto, el `estado` de cada diseño
+     recogido en el registro** (`registro-listings.json` de
+     la tienda) — aprobado / mejorar / rechazado, con la
+     fecha de la decisión — commiteado con
+     `scripts/registros-datos.py commit`. Registro y
+     checkpoint NUNCA quedan discrepando: el watchdog cruza
+     ambos, y una aprobación que solo vive en el checkpoint
+     se lee como trabajo perdido (hueco fundacional: la
+     recogida del 2026-10-22 solo escribió el checkpoint y
+     el watchdog alertó esa noche; los estados se alinearon
+     a mano y esta regla lo cierra).
 5. **Confirmar en la vitrina** con la acción
    `confirmarrecogida` y las listas por resultado:
    `{aprobados: [slugs], rechazados: [slugs], mejorar: [slugs]}`

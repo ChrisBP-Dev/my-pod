@@ -1,5 +1,8 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.3 (2026-10-22) — la recogida también alinea el registro (hueco detectado por el watchdog)
+- La recogida (§«Recogida de decisiones (vitrina)», paso 4) ahora actualiza en el mismo acto el `estado` de cada diseño recogido en `registro-listings.json` y lo commitea al repo de datos. Causa: la recogida fundacional escribió solo el checkpoint y el watchdog de las 21:09 cruzó registro vs checkpoint y alertó «el registro no refleja la aprobación» — hueco real de la v0.8.0. Los estados del lote 2026-10-19 se alinearon a mano el mismo día (9 aprobados «pendiente Fase B», p063 «nueva versión en vitrina»).
+
 ## v0.8.2 (2026-10-22) — retorno de una mejora: el ciclo del «mejorar» queda cerrado en el sistema
 - **Nueva sección «Retorno de una mejora (regeneración → nueva versión en la vitrina)»:** procedimiento completo con el caso fundacional p063 v2 — regenerar solo lo pedido, verificación del arte nuevo (con adjudicación registrada cuando el cambio mismo es un fondo de diseño), registro actualizado, **requisito duro de previa compilada por `arte_ref` ANTES de sembrar** (hueco fundacional: las previas eran estáticas por slug y la siembra habría mostrado el arte viejo como «Nueva versión»; la instancia se reparó y publicó el 2026-10-22), siembra, verificación en el tablero y aviso sin artes en el chat.
 - **Contabilidad del checkpoint al cumplirse una mejora:** la entrada se mueve de `mejorar` a `mejoras_cumplidas` (con su cumplimiento), y la recogida gana la excepción explícita: la decisión sobre una nueva versión es NUEVA y se procesa, no la bloquea la idempotencia.
