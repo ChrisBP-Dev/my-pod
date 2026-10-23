@@ -3,14 +3,14 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.11.0"
+  version: "0.11.1"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
+**Versión 0.11.1** (2026-10-23: corrección de cobertura — la plana cubre el color sin representar antes de repetir el prioritario; hallazgo del piloto seco de p058 explicado al dueño el mismo día. Base: **Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
 videos con estándar** — consolidación de la propuesta aprobada
 por el dueño el 2026-10-23: (1) el tope de 4 colores por prenda
 de v0.10.0 queda **eliminado como techo**: 3–4 es la **guía de
@@ -465,7 +465,12 @@ listing no tiene mockups.
 3. Repartir los espacios según los pesos de la composición
    y aplicar las **garantías mínimas por producto**: toma
    principal en el color prioritario; segunda pose distinta
-   en el siguiente color; plana en el color prioritario.
+   en el siguiente color; y una plana, cuyo color sale de la
+   cobertura: si queda un color sin representar, la plana lo
+   cubre; solo si todos están representados va en el
+   prioritario. (Corrección 2026-10-23, hallazgo del piloto
+   seco de p058: la plana en el prioritario repetía color y
+   dejaba un tercer color sin foto pudiendo entrar.)
    Después, cobertura por turnos de los colores aún no
    representados y relleno sin repetir par (toma, color).
 4. **Restricciones duras:** nunca repetir la misma pose o

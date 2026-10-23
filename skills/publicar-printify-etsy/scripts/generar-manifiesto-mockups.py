@@ -43,8 +43,13 @@ Algoritmo (determinista, §M5 del skill):
     de entrada dentro de cada tono.
  2. Garantías mínimas por item, en este orden: toma de rol
     principal en el color prioritario; toma de rol secundaria
-    (pose distinta) en el siguiente color; plana en el color
-    prioritario.
+    (pose distinta) en el siguiente color; y una plana, cuyo
+    color sale de la cobertura (si queda un color sin
+    representar, la plana lo cubre; si todos están
+    representados, va en el prioritario). Corrección
+    2026-10-23: antes la plana iba siempre en el prioritario
+    y en items de 3 espacios dejaba un tercer color sin foto
+    pudiendo entrar (piloto seco p058).
  3. Cobertura por turnos: cada color aún no representado
     recibe un espacio, rotando los roles de relleno
     (plana → doblada-decorada → detalle).
@@ -162,9 +167,15 @@ def generar_item(item):
         segundo = orden[1] if len(orden) > 1 else orden[0]
         agregar(["secundaria", "principal"], segundo,
                 "garantia-secundaria")
-    # 3. Garantía: plana del color prioritario
+    # 3. Garantía: una plana por item; su color sale de la
+    # cobertura — si queda un color sin representar, la plana
+    # lo cubre; si todos están representados, va en el
+    # prioritario. (Corrección 2026-10-23, piloto seco p058.)
     if E >= 3:
-        agregar(["plana"], orden[0], "garantia-plana")
+        representados = {s["color"] for s in slots}
+        sin_rep = [c for c in orden if c not in representados]
+        color_plana = sin_rep[0] if sin_rep else orden[0]
+        agregar(["plana"], color_plana, "garantia-plana")
     # 4. Cobertura por turnos de colores no representados
     i_relleno = 0
     for color in orden:

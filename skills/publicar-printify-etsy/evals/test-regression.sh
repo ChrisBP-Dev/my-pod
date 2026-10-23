@@ -156,6 +156,26 @@ if [[ $rc -eq 0 && "$out" == *"PASS"* ]]; then
 else
   fail=$((fail+1)); echo "FALLA: manifiesto válido no dio PASS (rc=$rc)"; echo "$out" | head -6
 fi
+# F12 (corrección 2026-10-23, piloto seco p058): en un item de
+# 3 espacios y 3 colores, TODOS los colores quedan
+# representados (la plana cubre el color que falta, no repite
+# el prioritario).
+if python3 - "$FIX" <<'PYEOF'
+import json, sys
+d = sys.argv[1]
+m = json.load(open(f"{d}/manifiesto.json"))
+e = json.load(open(f"{d}/entrada-mockups.json"))
+for item in e["items"]:
+    vendidos = {c["nombre"] for c in item["colores"]}
+    vistos = {s["color"] for s in m["espacios"]
+              if s["producto"] == item["producto"] and s.get("color")}
+    assert vendidos <= vistos, (item["producto"], vendidos - vistos)
+PYEOF
+then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: cobertura total en item 3 espacios/3 colores no se cumplió"
+fi
 python3 - "$FIX" <<'PYEOF'
 import json, sys
 d = sys.argv[1]
@@ -167,6 +187,12 @@ evitar = json.loads(json.dumps(m))
 evitar["espacios"][2]["toma_id"] = "toma-fea"
 json.dump(evitar, open(f"{d}/manifiesto-evitar.json", "w"))
 sin_declarar = json.loads(json.dumps(m))
+# Con la corrección de cobertura (2026-10-23) el manifiesto
+# generado cubre todos los colores; para probar F11 se fabrica
+# el hueco: la plana de la playera repite un color ya cubierto
+# y las declaraciones se vacían → un color vendido queda fuera
+# sin declarar.
+sin_declarar["espacios"][7]["color"] = sin_declarar["espacios"][5]["color"]
 sin_declarar["colores_sin_representacion"] = []
 json.dump(sin_declarar, open(f"{d}/manifiesto-sin-declarar.json", "w"))
 PYEOF

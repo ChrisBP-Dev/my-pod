@@ -113,3 +113,25 @@ declarado: el piloto de publicación EN VIVO con los MPL que
 el dueño está revisando, que es donde se verifican la
 disponibilidad real de tomas por color y los `camera_label`
 provisionales del catálogo.
+
+---
+
+## Corrección posterior (2026-10-23, v0.11.1) — la plana ya no desperdicia un espacio
+
+Al explicar este piloto, el dueño preguntó si el criterio había quedado
+bien pulido o a qué se refería el «color que quedó fuera». Revisión
+honesta: era un **defecto del algoritmo**, no un límite — la garantía
+«plana en el color prioritario» corría antes que la cobertura y, en la
+playera de 3 espacios, repetía Navy y dejaba fuera a Maroon pudiendo
+entrar. **Corregido en la fuente el mismo día** (skill v0.11.1): la
+plana garantizada cubre primero el color sin representar. Re-piloto
+sobre la misma entrada de p058: **los 6 colores de ambos productos
+quedan representados**, 0 declarados sin representación, puerta PASS;
+suite de regresión 12 ok / 0 fallas (F12 nueva cubre este caso).
+
+Lo que sigue siendo límite real (físico, no defecto): 10 imágenes por
+anuncio, 2 son tablas de tallas → 8 fotos, y cada foto muestra un solo
+color de un solo producto. Si una prenda vende más colores que sus
+espacios visuales, los colores restantes no tendrán foto propia: se
+ordenan por prioridad y los no cubiertos quedan declarados en el
+manifiesto.
