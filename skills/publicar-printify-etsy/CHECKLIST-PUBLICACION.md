@@ -18,10 +18,14 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Ningún otro componente creado como borrador suelto (la ruta vieja
   de crear todos y ensamblar está descartada; solo rescate anotado)
 - [ ] Colores del base = selección de colores del diseño (elegidos por
-  contraste con el arte colocado, máx. 4; el resto del catálogo
-  desmarcado — sin paleta canónica, ver skill §Selección de colores)
+  contraste con el arte colocado, guía 3–4 por prenda; extensión a
+  5–6 permitida si el arte lo justifica, con nota; el resto del
+  catálogo desmarcado — sin paleta canónica, ver skill §Selección
+  de colores)
 - [ ] Puerta de conteo corrida (`scripts/verificar-variantes.py`):
-  colores por item ≤4 y variantes totales del MPL ≤400, o aviso al dueño
+  detiene SOLO si el MPL pasa el límite técnico (>400 variantes o
+  >70 opciones); un item con >6 colores = aviso informativo en el
+  reporte, sin detener
 - [ ] Precios escalonados APLICADOS en el borrador base ANTES de publicar:
   - [ ] Precios según `estrategia_precios` del config de la tienda
     (ej. 29222324: sudadera S–XL $40.99 · 2XL $44.99 · 3XL $46.99;
@@ -35,8 +39,10 @@ está autorizado. El ojo del dueño es la puerta visual final.**
   catálogo con el mismo diseño (nunca agregado desde un borrador suelto,
   salvo rescate anotado en el registro)
 - [ ] Placement, colores/tallas y precios verificados POR ITEM dentro
-  del editor del MPL (colores = selección del diseño, máx. 4 por item,
-  todas las tallas que el proveedor ofrezca por color elegido)
+  del editor del MPL (colores = selección del diseño según la guía
+  del skill — 3–4, o 5–6 con nota si el arte lo justifica —, todas
+  las tallas que el proveedor ofrezca por color elegido; el dueño
+  puede cambiar los colores en su revisión sin límite del sistema)
 - [ ] Nombres de variación: "Sweatshirt" / "T-Shirt" (campo "Variation name for Etsy listing")
 - [ ] Shipping profile único asignado al MPL
 - [ ] Borrador MPL guardado SIN publicar; revisión de UBICACIÓN del dueño

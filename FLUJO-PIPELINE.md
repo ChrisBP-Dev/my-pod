@@ -102,7 +102,10 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   colocado, producción elige sus colores **juzgando ESTE arte**
   (tonos dominantes → fondos que contrasten; verificación
   visual del arte sobre cada candidata antes de decidir;
-  procedimiento completo en el skill) — **máx. 4 por prenda** —
+  procedimiento completo en el skill) — **guía de 3–4 por
+  prenda, sin techo** (extensión a 5–6 permitida si el arte lo
+  justifica, con nota; el dueño en la etapa 3 cambia colores
+  sin límite del sistema) —
   y deja solo los elegidos habilitados (desmarcar el resto es
   parte de crear el item). **Repetir el trío histórico
   (White/Sand/Sport Grey · White/Athletic Heather/Natural)
@@ -122,7 +125,8 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   es la segunda validación del dueño; la creativa fue la etapa 1
   en la vitrina. No hay revisión por borrador componente suelto.
   En colores: ve la selección que producción eligió por diseño
-  (máx. 4 por prenda) y la ajusta si quiere — desmarcar/marcar
+  (guía 3–4 por prenda, o 5–6 con nota) y la ajusta si quiere,
+  **sin límite del sistema** — desmarcar/marcar
   es reversible y no toca arte, ubicación ni precios. Su aviso
   de «listos» aprueba **ubicación y colores**, y lo que deja en
   el borrador es lo que se publica: las etapas siguientes leen

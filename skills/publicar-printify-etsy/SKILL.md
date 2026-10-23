@@ -3,13 +3,34 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.10.0"
+  version: "0.11.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
+**Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
+videos con estándar** — consolidación de la propuesta aprobada
+por el dueño el 2026-10-23: (1) el tope de 4 colores por prenda
+de v0.10.0 queda **eliminado como techo**: 3–4 es la **guía de
+producción** por juicio del arte, la extensión a 5–6 está
+permitida sin bloqueo con nota operativa, y el dueño en §M2
+agrega o quita colores **sin límite del sistema**; la puerta de
+conteo solo detiene por el límite técnico del MPL (400
+variantes / 70 opciones) y avisa sin detener desde 7 colores
+por item. (2) §M5 deja de ser una lista fija de espacios: la
+selección de mockups la hace el worker con un **algoritmo
+determinista** sobre el **catálogo canónico de tomas por
+producto** (`tomas_preferidas` en `data/productos/<producto>.json`)
+y los **pesos por composición** del config de tienda, y produce
+un **manifiesto de selección** que la puerta
+`scripts/verificar-mockups.py` exige en PASS antes de publicar;
+el dueño **nunca** elige mockups. (3) §M6: los videos se arman
+solo con tomas del manifiesto, con **escenarios A–D** según la
+composición; el formato técnico de video vive ahora en este
+skill y `CRITERIO-VIDEO.md` (raíz) se retiró como fuente
+duplicada que contradecía al esquema.)
 **Versión 0.10.0** (2026-10-23: **selección de colores del
 diseño** — criterio corregido por el dueño: NO existe paleta
 canónica ni quemada en ninguna parte; los colores se eligen
@@ -119,12 +140,18 @@ Default (la estratega puede definir otra composición en
   (blueprint/proveedor). El diseño debe verse bien en cada
   color elegido; no se abarcan colores sin verificación
   visual (regla suya 2026-10-15).
-- **Tope: máximo 4 colores por prenda** (criterio del dueño
-  2026-10-23). Con la composición default (2 prendas), el
-  total de variantes queda lejos del límite del MPL
-  (400 variantes). Por color van TODAS las tallas que el
-  proveedor ofrezca; si un color trae tallas limitadas, se
-  acepta como viene.
+- **Guía de producción: 3–4 colores por prenda** (criterio
+  del dueño 2026-10-23, **sin techo desde v0.11.0**): es la
+  cantidad que producción elige por juicio del arte, **no un
+  límite del sistema para nadie**. Si el juicio sobre ESTE
+  arte lo justifica (ej.: el arte pide fondos claros **y**
+  oscuros), producción puede habilitar **5–6** y el flujo
+  sigue, dejando la nota operativa del paso 5 ampliada con
+  el porqué de la extensión. Por color van TODAS las tallas
+  que el proveedor ofrezca; si un color trae tallas
+  limitadas, se acepta como viene. El único techo real es
+  el técnico del MPL (400 variantes / 70 opciones), que es
+  lo único que la puerta de conteo detiene (§puerta abajo).
 - **El trío histórico NO es punto de partida.** Sudadera
   White/Sand/Sport Grey y playera White/Athletic
   Heather/Natural fue el **hábito heredado** de los primeros
@@ -152,25 +179,36 @@ Default (la estratega puede definir otra composición en
      Printify o composición equivalente) ANTES de decidir.
      Sin esa vista no hay elección — elegir de memoria o
      por hábito es el incumplimiento de arriba.
-  4. **Elegir 3–4** y dejar **solo esas habilitadas**.
+  4. **Elegir según la guía (3–4; 5–6 si el juicio del
+     arte lo justifica, ver arriba)** y dejar **solo esas
+     habilitadas**.
   5. **Nota de producción de una línea** en el registro de
      la corrida (tonos del arte → colores elegidos y por
      qué). Es nota operativa de ESE diseño: no se guarda
      como canónica ni sirve de default para el siguiente.
 - **El dueño es el filtro final** (§M2): en su revisión
-  puede cambiar los colores; su «ya están listos» aprueba
+  puede cambiar los colores **sin límite del sistema**
+  (agrega o quita los que quiera; su juicio manda sobre la
+  guía de producción); su «ya están listos» aprueba
   ubicación **y** colores. Esa elección **no se guarda como
   canónica en ningún registro**: la fuente de verdad al
   publicar es el borrador tal como él lo dejó, y el paquete
   (§M3) y la verificación (§M8) se generan y contrastan
-  **leyendo ese borrador**, nunca una lista previa.
+  **leyendo ese borrador**, nunca una lista previa. Como
+  §M5 corre DESPUÉS de §M2, cualquier color que el dueño
+  agregue lo absorbe el worker al seleccionar los mockups
+  desde los colores finales del borrador — el dueño nunca
+  elige mockups (§M5).
 - **Puerta mecánica (única, de conteo):** antes de mockups
   y antes de publicar, correr
   `scripts/verificar-variantes.py` sobre los items: cuenta
-  colores habilitados por item y variantes totales. Si un
-  item pasa de 4 colores o el MPL pasa de 400 variantes,
-  **avisa al dueño y se detiene** — corrige él o manda
-  corregir; la puerta no compara contra ninguna lista.
+  colores habilitados por item, variantes y opciones del
+  conjunto. **Detiene SOLO por el límite técnico del MPL**
+  (>400 variantes totales o >70 opciones). Si un item pasa
+  de **6** colores, la puerta **avisa sin detener** (el
+  aviso queda en el reporte de la corrida y el flujo
+  sigue): 5–6 colores son una extensión válida, no un
+  error. La puerta no compara contra ninguna lista.
 
 ## Precios escalonados por talla (estándar 2026-10-15, orden del dueño)
 
@@ -259,7 +297,8 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
   siendo de su revisión, pero la base ya sale en su criterio.
 - Aplicar la **selección de colores del diseño** (ver
   «Selección de colores del diseño» arriba: elegir por
-  contraste con el arte ya colocado, máx. 4 por prenda) y
+  contraste con el arte ya colocado, guía 3–4 por prenda,
+  extensión 5–6 permitida con nota) y
   los precios escalonados de la tabla vigente. **Dejar solo
   los colores elegidos habilitados (desmarcar el resto del
   catálogo) es parte de crear el item, no un paso
@@ -303,7 +342,11 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
   el 2026-10-23): ve la selección que producción eligió por
   diseño y la ajusta en el mismo editor si no le convence —
   desmarcar/marcar colores es reversible y no toca arte,
-  ubicación ni precios. Su «ya están listos» aprueba
+  ubicación ni precios, y **no tiene límite del sistema**
+  (la guía 3–4 y su extensión 5–6 atan a producción, no a
+  él). **No revisa ni elige mockups:** en este punto del
+  flujo aún no existen; los selecciona el worker en §M5
+  desde los colores finales que él deje aquí. Su «ya están listos» aprueba
   **ubicación y colores**; lo que él deja en el borrador es
   lo que se publica (§M3 y §M8 leen de ahí).
 - Corrige la ubicación directamente en el editor si hace falta.
@@ -478,8 +521,11 @@ Nada se da por sentado. Verificar contra el listing vivo:
   colores) — **contra la lectura del borrador de Printify
   tal como el dueño lo dejó** (§M2), que es la fuente de
   verdad; nunca contra una lista previa o «esperada».
-- Conteo previo a publicar (puerta de §M1): ningún item
-  >4 colores ni MPL >400 variantes sin aviso al dueño.
+- Conteo previo a publicar (puerta de §M1): la puerta solo
+  detiene por el límite técnico (MPL >400 variantes o >70
+  opciones); un item con >6 colores genera aviso
+  informativo en el reporte, sin detener ni corregir lo que
+  el dueño dejó.
 - Precios por variación según la tabla vigente de la tienda
   (`estrategia_precios` en su config; ej. 29222324: sudadera
   $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99).
