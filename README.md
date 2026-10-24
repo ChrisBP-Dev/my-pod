@@ -3,6 +3,8 @@
 App construida con Rameli **v0.19.0** (pineado en `rameli.json`).
 Valida el framework en el camino más corto antes de construir My Channels.
 
+> **Cierre de mejoras:** ninguna mejora se declara cerrada sin pasar la puerta de `docs/PUERTA-CIERRE.md` (colocación, huecos, estados de ficha, suites, artefactos). Los valores que el mecanismo consume desde la ficha están inventariados en `docs/INVENTARIO-VALORES-FICHA.md`.
+
 ## Migración a Rameli v0.19.0 — actualización completa (2026-10-23)
 
 Adoptada como **actualización completa** por mandato del dueño

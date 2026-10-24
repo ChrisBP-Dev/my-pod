@@ -12,6 +12,7 @@ nunca propuesta creativa.**
 ## Principio
 Printify es la fuente de verdad para cómo se ve el producto.
 No predecimos con mockups propios; usamos los de Printify directamente.
+Toda mejora de este flujo se declara cerrada solo tras pasar `docs/PUERTA-CIERRE.md`.
 
 ## Flujo bifurcado (orden del dueño 2026-10-15)
 - **Diseño personalizable** (nombre/texto del comprador) → **track single**
