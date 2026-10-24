@@ -54,6 +54,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Puerta `verificar-paquete.py` = PASS
 
 ### Mockups — manifiesto + puerta (v0.11.0; pesos en `data/tiendas/<tienda-id>/config.json` → `mpl.esquema_mockups`; catálogos en `data/productos/<producto>.json` → `tomas_preferidas`)
+- [ ] Puerta de completitud visual corrida ANTES de seleccionar (`scripts/verificar-ficha-visual.py --config <config tienda> --producto <ficha de cada producto>`): `configurado` = operación normal; `provisional` = SOLO piloto declarado (anotado en el registro del listing y en el reporte); `sin_configurar` = DETENER y reportar qué falta (se llena en «Calibración visual de la tienda» de `onboarding-tienda`)
 - [ ] Manifiesto de selección generado por el worker con
   `scripts/generar-manifiesto-mockups.py` desde los colores
   FINALES post-revisión del dueño (el dueño NO elige mockups;

@@ -3,14 +3,14 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.12.0"
+  version: "0.13.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.12.0** (2026-10-23, Programa Estándar My POD F4: la puerta de conteo `verificar-variantes.py` ya no trae default de tienda — `--shop` explícito obligatorio en modo en vivo — y los ejemplos con precios/IDs reales de una tienda pasan a ficticios etiquetados o al config de la tienda activa. Base: **Versión 0.11.1** (2026-10-23: corrección de cobertura — la plana cubre el color sin representar antes de repetir el prioritario; hallazgo del piloto seco de p058 explicado al dueño el mismo día. Base: **Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
+**Versión 0.13.0** (2026-10-23, Programa Estándar F3: puerta de completitud de la ficha visual antes de §M5 — `verificar-ficha-visual.py` — y presupuesto de fotos leído de la ficha con techo de plataforma 20. Base: **Versión 0.12.0** (2026-10-23, Programa Estándar My POD F4: la puerta de conteo `verificar-variantes.py` ya no trae default de tienda — `--shop` explícito obligatorio en modo en vivo — y los ejemplos con precios/IDs reales de una tienda pasan a ficticios etiquetados o al config de la tienda activa. Base: **Versión 0.11.1** (2026-10-23: corrección de cobertura — la plana cubre el color sin representar antes de repetir el prioritario; hallazgo del piloto seco de p058 explicado al dueño el mismo día. Base: **Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
 videos con estándar** — consolidación de la propuesta aprobada
 por el dueño el 2026-10-23: (1) el tope de 4 colores por prenda
 de v0.10.0 queda **eliminado como techo**: 3–4 es la **guía de
@@ -442,6 +442,27 @@ mockups que Printify deje marcados por defecto NO son una
 selección válida:** sin manifiesto generado y verificado, el
 listing no tiene mockups.
 
+**Puerta de completitud de la ficha visual (v0.13.0, Programa
+Estándar F3 — ANTES de seleccionar nada):** correr
+`scripts/verificar-ficha-visual.py --config <config de la
+tienda> --producto <ficha de cada producto del listing>`. La
+puerta lee el estado de la estrategia visual que este paso va
+a consumir (`mpl.esquema_mockups.estado` del config y
+`tomas_preferidas.estado` de cada ficha de producto):
+- **`sin_configurar` o ausente → DETENER.** Se reporta qué
+  campo falta y en qué paso se llena («Calibración visual de
+  la tienda» de `onboarding-tienda`: presupuesto/reparto en el
+  descubrimiento visual de la Fase 1; catálogo por producto
+  en la Fase 4). No se inventan valores ni se usan defaults.
+- **`provisional` → solo PILOTO DECLARADO:** el paso puede
+  correr, y el piloto queda anotado en el registro del
+  listing y en el reporte de la corrida. Nunca es operación
+  normal.
+- **`configurado` → operación normal.**
+La misma puerta aplica al dar de alta un producto o una
+composición nueva: sin su calibración visual, no entra a
+producción.
+
 **Insumos (ninguno quemado en este skill):**
 - **Catálogo canónico de tomas por producto:**
   `data/productos/<producto>.json` → `tomas_preferidas` +
@@ -455,7 +476,12 @@ listing no tiene mockups.
   de tallas por producto). El producto principal es el
   primero de la composición. Otra composición declara SUS
   pesos y cada producto trae SU catálogo: nada se hereda en
-  silencio de la composición default.
+  silencio de la composición default. **El total de imágenes
+  es el presupuesto que la ficha de la tienda declara en su
+  calibración visual, con techo de plataforma 20** (Etsy
+  permite 20 fotos por listing desde ago-2025; el generador
+  de manifiesto no tiene default y detiene si el total falta
+  o supera 20).
 
 **Algoritmo (determinista — ejecutor:
 `scripts/generar-manifiesto-mockups.py`):**
@@ -822,6 +848,11 @@ expreso del dueño por listing, sabiendo el costo operativo.
 - **verificar-variantes.py**: conteo de colores/variantes —
   detiene solo por el límite técnico del MPL (400 variantes /
   70 opciones); sin techo de colores (§Selección de colores).
+- **verificar-ficha-visual.py**: completitud de la ficha
+  visual ANTES de §M5 (v0.13.0) — `sin_configurar` detiene
+  nombrando el paso de onboarding que lo llena; `provisional`
+  solo permite piloto declarado; `configurado` = operación
+  normal.
 - **verificar-mockups.py**: el manifiesto de selección de
   mockups cumple el algoritmo de §M5 (principal correcta,
   garantías mínimas, sin pose repetida, sin tomas a evitar,

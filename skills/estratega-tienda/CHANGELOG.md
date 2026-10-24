@@ -1,5 +1,10 @@
 # CHANGELOG — estratega-tienda
 
+## v0.7.0 (2026-10-23) — Programa Estándar My POD: evals desacoplados de la instancia + estrategia visual como insumo (F4/F3)
+- **Evals portables:** la suite de contrato ya no valida el `config-propuestas.json` REAL de una tienda concreta: corre contra fixtures neutros propios (`evals/fixtures/config-propuestas-ficticia-{valida,invalida}.json`, tienda ficticia) — válida pasa, inválida (temas no suman N) falla nombrando el criterio. Cualquier instancia puede correrla igual.
+- **Estrategia visual como insumo (F3):** nueva entrada 10 — `mpl.esquema_mockups`/`esquema_videos` y los catálogos `tomas_preferidas` con su `estado`. La estratega aporta evidencia a la Calibración visual de `onboarding-tienda`; si la estrategia visual no está `configurado`, la directriz lo señala como hueco declarado y nunca lo rellena por su cuenta.
+- Ejemplos con cifras reales de una tienda en el cuerpo → ejemplo FICTICIO etiquetado.
+
 ## v0.6.1 (2026-10-21)
 - Separación de registros D1 (migración a Rameli v0.17.0): el commit de cierre de la directriz y el config-propuestas se re-apunta al repo privado de datos (`my-pod-datos`) vía `scripts/registros-datos.py commit`; la regla «escribir = commitear» ahora nombra el repo que toca (registros → datos, sistema → este repo).
 

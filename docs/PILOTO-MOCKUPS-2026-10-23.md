@@ -135,3 +135,20 @@ color de un solo producto. Si una prenda vende más colores que sus
 espacios visuales, los colores restantes no tendrán foto propia: se
 ordenan por prioridad y los no cubiertos quedan declarados en el
 manifiesto.
+
+---
+
+## Nota de corrección (2026-10-23, Programa Estándar My POD F3 — apéndice, sin reescribir el texto de arriba)
+
+La afirmación de este documento de que «10 imágenes por anuncio» es un
+"límite real (físico, no defecto)" era **incorrecta**, como señaló el
+dueño el 2026-10-23: el 10 era el **esquema propio** aprobado el
+2026-10-15 para la forma de trabajo anterior y quemado en el config de
+la tienda. **Etsy permite 20 fotos por listing desde agosto de 2025**
+(y 2 videos), y Printify permite seleccionar hasta 20 mockups. Lo que
+sí es físico es más chico: cada foto muestra un solo color de un solo
+producto. El presupuesto total de fotos es **decisión de la tienda**
+en su Calibración visual (`onboarding-tienda` v0.2.0); el generador de
+manifiesto lo lee de la ficha con techo de plataforma 20 y ya no trae
+default (skill `publicar-printify-etsy` v0.13.0). El texto original de
+este documento se conserva como historia.

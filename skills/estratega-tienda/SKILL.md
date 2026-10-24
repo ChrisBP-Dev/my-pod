@@ -3,7 +3,7 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.6.1"
+  version: "0.7.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -73,6 +73,18 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
    listings no usan ninguna). Es insumo de la dirección cuando la
    semana toca decisiones de nicho o de SEO; sin datos de ventas,
    el reporte muestra cobertura y lo dice explícito.
+10. **Estrategia visual de la tienda** (v0.7.0, 2026-10-23 —
+    Programa Estándar My POD, F3): `config.json → mpl.esquema_mockups`
+    y `mpl.esquema_videos` (con su `estado`) y los catálogos
+    `tomas_preferidas` (con su `estado`) de las fichas de
+    producto. Es insumo de la dirección: la estratega aporta la
+    evidencia (qué convierte, qué hace la competencia del nicho)
+    a la Calibración visual de `onboarding-tienda`. **Si la
+    tienda no tiene su estrategia visual `configurado` (está
+    `provisional` o `sin_configurar`), la directriz lo SEÑALA
+    como hueco declarado — con el paso donde se cobra — y nunca
+    lo rellena por su cuenta ni lo trata como decisión del
+    dueño.**
 
 ## Método
 

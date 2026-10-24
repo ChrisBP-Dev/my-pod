@@ -1,5 +1,10 @@
 # CHANGELOG — onboarding-tienda
 
+## v0.2.0 (2026-10-23) — Calibración visual de la tienda (Programa Estándar My POD, F3)
+- **Nuevo bloque «Calibración visual de la tienda»:** la Fase 1 suma el descubrimiento visual (presupuesto de fotos ≤20, tablas de tallas, reparto, prioridad de cobertura, videos ≤2) y la Fase 4 suma la calibración por producto (catálogo de tomas elegido por el dueño DESDE las opciones reales de Printify, con muestras visuales; `tomas_a_evitar` con motivo). Son las 5 decisiones que el flujo de publicación consume: antes este paso NO existía y los valores se sembraban desde el historial sin pase del dueño (hueco detectado por el dueño el 2026-10-23).
+- **Registro de estado obligatorio:** cada valor visual vive en la ficha (config + fichas de producto) con `estado`/`fecha`/`decidido_por` — `configurado` solo con el pase del dueño; `provisional` = solo piloto declarado; `sin_configurar` = el flujo consumidor se detiene y lo reporta.
+- **Fase 6:** la tienda no se declara operativa con la calibración visual sin hacer — queda como hueco declarado con su paso y su dueño de cobro, nunca como silencio. Anti-patrón nuevo: sembrar la estrategia visual sin pase del dueño.
+
 ## v0.1.5 (2026-10-22)
 - Fila del cron de propuestas diarias alineada al flujo vigente: la fila mezclaba en una frase «ensambla MPL» y «siembra en la vitrina», legible como propuestas → Printify → vitrina. Ahora declara las dos fases en orden (Fase B: solo aprobados de la vitrina, ruta MPL única base→conversión→items dentro; Fase A: artes nuevas a la vitrina, aprobación antes de producir).
 

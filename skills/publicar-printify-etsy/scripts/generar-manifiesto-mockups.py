@@ -20,7 +20,7 @@ manifiesto lo declara en su campo `modo`.
 Formato de la entrada (`--desde-json`):
 {
   "diseno": "p000",
-  "total_imagenes": 10,
+  "total_imagenes": "<el de la ficha de la tienda, ≤20>",
   "tabla_tallas_por_producto": 1,
   "items": [
     {"producto": "gildan-18000",
@@ -214,7 +214,23 @@ def main():
 
     with open(args.desde_json) as f:
         entrada = json.load(f)
-    total_imagenes = entrada.get("total_imagenes", 10)
+    # El presupuesto de fotos lo declara LA FICHA de la tienda
+    # (calibración visual de onboarding-tienda), con techo de
+    # plataforma 20 (Etsy, desde ago-2025). Sin total declarado
+    # no hay default: el generador se detiene (Programa
+    # Estándar My POD F3, 2026-10-23 — antes el default quemado
+    # era 10, el esquema propio de una tienda).
+    total_imagenes = entrada.get("total_imagenes")
+    if total_imagenes is None:
+        print("DETENIDO: la entrada no declara `total_imagenes` "
+              "— el presupuesto de fotos se lee de la ficha de "
+              "la tienda (mpl.esquema_mockups), no tiene default.")
+        return 2
+    if total_imagenes > 20:
+        print(f"DETENIDO: total_imagenes={total_imagenes} supera "
+              f"el techo de plataforma (20 fotos por listing en "
+              f"Etsy desde ago-2025).")
+        return 2
     tablas_por_producto = entrada.get("tabla_tallas_por_producto", 1)
 
     espacios = []
@@ -260,7 +276,7 @@ def main():
     manifiesto = {
         "version_formato": 1,
         "generado_por": "generar-manifiesto-mockups.py "
-                        "(publicar-printify-etsy v0.11.0, §M5)",
+                        "(publicar-printify-etsy, §M5)",
         "modo": "fixture — la disponibilidad de cada toma por "
                 "color en Printify NO está verificada en este "
                 "modo (llega con el piloto de publicación)",
