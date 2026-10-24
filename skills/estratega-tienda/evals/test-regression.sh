@@ -1,19 +1,28 @@
 #!/usr/bin/env bash
 # Suite de contrato de estratega-tienda (creada 2026-10-19, Propuesta 2
-# de la auditoría de adopción docs/AUDITORIA-ADOPCION-V0110.md).
-# La salida máquina de la estratega es data/tiendas/29222324/config-propuestas.json,
-# cuyo contrato vive en docs/CONTRATO-TIPO-PRODUCTO.md. Esta suite
-# valida el config VIGENTE contra ese contrato: campos obligatorios,
-# tipo_lote válido, componentes presentes según el track, reparto y
-# temas sumando N, y vigencia de 7 días exactos con formato de fecha.
-# No juzga la estrategia (eso es la puerta humana del dueño); verifica
-# que el artefacto que consume el cron de propuestas sea consumible.
-# Falla (exit != 0) si el config rompe el contrato.
+# de la auditoría de adopción docs/AUDITORIA-ADOPCION-V0110.md;
+# DESACOPLADA DE LA INSTANCIA el 2026-10-23, Programa Estándar My POD
+# F4: antes validaba el config-propuestas REAL de una tienda concreta
+# y otra instancia no podía correrla; ahora corre contra FIXTURES
+# NEUTROS propios en evals/fixtures/ — tienda ficticia, sin leer
+# ningún dato real).
+# La salida máquina de la estratega es config-propuestas.json de la
+# tienda activa, cuyo contrato vive en docs/CONTRATO-TIPO-PRODUCTO.md.
+# Esta suite valida FIXTURES contra ese contrato: campos
+# obligatorios, tipo_lote válido, componentes presentes según el
+# track, reparto y temas sumando N, y vigencia de 7 días exactos con
+# formato de fecha. No juzga la estrategia (eso es la puerta humana
+# del dueño); verifica que el artefacto sea consumible.
+# Casos: fixture válida → el validador pasa; fixture inválida
+# (temas no suman N) → el validador falla nombrando el criterio.
+# Falla (exit != 0) si algún caso no da el veredicto esperado.
 set -u
 SKILL="$(cd "$(dirname "$0")/.." && pwd)"
-APP="$(cd "$SKILL/../.." && pwd)"
+FIX="$SKILL/evals/fixtures"
+ok=0; fail=0
 
-python3 - "$APP/data/tiendas/29222324/config-propuestas.json" << 'EOF'
+validar() { # validar <ruta> → stdout del validador; rc en $?
+python3 - "$1" << 'EOF'
 import json, sys
 from datetime import date
 ok = fail = 0
@@ -45,3 +54,19 @@ except Exception:
 print(f"--- {ok} ok, {fail} fallas ---")
 sys.exit(0 if fail == 0 else 1)
 EOF
+}
+
+out="$(validar "$FIX/config-propuestas-ficticia-valida.json" 2>&1)"; rc=$?
+if [[ $rc -eq 0 && "$out" == *"0 fallas"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: fixture válida no pasó el contrato (rc=$rc)"; echo "$out" | tail -4
+fi
+out="$(validar "$FIX/config-propuestas-ficticia-invalida.json" 2>&1)"; rc=$?
+if [[ $rc -ne 0 && "$out" == *"temas suman N"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: fixture inválida no falló nombrando 'temas suman N' (rc=$rc)"; echo "$out" | tail -4
+fi
+echo "--- $ok ok, $fail fallas ---"
+[[ $fail -eq 0 ]]

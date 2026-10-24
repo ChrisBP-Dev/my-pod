@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.7"
+  version: "0.8.8"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.7** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.8.8** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -249,7 +249,8 @@ Toda propuesta personalizada se entrega con su ficha:
 - **Campos:** máximo 3 del comprador, cada uno con tipo (texto /
   dropdown / imagen), límite y opciones. **Nombre ≤15 caracteres;
   credencial, título y club SOLO desde dropdown** con el vocabulario
-  cerrado de abajo — jamás texto libre para un dato con vocabulario
+  cerrado de la referencia de nicho de la tienda (ver «Formato
+  profesional real» abajo) — jamás texto libre para un dato con vocabulario
   cerrado; año de 4 dígitos.
 - **Comprador / destinatario / ocasión** nombrados; sin ocasión
   plausible en el calendario de la tienda, la propuesta espera.
@@ -261,22 +262,25 @@ Toda propuesta personalizada se entrega con su ficha:
   formato real; y el **peor caso renderizado** (nombre de 15, roster
   completo) además del ejemplo bonito.
 
-### Formato profesional real (enfermería)
+### Formato profesional real (referencia de nicho de la tienda)
 
-- **Firma ANCC:** grado más alto → licencia → designación estatal →
-  certificación nacional, con comas y sin puntos: `Jane Smith, BSN, RN,
-  RN-BC`; NP: `Sam Taylor, MSN, APRN, FNP-BC`. Nunca dos grados si hay
-  uno mayor. En formato badge: línea 1 nombre, línea 2 credencial ·
-  unidad. Un formato inventado (el "RN - ICU" sin criterio de la prueba)
-  mata la credibilidad ante una compradora que ES enfermera.
-- **Vocabulario cerrado observado en listings que venden:** RN · BSN ·
-  MSN · LPN · LVN · CNA · PCT · NP · APRN · FNP · PA · MA · CCRN ·
-  unidades ICU · NICU · ER · OR · L&D · Med-Surg · School Nurse ·
-  Emergency Department.
-- **Instrucción al comprador** (patrón de los listings top): ejemplo
-  literal entre paréntesis ("(ex: Melissa, RN)"), límite explícito,
-  "escríbelo EXACTAMENTE como debe aparecer", y qué pasa si lo deja
-  vacío.
+El formato profesional real (firma de credenciales, vocabulario
+cerrado de la profesión, instrucción al comprador) es **calibración
+del nicho de la tienda**, no mecanismo de esta puerta: vive en la
+referencia de nicho que la ficha de la tienda declara
+(`config.json → nicho.referencia_formato_profesional`, en los datos
+de la tienda). **Si la ficha declara un nicho con formato
+profesional documentado, la puerta carga esa referencia ANTES de
+juzgar propuestas personalizables** y juzga credenciales, títulos
+y vocabulario contra ella (un formato inventado mata la
+credibilidad ante un comprador que ES de esa profesión). Si la
+ficha no declara referencia de nicho, la puerta juzga solo con
+los criterios generales de esta sección y declara la ausencia en
+su reporte — nunca aplica el formato de otro nicho.
+(Movido el 2026-10-23, Programa Estándar My POD F4: la sección de
+enfermería que vivía aquí era el nicho de una tienda concreta
+viviendo en el skill; ahora vive como referencia de nicho en los
+datos de esa tienda.)
 
 ### Encaje (regla de oro)
 
@@ -474,7 +478,8 @@ dueño no puede juzgar el resultado. La entrega trae **dos imágenes**:
   la referencia se deriva del arte verdadero) con el **ejemplo derivado
   del concepto** colocado en cada zona según su geometría medida — el
   dato que un comprador real pondría en ESE diseño, con su formato
-  real (ver "Formato profesional real" en los criterios), y una foto
+  real (ver "Formato profesional real" en los criterios: la
+  referencia de nicho declarada en la ficha de la tienda), y una foto
   de muestra en el marco si el diseño lleva imagen. Se entrega
   declarada como simulación: aproxima la tipografía y el color de la
   capa prevista; el render definitivo es el mockup del draft en la
@@ -554,8 +559,8 @@ bloque `vitrina` del `config.json` de la tienda
 (`data/tiendas/<tienda-id>/config.json`, campo `artefacto`).
 Si la tienda no declara su instancia, la recogida se detiene y
 reporta el hueco — nunca se adivina un slug ni se reutiliza la
-instancia de otra tienda. (MyNightShiftShop, id `29222324`,
-declara `vitrina-de-revisi-n-my-pod` en su config.)
+instancia de otra tienda. (Cada tienda declara la suya en su
+propio config; ninguna instancia se comparte entre tiendas.)
 
 **Procedimiento.**
 

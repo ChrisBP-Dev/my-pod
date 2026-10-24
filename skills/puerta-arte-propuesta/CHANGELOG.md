@@ -1,5 +1,9 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.8.8 (2026-10-23) — el formato profesional sale del skill: es calibración de nicho (Programa Estándar My POD, F4)
+- La sección «Formato profesional real (enfermería)» (firma ANCC, vocabulario cerrado de unidades, instrucción al comprador) se **mueve sin cambios** a la referencia de nicho de la tienda que la usa: `data/tiendas/<tienda>/investigaciones/formato-profesional-enfermeria.md` en el repo de datos, declarada desde su ficha (`config.json → nicho.referencia_formato_profesional`).
+- En el skill queda el **mecanismo**: si la ficha declara un nicho con formato profesional documentado, la puerta carga esa referencia antes de juzgar personalizables; si no la declara, juzga con los criterios generales y declara la ausencia. Ninguna tienda hereda el formato de otro nicho.
+
 ## v0.8.7 (2026-10-23) — la siembra es solo del flujo; diseños no sembrados = incidente
 - El paso de siembra de la entrega declara que la acción explícita del flujo es la ÚNICA siembra existente (la instancia nunca se siembra sola; regla espejo en la plantilla `VITRINA-REVISION.md` v2.3 §«Regla de siembra», del incidente de resurrección del 2026-10-22: la instancia del piloto resembró el lote recogido al abrirse con la bandeja vacía). Si el tablero muestra diseños que la entrega vigente no sembró, es incidente de la instancia: no se pide decisión sobre ellos ni se recogen; se reporta y se corrige primero.
 

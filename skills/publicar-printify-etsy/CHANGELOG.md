@@ -1,5 +1,9 @@
 # CHANGELOG — publicar-printify-etsy
 
+## v0.12.0 (2026-10-23) — Programa Estándar My POD, F4: la puerta de conteo ya no asume una tienda
+- **`verificar-variantes.py` sin default de tienda:** el `--shop` ya no trae quemado el id de una tienda concreta (fuga funcional de colocación: otra instancia podía verificar LA TIENDA EQUIVOCADA EN SILENCIO). En modo en vivo, `--shop <shop_id de la tienda activa>` es obligatorio y explícito; sin él, la puerta se detiene con error de uso (exit 2, «falta --shop»). El modo fixture (`--desde-json`) no necesita tienda. Regresión nueva F7b (suite: 13 ok).
+- **Ejemplos neutralizados:** la tabla de precios del §Precios y las menciones de precios/IDs reales en §M8 y en `CHECKLIST-PUBLICACION.md` pasan a ejemplo FICTICIO etiquetado o a referencia al config de la tienda activa (los valores reales viven solo en la ficha).
+
 ## v0.11.1 (2026-10-23) — corrección de cobertura del manifiesto (hallazgo del piloto seco de p058)
 - **El defecto:** la garantía «plana en el color prioritario» corría ANTES de la cobertura; en un item de 3 espacios (playera) agotaba los espacios repitiendo el color prioritario y dejaba un tercer color vendido sin foto, pudiendo entrar (en p058: Maroon de playera). El piloto seco lo dejó declarado y documentado como tensión garantía-vs-cobertura; al explicarlo, el dueño preguntó si el criterio había quedado bien pulido — no lo estaba en este punto.
 - **La corrección (en la fuente, mismo día):** la plana garantizada cubre primero el color sin representar; solo si todos están representados va en el prioritario. `generar-manifiesto-mockups.py` + §M5 actualizados; regresión nueva F12 (item de 3 espacios y 3 colores = cobertura total) y F11 reconstruida sobre el manifiesto ya corregido. Suite: 12 ok, 0 fallas. Re-piloto seco de p058: los 6 colores de ambos productos representados, puerta PASS, 0 sin representación.

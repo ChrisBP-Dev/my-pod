@@ -114,7 +114,8 @@ No predecimos con mockups propios; usamos los de Printify directamente.
   lo cambió él a mano). **No hay paleta canónica** en ninguna parte: la
   selección vive solo en el borrador. Antes de entregar a la
   etapa 3 se corre la puerta de conteo
-  (`publicar-printify-etsy/scripts/verificar-variantes.py`).
+  (`publicar-printify-etsy/scripts/verificar-variantes.py
+  --shop <shop_id de la tienda activa>`, sin default).
   Detalle y glosario: skill `publicar-printify-etsy`
   §Selección de colores del diseño.
 - Detección de borradores: agrupar por diseño (título real); no

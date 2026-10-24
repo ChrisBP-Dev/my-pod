@@ -48,7 +48,7 @@ declara operativa solo cuando la Fase 6 verifica el conjunto.
 ## Pre-requisitos
 
 - Cuentas del dueño: Printify (con tienda creada) y Etsy (con tienda
-  creada). Anotar el **Printify shop ID** (numérico, p. ej. 29222324)
+  creada). Anotar el **Printify shop ID** (numérico)
   — es el `<shop_id>` de `data/tiendas/<shop_id>/`.
 - El dueño disponible para: crear la Seller App (1 clic), pegar el
   código OAuth, y responder el cuestionario de descubrimiento.
@@ -209,8 +209,8 @@ adopción `docs/AUDITORIA-ADOPCION-V0110.md`.)
 - `CALIBRACIÓN:` horarios, N diario de propuestas, pins/día y mix
   son valores de CADA tienda: se fijan en su onboarding y viven en
   su config y en los cuerpos de sus crons (la tabla de la Fase 5
-  trae los de la tienda 29222324 como ejemplo, no como default
-  universal). Revalidar al abrir la segunda tienda: lo que solo
+  trae valores de una tienda de ejemplo, no defaults
+  universales). Revalidar al abrir la segunda tienda: lo que solo
   se ha probado con una tienda es calibración, no mecanismo.
 
 ## Regresión

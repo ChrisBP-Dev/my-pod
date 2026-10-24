@@ -29,7 +29,15 @@ Exit codes:
   0 = OK (dentro de los límites técnicos; puede llevar avisos
       informativos impresos).
   2 = detención (límite técnico superado, o error de uso:
-      no se pasó ningún producto).
+      no se pasó ningún producto, o modo en vivo sin --shop).
+
+⚠️ La tienda NO tiene default (corrección de colocación
+2026-10-23, Programa Estándar My POD F4): antes el default era
+el id de una tienda concreta y otra instancia podía verificar
+LA TIENDA EQUIVOCADA EN SILENCIO. En modo en vivo, --shop es
+obligatorio y explícito (el llamador lo lee de la ficha de la
+tienda activa); sin --shop la puerta se detiene con error. El
+modo fixture (--desde-json) no necesita tienda.
 
 ⚠️ El GET de Printify lista TAMBIÉN las variantes deshabilitadas
 y el universo completo de opciones del blueprint. Contar sin
@@ -40,7 +48,7 @@ color se resuelve por el id de opción de la variante, no por
 el título (el orden título varía por blueprint).
 
 Uso en vivo (vía el CLI de Printify, sin tocar tokens):
-    verificar-variantes.py --shop 29222324 ID1 ID2 [...]
+    verificar-variantes.py --shop <shop_id de la tienda> ID1 ID2 [...]
 Uso con fixtures (regresión):
     verificar-variantes.py --desde-json a.json b.json [...]
 """
@@ -95,7 +103,11 @@ def cargar_en_vivo(shop, pid):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ids", nargs="*", help="IDs de producto (modo en vivo)")
-    ap.add_argument("--shop", default="29222324")
+    ap.add_argument("--shop", default=None,
+                    help="shop id de Printify de la tienda activa; "
+                         "OBLIGATORIO en modo en vivo (sin default: "
+                         "cada llamador lo pasa explícito desde la "
+                         "ficha de su tienda)")
     ap.add_argument("--desde-json", nargs="*", default=[],
                     help="archivos JSON de producto (modo fixture)")
     ap.add_argument("--aviso-colores", type=int, default=6,
@@ -108,6 +120,12 @@ def main():
                     help="límite técnico de opciones del conjunto "
                          "(default 70); superarlo detiene")
     args = ap.parse_args()
+
+    if args.ids and not args.shop:
+        print("ERROR DE USO: falta --shop — el modo en vivo exige "
+              "el shop id explícito de la tienda activa (sin "
+              "default: ninguna tienda se asume en silencio).")
+        return 2
 
     productos = []
     for ruta in args.desde_json:

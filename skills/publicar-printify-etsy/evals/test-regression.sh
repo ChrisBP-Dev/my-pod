@@ -115,6 +115,16 @@ if [[ $rc -eq 2 && "$out" == *"DETENCIÓN"* && "$out" == *"401 variantes"* ]]; t
 else
   fail=$((fail+1)); echo "FALLA: 401 variantes no detuvo por límite técnico (rc=$rc)"; echo "$out" | head -5
 fi
+# F7b (Programa Estándar F4, 2026-10-23): modo en vivo SIN
+# --shop → error de uso exit 2 nombrando «falta --shop» (la
+# tienda nunca se asume: antes el default era el id de una
+# tienda concreta).
+out="$(python3 "$VV" algun-id-en-vivo 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"falta --shop"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: modo en vivo sin --shop no dio el error esperado (rc=$rc)"; echo "$out" | head -5
+fi
 
 # F8–F11: manifiesto de mockups + puerta de cobertura (v0.11.0).
 # F8 manifiesto generado válido → PASS. F9 pose repetida en otro
