@@ -483,7 +483,12 @@ producción.
   calibración visual, con techo de plataforma 20** (Etsy
   permite 20 fotos por listing desde ago-2025; el generador
   de manifiesto no tiene default y detiene si el total falta
-  o supera 20).
+  o supera 20). **Semántica del total (2026-10-24, hallazgo
+  P3 de la prueba de frío): el total es META EXACTA derivada
+  = espacios visuales de los items + tablas de tallas; si la
+  ficha no cuadra, el generador se detiene temprano
+  declarando la inconsistencia — no genera de menos ni deja
+  que la puerta falle tarde por conteo.**
 
 **Algoritmo (determinista — ejecutor:
 `scripts/generar-manifiesto-mockups.py`):**

@@ -92,3 +92,11 @@ tienda, disponibilidad real de tomas por color en Printify, ni
 la experiencia de otro dueño con su propia instancia — eso es
 distribución, pendiente declarado del programa (F8 es el
 piloto en vivo de la tienda 1).
+
+---
+
+## Resolución del hallazgo P3 (2026-10-24, verificación de Jarvis al cierre del programa)
+
+La semántica quedó **declarada y ejecutable**: `total_imagenes` es **meta exacta derivada** (espacios visuales de los items + tablas de tallas), no un techo libre. `generar-manifiesto-mockups.py` valida el cuadre ANTES de generar y se detiene con el desglose si la ficha es inconsistente («ficha inconsistente», exit 2); la semántica quedó escrita en §M5 del skill. Regresión nueva **F18** (total 14 contra espacios+tablas=10 → detenido temprano). Con esto, el punto 3 de la prueba de frío queda **cerrado**, no solo documentado.
+
+En la misma verificación se corrigió un defecto vivo que la prueba de frío rozó sin ver entero: `scripts/sincronizar-registro-printify.py` (el PRIMER paso del cron de propuestas) traía rutas previas a D1 (`data/registro-listings.json`, inexistente) y reventaba con FileNotFoundError, además del SHOP_ID quemado. Corregido: rutas `data/tiendas/<shop>/`, tienda por `--shop`/variable o fallback de instancia única (sin IDs quemados), verificado en seco contra la tienda real (RESUMEN sin conflictos). El cron de propuestas está pausado por decisión del dueño; al reactivarse, su primer paso ya corre.

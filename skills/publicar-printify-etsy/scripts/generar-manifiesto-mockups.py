@@ -232,6 +232,24 @@ def main():
               f"Etsy desde ago-2025).")
         return 2
     tablas_por_producto = entrada.get("tabla_tallas_por_producto", 1)
+    # Semántica declarada del total (corrección 2026-10-24,
+    # hallazgo P3 de la prueba de frío): `total_imagenes` es la
+    # META EXACTA de la ficha = suma de los espacios visuales de
+    # los items + las tablas de tallas. Si no cuadra, la ficha es
+    # inconsistente y el generador se detiene AQUÍ, con el
+    # desglose — nunca genera de menos y deja que la puerta
+    # falle tarde por conteo.
+    suma_espacios = sum(int(i.get("espacios_visuales", 0))
+                        for i in entrada["items"])
+    tablas_total = tablas_por_producto * len(entrada["items"])
+    if total_imagenes != suma_espacios + tablas_total:
+        print(f"DETENIDO: ficha inconsistente — total_imagenes="
+              f"{total_imagenes} pero los espacios visuales suman "
+              f"{suma_espacios} y las tablas {tablas_total} "
+              f"(esperado {suma_espacios + tablas_total}). Corrige "
+              f"la ficha (pesos o total) en su paso de calibración; "
+              f"el generador no elige por la tienda.")
+        return 2
 
     espacios = []
     sustituciones = []

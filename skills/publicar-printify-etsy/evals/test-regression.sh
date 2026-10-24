@@ -292,6 +292,23 @@ if [[ $rc -eq 2 && "$out" == *"techo de plataforma"* ]]; then
 else
   fail=$((fail+1)); echo "FALLA: total 21 no detuvo por techo de plataforma (rc=$rc)"; echo "$out" | head -4
 fi
+# F18 (corrección 2026-10-24, hallazgo P3 de la prueba de frío):
+# total que no cuadra con espacios+tablas → DETENIDO temprano
+# por ficha inconsistente (la semántica del total es meta
+# exacta derivada, no techo libre).
+python3 - "$FIX" <<'PYEOF'
+import json, sys
+d = sys.argv[1]
+e = json.load(open(f"{d}/entrada-mockups.json"))
+e["total_imagenes"] = 14
+json.dump(e, open(f"{d}/entrada-inconsistente.json", "w"))
+PYEOF
+out="$(python3 "$GM" --desde-json "$FIX/entrada-inconsistente.json" 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"ficha inconsistente"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: total inconsistente con espacios+tablas no detuvo (rc=$rc)"; echo "$out" | head -4
+fi
 rm -rf "$FIX"
 
 echo "--- $ok ok, $fail fallas ---"

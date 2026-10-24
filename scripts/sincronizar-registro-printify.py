@@ -46,11 +46,13 @@ import sys
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
-REGISTRO = BASE / "data" / "registro-listings.json"
-ESTADO = BASE / "data" / "estado-propuestas.json"
-SHOP_ID = "29222324"
-BP_SUDADERA = 49   # Gildan 18000
-BP_PLAYERA = 12    # Bella+Canvas 3001
+# La tienda se declara SIEMPRE al invocar (--shop o MY_POD_SHOP_ID):
+# sin default quemado (fuga de colocación corregida 2026-10-24,
+# Programa Estándar F4 — antes traía el ID de una tienda y rutas
+# previas a la separación D1, y reventaba con FileNotFoundError).
+# Las rutas viven bajo data/tiendas/<shop>/ (layout D1, 2026-10-21).
+BP_SUDADERA = 49   # Gildan 18000 — hecho de catálogo Printify
+BP_PLAYERA = 12    # Bella+Canvas 3001 — hecho de catálogo Printify
 CAMPOS = {  # nombre de componente -> (campo registro, sufijo título, blueprint)
     "gildan-18000": ("draft_sweatshirt_id", "", BP_SUDADERA),
     "bella-canvas-3001": ("draft_tshirt_id", " T-Shirt", BP_PLAYERA),
@@ -93,7 +95,30 @@ def main():
     ap.add_argument("--fecha", help="fecha_propuesta a sincronizar (default: lote_actual del checkpoint)")
     ap.add_argument("--aplicar", action="store_true", help="escribe los archivos (default: seco)")
     ap.add_argument("--verificar-ids", action="store_true", help="confirma por ID los ya registrados")
+    ap.add_argument("--shop", default=os.environ.get("MY_POD_SHOP_ID"),
+                    help="ID de la tienda Printify (o variable MY_POD_SHOP_ID); sin default quemado")
     args = ap.parse_args()
+    if not args.shop:
+        # Fallback de INSTANCIA (mismo patrón que los scripts
+        # operativos de la raíz): si el despliegue tiene UNA sola
+        # tienda bajo data/tiendas/, es esa; con varias, se exige
+        # declarar cuál. Ningún ID va quemado aquí.
+        tiendas = sorted(d.name for d in
+                         (BASE / "data" / "tiendas").glob("*")
+                         if d.is_dir()) \
+            if (BASE / "data" / "tiendas").exists() else []
+        if len(tiendas) == 1:
+            args.shop = tiendas[0]
+        else:
+            sys.exit("ERROR: falta --shop (o MY_POD_SHOP_ID): la tienda "
+                     "se declara al invocar, nunca va quemada en el "
+                     "script; el fallback de instancia única no aplica "
+                     f"(tiendas encontradas: {tiendas or 'ninguna'})")
+    SHOP_ID = args.shop
+    REGISTRO = BASE / "data" / "tiendas" / SHOP_ID / "registro-listings.json"
+    ESTADO = BASE / "data" / "tiendas" / SHOP_ID / "estado-propuestas.json"
+    if not REGISTRO.exists():
+        sys.exit(f"ERROR: no existe el registro de la tienda {SHOP_ID}: {REGISTRO}")
 
     registro = json.loads(REGISTRO.read_text())
     estado = json.loads(ESTADO.read_text()) if ESTADO.exists() else {}
