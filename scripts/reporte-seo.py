@@ -5,8 +5,8 @@ reporte-seo.py — M4: cruza banco-keywords × ledger de ventas.
 Lee:
   data/banco-keywords/*.md        frases semilla por nicho (Etsy y Pinterest)
   data/paquetes-listing/*         título, descripción y tags reales por listing
-  data/tiendas/29222324/registro-listings.json     nicho + id_etsy por slug
-  data/tiendas/29222324/ledger-ventas.json         ventas y favoritos por listing (si hay datos)
+  data/tiendas/<tienda-id>/registro-listings.json     nicho + id_etsy por slug
+  data/tiendas/<tienda-id>/ledger-ventas.json         ventas y favoritos por listing (si hay datos)
 
 Reporta por nicho:
   - cobertura: qué keywords del banco usa cada listing (título/desc/tags)

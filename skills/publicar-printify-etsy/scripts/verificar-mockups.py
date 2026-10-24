@@ -73,7 +73,15 @@ def main():
     espacios = manifiesto.get("espacios", [])
     visuales = [s for s in espacios if s.get("rol") != "tabla_tallas"]
     tablas = [s for s in espacios if s.get("rol") == "tabla_tallas"]
-    total_esperado = entrada.get("total_imagenes", 10)
+    # Sin default quemado (Programa Estándar F3, 2026-10-23): el
+    # presupuesto viene de la ficha vía la entrada; si falta, la
+    # puerta falla nombrándolo (antes asumía 10 en silencio,
+    # residual detectado en la prueba de frío F7).
+    total_esperado = entrada.get("total_imagenes")
+    if total_esperado is None:
+        motivos.append("la entrada no declara `total_imagenes` "
+                       "(presupuesto de la ficha de la tienda); "
+                       "la puerta no asume ningún total")
     tablas_esperadas = entrada.get("tabla_tallas_por_producto", 1)
 
     # 1. Conteo

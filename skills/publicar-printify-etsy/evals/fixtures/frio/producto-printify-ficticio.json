@@ -1,0 +1,143 @@
+{
+  "title": "hoodie-ficticio (forma Printify)",
+  "options": [
+    {
+      "type": "color",
+      "name": "Colors",
+      "values": [
+        {
+          "id": 100,
+          "title": "Negro"
+        },
+        {
+          "id": 101,
+          "title": "Gris Claro"
+        },
+        {
+          "id": 102,
+          "title": "Azul"
+        }
+      ]
+    },
+    {
+      "type": "size",
+      "name": "Sizes",
+      "values": [
+        {
+          "id": 15,
+          "title": "S"
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 1,
+      "title": "T0 / Negro",
+      "options": [
+        100,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 2,
+      "title": "T1 / Negro",
+      "options": [
+        100,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 3,
+      "title": "T2 / Negro",
+      "options": [
+        100,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 4,
+      "title": "T3 / Negro",
+      "options": [
+        100,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 5,
+      "title": "T0 / Gris Claro",
+      "options": [
+        101,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 6,
+      "title": "T1 / Gris Claro",
+      "options": [
+        101,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 7,
+      "title": "T2 / Gris Claro",
+      "options": [
+        101,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 8,
+      "title": "T3 / Gris Claro",
+      "options": [
+        101,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 9,
+      "title": "T0 / Azul",
+      "options": [
+        102,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 10,
+      "title": "T1 / Azul",
+      "options": [
+        102,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 11,
+      "title": "T2 / Azul",
+      "options": [
+        102,
+        15
+      ],
+      "is_enabled": true
+    },
+    {
+      "id": 12,
+      "title": "T3 / Azul",
+      "options": [
+        102,
+        15
+      ],
+      "is_enabled": true
+    }
+  ]
+}

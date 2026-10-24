@@ -1,0 +1,133 @@
+{
+  "diseno": "frio-001",
+  "total_imagenes": 14,
+  "tabla_tallas_por_producto": 1,
+  "items": [
+    {
+      "producto": "hoodie-ficticio",
+      "rol_en_listing": "principal",
+      "espacios_visuales": 5,
+      "color_prioritario": "Negro",
+      "colores": [
+        {
+          "nombre": "Negro",
+          "tono": "oscuro"
+        },
+        {
+          "nombre": "Gris Claro",
+          "tono": "claro"
+        },
+        {
+          "nombre": "Azul",
+          "tono": "oscuro"
+        }
+      ],
+      "catalogo": {
+        "tomas": [
+          {
+            "id": "hoodie-ficticio-lifestyle-1",
+            "camera_label": "lifestyle",
+            "rol": "principal",
+            "prioridad": 1
+          },
+          {
+            "id": "hoodie-ficticio-lifestyle-2",
+            "camera_label": "lifestyle",
+            "rol": "secundaria",
+            "prioridad": 1
+          },
+          {
+            "id": "hoodie-ficticio-flat",
+            "camera_label": "front",
+            "rol": "plana",
+            "prioridad": 1
+          },
+          {
+            "id": "hoodie-ficticio-folded",
+            "camera_label": "folded",
+            "rol": "doblada-decorada",
+            "prioridad": 1
+          },
+          {
+            "id": "hoodie-ficticio-detalle",
+            "camera_label": "zoom",
+            "rol": "detalle",
+            "prioridad": 1
+          },
+          {
+            "id": "hoodie-ficticio-tabla",
+            "camera_label": null,
+            "rol": "tabla_tallas",
+            "prioridad": 1
+          }
+        ],
+        "tomas_a_evitar": []
+      }
+    },
+    {
+      "producto": "playera-ficticia",
+      "rol_en_listing": "secundario",
+      "espacios_visuales": 4,
+      "color_prioritario": "Blanco",
+      "colores": [
+        {
+          "nombre": "Blanco",
+          "tono": "claro"
+        },
+        {
+          "nombre": "Rojo",
+          "tono": "oscuro"
+        },
+        {
+          "nombre": "Negro",
+          "tono": "oscuro"
+        },
+        {
+          "nombre": "Arena",
+          "tono": "claro"
+        }
+      ],
+      "catalogo": {
+        "tomas": [
+          {
+            "id": "playera-ficticia-lifestyle-1",
+            "camera_label": "lifestyle",
+            "rol": "principal",
+            "prioridad": 1
+          },
+          {
+            "id": "playera-ficticia-lifestyle-2",
+            "camera_label": "lifestyle",
+            "rol": "secundaria",
+            "prioridad": 1
+          },
+          {
+            "id": "playera-ficticia-flat",
+            "camera_label": "front",
+            "rol": "plana",
+            "prioridad": 1
+          },
+          {
+            "id": "playera-ficticia-folded",
+            "camera_label": "folded",
+            "rol": "doblada-decorada",
+            "prioridad": 1
+          },
+          {
+            "id": "playera-ficticia-detalle",
+            "camera_label": "zoom",
+            "rol": "detalle",
+            "prioridad": 1
+          },
+          {
+            "id": "playera-ficticia-tabla",
+            "camera_label": null,
+            "rol": "tabla_tallas",
+            "prioridad": 1
+          }
+        ],
+        "tomas_a_evitar": []
+      }
+    }
+  ]
+}

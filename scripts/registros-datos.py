@@ -67,7 +67,7 @@ MEDIA_EXTS = {
 
 def es_registro(rel):
     """rel: ruta relativa a la raíz de la app, con '/' — p. ej.
-    'data/tiendas/29222324/config.json'. True si se versiona
+    'data/tiendas/<tienda-id>/config.json'. True si se versiona
     en el repo de datos."""
     if not rel.startswith(DATA_REL + "/"):
         return False
