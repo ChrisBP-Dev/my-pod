@@ -3,14 +3,14 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.11.1"
+  version: "0.13.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.11.1** (2026-10-23: corrección de cobertura — la plana cubre el color sin representar antes de repetir el prioritario; hallazgo del piloto seco de p058 explicado al dueño el mismo día. Base: **Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
+**Versión 0.13.0** (2026-10-23, Programa Estándar F3: puerta de completitud de la ficha visual antes de §M5 — `verificar-ficha-visual.py` — y presupuesto de fotos leído de la ficha con techo de plataforma 20. Base: **Versión 0.12.0** (2026-10-23, Programa Estándar My POD F4: la puerta de conteo `verificar-variantes.py` ya no trae default de tienda — `--shop` explícito obligatorio en modo en vivo — y los ejemplos con precios/IDs reales de una tienda pasan a ficticios etiquetados o al config de la tienda activa. Base: **Versión 0.11.1** (2026-10-23: corrección de cobertura — la plana cubre el color sin representar antes de repetir el prioritario; hallazgo del piloto seco de p058 explicado al dueño el mismo día. Base: **Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
 videos con estándar** — consolidación de la propuesta aprobada
 por el dueño el 2026-10-23: (1) el tope de 4 colores por prenda
 de v0.10.0 queda **eliminado como techo**: 3–4 es la **guía de
@@ -201,7 +201,10 @@ Default (la estratega puede definir otra composición en
   elige mockups (§M5).
 - **Puerta mecánica (única, de conteo):** antes de mockups
   y antes de publicar, correr
-  `scripts/verificar-variantes.py` sobre los items: cuenta
+  `scripts/verificar-variantes.py --shop <shop_id de la tienda
+  activa>` sobre los items (el shop se pasa explícito desde la
+  ficha de la tienda; la puerta no tiene default — corrección
+  de colocación 2026-10-23, Programa Estándar F4): cuenta
   colores habilitados por item, variantes y opciones del
   conjunto. **Detiene SOLO por el límite técnico del MPL**
   (>400 variantes totales o >70 opciones). Si un item pasa
@@ -221,13 +224,14 @@ margen en dólares de la talla base.
 **Tablas vigentes:** la tabla de cada tienda vive en
 `data/tiendas/<id>/config.json → estrategia_precios` (precio base S–XL
 por producto; los recargos por talla se calculan con la fórmula de
-arriba). Ejemplo tienda 29222324 (doctrina "precio con colchón",
-2026-10-16):
+arriba). Ejemplo FICTICIO (doctrina "precio con colchón"; cifras
+inventadas solo para ilustrar la fórmula — la tabla real de cada
+tienda vive en su config):
 
 | Producto | S–XL | 2XL | 3XL |
 |---|---|---|---|
-| Sudadera Gildan 18000 | $40.99 | $44.99 (+$4) | $46.99 (+$6) |
-| Playera Bella+Canvas 3001 | $25.99 | $28.99 (+$3) | $32.99 (+$7) |
+| Sudadera (ejemplo) | $30.99 | $34.99 (+$4) | $36.99 (+$6) |
+| Playera (ejemplo) | $20.99 | $23.99 (+$3) | $27.99 (+$7) |
 
 **Aplicación:**
 - En Printify: el precio retail de CADA variante lleva su recargo ANTES
@@ -263,7 +267,9 @@ pero no la redefine.
 Antes de pedirle al dueño que inicie sesión manualmente:
 1. Ir a printify.com → "Log in" → "Continue with Google".
 2. La sesión de Google YA está guardada en el navegador: en el selector
-   de cuentas elegir la de la tienda (tudale.pod / Tú Dale POD).
+   de cuentas elegir la de la tienda activa (la cuenta que la
+   ficha de la tienda declara; nunca una cuenta personal ni la
+   de otra tienda).
 3. Esto inicia sesión en Printify sin intervención del dueño.
 Solo si Google no ofrece cuenta guardada o el login falla, se le pide a
 él que lo haga manual en el navegador. Mismo protocolo vale para Etsy.
@@ -438,6 +444,27 @@ mockups que Printify deje marcados por defecto NO son una
 selección válida:** sin manifiesto generado y verificado, el
 listing no tiene mockups.
 
+**Puerta de completitud de la ficha visual (v0.13.0, Programa
+Estándar F3 — ANTES de seleccionar nada):** correr
+`scripts/verificar-ficha-visual.py --config <config de la
+tienda> --producto <ficha de cada producto del listing>`. La
+puerta lee el estado de la estrategia visual que este paso va
+a consumir (`mpl.esquema_mockups.estado` del config y
+`tomas_preferidas.estado` de cada ficha de producto):
+- **`sin_configurar` o ausente → DETENER.** Se reporta qué
+  campo falta y en qué paso se llena («Calibración visual de
+  la tienda» de `onboarding-tienda`: presupuesto/reparto en el
+  descubrimiento visual de la Fase 1; catálogo por producto
+  en la Fase 4). No se inventan valores ni se usan defaults.
+- **`provisional` → solo PILOTO DECLARADO:** el paso puede
+  correr, y el piloto queda anotado en el registro del
+  listing y en el reporte de la corrida. Nunca es operación
+  normal.
+- **`configurado` → operación normal.**
+La misma puerta aplica al dar de alta un producto o una
+composición nueva: sin su calibración visual, no entra a
+producción.
+
 **Insumos (ninguno quemado en este skill):**
 - **Catálogo canónico de tomas por producto:**
   `data/productos/<producto>.json` → `tomas_preferidas` +
@@ -451,7 +478,17 @@ listing no tiene mockups.
   de tallas por producto). El producto principal es el
   primero de la composición. Otra composición declara SUS
   pesos y cada producto trae SU catálogo: nada se hereda en
-  silencio de la composición default.
+  silencio de la composición default. **El total de imágenes
+  es el presupuesto que la ficha de la tienda declara en su
+  calibración visual, con techo de plataforma 20** (Etsy
+  permite 20 fotos por listing desde ago-2025; el generador
+  de manifiesto no tiene default y detiene si el total falta
+  o supera 20). **Semántica del total (2026-10-24, hallazgo
+  P3 de la prueba de frío): el total es META EXACTA derivada
+  = espacios visuales de los items + tablas de tallas; si la
+  ficha no cuadra, el generador se detiene temprano
+  declarando la inconsistencia — no genera de menos ni deja
+  que la puerta falle tarde por conteo.**
 
 **Algoritmo (determinista — ejecutor:
 `scripts/generar-manifiesto-mockups.py`):**
@@ -615,8 +652,8 @@ Nada se da por sentado. Verificar contra el listing vivo:
   informativo en el reporte, sin detener ni corregir lo que
   el dueño dejó.
 - Precios por variación según la tabla vigente de la tienda
-  (`estrategia_precios` en su config; ej. 29222324: sudadera
-  $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99).
+  (`estrategia_precios` en el config de la tienda activa; sin
+  precios quemados en este skill).
 - SKUs correctos por variación.
 - Orden de imágenes = **manifiesto de mockups verificado**
   (§M5, puerta en PASS); imagen principal = posición 1 del
@@ -818,6 +855,11 @@ expreso del dueño por listing, sabiendo el costo operativo.
 - **verificar-variantes.py**: conteo de colores/variantes —
   detiene solo por el límite técnico del MPL (400 variantes /
   70 opciones); sin techo de colores (§Selección de colores).
+- **verificar-ficha-visual.py**: completitud de la ficha
+  visual ANTES de §M5 (v0.13.0) — `sin_configurar` detiene
+  nombrando el paso de onboarding que lo llena; `provisional`
+  solo permite piloto declarado; `configurado` = operación
+  normal.
 - **verificar-mockups.py**: el manifiesto de selección de
   mockups cumple el algoritmo de §M5 (principal correcta,
   garantías mínimas, sin pose repetida, sin tomas a evitar,

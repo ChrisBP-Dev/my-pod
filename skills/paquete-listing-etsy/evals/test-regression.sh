@@ -26,6 +26,39 @@ run() { # run <nombre> <veredicto> <paquete> [criterio-esperado]
   ok=$((ok+1))
 }
 
+# G1–G3 (Programa Estándar F4, 2026-10-23): el generador ya NO
+# trae default de detalle de producto (antes era la descripción
+# de un producto concreto y se heredaba en silencio).
+# G1 sin detalle ni --producto → error claro. G2 con --producto
+# lee `detalle_listing` de la ficha (árbol fixture propio).
+# G3 con --producto-detalle explícito genera.
+G="$SKILL/scripts/generar-paquete.py"
+GTMP="$(mktemp -d)"
+mkdir -p "$GTMP/data/banco-keywords" "$GTMP/data/productos"
+printf '# banco fixture\nkeyword principal: Test Keyword\n' > "$GTMP/data/banco-keywords/fixture.md"
+printf '{"slug": "prod-fixture", "detalle_listing": "Producto Fixture de prueba (100%% algodón de mentira)"}\n' > "$GTMP/data/productos/prod-fixture.json"
+TAGS=(t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13)
+BASE=(--diseno px --nicho fixture --descripcion "diseno de prueba" --hook "hook de prueba" --descripcion-larga "descripcion larga de prueba" --colores White --tallas S-3XL --precio 10.00 --keyword "Test Keyword" --tags "${TAGS[@]}")
+out="$(cd "$GTMP" && python3 "$G" "${BASE[@]}" --salida "$GTMP/sin.md" 2>&1)"; rc=$?
+if [[ $rc -ne 0 && "$out" == *"falta el detalle del producto"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: G1 sin detalle no dio el error esperado (rc=$rc)"; echo "$out" | head -3
+fi
+out="$(cd "$GTMP" && python3 "$G" "${BASE[@]}" --producto prod-fixture --salida "$GTMP/con-ficha.md" 2>&1)"; rc=$?
+if [[ $rc -eq 0 && "$out" == *"paquete generado"* ]] && grep -q "Producto Fixture de prueba" "$GTMP/con-ficha.md"; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: G2 --producto no leyó detalle_listing de la ficha (rc=$rc)"; echo "$out" | head -3
+fi
+out="$(cd "$GTMP" && python3 "$G" "${BASE[@]}" --producto-detalle "Detalle explícito de prueba" --salida "$GTMP/explicito.md" 2>&1)"; rc=$?
+if [[ $rc -eq 0 && "$out" == *"paquete generado"* ]] && grep -q "Detalle explícito de prueba" "$GTMP/explicito.md"; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: G3 --producto-detalle explícito no generó (rc=$rc)"; echo "$out" | head -3
+fi
+rm -rf "$GTMP"
+
 # Conocido-bueno real: el paquete de p002, publicado y válido.
 run "P1 paquete real p002" PASS "$APP/data/paquetes-listing/p002-paquete.md"
 # Conocido-bueno sintético mínimo.

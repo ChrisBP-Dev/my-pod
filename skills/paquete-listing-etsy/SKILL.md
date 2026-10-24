@@ -2,7 +2,7 @@ name: "paquete-listing-etsy"
 description: "Genera el paquete completo de listing para Etsy: título SEO, descripción estructurada, 13 tags y copy de anuncio, siguiendo la metodología validada en listings publicados."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.2.1"
+  version: "0.3.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -74,7 +74,11 @@ Estructura fija (precedente listings #1, #2, #3):
    figuraba "ICU Halloween" cuando el arte ya era un carrito navideño; p004
    describía "enfermera" cuando el arte era un búho). La puerta mecánica NO detecta
    esto (solo valida formato) — la coherencia se verifica contra el arte, siempre.
-3. **Generar** el paquete con `scripts/generar-paquete.py`.
+3. **Generar** el paquete con `scripts/generar-paquete.py`,
+   pasando el detalle del producto con `--producto <slug>` (lee
+   `detalle_listing` de la ficha del producto) o con
+   `--producto-detalle` explícito: el generador NO tiene default
+   de descripción (v0.3.0, Programa Estándar F4).
 4. **Validar** con `scripts/verificar-paquete.py` (puerta mecánica).
 5. **Presentar** al dueño para aprobación. Sin su dale, no se publica.
 

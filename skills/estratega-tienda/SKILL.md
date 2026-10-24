@@ -3,7 +3,7 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.6.1"
+  version: "0.7.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -73,6 +73,18 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
    listings no usan ninguna). Es insumo de la dirección cuando la
    semana toca decisiones de nicho o de SEO; sin datos de ventas,
    el reporte muestra cobertura y lo dice explícito.
+10. **Estrategia visual de la tienda** (v0.7.0, 2026-10-23 —
+    Programa Estándar My POD, F3): `config.json → mpl.esquema_mockups`
+    y `mpl.esquema_videos` (con su `estado`) y los catálogos
+    `tomas_preferidas` (con su `estado`) de las fichas de
+    producto. Es insumo de la dirección: la estratega aporta la
+    evidencia (qué convierte, qué hace la competencia del nicho)
+    a la Calibración visual de `onboarding-tienda`. **Si la
+    tienda no tiene su estrategia visual `configurado` (está
+    `provisional` o `sin_configurar`), la directriz lo SEÑALA
+    como hueco declarado — con el paso donde se cobra — y nunca
+    lo rellena por su cuenta ni lo trata como decisión del
+    dueño.**
 
 ## Método
 
@@ -151,9 +163,9 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
    (evento+cupones)? ¿se permite apilar evento + cupones? ¿modo
    "siempre en descuento" (el precio base es un ancla y vive en
    promo rotativa) o "solo eventos"?
-   **Ejemplo — tienda 29222324 (NO regla):** piso $1.50, D=25% sin
-   apilado con cupones, siempre en descuento → sudadera
-   $40.99/$44.99/$46.99, playera $25.99/$28.99/$32.99.
+   **Ejemplo FICTICIO (NO regla; cifras inventadas):** piso $1.50,
+   D=25% sin apilado con cupones, siempre en descuento → sudadera
+   $30.99/$34.99/$36.99, playera $20.99/$23.99/$27.99.
    **Recalibración:** la corrida semanal re-valida la estrategia si
    cambian los costos de Printify, entra un producto nuevo o el
    dueño ajusta parámetros; guarda la nueva calibración con fecha
@@ -256,6 +268,7 @@ mecanismo y calibración en prosa; aquí queda declarado.)
 - `CALIBRACIÓN:` los valores de ESTA tienda (piso de margen,
   porcentajes de oferta y cupones, precios por producto, reparto
   de foco) viven en `data/tiendas/<id>/config.json` y en la
-  directriz vigente — el ejemplo con cifras del cuerpo es de la
-  tienda 29222324 (2026-10-16) y NO es regla. Revalidar en cada
+  directriz vigente — el ejemplo con cifras del cuerpo es
+  FICTICIO y NO es regla (los valores reales son los de la
+  tienda activa en su config). Revalidar en cada
   directriz semanal y al abrir otra tienda.

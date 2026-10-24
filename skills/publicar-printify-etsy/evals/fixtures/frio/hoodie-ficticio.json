@@ -1,0 +1,48 @@
+{
+  "slug": "hoodie-ficticio",
+  "producto": "Producto ficticio hoodie-ficticio",
+  "tomas_preferidas": {
+    "estado": "configurado",
+    "fecha": "2027-01-04",
+    "decidido_por": "dueño (fixture)",
+    "tomas": [
+      {
+        "id": "hoodie-ficticio-lifestyle-1",
+        "camera_label": "lifestyle",
+        "rol": "principal",
+        "prioridad": 1
+      },
+      {
+        "id": "hoodie-ficticio-lifestyle-2",
+        "camera_label": "lifestyle",
+        "rol": "secundaria",
+        "prioridad": 1
+      },
+      {
+        "id": "hoodie-ficticio-flat",
+        "camera_label": "front",
+        "rol": "plana",
+        "prioridad": 1
+      },
+      {
+        "id": "hoodie-ficticio-folded",
+        "camera_label": "folded",
+        "rol": "doblada-decorada",
+        "prioridad": 1
+      },
+      {
+        "id": "hoodie-ficticio-detalle",
+        "camera_label": "zoom",
+        "rol": "detalle",
+        "prioridad": 1
+      },
+      {
+        "id": "hoodie-ficticio-tabla",
+        "camera_label": null,
+        "rol": "tabla_tallas",
+        "prioridad": 1
+      }
+    ]
+  },
+  "tomas_a_evitar": []
+}

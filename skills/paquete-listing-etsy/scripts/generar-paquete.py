@@ -8,9 +8,23 @@ Uso:
     generar-paquete.py --diseno p002 --nicho enfermeria \\
         --descripcion "texto que describe el diseño" \\
         --colores White Sand "Sport Grey" --tallas S-3XL \\
-        --precio 34.99 --salida /tmp/paquete-p002.md
+        --precio 34.99 --producto <slug-de-la-ficha> \\
+        --salida /tmp/paquete-p002.md
+
+El detalle del producto (material/composición que va en la
+sección DETAILS) NO tiene default (corrección de colocación
+2026-10-23, Programa Estándar My POD F4): antes el default era
+la descripción de UN producto concreto y cualquier otro
+producto heredaba esa descripción EN SILENCIO. Ahora el
+detalle se exige, por una de dos vías:
+  --producto <slug>: se lee el campo `detalle_listing` de la
+      ficha del producto (data/productos/<slug>.json); si la
+      ficha no lo trae, error claro.
+  --producto-detalle "<texto>": se pasa explícito.
+Sin ninguna de las dos, el generador se detiene con error.
 """
 import argparse
+import json
 import os
 import re
 
@@ -20,6 +34,21 @@ DISCLOSURE_IA = ("Designed with the assistance of generative AI imagery; "
                  "and finalized by the seller.")
 
 BLOQUE_MADE_TO_ORDER = """⚠️ PLEASE READ — made to order: this sweatshirt is printed just for you after you order, so we can't accept change-of-mind returns or size exchanges. Please check the size chart and message us with any questions before buying. If your item arrives damaged, misprinted, or wrong, we'll replace it free or refund you in full — just send a photo within 7 days. Full details in our Shop Policies & FAQ below."""
+
+
+def leer_detalle_producto(slug):
+    path = f"data/productos/{slug}.json"
+    if not os.path.isfile(path):
+        raise SystemExit(f"no existe ficha del producto: {path}")
+    with open(path) as f:
+        ficha = json.load(f)
+    detalle = ficha.get("detalle_listing")
+    if not detalle:
+        raise SystemExit(
+            f"la ficha del producto {slug} no trae `detalle_listing` "
+            f"— complétala en su ficha o pasa --producto-detalle "
+            f"explícito (sin default: ninguna descripción se asume)")
+    return detalle
 
 
 def leer_banco(nicho):
@@ -81,11 +110,28 @@ def main():
     ap.add_argument("--precio", required=True)
     ap.add_argument("--keyword", required=True,
                     help="Keyword principal del banco")
-    ap.add_argument("--producto-detalle", default="Gildan 18000 Heavy Blend™ crewneck (50% cotton / 50% polyester)")
+    ap.add_argument("--producto", default=None,
+                    help="slug de la ficha del producto: el detalle "
+                         "se lee de su campo `detalle_listing`")
+    ap.add_argument("--producto-detalle", default=None,
+                    help="detalle del producto explícito "
+                         "(material/composición); sin default")
     ap.add_argument("--tags", nargs=13, required=True,
                     help="13 tags (se validan, no se generan automáticamente)")
     ap.add_argument("--salida", required=True)
     a = ap.parse_args()
+
+    if a.producto_detalle:
+        detalle = a.producto_detalle
+    elif a.producto:
+        detalle = leer_detalle_producto(a.producto)
+    else:
+        raise SystemExit(
+            "ERROR DE USO: falta el detalle del producto — pasa "
+            "--producto <slug> (se lee `detalle_listing` de su "
+            "ficha) o --producto-detalle explícito. Sin default: "
+            "ninguna descripción de producto se asume en silencio.")
+    a.producto_detalle = detalle
 
     banco = leer_banco(a.nicho)
     titulo = generar_titulo(a.descripcion, a.keyword)

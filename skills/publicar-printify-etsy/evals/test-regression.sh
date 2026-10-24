@@ -115,6 +115,16 @@ if [[ $rc -eq 2 && "$out" == *"DETENCIÓN"* && "$out" == *"401 variantes"* ]]; t
 else
   fail=$((fail+1)); echo "FALLA: 401 variantes no detuvo por límite técnico (rc=$rc)"; echo "$out" | head -5
 fi
+# F7b (Programa Estándar F4, 2026-10-23): modo en vivo SIN
+# --shop → error de uso exit 2 nombrando «falta --shop» (la
+# tienda nunca se asume: antes el default era el id de una
+# tienda concreta).
+out="$(python3 "$VV" algun-id-en-vivo 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"falta --shop"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: modo en vivo sin --shop no dio el error esperado (rc=$rc)"; echo "$out" | head -5
+fi
 
 # F8–F11: manifiesto de mockups + puerta de cobertura (v0.11.0).
 # F8 manifiesto generado válido → PASS. F9 pose repetida en otro
@@ -213,6 +223,91 @@ if [[ $rc -eq 1 && "$out" == *"NO declarado"* ]]; then
   ok=$((ok+1))
 else
   fail=$((fail+1)); echo "FALLA: color sin representación no declarado no dio FAIL (rc=$rc)"; echo "$out" | head -6
+fi
+
+# F13–F15 (Programa Estándar F3, 2026-10-23): puerta de
+# completitud de la ficha visual (verificar-ficha-visual.py).
+# F13 sin_configurar → DETIENE (exit 2) nombrando el paso de
+# onboarding que lo llena. F14 provisional → pasa como PILOTO
+# DECLARADO (exit 0). F15 configurado → operación normal.
+VF="$SKILL/scripts/verificar-ficha-visual.py"
+python3 - "$FIX" <<'PYEOF'
+import json, sys
+d = sys.argv[1]
+def cfg(estado):
+    c = {"nombre": "tienda-fixture", "mpl": {"esquema_mockups": {}}}
+    if estado is not None:
+        c["mpl"]["esquema_mockups"]["estado"] = estado
+    return c
+def prod(estado):
+    p = {"slug": "prod-fixture", "tomas_preferidas": {"tomas": []}}
+    if estado is not None:
+        p["tomas_preferidas"]["estado"] = estado
+    return p
+json.dump(cfg(None), open(f"{d}/cfg-sin.json", "w"))
+json.dump(cfg("provisional_sin_pase_del_dueno"), open(f"{d}/cfg-prov.json", "w"))
+json.dump(cfg("configurado"), open(f"{d}/cfg-ok.json", "w"))
+json.dump(prod("provisional_sin_pase_del_dueno"), open(f"{d}/prod-prov.json", "w"))
+json.dump(prod("configurado"), open(f"{d}/prod-ok.json", "w"))
+PYEOF
+out="$(python3 "$VF" --config "$FIX/cfg-sin.json" --producto "$FIX/prod-ok.json" 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"DETENIDO"* && "$out" == *"Calibración visual de la tienda"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: ficha sin configurar no detuvo nombrando el paso (rc=$rc)"; echo "$out" | head -6
+fi
+out="$(python3 "$VF" --config "$FIX/cfg-prov.json" --producto "$FIX/prod-prov.json" 2>&1)"; rc=$?
+if [[ $rc -eq 0 && "$out" == *"PILOTO DECLARADO"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: ficha provisional no pasó como piloto declarado (rc=$rc)"; echo "$out" | head -6
+fi
+out="$(python3 "$VF" --config "$FIX/cfg-ok.json" --producto "$FIX/prod-ok.json" 2>&1)"; rc=$?
+if [[ $rc -eq 0 && "$out" == *"operación"* && "$out" != *"PILOTO DECLARADO"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: ficha configurada no pasó como operación normal (rc=$rc)"; echo "$out" | head -6
+fi
+# F16–F17: el generador de manifiesto lee el presupuesto de la
+# ficha con techo de plataforma 20 (sin default quemado):
+# F16 sin total_imagenes → DETENIDO; F17 total 21 → DETENIDO.
+python3 - "$FIX" <<'PYEOF'
+import json, sys
+d = sys.argv[1]
+e = json.load(open(f"{d}/entrada-mockups.json"))
+sin = dict(e); sin.pop("total_imagenes", None)
+json.dump(sin, open(f"{d}/entrada-sin-total.json", "w"))
+sobre = dict(e); sobre["total_imagenes"] = 21
+json.dump(sobre, open(f"{d}/entrada-sobre-techo.json", "w"))
+PYEOF
+out="$(python3 "$GM" --desde-json "$FIX/entrada-sin-total.json" 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"total_imagenes"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: entrada sin total_imagenes no detuvo (rc=$rc)"; echo "$out" | head -4
+fi
+out="$(python3 "$GM" --desde-json "$FIX/entrada-sobre-techo.json" 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"techo de plataforma"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: total 21 no detuvo por techo de plataforma (rc=$rc)"; echo "$out" | head -4
+fi
+# F18 (corrección 2026-10-24, hallazgo P3 de la prueba de frío):
+# total que no cuadra con espacios+tablas → DETENIDO temprano
+# por ficha inconsistente (la semántica del total es meta
+# exacta derivada, no techo libre).
+python3 - "$FIX" <<'PYEOF'
+import json, sys
+d = sys.argv[1]
+e = json.load(open(f"{d}/entrada-mockups.json"))
+e["total_imagenes"] = 14
+json.dump(e, open(f"{d}/entrada-inconsistente.json", "w"))
+PYEOF
+out="$(python3 "$GM" --desde-json "$FIX/entrada-inconsistente.json" 2>&1)"; rc=$?
+if [[ $rc -eq 2 && "$out" == *"ficha inconsistente"* ]]; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: total inconsistente con espacios+tablas no detuvo (rc=$rc)"; echo "$out" | head -4
 fi
 rm -rf "$FIX"
 

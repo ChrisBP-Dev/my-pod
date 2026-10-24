@@ -1,0 +1,48 @@
+{
+  "slug": "playera-ficticia",
+  "producto": "Producto ficticio playera-ficticia",
+  "tomas_preferidas": {
+    "estado": "configurado",
+    "fecha": "2027-01-04",
+    "decidido_por": "dueño (fixture)",
+    "tomas": [
+      {
+        "id": "playera-ficticia-lifestyle-1",
+        "camera_label": "lifestyle",
+        "rol": "principal",
+        "prioridad": 1
+      },
+      {
+        "id": "playera-ficticia-lifestyle-2",
+        "camera_label": "lifestyle",
+        "rol": "secundaria",
+        "prioridad": 1
+      },
+      {
+        "id": "playera-ficticia-flat",
+        "camera_label": "front",
+        "rol": "plana",
+        "prioridad": 1
+      },
+      {
+        "id": "playera-ficticia-folded",
+        "camera_label": "folded",
+        "rol": "doblada-decorada",
+        "prioridad": 1
+      },
+      {
+        "id": "playera-ficticia-detalle",
+        "camera_label": "zoom",
+        "rol": "detalle",
+        "prioridad": 1
+      },
+      {
+        "id": "playera-ficticia-tabla",
+        "camera_label": null,
+        "rol": "tabla_tallas",
+        "prioridad": 1
+      }
+    ]
+  },
+  "tomas_a_evitar": []
+}

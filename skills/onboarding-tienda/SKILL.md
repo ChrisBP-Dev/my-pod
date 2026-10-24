@@ -3,13 +3,13 @@ name: "onboarding-tienda"
 description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento, conexiones (Etsy API, Printify), activaciones de Etsy, calibración de productos y crons operativos con patrones de resiliencia."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.1.5"
+  version: "0.2.0"
   framework_version: "0.19.0"
 ---
 
 # Onboarding de tienda POD
 
-**Versión 0.1.3** (2026-10-16: destilado de la puesta en marcha real de
+**Versión 0.2.0** (2026-10-16: destilado de la puesta en marcha real de
 MyNightShiftShop — todo lo aprendido en el camino, convertido en
 procedimiento reproducible).
 
@@ -48,7 +48,7 @@ declara operativa solo cuando la Fase 6 verifica el conjunto.
 ## Pre-requisitos
 
 - Cuentas del dueño: Printify (con tienda creada) y Etsy (con tienda
-  creada). Anotar el **Printify shop ID** (numérico, p. ej. 29222324)
+  creada). Anotar el **Printify shop ID** (numérico)
   — es el `<shop_id>` de `data/tiendas/<shop_id>/`.
 - El dueño disponible para: crear la Seller App (1 clic), pegar el
   código OAuth, y responder el cuestionario de descubrimiento.
@@ -102,6 +102,18 @@ el dueño no responde dos cosas al mismo tiempo.
    eventos). ¿cupones? (decidir % junto con precios — presupuesto total
    de descuento ≤ D%).
 5. **Metas:** ¿Star Seller como meta? ¿horizonte?
+6. **Descubrimiento visual (inicio de la Calibración visual de la
+   tienda, §Fase 4):** ¿cuántas fotos por tipo de listing?
+   (presupuesto, con techo de plataforma 20 en Etsy) ¿las tablas
+   de tallas ocupan foto, van combinadas en una, o no van?
+   ¿reparto de espacios por composición y producto principal de
+   cada composición que la tienda opere? ¿qué se muestra primero
+   cuando colores × productos no alcanzan en el presupuesto?
+   ¿cuántos videos por listing y con qué lógica (techo Etsy: 2)?
+   La estratega aporta la evidencia (qué convierte, qué hace la
+   competencia del nicho); el dueño decide. Estas respuestas se
+   completan con la calibración por producto de la Fase 4 y
+   juntas forman la **Calibración visual de la tienda**.
 
 Registrar todo en `data/tiendas/<shop_id>/config.json`
 (`estrategia_precios`, `calendario_descuentos`, `pinterest`, etc.).
@@ -153,6 +165,58 @@ verificar envío, y fijar la tabla de precios por talla en
 skill `estratega-tienda` (v0.5.1). Sin costos reales no hay precios
 definitivos. Guardar ficha en `data/productos/<slug>.json`.
 
+### Calibración visual de la tienda (v0.2.0, 2026-10-23 — Programa
+Estándar My POD, F3)
+
+La tienda no solo calibra costos: calibra **cómo se ve** lo que
+vende. Este bloque produce, con el dueño decidiendo y la
+estratega aportando evidencia, TODOS los valores visuales que el
+flujo de publicación consume — para que ningún mecanismo tenga
+que sembrarlos desde el historial ni asumirlos en silencio.
+**Una decisión a la vez**, en este orden:
+
+1. **Presupuesto de fotos por listing** (descubrimiento visual,
+   Fase 1): cuántas fotos usa esta tienda por tipo de listing,
+   con techo de plataforma **20** (Etsy, desde ago-2025), y si
+   las tablas de tallas ocupan foto, van combinadas en una o
+   no van. → `config.json → mpl.esquema_mockups`
+   (`total_imagenes`, `tabla_tallas_por_producto`).
+2. **Reparto por composición:** por cada composición que la
+   tienda opere, los espacios visuales por producto y cuál es
+   el producto principal. → `mpl.esquema_mockups.pesos`.
+3. **Catálogo por producto:** por cada producto del mix, el
+   dueño elige sus tomas preferidas **desde las opciones
+   reales que Printify ofrece para ese producto**, presentadas
+   con muestras visuales reales (no una lista de nombres):
+   orden de preferencia para principal, secundarias, planas y
+   detalle; las descartadas quedan en `tomas_a_evitar` con su
+   motivo. → `data/productos/<slug>.json → tomas_preferidas`
+   (+ `tomas_a_evitar`).
+4. **Prioridad de cobertura:** qué se muestra primero cuando
+   colores × productos no alcanzan en el presupuesto (la regla
+   general la pone el mecanismo de `publicar-printify-etsy`
+   §M5; el orden fino lo declara la tienda). →
+   `mpl.esquema_mockups` (reglas de la composición).
+5. **Escenarios de video de la tienda:** cuántos videos por
+   listing y con qué lógica, dentro de los 2 que permite
+   Etsy. → `mpl.esquema_videos`.
+
+**Registro de estado (obligatorio):** cada valor visual queda
+en su ficha con `estado`, `fecha` y `decidido_por`:
+- `configurado` — decidido por el dueño en este flujo.
+- `provisional` — sembrado con otra procedencia (historial,
+  propuesta) SIN pase del dueño: usable SOLO como piloto
+  declarado (ver la puerta de completitud de
+  `publicar-printify-etsy` §M5), nunca como operación normal.
+- `sin_configurar` — aún no se decidió: el flujo que lo
+  consume se detiene y lo reporta (no lo inventa).
+
+Sin pase del dueño no hay `configurado`: lo que una tienda
+decide no se hereda a otra — cada tienda recorre su propia
+calibración visual (multitienda de verdad). Producto o
+composición nueva = recorrer este bloque para lo nuevo antes
+de producirlo.
+
 ## Fase 5 — Crons operativos
 
 Crear el set estándar de crons (ajustar horarios/N por tienda):
@@ -174,6 +238,16 @@ el reintento lo relee, no lo duplica.
 
 ## Fase 6 — Verificación y cierre
 
+0. **Calibración visual verificada:** correr la puerta de
+   completitud (`publicar-printify-etsy/scripts/verificar-ficha-visual.py`)
+   sobre el config y las fichas de producto del mix. Una tienda
+   **no se declara operativa con la calibración visual sin
+   hacer**: si queda pendiente, queda registrada como **hueco
+   declarado** — qué decisión falta, en qué paso de este
+   onboarding se llena (Fase 1 descubrimiento visual / Fase 4
+   calibración por producto) y quién la cobra — nunca como
+   silencio. Con valores `provisional`, la tienda opera solo
+   en modo piloto declarado hasta el pase del dueño.
 1. Correr cada gate/eval afectado en verde (`evals/`).
 2. Primera corrida de propuestas supervisada: el dueño revisa los
    drafts en Printify.
@@ -192,6 +266,9 @@ el reintento lo relee, no lo duplica.
 
 - Dejar activaciones "para después" (Share & Save, ofertas dirigidas).
 - Quemar valores de la tienda en skills o scripts.
+- Sembrar la estrategia visual desde el historial o desde otra
+  tienda sin el pase del dueño: queda `provisional` y solo sirve
+  como piloto declarado (Fase 4, Calibración visual).
 - Crons sin P1/P2/P3: el primer fallo externo los deja tirados.
 - Asumir endpoints o costos sin verificarlos en vivo.
 
@@ -209,8 +286,8 @@ adopción `docs/AUDITORIA-ADOPCION-V0110.md`.)
 - `CALIBRACIÓN:` horarios, N diario de propuestas, pins/día y mix
   son valores de CADA tienda: se fijan en su onboarding y viven en
   su config y en los cuerpos de sus crons (la tabla de la Fase 5
-  trae los de la tienda 29222324 como ejemplo, no como default
-  universal). Revalidar al abrir la segunda tienda: lo que solo
+  trae valores de una tienda de ejemplo, no defaults
+  universales). Revalidar al abrir la segunda tienda: lo que solo
   se ha probado con una tienda es calibración, no mecanismo.
 
 ## Regresión

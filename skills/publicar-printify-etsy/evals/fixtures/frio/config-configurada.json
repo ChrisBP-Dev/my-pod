@@ -1,0 +1,28 @@
+{
+  "tienda_id": "99999999",
+  "nombre": "Tienda Ficticia Prueba Frio",
+  "mpl": {
+    "composicion_default": [
+      "hoodie-ficticio",
+      "playera-ficticia"
+    ],
+    "esquema_mockups": {
+      "total_imagenes": 14,
+      "tabla_tallas_por_producto": 1,
+      "pesos": {
+        "principal": {
+          "espacios_visuales": 5
+        },
+        "secundario": {
+          "espacios_visuales": 4
+        }
+      },
+      "estado": "configurado",
+      "fecha": "2027-01-04",
+      "decidido_por": "dueño (fixture de prueba de frío)"
+    },
+    "esquema_videos": {
+      "escenarios": {}
+    }
+  }
+}

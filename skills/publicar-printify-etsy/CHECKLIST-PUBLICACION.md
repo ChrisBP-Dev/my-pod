@@ -22,14 +22,13 @@ está autorizado. El ojo del dueño es la puerta visual final.**
   5–6 permitida si el arte lo justifica, con nota; el resto del
   catálogo desmarcado — sin paleta canónica, ver skill §Selección
   de colores)
-- [ ] Puerta de conteo corrida (`scripts/verificar-variantes.py`):
+- [ ] Puerta de conteo corrida (`scripts/verificar-variantes.py --shop <shop_id de la tienda activa>` — sin default; en fixture: `--desde-json`):
   detiene SOLO si el MPL pasa el límite técnico (>400 variantes o
   >70 opciones); un item con >6 colores = aviso informativo en el
   reporte, sin detener
 - [ ] Precios escalonados APLICADOS en el borrador base ANTES de publicar:
   - [ ] Precios según `estrategia_precios` del config de la tienda
-    (ej. 29222324: sudadera S–XL $40.99 · 2XL $44.99 · 3XL $46.99;
-    playera S–XL $25.99 · 2XL $28.99 · 3XL $32.99)
+    activa (sin precios quemados en este checklist)
 - [ ] Título = título REAL del diseño en el borrador (no genérico del blueprint)
 - [ ] Regla: el base NO se publica single por separado
 
@@ -54,7 +53,8 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] 13 tags (≤20 car. c/u) cubriendo ambos productos y el nicho
 - [ ] Puerta `verificar-paquete.py` = PASS
 
-### Mockups — manifiesto + puerta (v0.11.0; pesos en `data/tiendas/29222324/config.json` → `mpl.esquema_mockups`; catálogos en `data/productos/<producto>.json` → `tomas_preferidas`)
+### Mockups — manifiesto + puerta (v0.11.0; pesos en `data/tiendas/<tienda-id>/config.json` → `mpl.esquema_mockups`; catálogos en `data/productos/<producto>.json` → `tomas_preferidas`)
+- [ ] Puerta de completitud visual corrida ANTES de seleccionar (`scripts/verificar-ficha-visual.py --config <config tienda> --producto <ficha de cada producto>`): `configurado` = operación normal; `provisional` = SOLO piloto declarado (anotado en el registro del listing y en el reporte); `sin_configurar` = DETENER y reportar qué falta (se llena en «Calibración visual de la tienda» de `onboarding-tienda`)
 - [ ] Manifiesto de selección generado por el worker con
   `scripts/generar-manifiesto-mockups.py` desde los colores
   FINALES post-revisión del dueño (el dueño NO elige mockups;
@@ -96,8 +96,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] Variaciones: "Sweatshirt"/"T-Shirt" + tallas + colores correctos
 - [ ] Precio por variación verificado:
   - [ ] Precios por variación según `estrategia_precios` del config
-    de la tienda (ej. 29222324: sudadera $40.99/$44.99/$46.99;
-    playera $25.99/$28.99/$32.99)
+    de la tienda activa (sin precios quemados en este checklist)
 - [ ] SKUs correctos por variación
 - [ ] Orden de imágenes = manifiesto de mockups verificado; imagen principal = posición 1 del manifiesto
 - [ ] (Si el orden no se preservó del sync: reordenar en el editor de Etsy)

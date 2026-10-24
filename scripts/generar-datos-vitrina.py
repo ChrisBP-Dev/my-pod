@@ -15,7 +15,7 @@ guardadas como datos que Jarvis lee y vuelca al checkpoint del sistema.
 
 Uso:
     python3 scripts/generar-datos-vitrina.py \
-        --tienda 29222324 --tienda-nombre MyNightShiftShop \
+        --tienda <shop_id de la tienda> --tienda-nombre <nombre de la tienda> \
         --repo ~/workspace/my-pod \
         --salida ~/workspace/vitrina-piloto \
         [--slugs p058,p059] [--ancho-previa 1100]

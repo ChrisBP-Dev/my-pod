@@ -1,5 +1,9 @@
 # CHANGELOG — paquete-listing-etsy
 
+## v0.3.0 (2026-10-23) — Programa Estándar My POD, F4: el detalle del producto ya no tiene default
+- **`generar-paquete.py` sin descripción quemada:** se elimina el default de `--producto-detalle` (era la descripción de UN producto concreto; cualquier otro producto la heredaba en silencio). El detalle se exige por una de dos vías: `--producto <slug>` (lee `detalle_listing` de la ficha del producto en `data/productos/<slug>.json`; si la ficha no lo trae, error claro) o `--producto-detalle` explícito. Sin ninguna, el generador se detiene con error. Regresiones nuevas G1–G3 (suite: 7 ok).
+- Paso 3 del SKILL.md actualizado: generar con `--producto <slug>` (o detalle explícito).
+
 ## v0.2.1 (2026-10-23) — colores leídos del borrador (criterio del dueño)
 - Paso 2: los **colores del paquete se leen del borrador de Printify por API** (los que el dueño dejó aprobados en su revisión) y con esa lectura se llena `--colores`. Prohibido escribirlos a mano o tomarlos de una lista guardada o del ejemplo del script: **no existe paleta canónica** (ver `publicar-printify-etsy` v0.10.0, §Selección de colores del diseño). Si el borrador cambia, el paquete se regenera.
 
