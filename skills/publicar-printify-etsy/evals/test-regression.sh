@@ -127,8 +127,11 @@ else
 fi
 
 # F8–F11: manifiesto de mockups + puerta de cobertura (v0.11.0).
-# F8 manifiesto generado válido → PASS. F9 pose repetida en otro
-# color → FAIL. F10 toma a evitar → FAIL. F11 color sin
+# F8 manifiesto generado válido → PASS. F9 toma repetida en un
+# segundo color MIENTRAS otra usable no aparece ni una vez →
+# FAIL (doctrina 2026-10-26: la repetición en segundo color es
+# legal solo tras la distribución completa; la mutación deja
+# lifestyle-3 fuera). F10 toma a evitar → FAIL. F11 color sin
 # representación NO declarado → FAIL.
 GM="$SKILL/scripts/generar-manifiesto-mockups.py"
 VM="$SKILL/scripts/verificar-mockups.py"
@@ -207,10 +210,10 @@ sin_declarar["colores_sin_representacion"] = []
 json.dump(sin_declarar, open(f"{d}/manifiesto-sin-declarar.json", "w"))
 PYEOF
 out="$(python3 "$VM" --manifiesto "$FIX/manifiesto-repetido.json" --desde-json "$FIX/entrada-mockups.json" 2>&1)"; rc=$?
-if [[ $rc -eq 1 && "$out" == *"pose/modelo repetida"* ]]; then
+if [[ $rc -eq 1 && "$out" == *"segundo color"* ]]; then
   ok=$((ok+1))
 else
-  fail=$((fail+1)); echo "FALLA: pose repetida en otro color no dio FAIL (rc=$rc)"; echo "$out" | head -6
+  fail=$((fail+1)); echo "FALLA: repetición sin distribución completa no dio FAIL (rc=$rc)"; echo "$out" | head -6
 fi
 out="$(python3 "$VM" --manifiesto "$FIX/manifiesto-evitar.json" --desde-json "$FIX/entrada-mockups.json" 2>&1)"; rc=$?
 if [[ $rc -eq 1 && "$out" == *"toma a evitar"* ]]; then

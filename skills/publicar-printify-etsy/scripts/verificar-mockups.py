@@ -174,7 +174,14 @@ def main():
                     f"{prod}: garantías mínimas — el set trae "
                     f"claros y oscuros pero los espacios no "
                     f"muestran ambos tonos")
-        vistos_modelo = {}
+        # Par (toma, color) jamás repetido. Una toma SÍ puede
+        # aparecer en un segundo color (criterio del dueño
+        # 2026-10-26: presupuesto real antes que unicidad),
+        # pero SOLO cuando todas las demás tomas del catálogo
+        # (pool, plana, extensión) ya aparecen al menos una vez
+        # en el item — la distribución va primero.
+        pares = set()
+        colores_por_toma = {}
         for s in propios:
             tid = s.get("toma_id")
             if tid in cat["evitar"]:
@@ -182,13 +189,23 @@ def main():
             if tid not in cat["tomas"]:
                 motivos.append(f"{prod}: toma fuera de catálogo: "
                                f"{tid}")
-            if s.get("rol") in ROLES_MODELO:
-                if tid in vistos_modelo:
-                    motivos.append(
-                        f"{prod}: pose/modelo repetida — la toma "
-                        f"{tid} aparece en "
-                        f"{vistos_modelo[tid]} y en {s.get('color')}")
-                vistos_modelo[tid] = s.get("color")
+            par = (tid, s.get("color"))
+            if par in pares:
+                motivos.append(f"{prod}: par (toma, color) "
+                               f"repetido: {tid} en {s.get('color')}")
+            pares.add(par)
+            colores_por_toma.setdefault(tid, set()).add(s.get("color"))
+        usables = {tid for tid, t in cat["tomas"].items()
+                   if t.get("rol") in ROLES_MODELO + ("plana",)}
+        repetidas = {tid for tid, cs in colores_por_toma.items()
+                     if len(cs) > 1}
+        if repetidas and not usables.issubset(set(colores_por_toma)):
+            faltan = sorted(usables - set(colores_por_toma))
+            motivos.append(
+                f"{prod}: tomas repetidas en segundo color "
+                f"({sorted(repetidas)}) mientras otras tomas "
+                f"usables no aparecen ni una vez: {faltan} — "
+                f"la distribución va primero")
 
     # 6. Colores sin representación: declarados = reales
     declarados = {(d["producto"], d["color"])

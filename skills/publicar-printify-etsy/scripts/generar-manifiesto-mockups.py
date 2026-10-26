@@ -182,6 +182,18 @@ def generar_item(item):
         sin_rep = [c for c in orden if c not in representados]
         color_plana = sin_rep[0] if sin_rep else orden[0]
         agregar(planas[0], color_plana, "garantia-plana")
+    # 3b. Pool restante: si el pool tiene más tomas que colores,
+    # las que no cupieron en la distribución entran en el primer
+    # color con par libre — ninguna favorita queda fuera antes
+    # de que otra se repita (la distribución va primero).
+    for toma in pool_rot:
+        if len(slots) >= E:
+            break
+        if toma["id"] in usados_toma:
+            continue
+        for color in orden:
+            if agregar(toma, color, "pool-restante"):
+                break
     # 4. Cobertura: cada color sin representar, con la primera
     # toma aún no usada (pool restante, plana, extensión).
     for color in orden:
@@ -192,10 +204,35 @@ def generar_item(item):
         for toma in pool_rot + planas + extension:
             if agregar(toma, color, "cobertura"):
                 break
+    # 4b. Cobertura tardía (corrección 2026-10-26, caso p061):
+    # si un color sigue sin representar tras el paso 4 porque
+    # ya no quedaban tomas sin usar, entra con la primera toma
+    # del pool cuyo par con ese color esté libre. La cobertura
+    # de colores manda sobre cualquier repetición.
+    if len(slots) < E:
+        representados = {s["color"] for s in slots}
+        for color in orden:
+            if len(slots) >= E:
+                break
+            if color in representados:
+                continue
+            for toma in pool_rot:
+                tid = toma["id"]
+                if tid in evitar or (tid, color) in usados:
+                    continue
+                usados.add((tid, color))
+                usados_toma.add(tid)
+                slots.append({"producto": producto, "color": color,
+                              "toma_id": tid,
+                              "etiqueta_printify":
+                                  toma.get("etiqueta_printify"),
+                              "camera_label": toma.get("camera_label"),
+                              "rol": toma.get("rol"),
+                              "uso": "cobertura"})
+                representados.add(color)
+                break
     # 5. Relleno: la extensión (rol secundaria — p. ej. la
-    # Lifestyle de extensión) y por último la plana en otros
-    # colores. Si aún faltan espacios, el manifiesto queda corto
-    # y la puerta lo detiene por conteo (no se inventan tomas).
+    # Lifestyle de extensión) y la plana en otros colores.
     for toma in extension + planas:
         if len(slots) >= E:
             break
@@ -203,6 +240,40 @@ def generar_item(item):
             if len(slots) >= E:
                 break
             agregar(toma, color, "relleno")
+    # 6. Repetición en segundo color (criterio del dueño
+    # 2026-10-26): agotadas las tomas sin usar, las favoritas
+    # SÍ pueden repetirse en un color distinto — el presupuesto
+    # real (techo de plataforma) manda sobre la unicidad; lo
+    # que nunca se repite es el par (toma, color). Para este
+    # paso se levanta la unicidad por toma, no la del par.
+    if len(slots) < E:
+        # Round-robin entre tomas: cada pasada le da a cada
+        # favorita su siguiente color libre antes de que alguna
+        # acumule un tercero.
+        progreso = True
+        while len(slots) < E and progreso:
+            progreso = False
+            for toma in pool_rot + extension:
+                if len(slots) >= E:
+                    break
+                tid = toma["id"]
+                if tid in evitar:
+                    continue
+                for color in orden:
+                    if (tid, color) in usados:
+                        continue
+                    usados.add((tid, color))
+                    slots.append({"producto": producto,
+                                  "color": color,
+                                  "toma_id": tid,
+                                  "etiqueta_printify":
+                                      toma.get("etiqueta_printify"),
+                                  "camera_label":
+                                      toma.get("camera_label"),
+                                  "rol": toma.get("rol"),
+                                  "uso": "favorita-segundo-color"})
+                    progreso = True
+                    break
     return slots, sustituciones, orden
 
 

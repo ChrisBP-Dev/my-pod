@@ -177,14 +177,22 @@ así que los colores que él agregue los absorbe esta selección):
   `publicar-printify-etsy/scripts/generar-manifiesto-mockups.py`
   desde los colores FINALES del borrador (post-etapa 3), el
   **catálogo canónico de tomas de cada producto**
-  (`data/productos/<producto>.json` → `tomas_preferidas`) y los
-  **pesos de la composición** (`config.json` → `mpl.esquema_mockups`:
-  total 10 imágenes, principal 5 espacios visuales, secundario 3,
-  1 tabla de tallas por producto). Algoritmo y garantías mínimas:
+  (`data/productos/<producto>.json` → `tomas_preferidas`) y el
+  **presupuesto de la composición** (`config.json` →
+  `mpl.esquema_mockups`): **20 imágenes = el techo REAL de
+  plataforma** (Etsy admite 20 fotos desde ago-2025 y Printify
+  permite seleccionar 20; el total de 10 anterior era un
+  esquema propio heredado de la lista fija, retirado por el
+  dueño el 2026-10-26). El reparto es por COBERTURA: las
+  tablas de tallas (1 por producto) siempre entran; cada color
+  vendido parte con 1 espacio y los extras alternan entre
+  items desde el principal — el objetivo es mostrar TODAS las
+  variantes hasta donde el límite real alcance; si un color
+  queda fuera es por el techo real y se declara. Algoritmo:
   skill `publicar-printify-etsy` §M5.
-- Puerta: `verificar-mockups.py` en PASS (imagen principal
-  correcta, garantías por producto, sin pose repetida, sin
-  tomas a evitar). Sin PASS no se publica. Los colores
+- Puerta: `verificar-mockups.py` en PASS (imagen principal =
+  pool rotado, garantías por producto, sin par (toma, color)
+  repetido, sin tomas a evitar). Sin PASS no se publica. Los colores
   vendidos sin espacio quedan **declarados en el manifiesto**
   (la regla «todos representados» era imposible y se retiró).
 - Rotación de héroes entre productos (modelo y color no se repiten en

@@ -551,6 +551,27 @@ La puerta `verificar-mockups.py` verifica contra este
 modelo: héroe = pool rotado, plana solo si el catálogo la
 declara, sin pares (toma, color) repetidos.
 
+**Presupuesto y cobertura (criterio del dueño 2026-10-26 —
+el «máximo 10» queda retirado):** el presupuesto de fotos es
+el TECHO REAL de plataforma: Etsy admite 20 fotos por
+listing (desde ago-2025) y Printify permite seleccionar
+hasta 20 mockups por MPL (contador «N/20 selected»). El
+total de 10 que la ficha traía era un esquema propio
+heredado de la lista fija pre-algoritmo, no un límite de
+nadie. La ficha declara `total_imagenes = 20` y el reparto
+es por COBERTURA: (1) las tablas de tallas (1 por producto)
+siempre entran; (2) cada color vendido parte con 1 espacio
+visual; (3) los espacios restantes alternan entre items
+desde el principal y se llenan en el orden del algoritmo
+(pool → distribución → plana → cobertura → extensión →
+favoritas en segundo color). El objetivo declarado es
+mostrar TODAS las variantes que el listing vende; si con
+el techo real un color quedara fuera, el manifiesto lo
+declara y es un límite real — nunca un bloqueo por
+calibración nuestra. Ante un catálogo o una ficha sin
+calibrar, el flujo reacciona presentando la calibración
+como el paso requerido (arriba), no deteniéndose en seco.
+
 **Insumos (ninguno quemado en este skill):**
 - **Catálogo canónico de tomas por producto:**
   `data/productos/<producto>.json` → `tomas_preferidas` +
