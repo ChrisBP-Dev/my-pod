@@ -44,6 +44,19 @@ Qué es «registro» (y qué no):
 - Los `.gitkeep` son **esqueleto**, no registros: cada repo
   trackea los suyos y el puente NO los sincroniza (ni los
   copia ni los retira en ningún sentido).
+- **Repo-primero (vitrina en vivo, enmienda F3 2026-10-26):**
+  `data/tiendas/*/vitrina/decisiones.json` NACE en el repo de
+  datos — lo escribe la vitrina — y la copia física es solo
+  caché de lectura. En `commit`, el espejo físico→datos de
+  ese archivo va CUSTODIADO: se rechaza en seco si la copia
+  física perdió entradas respecto al repo (la firma del
+  pisado del 2026-10-26, cuando un commit de otro flujo
+  espejó un `[]` viejo sobre el registro vivo) o si trae
+  entradas nacidas fuera del repo; solo se permite el
+  avance de campos de la recogida-aplicación (estado hacia
+  adelante, `commit_aplicacion`, fechas de marca). Y nunca
+  se retira del repo por ausencia física. Ver
+  `docs/VITRINA-VIVA.md`, enmienda F3.
 
 Uso:
     python3 scripts/registros-datos.py commit -m "Pinterest diario 2026-10-21: registro de pins publicados"
@@ -54,6 +67,7 @@ El clon de datos se busca en `$MY_POD_DATOS_DIR` o en
 `~/workspace/my-pod-datos`.
 """
 
+import json
 import os
 import shutil
 import subprocess
@@ -126,6 +140,115 @@ def listar_registros(raiz):
     return encontrados
 
 
+def es_repo_first(rel):
+    """True si el registro nace en el repo de datos y la copia
+    física es solo caché: hoy, el registro de decisiones de la
+    vitrina (`data/tiendas/<id>/vitrina/decisiones.json`), que
+    escribe la vitrina en vivo en el repo."""
+    partes = rel.split("/")
+    return (len(partes) == 5 and partes[1] == "tiendas"
+            and partes[3] == "vitrina" and partes[4] == "decisiones.json")
+
+
+_ORDEN_ESTADO_DECISION = {"sin-marcar": 0, "lista": 1,
+                          "aplicada": 2, "devuelta": 2}
+
+
+def _identidad_decision(entrada):
+    return (entrada.get("slug"), entrada.get("fecha"),
+            entrada.get("accion"))
+
+
+def _avance_decision_valido(del_repo, del_fisico):
+    """La recogida-aplicación solo puede AVANZAR una decisión:
+    estado hacia adelante, `commit_aplicacion` de vacío a valor
+    y fechas de marca de vacío a valor. Todo lo demás, idéntico."""
+    for clave in set(del_repo) | set(del_fisico):
+        en_repo = del_repo.get(clave)
+        en_fisico = del_fisico.get(clave)
+        if clave == "estado":
+            if (_ORDEN_ESTADO_DECISION.get(en_fisico, -1)
+                    < _ORDEN_ESTADO_DECISION.get(en_repo, -1)):
+                return False
+        elif clave == "commit_aplicacion" or clave.startswith("fecha_"):
+            if en_repo not in (None, "") and en_repo != en_fisico:
+                return False
+        elif en_repo != en_fisico:
+            return False
+    return True
+
+
+def _rechazar_repo_first(rel, motivo):
+    sys.stderr.write(
+        f"ERROR repo-primero: commit detenido. {rel}: {motivo}\n"
+        "El registro de decisiones de la vitrina nace en el repo "
+        "de datos; la copia física es caché. Refresca la copia "
+        "física con `registros-datos.py pull` y reintenta. "
+        "Ningún archivo se sincronizó.\n"
+    )
+    sys.exit(2)
+
+
+def verificar_repo_first(app_raiz, datos_raiz):
+    """Custodia del espejo físico→datos de los registros
+    repo-primero. Devuelve el conjunto de rutas cuyo copiado
+    está permitido (aplicaciones legítimas). Ante cualquier
+    firma de pisado, detiene el commit entero (SystemExit)."""
+    permitidos = set()
+    fisicos = {r: p for r, p in listar_registros(app_raiz).items()
+               if es_repo_first(r)}
+    en_datos = {r: p for r, p in listar_registros(datos_raiz).items()
+                if es_repo_first(r)}
+    for rel in sorted(set(fisicos) | set(en_datos)):
+        if rel not in fisicos:
+            continue  # sin copia física no hay opinión: no se toca
+        with open(fisicos[rel], "rb") as f:
+            bytes_fisico = f.read()
+        try:
+            lista_fisico = json.loads(bytes_fisico.decode("utf-8"))
+        except (ValueError, UnicodeDecodeError):
+            _rechazar_repo_first(rel, "la copia física no es JSON válido")
+        if not isinstance(lista_fisico, list):
+            _rechazar_repo_first(rel, "la copia física no es una lista")
+        if rel not in en_datos:
+            if lista_fisico == []:
+                permitidos.add(rel)  # nacimiento vacío de una tienda nueva
+                continue
+            _rechazar_repo_first(
+                rel, "trae decisiones y el repo no tiene el archivo: "
+                "las decisiones nacen en el repo, no en el árbol físico")
+        with open(en_datos[rel], "rb") as f:
+            bytes_repo = f.read()
+        if bytes_repo == bytes_fisico:
+            continue
+        try:
+            lista_repo = json.loads(bytes_repo.decode("utf-8"))
+        except (ValueError, UnicodeDecodeError):
+            _rechazar_repo_first(rel, "el registro en el repo no es JSON válido")
+        if not isinstance(lista_repo, list):
+            _rechazar_repo_first(rel, "el registro en el repo no es una lista")
+        mapa_repo = {_identidad_decision(e): e for e in lista_repo}
+        mapa_fisico = {_identidad_decision(e): e for e in lista_fisico}
+        if len(mapa_repo) != len(lista_repo) or len(mapa_fisico) != len(lista_fisico):
+            _rechazar_repo_first(rel, "hay decisiones duplicadas por identidad")
+        if set(mapa_repo) - set(mapa_fisico):
+            _rechazar_repo_first(
+                rel, "la copia física PERDIÓ decisiones que el repo sí "
+                "tiene (firma de pisado)")
+        if set(mapa_fisico) - set(mapa_repo):
+            _rechazar_repo_first(
+                rel, "la copia física trae decisiones que no nacieron "
+                "en el repo")
+        for identidad, entrada_repo in mapa_repo.items():
+            if not _avance_decision_valido(entrada_repo,
+                                           mapa_fisico[identidad]):
+                _rechazar_repo_first(
+                    rel, f"la copia física altera una decisión fuera del "
+                    f"avance permitido ({identidad})")
+        permitidos.add(rel)
+    return permitidos
+
+
 def git(directorio, *args, check=True):
     resultado = subprocess.run(
         ["git", "-C", directorio, *args],
@@ -150,13 +273,20 @@ def exigir_repo_datos():
         sys.exit(2)
 
 
-def sincronizar(origen_raiz, destino_raiz):
+def sincronizar(origen_raiz, destino_raiz, custodiar_repo_first=False):
     """Espejo de registros origen -> destino. Devuelve
-    (copiados, retirados)."""
+    (copiados, retirados). Con custodiar_repo_first (el commit
+    físico→datos), los registros repo-primero solo se copian
+    si la custodia los permite y jamás se retiran del repo."""
+    permitidos = (verificar_repo_first(origen_raiz, destino_raiz)
+                  if custodiar_repo_first else None)
     origen = listar_registros(origen_raiz)
     destino = listar_registros(destino_raiz)
     copiados = 0
     for rel, absoluta in sorted(origen.items()):
+        if permitidos is not None and es_repo_first(rel) \
+                and rel not in permitidos:
+            continue
         destino_abs = os.path.join(destino_raiz, *rel.split("/"))
         if os.path.isfile(destino_abs):
             with open(absoluta, "rb") as f:
@@ -169,6 +299,8 @@ def sincronizar(origen_raiz, destino_raiz):
         copiados += 1
     retirados = 0
     for rel, absoluta in sorted(destino.items()):
+        if permitidos is not None and es_repo_first(rel):
+            continue  # repo-primero: nunca se retira del repo
         if rel not in origen:
             os.remove(absoluta)
             retirados += 1
@@ -192,7 +324,8 @@ def cmd_commit(args):
     # El repo de datos manda en su propio historial: primero
     # se trae lo remoto, para commitear sobre la punta real.
     git(DATOS_DIR, "pull", "--ff-only", "origin", "main")
-    copiados, retirados = sincronizar(APP_DIR, DATOS_DIR)
+    copiados, retirados = sincronizar(APP_DIR, DATOS_DIR,
+                                      custodiar_repo_first=True)
     git(DATOS_DIR, "add", "-A", "--", DATA_REL)
     estado = git(DATOS_DIR, "status", "--porcelain", "--", DATA_REL)
     if not estado.stdout.strip():
