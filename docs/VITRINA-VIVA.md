@@ -307,3 +307,34 @@ nada en ella tras la recogida.
 - **Dimensiones:** la ficha expone `dimensiones_px` {ancho_px, alto_px} de la
   entrada del registro como dimensiones reales del PNG; si falta, no se
   inventa.
+
+## Pase de pulido — carga y actualización (2026-10-26, portado del Centro de gestión de My Channels)
+
+Aplicado y verificado primero en la instancia de ensayo y después en la de
+producción, con el dale del dueño. Cuatro piezas, sin tocar el contrato de datos:
+
+1. **Carga centrada:** el único estado de carga inicial es el símbolo de carga
+   centrado en la vista con solo la palabra «Cargando». Los refrescos en
+   segundo plano usan una versión pequeña que nunca tapa la vista.
+2. **«Actualizar» dentro de la vista:** botón en la cabecera de la lista y del
+   detalle. Primero comprueba el **sello** (acción ligera de solo-HEAD: en
+   producción `sello`; devuelve el commit vigente). Si el commit no cambió,
+   avisa «Ya está al día» y no relee nada; si cambió, refresca la bandeja en
+   segundo plano conservando vista, filtro, detalle abierto y posición de
+   scroll. Nunca recarga el documento.
+3. **Caché de derivación por commit:** en el servidor, la derivación de la
+   bandeja se indexa por el SHA de HEAD; con el sello quieto, reabrir o
+   actualizar no repite la lectura completa. Las escrituras de decisiones
+   invalidan la caché al instante.
+4. **Overscroll contenido:** contención en la raíz (CSS + guardia de toque)
+   para que el gesto de tirar hacia abajo no fuerce una recarga completa del
+   documento.
+
+El guardado instantáneo queda como estaba (decisión/retiro = un commit al
+instante, con estado escribiendo/fallida); la nota NO se auto-guarda por
+tecleo (viaja con la decisión o con «Guardar nota») y «Marcar listas» sigue
+siendo la puerta deliberada de recogida.
+
+**Deuda declarada:** el nombre de la acción de sello difiere entre instancias
+(ensayo: `gethead`; producción: `sello`). El nombre canónico es `sello`; la
+instancia de ensayo se unifica al próximo toque. Funcionalmente son idénticas.
