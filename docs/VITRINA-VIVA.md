@@ -401,18 +401,21 @@ contra la guía oficial de Printify y recalibrada con su dale:
   etiqueta visible junto a «Personalizable» («Bordado» / «DTG»).
   Sin `metodo` declarado, la entrega de una propuesta nueva no está
   completa (la puerta mecánica lo exige en diseños nuevos).
-- **En bordado, fuente y resultado son dos cosas y se rotulan
-  como dos cosas:** el archivo que entra a Printify es la FUENTE
-  PLANA (colores sólidos, sin textura de puntadas, degradados ni
-  sombras — la textura nace al digitalizar y coser). La previa del
-  arte muestra esa fuente y se rotula «Archivo fuente — plano»;
-  la simulación (compuesta sobre el `resultado_esperado` con
-  textura, declarado en la entrada) se rotula «Resultado esperado —
-  con el ejemplo». En DTG se conservan los rótulos vigentes
-  («Arte real — zonas vacías» / «Simulación — con el ejemplo»),
-  porque ahí la tinta sí reproduce el arte tal cual.
+- **La fuente bordada es plana** (colores sólidos, sin textura de
+  puntadas, degradados ni sombras — la textura nace al digitalizar
+  y coser) y la previa la muestra tal cual.
+- **ACTUALIZACIÓN de la misma noche (corrección del dueño):** la
+  vista «Resultado esperado» con textura quedó RETIRADA — el dueño
+  juzga el diseño tal cual es, sin acabados fingidos. Rigen para
+  todo método los rótulos estándar («Arte real — zonas vacías» /
+  «Simulación — con el ejemplo») y la simulación se compone sobre
+  la fuente misma. El campo `resultado_esperado` sale de la lista
+  blanca de lectura: si una entrada histórica lo trae, la
+  instancia lo ignora. La sección «Ficha de personalización» del
+  detalle muestra por campo su `fuente` y su `color` declarados
+  cuando la ficha los trae.
 - El estándar de la fuente bordada y su puerta viven en
-  `puerta-arte-propuesta` v0.11.0; esta enmienda solo declara cómo
+  `puerta-arte-propuesta` v0.12.0; esta enmienda solo declara cómo
   la vitrina lo lee y lo presenta.
 
 ## Enmienda U1 (2026-10-26) — vitrina sin marca

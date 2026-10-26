@@ -1,5 +1,13 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.12.0 (2026-10-26) — presentación sin acabado fingido; estilo por diseño; tipografía declarada
+
+Tres correcciones del dueño sobre el piloto p068–p071, con su dale a recalibrar el canon y regenerar con worker frío:
+
+- **`resultado_esperado` RETIRADO del flujo:** la vista «cómo se vería» con acabado bordado no se quiere — confundía el juicio y fingía un acabado. La propuesta de todo método lleva UN arte (la fuente) y la simulación compuesta sobre la fuente misma. La puerta mecánica de entrega ahora FALLA si una entrada declara `resultado_esperado`, y ya no lo exige en bordado. (La separación fuente/resultado de v0.11.0 queda como historia: la fuente plana sigue siendo la regla; lo que muere es la vista texturizada.)
+- **Estilo declarado e independiente del método:** la ficha gana el campo `estilo` (obligatorio en la puerta mecánica). Un dtg nace como gráfico de impresión, nunca con look bordado/parche salvo concepto declarado; el sesgo del lote no contagia estéticas.
+- **Tipografía declarada por campo:** cada campo de la ficha declara `fuente` y `color` (obligatorio en la puerta mecánica); canon de fuentes con archivos en `assets/fuentes/` (Dancing Script, Oswald, Montserrat). Las simulaciones renderizan los ejemplos con la fuente y el color declarados, y el ejemplo lleva el carácter del concepto — un texto básico de relleno es defecto de la entrega. Aclarado en el canon: el dueño aprueba la ficha una vez; el sistema compone el texto del comprador desde ella, pedido a pedido, sin que el dueño coloque textos.
+
 ## v0.11.1 (2026-10-26) — contornos lisos: la fuente plana nace plana
 
 - **Corrección del dueño sobre la corrección v0.11.0:** las fuentes planas de p070/p071, producidas aplanando el arte texturizado, heredaban su silueta — un tembloreo sutil de hilo en todos los contornos: «no parece un diseño normal». Regla nueva en la puerta: la fuente plana exige **contornos lisos tipo vector**; aplanar/posterizar un texturizado NO es una fuente válida. Si el concepto nació texturizado, la fuente se regenera como ilustración plana de contornos lisos (misma composición) y se cuantiza a colores exactos. Caso vivo cerrado el mismo día: p070 regenerado (5 colores exactos, PASS) y p071 regenerado (4 colores exactos, PASS), previas regeneradas en la vitrina.

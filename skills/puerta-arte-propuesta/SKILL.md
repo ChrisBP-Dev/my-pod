@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.11.1"
+  version: "0.12.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.11.1** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.12.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -337,19 +337,18 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   digitalizar (el proveedor convierte el dibujo en recorridos de
   aguja) y al coser: un arte que ya «se ve bordado» obliga a la
   digitalización a simplificar o alterar sus partes finas y el
-  resultado real difiere de la previa. Por tanto, en todo diseño
-  con método bordado conviven DOS archivos con roles distintos y
-  nombres que lo dicen: el **arte fuente plano** (`arte` en el
-  registro — el de producción) y el **resultado esperado**
-  (`resultado_esperado` — la versión con textura, SOLO referencia
-  visual de cómo se verá cosido; jamás entra a Printify). La
-  simulación del personalizable bordado se compone sobre el
-  resultado esperado (es el resultado lo que el dueño juzga con el
-  ejemplo puesto) y la previa del arte muestra la fuente plana: la
-  vitrina los etiqueta distinto y el diseño declara su `metodo`
-  (ver «Dónde vive en el sistema»). Un arte bordado cuya fuente
-  lleve textura, degradados o más de 6 colores sólidos es FAIL de
-  esta puerta, no un estilo.
+  resultado real difiere de la previa. La propuesta de un bordado
+  lleva UN solo arte — la fuente plana — y la simulación se compone
+  sobre esa misma fuente, como en todo método: el dueño juzga el
+  diseño tal cual es y dónde va su personalización. **No existe
+  vista de «resultado esperado» con textura** (el campo
+  `resultado_esperado` quedó retirado por corrección del dueño el
+  2026-10-26: fingir el acabado bordado en una previa confunde el
+  juicio; que el cosido real nace de digitalizar la fuente se
+  declara en la ficha, no se renderiza). El diseño declara su
+  `metodo` (ver «Dónde vive en el sistema»). Un arte bordado cuya
+  fuente lleve textura, degradados o más de 6 colores sólidos es
+  FAIL de esta puerta, no un estilo.
   **Contornos LISOS, tipo vector (corrección del dueño 2026-10-26):**
   plano no alcanza — la silueta debe ser la de un dibujo normal,
   con bordes limpios y suaves. **Aplanar/posterizar un arte
@@ -357,10 +356,19 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   tembloroso del hilo en versión sutil y el diseño «se ve raro»,
   ni plano ni bordado. Si el concepto nació texturizado, la fuente
   se **regenera como ilustración plana de contornos lisos** (misma
-  composición) y se cuantiza a los colores exactos (≤6); la
-  texturizada queda solo como `resultado_esperado`. Una fuente con
-  silueta temblorosa o bordes de hilo es FAIL de esta puerta,
-  adjudicable a ojo sobre el PNG final.
+  composición) y se cuantiza a los colores exactos (≤6). Una
+  fuente con silueta temblorosa o bordes de hilo es FAIL de esta
+  puerta, adjudicable a ojo sobre el PNG final.
+- **Estilo declarado, independiente del método (corrección del
+  dueño 2026-10-26):** cada diseño declara su `estilo` en la ficha
+  y el método NO lo dicta. Un diseño de impresión (dtg) nace como
+  gráfico de impresión — ilustración impresa, tipografía de
+  póster, vintage impreso — y **nunca con look bordado, puntadas
+  ni parche cosido**, salvo que su concepto declare «parche» como
+  estilo buscado y la ficha lo justifique: el sesgo de un lote (el
+  tema o el método de los diseños vecinos) no contagia la estética
+  de un diseño. Un bordado nace plano y liso por su regla, no por
+  «verse bordado».
 - **Brief de generación:** el prompt pide la zona explícita con el
   resto de la composición completa y cerrada; el gate de composición
   sigue aplicando igual. Y si el diseño trae elementos que se leen
@@ -551,13 +559,15 @@ peor caso renderizado. Y declara además, explícito:
 **Dónde vive en el sistema (cierre de vitrina, 2026-10-22):** la
 entrada del diseño en el registro de la tienda declara
 `personalizable: true`, `simulacion` (ruta repo-relativa del PNG de
-la simulación, compuesto sobre el arte real), `metodo`
+la simulación, compuesto sobre el arte real — la FUENTE misma, en
+todo método), `metodo`
 (`"dtg"` o `"bordado"` — declarado en TODA propuesta, personalizable
-o no, desde la recalibración 2026-10-26; en bordado además
-`resultado_esperado` con la ruta de la referencia con textura) y `ficha_razon` (objeto
-estructurado: `razon`, `prueba_borrado`, `campos` — cada uno con
+o no, desde la recalibración 2026-10-26) y `ficha_razon` (objeto
+estructurado: `razon`, `estilo` — la dirección de arte declarada
+del diseño, independiente de su método —, `prueba_borrado`, `campos` — cada uno con
 `nombre`, `tipo` y, según el tipo, `limite` u `opciones`, más su
-`ejemplo` —, `comprador_destinatario_ocasion`, `clase_encaje`,
+`ejemplo`, su `fuente` y su `color` (la tipografía declarada de
+ese texto, ver «Canon de fuentes») —, `comprador_destinatario_ocasion`, `clase_encaje`,
 `ejemplo_simulacion`, `peor_caso`, `producto_destino`,
 `plan_zonas`). El script de entrega
 (`scripts/producir-previas-vitrina.py`) es la puerta mecánica de esta
@@ -566,6 +576,32 @@ de previas FALLA — el diseño nunca llega a la bandeja disfrazado de
 normal, y la vitrina lo muestra con sus dos imágenes etiquetadas y
 su sección «Ficha de personalización» (contrato:
 `docs/VITRINA-VIVA.md`, variante personalizable).
+
+### Canon de fuentes de personalización (2026-10-26, corrección del dueño)
+
+El texto personalizable NO se compone con «una fuente cualquiera»:
+cada campo de la ficha declara su `fuente` y su `color`, el dueño
+aprueba esa tipografía con la propuesta, y la composición — la
+simulación primero y el pedido real después — usa exactamente lo
+declarado. El dueño no coloca textos pedido a pedido: aprueba la
+ficha una vez y el sistema compone desde ella de forma
+determinista. Fuentes canónicas (archivos en
+`assets/fuentes/` de este skill, licencias abiertas):
+
+- **Dancing Script** — manuscrita cálida: nombres y frases con
+  carácter (la firma personal del diseño).
+- **Oswald** — titular condensada en mayúsculas: credenciales,
+  unidades, años (lo institucional, legible de lejos).
+- **Montserrat** — sans limpia: textos neutros o secundarios.
+
+Un diseño puede declarar una fuente propia fuera del canon si su
+concepto la pide; entonces el archivo se suma a `assets/fuentes/`
+con su licencia y la ficha la nombra. La simulación renderiza los
+ejemplos con la fuente y el color DECLARADOS de cada campo (no
+con una genérica), y el ejemplo tiene el carácter del concepto —
+un nombre con su credencial se lee como una credencial real, no
+como un texto de relleno: un ejemplo básico desinfla la propuesta
+y es defecto de la entrega, no un detalle.
 
 - **Producto destino** (el que la estratega fijó en el config de
   propuestas — al aprobar el arte, el dueño aprueba diseño +

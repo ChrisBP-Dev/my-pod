@@ -60,6 +60,7 @@ FONDO_CLARO = (244, 241, 234)
 # no hay entrega: este script es la puerta mecánica de ese criterio.
 FICHA_CAMPOS = [
     "razon",
+    "estilo",
     "prueba_borrado",
     "campos",
     "comprador_destinatario_ocasion",
@@ -81,8 +82,11 @@ def validar_personalizable(slug: str, entrada: dict, repo: Path) -> dict:
               "Sin simulación no hay entrega (puerta-arte-propuesta).",
               file=sys.stderr)
         raise SystemExit(1)
-    # Método declarado y, en bordado, separación fuente/resultado
-    # (recalibración 2026-10-26, puerta-arte-propuesta v0.11.0).
+    # Método y estilo declarados (recalibración 2026-10-26,
+    # puerta-arte-propuesta v0.12.0). El `resultado_esperado`
+    # texturizado quedó RETIRADO por corrección del dueño: la
+    # propuesta muestra la fuente tal cual y la simulación sobre
+    # la fuente; ninguna vista finge el acabado.
     metodo = entrada.get("metodo")
     if metodo not in ("dtg", "bordado"):
         print(f"ERROR: {slug} es personalizable y no declara `metodo` "
@@ -90,16 +94,12 @@ def validar_personalizable(slug: str, entrada: dict, repo: Path) -> dict:
               "entrega (Enmienda Bordado de VITRINA-VIVA).",
               file=sys.stderr)
         raise SystemExit(1)
-    if metodo == "bordado":
-        res_rel = entrada.get("resultado_esperado", "")
-        res_path = repo / res_rel if res_rel else None
-        if not res_path or not res_path.exists():
-            print(f"ERROR: {slug} es bordado y no declara "
-                  f"`resultado_esperado` válido: {res_rel!r}. En bordado "
-                  "la fuente plana (`arte`) y el resultado esperado con "
-                  "textura son dos archivos distintos; sin ambos no hay "
-                  "entrega.", file=sys.stderr)
-            raise SystemExit(1)
+    if entrada.get("resultado_esperado"):
+        print(f"ERROR: {slug} declara `resultado_esperado`: ese campo "
+              "quedó retirado del flujo (corrección del dueño "
+              "2026-10-26). La propuesta lleva solo la fuente y la "
+              "simulación sobre la fuente.", file=sys.stderr)
+        raise SystemExit(1)
     ficha = entrada.get("ficha_razon")
     if not isinstance(ficha, dict):
         print(f"ERROR: {slug} es personalizable y no trae `ficha_razon`. "
@@ -123,6 +123,16 @@ def validar_personalizable(slug: str, entrada: dict, repo: Path) -> dict:
         if campo["tipo"] == "dropdown" and not campo.get("opciones"):
             print(f"ERROR: {slug}: el campo {campo['nombre']!r} es "
                   "dropdown y no declara `opciones` (vocabulario cerrado).",
+                  file=sys.stderr)
+            raise SystemExit(1)
+        # Tipografía declarada por campo (corrección del dueño
+        # 2026-10-26): sin fuente y color declarados, el dueño no
+        # puede juzgar la personalización ni el sistema componerla.
+        if not campo.get("fuente") or not campo.get("color"):
+            print(f"ERROR: {slug}: el campo {campo['nombre']!r} no "
+                  "declara `fuente` y `color` de su texto. La ficha "
+                  "declara la tipografía de cada campo (canon de "
+                  "fuentes de puerta-arte-propuesta).",
                   file=sys.stderr)
             raise SystemExit(1)
     return {"simulacion_path": sim_path, "ficha": ficha}
