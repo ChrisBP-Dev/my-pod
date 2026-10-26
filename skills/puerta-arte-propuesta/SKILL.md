@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.11.0"
+  version: "0.11.1"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.11.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.11.1** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -350,6 +350,17 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   (ver «Dónde vive en el sistema»). Un arte bordado cuya fuente
   lleve textura, degradados o más de 6 colores sólidos es FAIL de
   esta puerta, no un estilo.
+  **Contornos LISOS, tipo vector (corrección del dueño 2026-10-26):**
+  plano no alcanza — la silueta debe ser la de un dibujo normal,
+  con bordes limpios y suaves. **Aplanar/posterizar un arte
+  texturizado NO produce una fuente válida:** conserva el contorno
+  tembloroso del hilo en versión sutil y el diseño «se ve raro»,
+  ni plano ni bordado. Si el concepto nació texturizado, la fuente
+  se **regenera como ilustración plana de contornos lisos** (misma
+  composición) y se cuantiza a los colores exactos (≤6); la
+  texturizada queda solo como `resultado_esperado`. Una fuente con
+  silueta temblorosa o bordes de hilo es FAIL de esta puerta,
+  adjudicable a ojo sobre el PNG final.
 - **Brief de generación:** el prompt pide la zona explícita con el
   resto de la composición completa y cerrada; el gate de composición
   sigue aplicando igual. Y si el diseño trae elementos que se leen

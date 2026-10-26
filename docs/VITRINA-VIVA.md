@@ -380,6 +380,17 @@ tecleo (viaja con la decisión o con «Guardar nota»).
 instancias exponen `sello` (verificado por acciones en ensayo y en
 producción durante la corrida U1); ya no difieren.
 
+## Superficie de evaluación (corrección del dueño, 2026-10-26)
+
+La vitrina es la ÚNICA superficie donde el dueño juzga propuestas y
+variaciones: ahí viven las previas, el método, la fuente y el
+resultado esperado, y ahí se decide. El chat NO adjunta tableros ni
+fotos agrupadas de propuestas ni repite por imágenes lo que la
+vitrina ya muestra — el reporte por chat es estado y enlace a la
+vitrina, nada más. (La entrega ya lo mandaba —«sin artes en el
+chat»—; esta nota lo deja explícito como contrato tras una entrega
+que lo incumplió con un tablero comparativo.)
+
 ## Enmienda Bordado (2026-10-26) — método visible; fuente plana ≠ resultado
 
 Duda del dueño al revisar el piloto de personalización U3, resuelta

@@ -1,5 +1,9 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.11.1 (2026-10-26) — contornos lisos: la fuente plana nace plana
+
+- **Corrección del dueño sobre la corrección v0.11.0:** las fuentes planas de p070/p071, producidas aplanando el arte texturizado, heredaban su silueta — un tembloreo sutil de hilo en todos los contornos: «no parece un diseño normal». Regla nueva en la puerta: la fuente plana exige **contornos lisos tipo vector**; aplanar/posterizar un texturizado NO es una fuente válida. Si el concepto nació texturizado, la fuente se regenera como ilustración plana de contornos lisos (misma composición) y se cuantiza a colores exactos. Caso vivo cerrado el mismo día: p070 regenerado (5 colores exactos, PASS) y p071 regenerado (4 colores exactos, PASS), previas regeneradas en la vitrina.
+
 ## v0.11.0 (2026-10-26) — bordado: fuente plana ≠ resultado esperado; método declarado
 
 - **Estándar de fuente para bordado (duda del dueño, resuelta contra la guía oficial de Printify):** el archivo que entra a Printify para bordar es PLANO — colores sólidos (máx. 6 de hilo), formas gruesas, sin degradados, sombras ni textura de puntadas; la textura nace al digitalizar y coser. Un arte «que ya se ve bordado» es FAIL como fuente: la digitalización simplifica o altera sus partes finas y el resultado difiere de la previa.
