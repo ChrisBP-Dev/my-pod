@@ -358,6 +358,35 @@ con propuestas; su único uso vivo es el rescate (§M4, excepción).
 - Corrige la ubicación directamente en el editor si hace falta.
 - Elimina los rechazados. Avisa cuáles están listos.
 
+### M2.1 Normalización post-revisión — precios y tallas (paso del agente, SIN consulta)
+Al cerrar §M2, el agente normaliza CADA borrador aprobado, siempre
+y sin pedir aprobación (regla del dueño 2026-10-26: «eso ya se sabe,
+es parte del flujo» — no es una decisión por lote). Hecho mecánico
+detrás de esta regla: **habilitar un color en el editor de Printify
+lo deja con el precio default de Printify y con la gama de tallas
+parcial**, aunque el resto del borrador esté correcto; si nadie
+normaliza, el listing vende bajo el piso de margen y con tallas
+faltantes. La normalización, por API y por producto:
+1. Fijar el precio de TODA variante habilitada según la **tabla
+   con colchón** de la ficha del producto (sección «Precios
+   escalonados por talla» de este skill), con el payload mínimo
+   verificado (`title` REAL del GET + `description` + `tags` +
+   solo variantes habilitadas; el `title` del payload es
+   autoritativo: jamás uno reconstruido).
+2. Completar la gama **S–3XL** de cada color elegido: habilitar
+   las variantes de ese color y esa gama que existan en el
+   producto y estén deshabilitadas, cada una con su precio de
+   tabla. (Colores no elegidos y tallas fuera de la gama — XS,
+   4XL+ — no se tocan.)
+3. Verificar por API: toda variante habilitada a su precio de
+   tabla y gama completa por color; el resultado queda en el
+   registro del listing.
+Sin esta verificación en PASS no se entra a §M5. La misma
+normalización aplica cuando un color se agrega o se quita en
+cualquier momento posterior (p. ej., al adoptar un external
+inactivo): agregar colores sin normalizar deja el borrador en
+estado no publicable.
+
 ### M3. Paquete de listing — SEO completo para TODOS los productos
 - Generar con el skill `paquete-listing-etsy`.
 - **Colores del paquete = los del borrador, leídos por API**
@@ -464,6 +493,38 @@ a consumir (`mpl.esquema_mockups.estado` del config y
 La misma puerta aplica al dar de alta un producto o una
 composición nueva: sin su calibración visual, no entra a
 producción.
+
+**Calibración de tomas con etiquetas reales (requisito del
+MARCADO, canonizado 2026-10-26 — evidencia F8 del piloto p058):**
+el manifiesto se genera con el catálogo en estado provisional,
+pero el **marcado en Printify y todo lo que cuelga de él
+(descargas, videos §M6, publicación §M7) exigen el catálogo
+CALIBRADO**: cada toma de `tomas_preferidas` con su campo
+`etiqueta_printify` = la etiqueta EXACTA que la biblioteca de
+mockups de Printify muestra para ese producto (p. ej.
+`Lifestyle 2`, `Person 3`, `Front 2`, `Folded 2`), y
+`tomas_preferidas.estado` = `configurado_con_pase_del_dueno`
+(la puerta `verificar-ficha-visual.py` reconoce el estado por
+el prefijo `configurado`). El pool real no usa
+los ids del catálogo sembrado (evidencia: sudadera Gildan
+18000 = 15 tipos de vista; playera Bella+Canvas 3001 = 33;
+en `data/mockups/F8-pool-printify-2026-10-26.md`). Con el
+catálogo provisional, el marcado se DETIENE por diseño tras
+generar el manifiesto — no es una falla ni una improvisación:
+el flujo presenta en ese momento la **sesión de calibración**
+como el paso requerido. La sesión (única por producto, con el
+dueño): se le muestran las vistas reales del pool, agrupadas
+por producto y rol, con su etiqueta; él elige qué etiqueta
+llena cada rol (principal, secundaria, plana, doblada,
+detalle) y las decisiones se escriben AL INSTANTE en la ficha
+del producto (`etiqueta_printify` por toma + `estado:
+configurado_con_pase_del_dueno`). Con el catálogo calibrado, el marcado compara el
+manifiesto contra `etiqueta_printify` — correspondencia 1:1
+sin juicio del worker — y los manifiestos se regeneran si la
+calibración cambió alguna toma. La tabla de tallas se marca
+con la etiqueta `Size Chart` del color prioritario (la imagen
+es idéntica en todos los colores; convención de mecanismo,
+no decisión visual).
 
 **Insumos (ninguno quemado en este skill):**
 - **Catálogo canónico de tomas por producto:**

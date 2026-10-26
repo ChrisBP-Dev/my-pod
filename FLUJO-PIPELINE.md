@@ -154,6 +154,20 @@ Toda mejora de este flujo se declara cerrada solo tras pasar `docs/PUERTA-CIERRE
 - Elimina los rechazados. Los que quedan = aprobados para continuar.
 - Avisa cuáles están listos.
 
+### 3.1 Normalización post-revisión — precios + tallas (del agente, sin consulta)
+Paso obligatorio al cerrar la etapa 3, ejecutado por el agente
+SIEMPRE y sin pedir aprobación (regla del dueño 2026-10-26:
+los precios correctos son parte del flujo, no una consulta por
+lote). Habilitar un color en el editor lo deja con el **precio
+default de Printify** y con la **gama de tallas parcial**; la
+normalización (detalle y mecanismo: skill
+`publicar-printify-etsy` §M2.1) fija por API el precio de tabla
+con colchón en toda variante habilitada y completa la gama
+S–3XL de cada color elegido, con verificación por API al final.
+**Puerta de entrada a la etapa 4:** normalización verificada
+en el registro del listing. La misma normalización corre si un
+color se agrega o se quita en cualquier momento posterior.
+
 ### 4. Mockups (desde Printify — selección del worker por algoritmo, v0.11.0)
 La lista fija de imágenes se retiró. La selección la hace el
 **worker** (el dueño nunca elige mockups; su revisión de la
@@ -182,6 +196,19 @@ así que los colores que él agregue los absorbe esta selección):
   manifiesto (o republicar solo-mockups después). Verificar el conteo "N/20
   selected" **contra el manifiesto**. Los que Printify deje
   marcados por defecto NO son una selección válida.
+- **Requisito del marcado: catálogo de tomas CALIBRADO**
+  (canonizado 2026-10-26, evidencia F8 del piloto p058 — skill
+  §M5): el marcado compara el manifiesto contra el campo
+  `etiqueta_printify` de cada toma (la etiqueta exacta del pool
+  real de Printify) y exige `tomas_preferidas.estado` =
+  `configurado_con_pase_del_dueno`. Con el catálogo provisional
+  la etapa se detiene POR DISEÑO tras el manifiesto y el flujo
+  presenta la **sesión de calibración de tomas** como el paso
+  requerido: sesión única por producto en la que el dueño,
+  viendo las vistas reales con su etiqueta, elige qué etiqueta
+  llena cada rol; las decisiones se escriben al instante en la
+  ficha del producto. Sin calibración no hay marcado, ni
+  descargas, ni videos (etapa 5), ni publicación (etapa 7).
 
 ### 5. Videos
 - Generar videos con `scripts/generar-video-listing.py` SOLO
