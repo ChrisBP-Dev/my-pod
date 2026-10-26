@@ -112,14 +112,18 @@ def main():
             "evitar": {t["id"] for t in cat.get("tomas_a_evitar", [])},
         }
 
-    # 2. Imagen principal
+    # 2. Imagen principal — pool primario ROTATIVO (calibración
+    # del dueño 2026-10-26): la esperada es la toma del pool
+    # según la `rotacion` de la entrada, no siempre la prioridad 1.
     if espacios:
         p1 = espacios[0]
         cat_p = catalogos.get(principal.get("producto"), {"tomas": {}})
         principales = [t for t in cat_p["tomas"].values()
                        if t.get("rol") == "principal"]
         principales.sort(key=lambda t: t.get("prioridad", 99))
-        esperada = principales[0]["id"] if principales else None
+        rot = int(principal.get("rotacion", 0)) % len(principales) \
+            if principales else 0
+        esperada = principales[rot]["id"] if principales else None
         if p1.get("producto") != principal.get("producto"):
             motivos.append(
                 f"imagen principal: es de {p1.get('producto')}, "
@@ -129,7 +133,7 @@ def main():
             motivos.append(
                 f"imagen principal: toma {p1.get('toma_id')} "
                 f"(rol {p1.get('rol')}), debe ser {esperada} "
-                f"(rol principal, prioridad 1 del catálogo)")
+                f"(pool primario, rotación {rot})")
         if p1.get("color") != principal.get("color_prioritario"):
             motivos.append(
                 f"imagen principal: color {p1.get('color')}, debe "
@@ -149,8 +153,13 @@ def main():
             motivos.append(f"{prod}: garantías mínimas — solo "
                            f"{n_modelo} tomas con modelo "
                            f"(mínimo 2 con {E} espacios)")
-        if E >= 3 and not any(s.get("rol") == "plana"
-                              for s in propios):
+        # La plana solo se exige si el catálogo del producto la
+        # declara (calibración 2026-10-26: la playera no usa
+        # plana por decisión del dueño; su garantía es el pool).
+        declara_plana = any(t.get("rol") == "plana"
+                            for t in cat["tomas"].values())
+        if E >= 3 and declara_plana and not any(
+                s.get("rol") == "plana" for s in propios):
             motivos.append(f"{prod}: garantías mínimas — ninguna "
                            f"toma plana con {E} espacios")
         tonos = {c["nombre"]: c.get("tono")

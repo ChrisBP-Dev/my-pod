@@ -35,29 +35,29 @@ Formato de la entrada (`--desde-json`):
 El `catalogo` de cada item es la sección `tomas_preferidas` del
 producto (data/productos/<producto>.json) + su `tomas_a_evitar`.
 
-Algoritmo (determinista, §M5 del skill):
+Algoritmo (determinista, §M5 del skill). Modelo v2 —
+POOL PRIMARIO ROTATIVO (calibración del dueño 2026-10-26,
+reemplaza al héroe fijo + garantías de la v1):
  1. Orden de colores por item: primero el color prioritario
     (dato de entrada: juicio de contraste del worker +
     rotación de héroes del lote); después alternando tonos
     (opuesto al del prioritario primero) conservando el orden
     de entrada dentro de cada tono.
- 2. Garantías mínimas por item, en este orden: toma de rol
-    principal en el color prioritario; toma de rol secundaria
-    (pose distinta) en el siguiente color; y una plana, cuyo
-    color sale de la cobertura (si queda un color sin
-    representar, la plana lo cubre; si todos están
-    representados, va en el prioritario). Corrección
-    2026-10-23: antes la plana iba siempre en el prioritario
-    y en items de 3 espacios dejaba un tercer color sin foto
-    pudiendo entrar (piloto seco p058).
- 3. Cobertura por turnos: cada color aún no representado
-    recibe un espacio, rotando los roles de relleno
-    (plana → doblada-decorada → detalle).
- 4. Espacios restantes: se llenan rotando roles de relleno y
-    colores en orden de prioridad, sin repetir par (toma,
-    color) y sin repetir jamás una toma CON MODELO (roles
-    principal/secundaria) en otro color.
- 5. Sustitución reglada: si el rol pedido no tiene toma
+ 2. Héroe: la primera toma del POOL primario (rol principal,
+    ordenado por prioridad) ROTADO por `rotacion` de la
+    entrada (índice del diseño en su lote), en el color
+    prioritario. Sin héroe fijo y sin color fijo.
+ 3. Distribución del pool: cada toma restante del pool, en
+    el siguiente color del orden — las favoritas se reparten
+    entre los colores antes de repetir una toma en otro color.
+ 4. Plana (solo si el catálogo la declara): cubre el primer
+    color sin representar; si todos están, va en el prioritario.
+ 5. Cobertura y relleno: colores sin representar con tomas
+    aún no usadas; al final la extensión (rol secundaria) y
+    la plana en otros colores (la plana sí puede repetirse en
+    otro color: evidencia p046). Sin repetir jamás el par
+    (toma, color) ni una toma no-plana en dos colores.
+ 6. Sustitución reglada: si el rol pedido no tiene toma
     disponible, se baja al siguiente rol de la lista de
     preferencia y la sustitución queda registrada.
  6. Al final, 1 tabla de tallas por producto.
@@ -123,84 +123,86 @@ def generar_item(item):
     evitar = {t["id"] for t in catalogo.get("tomas_a_evitar", [])}
     E = item["espacios_visuales"]
     orden = ordenar_colores(item)
-    usados_modelo = set()   # toma con modelo: única en TODO el item
-    usados_par = set()      # (toma, color): nunca se repite
     slots = []
     sustituciones = []
 
-    def elegir(roles_preferidos, color):
-        for rol in roles_preferidos:
-            for toma in por_rol(catalogo, rol):
-                tid = toma["id"]
-                if tid in evitar or (tid, color) in usados_par:
-                    continue
-                if rol in ROLES_MODELO and tid in usados_modelo:
-                    continue
-                usados_par.add((tid, color))
-                if rol in ROLES_MODELO:
-                    usados_modelo.add(tid)
-                return toma, rol
-        return None, None
+    # Modelo de selección v2 (calibración del dueño 2026-10-26):
+    # POOL PRIMARIO ROTATIVO. El catálogo declara un pool de
+    # tomas de rol principal (las favoritas del dueño); no hay
+    # héroe fijo ni color fijo: el pool rota entre listings
+    # según `rotacion` de la entrada (índice del diseño en su
+    # lote) y las favoritas se reparten entre los colores antes
+    # de repetir una toma en otro color.
+    pool = por_rol(catalogo, "principal")
+    rot = int(item.get("rotacion", 0)) % len(pool)
+    pool_rot = pool[rot:] + pool[:rot]
+    planas = por_rol(catalogo, "plana")
+    extension = por_rol(catalogo, "secundaria")
+    usados = set()       # (toma_id, color): nunca se repite
+    usados_toma = set()  # toma ya usada (la plana sí puede repetirse en otro color)
 
-    def agregar(roles_preferidos, color, motivo_rol):
-        toma, rol_real = elegir(roles_preferidos, color)
-        if toma is None:
+    def agregar(toma, color, uso):
+        tid = toma["id"]
+        if tid in evitar or (tid, color) in usados:
             return False
-        if rol_real != roles_preferidos[0]:
-            sustituciones.append(
-                {"producto": producto, "color": color,
-                 "rol_pedido": roles_preferidos[0],
-                 "rol_usado": rol_real, "toma": toma["id"],
-                 "motivo": "sin toma disponible del rol pedido; "
-                           "se bajó al siguiente rol de preferencia"})
+        if toma.get("rol") != "plana" and tid in usados_toma:
+            return False
+        usados.add((tid, color))
+        if toma.get("rol") != "plana":
+            usados_toma.add(tid)
         slots.append({"producto": producto, "color": color,
-                      "toma_id": toma["id"],
+                      "toma_id": tid,
+                      "etiqueta_printify": toma.get("etiqueta_printify"),
                       "camera_label": toma.get("camera_label"),
-                      "rol": rol_real, "uso": motivo_rol})
+                      "rol": toma.get("rol"), "uso": uso})
         return True
 
-    # 1–2. Garantías: principal y secundaria (poses distintas)
-    if not agregar(["principal"], orden[0], "garantia-principal"):
+    # 1. Héroe: la primera toma del pool rotado, en el color
+    # prioritario (que también rota por diseño vía la entrada).
+    if not agregar(pool_rot[0], orden[0], "heroe-pool"):
         raise ValueError(f"{producto}: no se pudo asignar la toma "
-                         f"principal")
-    if E >= 2:
-        segundo = orden[1] if len(orden) > 1 else orden[0]
-        agregar(["secundaria", "principal"], segundo,
-                "garantia-secundaria")
-    # 3. Garantía: una plana por item; su color sale de la
-    # cobertura — si queda un color sin representar, la plana
-    # lo cubre; si todos están representados, va en el
-    # prioritario. (Corrección 2026-10-23, piloto seco p058.)
-    if E >= 3:
+                         f"del pool primario")
+    # 2. Distribución del pool: cada toma restante del pool, en
+    # el siguiente color del orden (favoritas × colores).
+    i_color = 1
+    for toma in pool_rot[1:]:
+        if len(slots) >= E:
+            break
+        while i_color < len(orden) and \
+                (toma["id"], orden[i_color]) in usados:
+            i_color += 1
+        if i_color >= len(orden):
+            break
+        if agregar(toma, orden[i_color], "pool-distribuido"):
+            i_color += 1
+    # 3. Plana (solo si el catálogo la declara): cubre el primer
+    # color sin representar; si todos están, va en el prioritario.
+    if planas and len(slots) < E:
         representados = {s["color"] for s in slots}
         sin_rep = [c for c in orden if c not in representados]
         color_plana = sin_rep[0] if sin_rep else orden[0]
-        agregar(["plana"], color_plana, "garantia-plana")
-    # 4. Cobertura por turnos de colores no representados
-    i_relleno = 0
+        agregar(planas[0], color_plana, "garantia-plana")
+    # 4. Cobertura: cada color sin representar, con la primera
+    # toma aún no usada (pool restante, plana, extensión).
     for color in orden:
         if len(slots) >= E:
             break
         if any(s["color"] == color for s in slots):
             continue
-        roles = list(RELLENO[i_relleno % len(RELLENO):]) + \
-            list(RELLENO[:i_relleno % len(RELLENO)]) + ["secundaria"]
-        if agregar(roles, color, "cobertura"):
-            i_relleno += 1
-    # 5. Relleno de espacios restantes
-    i_color = 0
-    while len(slots) < E:
-        color = orden[i_color % len(orden)]
-        roles = list(RELLENO[i_relleno % len(RELLENO):]) + \
-            list(RELLENO[:i_relleno % len(RELLENO)]) + \
-            ["secundaria", "principal"]
-        if agregar(roles, color, "relleno"):
-            i_relleno += 1
-            i_color += 1
-        else:
-            i_color += 1
-            if i_color > len(orden) * (len(RELLENO) + 2):
-                break  # no hay combinación (toma, color) disponible
+        for toma in pool_rot + planas + extension:
+            if agregar(toma, color, "cobertura"):
+                break
+    # 5. Relleno: la extensión (rol secundaria — p. ej. la
+    # Lifestyle de extensión) y por último la plana en otros
+    # colores. Si aún faltan espacios, el manifiesto queda corto
+    # y la puerta lo detiene por conteo (no se inventan tomas).
+    for toma in extension + planas:
+        if len(slots) >= E:
+            break
+        for color in orden:
+            if len(slots) >= E:
+                break
+            agregar(toma, color, "relleno")
     return slots, sustituciones, orden
 
 
@@ -278,8 +280,10 @@ def main():
                     f"de rol tabla_tallas")
             for _ in range(tablas_por_producto):
                 espacios.append({
-                    "producto": item["producto"], "color": None,
+                    "producto": item["producto"],
+                    "color": item["color_prioritario"],
                     "toma_id": tablas[0]["id"],
+                    "etiqueta_printify": tablas[0].get("etiqueta_printify"),
                     "camera_label": tablas[0].get("camera_label"),
                     "rol": "tabla_tallas", "uso": "tabla-de-tallas"})
     except ValueError as e:
@@ -303,6 +307,7 @@ def main():
         "items": [{"producto": it["producto"],
                    "rol_en_listing": it.get("rol_en_listing"),
                    "espacios_visuales": it["espacios_visuales"],
+                   "rotacion": it.get("rotacion", 0),
                    "color_prioritario": it["color_prioritario"],
                    "colores_habilitados":
                        [c["nombre"] for c in it["colores"]]}

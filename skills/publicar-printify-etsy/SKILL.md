@@ -3,7 +3,7 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.13.0"
+  version: "0.14.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -525,6 +525,31 @@ calibración cambió alguna toma. La tabla de tallas se marca
 con la etiqueta `Size Chart` del color prioritario (la imagen
 es idéntica en todos los colores; convención de mecanismo,
 no decisión visual).
+
+**Modelo de selección v2 — POOL PRIMARIO ROTATIVO
+(v0.14.0, calibración del dueño 2026-10-26; reemplaza al
+héroe fijo de la v1):** el catálogo de cada producto declara
+su conjunto favorito como tomas de rol `principal` (el POOL,
+ordenado por `prioridad`). No hay héroe fijo ni color fijo:
+- El héroe de cada listing es la primera toma del pool
+  ROTADO por el índice del diseño en su lote (`rotacion` de
+  la entrada del generador); el color prioritario también
+  rota por diseño (contraste + rotación de la entrada).
+- Las demás tomas del pool se reparten entre los colores
+  siguientes antes de repetir una toma en otro color
+  (criterio del dueño: «si elegí cuatro favoritas y tengo
+  cuatro colores, cada mockup en un color»).
+- La plana solo entra si el catálogo la declara (la playera
+  calibrada no usa plana: se exhibe con Lifestyle + Hanging).
+- La extensión (rol `secundaria`) entra solo cuando los
+  espacios/colores lo piden tras agotar pool y plana.
+- Criterio de fondo del dueño (esta tienda): fondos con
+  escena, evitar el blanco; las tomas no elegidas en su
+  calibración quedan fuera del catálogo o en
+  `tomas_a_evitar` con su motivo.
+La puerta `verificar-mockups.py` verifica contra este
+modelo: héroe = pool rotado, plana solo si el catálogo la
+declara, sin pares (toma, color) repetidos.
 
 **Insumos (ninguno quemado en este skill):**
 - **Catálogo canónico de tomas por producto:**

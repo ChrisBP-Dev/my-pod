@@ -168,7 +168,7 @@ S–3XL de cada color elegido, con verificación por API al final.
 en el registro del listing. La misma normalización corre si un
 color se agrega o se quita en cualquier momento posterior.
 
-### 4. Mockups (desde Printify — selección del worker por algoritmo, v0.11.0)
+### 4. Mockups (desde Printify — selección del worker por algoritmo; desde 2026-10-26, modelo v2 de pool primario rotativo, §M5 v0.14.0)
 La lista fija de imágenes se retiró. La selección la hace el
 **worker** (el dueño nunca elige mockups; su revisión de la
 etapa 3 es solo ubicación + colores y va ANTES de esta etapa,
