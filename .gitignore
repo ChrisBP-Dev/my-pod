@@ -6,7 +6,6 @@ data/cola-pins/*
 *.mp4
 *.mp3
 data/ventas-csv/*.csv
-data/tiendas/29222324/estado-propuestas.json
 data/tiendas/29222324/estado-pinterest.json
 data/tiendas/29222324/estado-publicacion.json
 # Política de medios — datos de instancia (Rameli, docs/DATOS-INSTANCIA.md):
