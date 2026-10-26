@@ -284,3 +284,5 @@ con sus validaciones, en la recogida-aplicación.
   pero la decisión viviría fuera del sistema entre tanto: es el
   defecto que esta fase elimina). Recomendación de Jarvis: al
   instante.
+
+**F3 EJECUTADA Y VERIFICADA (2026-10-26):** ciclo completo en la tienda de ensayo (entrega sin siembra → aprobado directo; mejorar → retiro → mejorar → aplicación → regeneración como nueva versión → aprobación → aplicación; bandeja en cero en dos lecturas, sin resurrección). Cazados y corregidos: derivación del retorno de mejora, dimensiones vacías y dos timeouts de escritura que sí aterrizan. Incidente mayor: el commit de investigación semanal pisó el registro de decisiones del ensayo vía el puente (causa raíz: decisiones es repo-first y la copia física era vieja); restaurado desde git. Enmienda F3 en `docs/VITRINA-VIVA.md`. Puerta dura de F4: regla repo-first en el puente antes del corte.

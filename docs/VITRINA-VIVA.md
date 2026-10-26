@@ -271,3 +271,39 @@ nada en ella tras la recogida.
   `docs/VITRINA-REVISION.md` (plantilla v2.3) y en el CHANGELOG
   de `puerta-arte-propuesta`; este contrato conserva de aquella
   plantilla solo su presentación y su gestión, que son el piso.
+
+## Enmienda F3 (2026-10-26) — lo que el ciclo de ensayo probó y corrigió
+
+- **Acción `retirar` (paridad «Quitar decisión»):** `guardardecision` acepta
+  `retirar`; se escribe al instante en `vitrina/decisiones.json` con estado
+  `sin-marcar`, manda sobre la decisión vigente no aplicada del mismo slug, y la
+  derivación la trata como «sin decisión vigente» (el diseño vuelve a
+  Pendientes). `marcarlistas` nunca la marca y la recogida-aplicación la ignora.
+- **Tienda de ensayo permanente:** `data/tiendas/ensayo-vitrina/` en el repo de
+  datos es el fixture declarado de pruebas de la vitrina (NO es una tienda
+  real; ningún flujo de producción la opera). La instancia de ensayo lee esa
+  tienda; la de producción, la suya.
+- **`vitrina/decisiones.json` es REPO-FIRST (regla dura):** lo escribe la
+  vitrina en el repo; la copia física es solo caché de lectura. El puente
+  `registros-datos.py` NUNCA lo espeja físico→repo: al commitear, primero hace
+  pull (repo→físico) de ese archivo. Motivo (incidente F3, 2026-10-26): el
+  commit de investigación semanal espejó la copia física vieja (`[]`) sobre el
+  registro remoto y borró las decisiones aplicadas del ensayo; se restauró
+  desde el historial git (commit `f5cd67a`). **Sin esta regla en el puente
+  fusionado no hay corte (F4).**
+- **Timeouts de escritura:** una escritura puede agotar el presupuesto de
+  respuesta y aun así aterrizar en el repo. Ante un timeout se verifica por
+  relectura (HEAD derivado) antes de reintentar; `marcarlistas` es idempotente
+  (un reintento sobre lo ya marcado marca 0).
+- **`commit_aplicacion`:** la recogida lo escribe sobre la entrada aplicada
+  aunque el campo exista en `null` (la vitrina crea las entradas con
+  `commit_aplicacion: null`).
+- **Retorno de mejora (derivación):** decisión `mejorar` aplicada + slug en
+  `mejoras_cumplidas` (por `slug`, cualquier forma de entrada con slug) ⇒ el
+  diseño vuelve a Pendientes como nueva versión, con `notaMejoraAnterior` =
+  nota de la decisión mejorar aplicada (respaldo:
+  `registro.regeneracion.nota_dueno`). Sin cumplimiento, sigue en «Por mejorar»
+  como esperando regeneración.
+- **Dimensiones:** la ficha expone `dimensiones_px` {ancho_px, alto_px} de la
+  entrada del registro como dimensiones reales del PNG; si falta, no se
+  inventa.
