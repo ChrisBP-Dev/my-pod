@@ -81,6 +81,25 @@ def validar_personalizable(slug: str, entrada: dict, repo: Path) -> dict:
               "Sin simulación no hay entrega (puerta-arte-propuesta).",
               file=sys.stderr)
         raise SystemExit(1)
+    # Método declarado y, en bordado, separación fuente/resultado
+    # (recalibración 2026-10-26, puerta-arte-propuesta v0.11.0).
+    metodo = entrada.get("metodo")
+    if metodo not in ("dtg", "bordado"):
+        print(f"ERROR: {slug} es personalizable y no declara `metodo` "
+              f"válido ('dtg'|'bordado'): {metodo!r}. Sin método no hay "
+              "entrega (Enmienda Bordado de VITRINA-VIVA).",
+              file=sys.stderr)
+        raise SystemExit(1)
+    if metodo == "bordado":
+        res_rel = entrada.get("resultado_esperado", "")
+        res_path = repo / res_rel if res_rel else None
+        if not res_path or not res_path.exists():
+            print(f"ERROR: {slug} es bordado y no declara "
+                  f"`resultado_esperado` válido: {res_rel!r}. En bordado "
+                  "la fuente plana (`arte`) y el resultado esperado con "
+                  "textura son dos archivos distintos; sin ambos no hay "
+                  "entrega.", file=sys.stderr)
+            raise SystemExit(1)
     ficha = entrada.get("ficha_razon")
     if not isinstance(ficha, dict):
         print(f"ERROR: {slug} es personalizable y no trae `ficha_razon`. "
@@ -168,6 +187,15 @@ def main() -> int:
         if entrada is None:
             print(f"ERROR: {slug} no está en el registro de la tienda.",
                   file=sys.stderr)
+            return 1
+        # Método obligatorio en propuestas nuevas (Enmienda Bordado,
+        # 2026-10-26): las históricas anteriores no lo declaraban.
+        if (entrada.get("fecha_propuesta") or "") >= "2026-10-26" \
+                and entrada.get("metodo") not in ("dtg", "bordado"):
+            print(f"ERROR: {slug} es una propuesta nueva "
+                  f"({entrada.get('fecha_propuesta')}) y no declara "
+                  f"`metodo` válido ('dtg'|'bordado'): "
+                  f"{entrada.get('metodo')!r}.", file=sys.stderr)
             return 1
         arte_rel = entrada.get("arte", "")
         arte_path = repo / arte_rel

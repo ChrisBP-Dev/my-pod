@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.10.0"
+  version: "0.11.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.10.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.11.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -327,6 +327,29 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
 - **Bordado (pecho 4×4"):** texto corto y bold, sin degradados ni
   detalle fino; solo fuentes pre-digitalizadas. Sin Live Preview:
   el arte y las fotos del listing cargan la confianza.
+- **Bordado — la FUENTE es plana, el look bordado es el RESULTADO**
+  (recalibración 2026-10-26, duda del dueño resuelta contra la guía
+  oficial de Printify): el archivo que entra a Printify para bordar
+  es un dibujo PLANO — colores sólidos contrastantes (máx. 6 colores
+  de hilo por diseño), formas gruesas (línea ≥0.05", texto ≥0.25" de
+  alto), fondo transparente, SIN degradados, sombras, brillos ni
+  textura de puntadas dentro del arte. La textura de hilo nace al
+  digitalizar (el proveedor convierte el dibujo en recorridos de
+  aguja) y al coser: un arte que ya «se ve bordado» obliga a la
+  digitalización a simplificar o alterar sus partes finas y el
+  resultado real difiere de la previa. Por tanto, en todo diseño
+  con método bordado conviven DOS archivos con roles distintos y
+  nombres que lo dicen: el **arte fuente plano** (`arte` en el
+  registro — el de producción) y el **resultado esperado**
+  (`resultado_esperado` — la versión con textura, SOLO referencia
+  visual de cómo se verá cosido; jamás entra a Printify). La
+  simulación del personalizable bordado se compone sobre el
+  resultado esperado (es el resultado lo que el dueño juzga con el
+  ejemplo puesto) y la previa del arte muestra la fuente plana: la
+  vitrina los etiqueta distinto y el diseño declara su `metodo`
+  (ver «Dónde vive en el sistema»). Un arte bordado cuya fuente
+  lleve textura, degradados o más de 6 colores sólidos es FAIL de
+  esta puerta, no un estilo.
 - **Brief de generación:** el prompt pide la zona explícita con el
   resto de la composición completa y cerrada; el gate de composición
   sigue aplicando igual. Y si el diseño trae elementos que se leen
@@ -517,7 +540,10 @@ peor caso renderizado. Y declara además, explícito:
 **Dónde vive en el sistema (cierre de vitrina, 2026-10-22):** la
 entrada del diseño en el registro de la tienda declara
 `personalizable: true`, `simulacion` (ruta repo-relativa del PNG de
-la simulación, compuesto sobre el arte real) y `ficha_razon` (objeto
+la simulación, compuesto sobre el arte real), `metodo`
+(`"dtg"` o `"bordado"` — declarado en TODA propuesta, personalizable
+o no, desde la recalibración 2026-10-26; en bordado además
+`resultado_esperado` con la ruta de la referencia con textura) y `ficha_razon` (objeto
 estructurado: `razon`, `prueba_borrado`, `campos` — cada uno con
 `nombre`, `tipo` y, según el tipo, `limite` u `opciones`, más su
 `ejemplo` —, `comprador_destinatario_ocasion`, `clase_encaje`,

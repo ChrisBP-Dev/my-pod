@@ -1,5 +1,11 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.11.0 (2026-10-26) — bordado: fuente plana ≠ resultado esperado; método declarado
+
+- **Estándar de fuente para bordado (duda del dueño, resuelta contra la guía oficial de Printify):** el archivo que entra a Printify para bordar es PLANO — colores sólidos (máx. 6 de hilo), formas gruesas, sin degradados, sombras ni textura de puntadas; la textura nace al digitalizar y coser. Un arte «que ya se ve bordado» es FAIL como fuente: la digitalización simplifica o altera sus partes finas y el resultado difiere de la previa.
+- **Dos archivos con roles y nombres distintos en bordado:** `arte` = fuente plana de producción; `resultado_esperado` = referencia con textura de cómo se verá cosido (nunca entra a Printify). La simulación del personalizable bordado se compone sobre el resultado esperado; la previa del arte muestra la fuente plana.
+- **`metodo` declarado en toda propuesta** (`dtg` | `bordado`) en la entrada del registro; la vitrina lo muestra como etiqueta visible junto a «Personalizable» y rotula fuente/resultado en bordados (contrato `docs/VITRINA-VIVA.md`, Enmienda Bordado). Caso vivo que lo destapó: p070/p071 del piloto U3 llegaron con la textura dentro de la fuente y sin etiqueta de método — corregidos en plano el mismo día.
+
 ## v0.10.0 (2026-10-26) — recogida sin marca (U1 del brief de alineación)
 
 - **«Marcar listas» deja de ser puerta:** la decisión del dueño es vigente desde que la vitrina la escribe al instante en `vitrina/decisiones.json`; no hay botón, ni recibo copiable, ni estado `lista` como requisito. La recogida-aplicación (§ homónima) opera sobre las **decisiones vigentes** del repo: última entrada por slug, no `aplicada`/`devuelta`, `accion` ≠ `retirar` (una última entrada `retirar` = sin decisión vigente).

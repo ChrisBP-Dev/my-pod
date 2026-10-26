@@ -122,6 +122,7 @@ acotado **solo al repo de datos**. Por apertura:
    (que el servidor parte en sus secciones por sus marcadores
    canónicos — «Tema y ángulo:», «Frase:», «Iconografía:», «Qué
    mirar:» — sin reescribirlo), `nota_puerta`, `personalizable`,
+   `metodo` (`dtg` | `bordado`, Enmienda Bordado),
    `ficha_razon`, `dimensiones_px` y el bloque `vitrina` (rutas de
    previas + `arte_ref`). Etiquetas y frase corta se derivan del
    porqué/tema con la misma lógica determinista que usaba el
@@ -378,6 +379,30 @@ tecleo (viaja con la decisión o con «Guardar nota»).
 **Deuda del nombre del sello — CERRADA en U1 (2026-10-26):** ambas
 instancias exponen `sello` (verificado por acciones en ensayo y en
 producción durante la corrida U1); ya no difieren.
+
+## Enmienda Bordado (2026-10-26) — método visible; fuente plana ≠ resultado
+
+Duda del dueño al revisar el piloto de personalización U3, resuelta
+contra la guía oficial de Printify y recalibrada con su dale:
+
+- **El método se declara y se ve:** toda entrada declara `metodo`
+  (`dtg` | `bordado`) y la tarjeta y el detalle lo muestran como
+  etiqueta visible junto a «Personalizable» («Bordado» / «DTG»).
+  Sin `metodo` declarado, la entrega de una propuesta nueva no está
+  completa (la puerta mecánica lo exige en diseños nuevos).
+- **En bordado, fuente y resultado son dos cosas y se rotulan
+  como dos cosas:** el archivo que entra a Printify es la FUENTE
+  PLANA (colores sólidos, sin textura de puntadas, degradados ni
+  sombras — la textura nace al digitalizar y coser). La previa del
+  arte muestra esa fuente y se rotula «Archivo fuente — plano»;
+  la simulación (compuesta sobre el `resultado_esperado` con
+  textura, declarado en la entrada) se rotula «Resultado esperado —
+  con el ejemplo». En DTG se conservan los rótulos vigentes
+  («Arte real — zonas vacías» / «Simulación — con el ejemplo»),
+  porque ahí la tinta sí reproduce el arte tal cual.
+- El estándar de la fuente bordada y su puerta viven en
+  `puerta-arte-propuesta` v0.11.0; esta enmienda solo declara cómo
+  la vitrina lo lee y lo presenta.
 
 ## Enmienda U1 (2026-10-26) — vitrina sin marca
 
