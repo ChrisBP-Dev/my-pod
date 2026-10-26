@@ -1,5 +1,13 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.9.0 (2026-10-26) — la entrega y la recogida se mudan a la vitrina en vivo (sin siembra)
+
+- **Entrega reescrita:** mueren el paquete (`datos-vitrina.json`) y la siembra. La entrega ahora es: porqué completo en el registro → previas producidas como entregable en su hogar del repo de datos con `scripts/producir-previas-vitrina.py` (que hereda la puerta mecánica de personalizables: sin simulación o sin ficha, falla) y declaradas en la entrada (`dimensiones_px` + bloque `vitrina`) → entregados registrados en `estado-propuestas.json` → un solo commit del puente. Con ese commit el diseño ya está en la vitrina: la instancia lo deriva del repo al abrir.
+- **Recogida → recogida-aplicación:** la fuente deja de ser la instancia (acciones `leerdecisiones`/`confirmarrecogida`, retiradas) y pasa a ser el registro de decisiones de la tienda en el repo (`vitrina/decisiones.json`, append-only, escrito al instante por la vitrina — ruta C del Centro de My Channels). Se conservan disparador, cruce obligatorio, validaciones, idempotencia con su excepción de nueva versión y las escrituras exactas por resultado; se suma la marca `aplicada`/`devuelta` + `commit_aplicacion` sobre cada decisión y la verificación por relectura como paso de cierre.
+- **`estado-propuestas.json` cambia de clase:** de checkpoint local no versionado a registro versionado de la tienda (decisión del dueño 2026-10-26; el puente `registros-datos.py` y los `.gitignore` lo declaran igual).
+- **Retorno de una mejora:** el requisito «previa compilada en la instancia antes de sembrar» se reemplaza por producir las previas del arte nuevo en su hogar y verificar por relectura tras el commit — mostrar el arte viejo como nueva versión es imposible por construcción (la previa servida es la del `arte_ref` vigente).
+- Contratos nuevos en `docs/VITRINA-VIVA.md`; la plantilla sembrada v2.3 queda como historia. Decisión y plan: `docs/PROPUESTA-VITRINA-LECTURA-EN-VIVO.md`.
+
 ## v0.8.8 (2026-10-23) — el formato profesional sale del skill: es calibración de nicho (Programa Estándar My POD, F4)
 - La sección «Formato profesional real (enfermería)» (firma ANCC, vocabulario cerrado de unidades, instrucción al comprador) se **mueve sin cambios** a la referencia de nicho de la tienda que la usa: `data/tiendas/<tienda>/investigaciones/formato-profesional-enfermeria.md` en el repo de datos, declarada desde su ficha (`config.json → nicho.referencia_formato_profesional`).
 - En el skill queda el **mecanismo**: si la ficha declara un nicho con formato profesional documentado, la puerta carga esa referencia antes de juzgar personalizables; si no la declara, juzga con los criterios generales y declara la ausencia. Ninguna tienda hereda el formato de otro nicho.

@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.8"
+  version: "0.9.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.8.8** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.9.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -425,11 +425,12 @@ aprobación del dueño registrada en el checkpoint
 recogida), el diseño no entra a producción (flujo v2 en
 `FLUJO-PIPELINE.md`).
 
-**La entrega, paso a paso:**
+**La entrega, paso a paso** (flujo en vivo desde 2026-10-26,
+decisión del dueño: la vitrina lee el repo — no hay paquete ni
+siembra; contratos en `docs/VITRINA-VIVA.md`):
 
-1. **Generar el paquete** de datos con
-   `scripts/generar-datos-vitrina.py` (desde el registro y el
-   checkpoint de la tienda). El paquete lleva, por diseño, el
+1. **El porqué completo vive en el registro.** La entrada del
+   diseño en el registro de la tienda ya trae, al entregar, el
    arte y su **porqué completo**: tema y ángulo según la
    directriz vigente, la frase y su sentido, la iconografía y
    por qué esos elementos (qué significan en el tema; p. ej.
@@ -437,29 +438,49 @@ recogida), el diseño no entra a producción (flujo v2 en
    **qué mirar**: los puntos que la puerta declara pendientes
    del ojo humano (counters/agujeros de las letras, trazos que
    llegan al borde adjudicados como motivo) y cualquier duda
-   honesta del generador.
-2. **Sembrar aditivo** en la instancia de la tienda (bandeja
-   continua: una sola instancia por tienda, declarada en
-   `vitrina` del `config.json` de la tienda; plantilla y
-   contratos en `docs/VITRINA-REVISION.md`). **Esta acción
-   explícita del flujo es la ÚNICA siembra que existe:** la
-   instancia nunca se siembra sola (regla de la plantilla,
-   §«Regla de siembra», nacida del incidente de resurrección del
-   2026-10-22). Si al verificar el tablero aparecen diseños que
-   esta entrega NO sembró — en particular diseños ya recogidos
-   que volvieron como pendientes — es un INCIDENTE de la
-   instancia: no se avisa al dueño a decidir sobre ellos ni se
-   recogen como decisiones nuevas; se reporta y se corrige la
-   instancia primero.
-3. **Avisar al dueño en el chat de entrega** (según
+   honesta del generador. Si el porqué no está completo en el
+   registro, la entrega se detiene: se completa en la fuente,
+   no al mostrar.
+2. **Producir las previas como entregable en el repo** con
+   `scripts/producir-previas-vitrina.py --tienda <id>
+   --slugs <lote>`: compone las previas deterministas desde el
+   PNG de producción, las deja en su hogar declarado
+   (`data/tiendas/<tienda-id>/propuestas/<slug>/`) y declara en
+   la entrada del registro sus `dimensiones_px` y su bloque
+   `vitrina` (rutas de previas + `arte_ref`). En
+   personalizables es además la puerta mecánica: sin
+   simulación o sin ficha completa, **falla** y no produce
+   nada. Una regeneración vuelve a correrlo con el arte nuevo:
+   la previa servida es siempre la del `arte_ref` vigente.
+3. **Registrar la entrega en el estado y commitear todo en la
+   misma corrida:** los slugs del lote quedan en
+   `entregados` (y en `lote_actual`) de
+   `data/tiendas/<tienda-id>/estado-propuestas.json`, y el
+   ciclo escribir = commitear
+   (`scripts/registros-datos.py commit`) sube al repo de datos,
+   en un solo commit, registro + estado + previas. Con ese
+   commit el diseño **ya está en la vitrina**: la instancia
+   (una por tienda, declarada en `vitrina` del `config.json`)
+   lo deriva al abrir, sin siembra ni edición de la instancia.
+   Si tras el commit la vitrina mostrara diseños que esta
+   entrega no produjo — en particular diseños ya aplicados que
+   reaparecieran como pendientes — sería un defecto de
+   derivación de la superficie (la bandeja se deriva del
+   estado, no se administra): se reporta y se corrige la
+   derivación primero; no se avisa al dueño a decidir sobre
+   ellos ni se recogen como decisiones nuevas.
+4. **Avisar al dueño en el chat de entrega** (según
    `docs/REGLA-DELIVERY-CHATS.md`): un aviso breve — qué lote
    es, cuántos diseños trae y **el acceso a la vitrina** (su
    tarjeta) — **SIN adjuntar artes ni porqués en el chat**:
    todo eso vive dentro de la vitrina y ahí se revisa.
-4. **El dueño decide en la vitrina**, marca las decisiones con
-   «Marcar listas para Jarvis» y avisa en un chat; la recogida
-   al checkpoint sigue la sección «Recogida de decisiones
-   (vitrina)» de este skill.
+5. **El dueño decide en la vitrina** (sus decisiones se
+   escriben al instante en el registro de decisiones de la
+   tienda, en el repo), marca las decisiones con «Marcar
+   listas para Jarvis» y avisa en un chat; la
+   recogida-aplicación al checkpoint sigue la sección
+   «Recogida-aplicación de decisiones (vitrina en vivo)» de
+   este skill.
 
 El porqué se escribe al generar (sale de la directriz y del
 brief del diseño, no se inventa al entregar) y se guarda en el
@@ -501,13 +522,13 @@ estructurado: `razon`, `prueba_borrado`, `campos` — cada uno con
 `nombre`, `tipo` y, según el tipo, `limite` u `opciones`, más su
 `ejemplo` —, `comprador_destinatario_ocasion`, `clase_encaje`,
 `ejemplo_simulacion`, `peor_caso`, `producto_destino`,
-`plan_zonas`). El generador de la vitrina
-(`scripts/generar-datos-vitrina.py`) es la puerta mecánica de esta
-entrega: sin simulación válida o sin ficha completa, la generación
-del paquete FALLA — el diseño nunca se siembra disfrazado de
+`plan_zonas`). El script de entrega
+(`scripts/producir-previas-vitrina.py`) es la puerta mecánica de esta
+entrega: sin simulación válida o sin ficha completa, la producción
+de previas FALLA — el diseño nunca llega a la bandeja disfrazado de
 normal, y la vitrina lo muestra con sus dos imágenes etiquetadas y
-su sección «Ficha de personalización» (plantilla:
-`docs/VITRINA-REVISION.md` §«Cierre de la variante personalizable»).
+su sección «Ficha de personalización» (contrato:
+`docs/VITRINA-VIVA.md`, variante personalizable).
 
 - **Producto destino** (el que la estratega fijó en el config de
   propuestas — al aprobar el arte, el dueño aprueba diseño +
@@ -518,18 +539,34 @@ su sección «Ficha de personalización» (plantilla:
   contraste del dato sobre la prenda más clara, y si la composición
   sigue cerrando con el dato puesto.
 
-## Recogida de decisiones (vitrina) — canonizada 2026-10-22
+## Recogida-aplicación de decisiones (vitrina en vivo) — 2026-10-26
 
 **Dónde vive y por qué.** Esta recogida es el cierre de ESTA
 puerta — la misma que entrega —, no un flujo nuevo: consume el
 mismo checkpoint que la Fase B y la decide el mismo dueño. Por
 eso vive como sección de este skill y no como skill aparte: un
 skill separado fragmentaría la puerta entre dos dueños, y la
-Fase B seguiría apuntando aquí. La plantilla de la vitrina y
-sus contratos (entrada/salida, UX, operación) viven en
-`docs/VITRINA-REVISION.md`; **este es el procedimiento
-operativo de recogida** y manda sobre cualquier descripción
-resumida de aquel doc.
+Fase B seguiría apuntando aquí. Los contratos de la vitrina en
+vivo (lectura, decisiones, UX) viven en `docs/VITRINA-VIVA.md`;
+**este es el procedimiento operativo de recogida-aplicación**
+y manda sobre cualquier descripción resumida de aquel doc.
+
+**La fuente ya no es la instancia: es el repo.** Las decisiones
+del dueño viven en el registro de decisiones de la tienda,
+`data/tiendas/<tienda-id>/vitrina/decisiones.json` (append-only;
+la vitrina lo escribe al instante con el conector, un commit
+por decisión — ruta C del Centro de My Channels). Cada
+decisión trae `{id, fecha, slug, accion
+(aprobado|rechazado|mejorar), nota, estado
+(sin-marcar|lista|aplicada|devuelta), fecha_lista,
+commit_aplicacion}`. Recoger = **aplicar**: leer las decisiones
+en `lista`, mover el estado y el registro con las validaciones
+de esta sección, y marcar cada decisión `aplicada` (o
+`devuelta` si una validación la rechaza, con su causa en la
+nota de aplicación) con el `commit_aplicacion` del commit que
+la aplicó. No existe confirmación hacia la superficie: la
+bandeja se deriva del repo, así que lo aplicado deja de verse
+pendiente por derivación, no por purga.
 
 **Disparador.** El dueño avisa en un chat — «recoge las
 decisiones de la vitrina de <tienda>» (el recibo de la vitrina
@@ -540,19 +577,20 @@ la frase exacta:** cualquier mensaje suyo, en cualquier forma
 decisiones como listas en la vitrina ES el aviso y dispara la
 recogida (caso fundacional 2026-10-22: avisó por audio, sin
 pegar el mensaje copiable, y la recogida corrió). Sin aviso NO
-hay recogida: la bandera `enviada` por sí sola no dispara nada
+hay aplicación: la marca `lista` por sí sola no dispara nada
 y la vitrina no notifica a nadie.
 
 **Cruce obligatorio antes de reportar estados.** El checkpoint
-NO conoce las decisiones que el dueño ya marcó como listas en
-la vitrina y aún no se recogieron. Antes de reportarle conteos
-de aprobados / mejorar / rechazados de un lote, cruza con la
-lectura de decisiones de la instancia: lo decidido y enviado
-se reporta como «decidido en la vitrina, pendiente de
-recogida» — nunca se le repiten los conteos viejos como si su
-decisión no existiera (mismo caso fundacional: el sistema le
-siguió diciendo «uno en mejorar» horas después de que él ya
-había aprobado la nueva versión en la vitrina).
+NO conoce las decisiones que el dueño ya marcó como `lista` y
+aún no se aplicaron. Antes de reportarle conteos de aprobados
+/ mejorar / rechazados de un lote, cruza con el registro de
+decisiones de la tienda (tras el `pull` del paso 1): lo
+decidido y marcado se reporta como «decidido en la vitrina,
+pendiente de aplicación» — nunca se le repiten los conteos
+viejos como si su decisión no existiera (mismo caso
+fundacional: el sistema le siguió diciendo «uno en mejorar»
+horas después de que él ya había aprobado la nueva versión en
+la vitrina).
 
 **Instancia.** Una sola vitrina por tienda, declarada en el
 bloque `vitrina` del `config.json` de la tienda
@@ -564,18 +602,20 @@ propio config; ninguna instancia se comparte entre tiendas.)
 
 **Procedimiento.**
 
-1. **Leer** las decisiones con la acción `leerdecisiones` de
-   la instancia de la tienda (así se publica el nombre; en
-   prosa puede citarse `leerDecisiones`). Devuelve, por
-   diseño: `slug`, `decision`
-   (`aprobado|rechazado|mejorar`), `nota`, `enviada`,
-   `fechaEnviada`, `esperandoRegeneracion`, `esNuevaVersion`
-   y `loteFecha`. (El contrato de la plantilla,
-   `docs/VITRINA-REVISION.md`, nombra los mismos datos como
-   `fecha`/`fecha_envio` de la decisión: son la fecha de la
-   decisión y la de su marca como lista.)
-2. **Filtrar:** solo se recogen las decisiones con
-   `enviada = true`. Una decisión no enviada es un borrador
+1. **Traer el repo y leer** el registro de decisiones de la
+   tienda: primero `scripts/registros-datos.py pull` (la
+   vitrina commitea directo en el repo de datos; el pull baja
+   sus commits y los sincroniza al árbol físico), después
+   leer `data/tiendas/<tienda-id>/vitrina/decisiones.json`.
+   De cada decisión interesa: `slug`, `accion`
+   (`aprobado|rechazado|mejorar`), `nota`, `estado`,
+   `fecha` y `fecha_lista`. Un veredicto nuevo sobre el mismo
+   diseño y la misma acción **reemplaza** al anterior — manda
+   el último: el registro conserva todos (es append-only) y
+   se aplica solo el vigente, el último en `lista` para ese
+   slug.
+2. **Filtrar:** solo se aplican las decisiones vigentes con
+   `estado = lista`. Una decisión `sin-marcar` es un borrador
    del dueño: no se toca ni se reporta como decisión.
 3. **Validar ANTES de escribir** — si algo falla, se detiene
    todo y se reporta; nunca se escribe a medias:
@@ -584,80 +624,82 @@ propio config; ninguna instancia se comparte entre tiendas.)
      el checkpoint (`data/tiendas/<tienda-id>/estado-propuestas.json`).
    - Los conteos cuadran: total de filtradas = aprobadas +
      rechazadas + mejorar de esta recogida.
-   - **Idempotencia:** un slug que ya está en `aprobados`,
-     `mejorar` o `rechazados` del checkpoint, o que la vitrina
-     ya devuelve con `esperandoRegeneracion = true`, YA fue
-     recogido: se excluye de esta recogida y se reporta como
-     ya recogido. Jamás se duplica su entrada ni se reescribe
+   - **Idempotencia:** una decisión ya `aplicada` o `devuelta`
+     no se reaplica jamás; y un slug que ya está en
+     `aprobados`, `mejorar` o `rechazados` del checkpoint por
+     una recogida anterior se excluye y se reporta como ya
+     recogido. Jamás se duplica su entrada ni se reescribe
      (una entrada de `mejorar` puede llevar trabajo posterior
      — p. ej. su bloque de regeneración — que no es de esta
      recogida). Si tras excluir no queda nada nuevo, la
      recogida termina aquí: se reporta «nada nuevo por
-     recoger» y no se escribe ni se confirma nada.
+     recoger» y no se escribe nada.
      **Excepción — decisión sobre una nueva versión:** si la
      mejora ya se cumplió (su entrada se movió a
-     `mejoras_cumplidas` al sembrarse la regeneración, ver
-     §«Retorno de una mejora») y la vitrina devuelve ese slug
-     como pendiente de una versión nueva con una decisión
-     `enviada = true`, esa decisión es NUEVA: se procesa con
-     normalidad y su entrada se escribe en el array que
-     corresponda, sin que la historia en `mejoras_cumplidas`
-     la bloquee.
+     `mejoras_cumplidas` al entregarse la regeneración, ver
+     §«Retorno de una mejora») y existe una decisión `lista`
+     posterior sobre ese slug, esa decisión es NUEVA: se
+     procesa con normalidad y su entrada se escribe en el
+     array que corresponda, sin que la historia en
+     `mejoras_cumplidas` la bloquee.
 4. **Escribir** en el checkpoint
    `data/tiendas/<tienda-id>/estado-propuestas.json`
-   (checkpoint local de corrida: no se versiona en ningún
-   repo, por diseño de `scripts/registros-datos.py`):
+   (desde 2026-10-26 es un registro versionado de la tienda,
+   no un checkpoint local: se commitea con
+   `scripts/registros-datos.py commit`):
    - `aprobado` → array `aprobados`, agregando
      `{slug, fecha_aprobacion}` — `fecha_aprobacion` = la
      fecha en que el dueño marcó la decisión como lista
-     (`fechaEnviada` de la vitrina, en formato `YYYY-MM-DD`).
+     (`fecha_lista` de la decisión, en formato `YYYY-MM-DD`).
    - `rechazado` → array `rechazados`, agregando
      `{slug, fecha_decision, motivo}` — `fecha_decision`
-     con la misma regla de `fechaEnviada`; `motivo` = la nota
+     con la misma regla de `fecha_lista`; `motivo` = la nota
      del dueño si la dio, si no `null`. Un rechazado no entra
      jamás a `aprobados`, `mejorar` ni `producidos`.
    - `mejorar` → array `mejorar`, agregando
      `{slug, nota, fecha_decision, estado: "esperando_regeneracion"}`
-     — `fecha_decision` con la misma regla de `fechaEnviada`
-     de arriba.
+     — `fecha_decision` con la misma regla de `fecha_lista`.
    - Bloque `recogida_vitrina` (reemplaza al anterior; es el
      registro de la ÚLTIMA recogida): `{fecha_recogida,
      fecha_envio_dueno, lote_fecha, tienda_id, total,
      aprobados, mejorar, rechazados, fuente}` — conteos de
      ESTA recogida; `fecha_envio_dueno` = la mayor
-     `fechaEnviada` de las decisiones recogidas;
-     `fuente` = `<slug de la instancia> (leerdecisiones)`.
+     `fecha_lista` de las decisiones aplicadas;
+     `fuente` = `vitrina/decisiones.json (repo de datos)`.
    - **Y en el mismo acto, el `estado` de cada diseño
      recogido en el registro** (`registro-listings.json` de
      la tienda) — aprobado / mejorar / rechazado, con la
-     fecha de la decisión — commiteado con
-     `scripts/registros-datos.py commit`. Registro y
-     checkpoint NUNCA quedan discrepando: el watchdog cruza
-     ambos, y una aprobación que solo vive en el checkpoint
-     se lee como trabajo perdido (hueco fundacional: la
-     recogida del 2026-10-22 solo escribió el checkpoint y
-     el watchdog alertó esa noche; los estados se alinearon
-     a mano y esta regla lo cierra).
-5. **Confirmar en la vitrina** con la acción
-   `confirmarrecogida` y las listas por resultado:
-   `{aprobados: [slugs], rechazados: [slugs], mejorar: [slugs]}`
-   — solo lo efectivamente escrito en el paso 4. Efecto:
-   aprobados y rechazados **salen** de la vitrina; los de
-   mejorar quedan «Esperando regeneración» hasta que su nueva
-   versión se siembre. Si la escritura falló, no se confirma
-   nada.
+     fecha de la decisión — y la marca de cada decisión en
+     `vitrina/decisiones.json` (`aplicada` +
+     `commit_aplicacion` = el commit del propio
+     `registros-datos.py commit` que cierra este paso; si el
+     hash se conoce recién al commitear, se escribe en un
+     segundo commit inmediato del mismo acto, solo sobre
+     `decisiones.json`). Registro, checkpoint y decisiones
+     NUNCA quedan discrepando: el watchdog cruza los tres, y
+     una aprobación que solo vive en uno se lee como trabajo
+     perdido (hueco fundacional: la recogida del 2026-10-22
+     solo escribió el checkpoint y el watchdog alertó esa
+     noche; los estados se alinearon a mano y esta regla lo
+     cierra).
+5. **Verificar por relectura:** con el commit pusheado,
+   releer el `decisiones.json` del repo de datos (o el árbol
+   físico sincronizado) y confirmar que cada decisión
+   aplicada quedó marcada y que la bandeja derivada ya no la
+   ofrece como pendiente. Sin esta relectura no se reporta
+   éxito: un guardado no verificado no es un guardado.
 6. **Reportar al dueño en el chat donde avisó:** conteos por
-   resultado, qué quedó registrado en el checkpoint y qué
-   sigue (la Fase B produce solo los `aprobados` registrados,
-   con la palabra que el flujo exija; los `mejorar` se
-   regeneran solo en lo que pide su nota). La recogida NO
-   produce drafts, NO publica y NO siembra nada.
+   resultado, qué quedó registrado y qué sigue (la Fase B
+   produce solo los `aprobados` registrados, con la palabra
+   que el flujo exija; los `mejorar` se regeneran solo en lo
+   que pide su nota). La recogida NO produce drafts, NO
+   publica y NO entrega nada nuevo a la vitrina.
 
 **Modo lectura (dry-run).** Si el dueño pide revisar sin
 recoger — o ante cualquier duda sobre el estado — se ejecutan
-solo los pasos 1–3 y se reporta qué se recogería (o que no hay
-nada nuevo), sin escribir el checkpoint ni confirmar en la
-vitrina.
+solo los pasos 1–3 y se reporta qué se aplicaría (o que no hay
+nada nuevo), sin escribir nada.
+
 
 ## Retorno de una mejora (regeneración → nueva versión en la vitrina) — 2026-10-22
 
@@ -678,33 +720,35 @@ cerrado el 2026-10-22):
 3. **Actualizar el registro del diseño:** su `arte` apunta a
    la nueva versión y el bloque de regeneración guarda motivo,
    cambio y verificación (diff acotado a la zona pedida).
-4. **Previa compilada ANTES de sembrar (requisito duro):** la
-   vitrina resuelve las previas por `arte_ref` desde su mapa
-   compilado; la previa de la nueva versión debe estar en ese
-   mapa (edición de la instancia con las previas generadas por
-   `scripts/generar-datos-vitrina.py`) **antes** de la siembra.
-   Si no está, la instancia muestra «Previa de esta versión
-   aún no cargada» — honesto, pero el retorno NO está completo:
-   nunca se siembra a ciegas ni se avisa al dueño sin ver la
-   imagen nueva en el tablero. (Hueco fundacional: las previas
-   eran estáticas por slug y la siembra habría mostrado el
-   arte viejo como «Nueva versión»; la resolución por
-   `arte_ref` se publicó el 2026-10-22.)
-5. **Sembrar** con `scripts/generar-datos-vitrina.py` +
-   acción de siembra de la instancia, con el `arte_ref`
-   NUEVO: la vitrina marca el diseño «Nueva versión», limpia
-   la decisión anterior, conserva la nota de mejora visible y
-   lo deja pendiente.
-6. **Verificar en el tablero** (acción de lectura del
-   tablero): pendiente, nueva versión marcada, `arte_ref`
-   nuevo y nota anterior presente. Recién entonces el retorno
-   existe.
-7. **Checkpoint:** la entrada del diseño se mueve de `mejorar`
+4. **Producir las previas de la nueva versión (requisito
+   duro):** correr `scripts/producir-previas-vitrina.py` con
+   el arte NUEVO ya apuntado en el registro (paso 3): las
+   previas del hogar del diseño se recomponen desde ese arte
+   y el bloque `vitrina` de la entrada declara el `arte_ref`
+   nuevo. La vitrina sirve siempre la previa del `arte_ref`
+   vigente, así que mostrar el arte viejo como «Nueva
+   versión» es imposible por construcción — no por cuidado
+   del operador. (Hueco fundacional del flujo de siembra: las
+   previas eran estáticas por slug dentro de la instancia y
+   la siembra habría mostrado el arte viejo; la resolución
+   por `arte_ref` se publicó el 2026-10-22 y este paso la
+   vuelve estructural.)
+5. **Commitear y verificar por relectura:**
+   `scripts/registros-datos.py commit` (registro + previas +
+   checkpoint del paso 6 en un solo commit), y recién con el
+   commit en el repo, verificar que la bandeja derivada
+   muestra el diseño pendiente, marcado «Nueva versión», con
+   la previa del arte nuevo y la nota anterior presente.
+   Nunca se avisa al dueño sin esa verificación: el retorno
+   no está completo hasta que la imagen nueva es la que la
+   vitrina sirve de verdad.
+6. **Checkpoint:** la entrada del diseño se mueve de `mejorar`
    a `mejoras_cumplidas` (conservando nota, fechas y bloque de
-   regeneración, más el cumplimiento: fecha de siembra, arte
+   regeneración, más el cumplimiento: fecha de entrega, arte
    nuevo y verificación). Así, la decisión que el dueño tome
    sobre la nueva versión es una decisión nueva para la
    recogida (ver la excepción de idempotencia en
-   §«Recogida de decisiones (vitrina)» paso 3).
+   §«Recogida-aplicación de decisiones (vitrina en vivo)»
+   paso 3).
 8. **Avisar al dueño en el chat de entrega** con el acceso a
    la vitrina (sin artes en el chat, como manda la entrega).

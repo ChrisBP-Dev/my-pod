@@ -1,0 +1,273 @@
+# Vitrina de revisión de propuestas — EN VIVO (contrato del sistema)
+
+**Qué es.** La superficie donde el dueño ejerce la puerta creativa de
+la Etapa 1 del flujo v2 (ver `FLUJO-PIPELINE.md` §1): una página
+organizada, pensada primero para el teléfono, donde cada propuesta se
+revisa con su arte y su porqué, y la decisión se guarda **como dato en
+el repositorio de datos** — no como mensajes sueltos en un chat ni como
+filas en una base de datos de la superficie.
+
+**El motor (desde 2026-10-26, decisión del dueño):** la vitrina **lee
+en vivo** el repo de datos de la aplicación (`ChrisBP-Dev/my-pod-datos`)
+con el conector de GitHub declarado, y su única escritura es el
+registro de decisiones de la tienda, en ese mismo repo. No hay
+paquete, no hay siembra, no hay base de datos propia con estado de
+revisión: la bandeja se **deriva** del repo en cada apertura. Es el
+mismo patrón del Centro de gestión de My Channels (contrato
+`CENTRO-GESTION-VIVO.md` de esa app, ruta C de decisiones), aplicado a
+esta puerta. Plan y auditoría que lo originan:
+`docs/PROPUESTA-VITRINA-LECTURA-EN-VIVO.md`.
+
+**Estado:** contrato vigente desde su fusión. La presentación es la
+plantilla v2.3 aprobada por el dueño (sus §§ de UX se conservan
+abajo); la plantilla sembrada anterior (`docs/VITRINA-REVISION.md`)
+queda como historia.
+
+## Principios de UX (los de la plantilla v2.3, no negociables)
+
+1. **Móvil primero, desktop con su ancho.** En el teléfono: una columna,
+   el arte manda. En desktop: parrilla de tarjetas (2–3 por fila) y el
+   detalle en dos columnas (arte | información y decisión).
+2. **Pocas cosas, bien ordenadas.** Una sola jerarquía por pantalla:
+   arte → título y etiquetas → porqué en secciones → decisión. Nada de
+   tableros cargados ni datos duplicados en dos lugares.
+3. **Progreso siempre visible.** Encabezado fijo con el conteo
+   (revisados / total) y su barra; el dueño sabe en todo momento
+   cuánto falta.
+4. **Decidir cuesta un toque.** La decisión se guarda al instante, sin
+   botón de «guardar» global ni formularios. Cambiar de opinión es
+   volver a tocar: la última decisión es la que vale.
+5. **El arte se juzga como se va a usar.** Cada diseño trae dos vistas
+   previas deterministas compuestas desde el PNG de producción: sobre
+   fondo oscuro y sobre fondo claro (las prendas reales), con un
+   conmutador en el detalle. Nunca una regeneración «parecida».
+6. **Sin celdas vacías ni datos huérfanos.** Todo lo que la puerta
+   declara (porqué, qué mirar, nota de la puerta) vive dentro de la
+   tarjeta del diseño; ningún archivo adjunto sustituye la
+   presentación.
+7. **La tarjeta no decide; el detalle decide.** La lista es para
+   navegar: tarjeta = arte completo + título + descripción breve +
+   etiquetas + estado, y se entra tocándola. Los botones de decisión
+   viven solo en el detalle (el flujo de revisión es de a uno).
+8. **El arte nunca se recorta en pantalla.** Tarjeta, detalle y visor
+   muestran el diseño COMPLETO (ajuste «contain», mismo margen y
+   fondo en todas), fiel al recorte real del archivo — un encuadre
+   que corte el diseño falsea la evaluación del recorte.
+9. **Nada bloquea a nada.** La vitrina es una bandeja continua: los
+   lotes se suman, las decisiones conviven y todo sigue editable
+   mientras el diseño esté en la vitrina. No hay «cierre de lote» ni
+   requisito de cero pendientes para que entre trabajo nuevo.
+
+A estos se suma, propio del motor en vivo:
+
+10. **La superficie lee la realidad y lo dice.** Cada apertura fija el
+    HEAD del repo, deriva de él y muestra el sello «Leído en vivo ·
+    commit `<sha-corto>`». Si una lectura falla, la vista lo muestra
+    fallido con su causa; jamás sirve una copia vieja como si fuera
+    la realidad, y jamás inventa un dato que su fuente no trae: si
+    falta un entregable (una previa, un campo), el hueco se nombra
+    en la vista y se corrige en el flujo que lo produce.
+
+## Flujo de uso
+
+1. **Entrega (el flujo):** con un lote en PASS de la puerta de arte,
+   el flujo produce las previas en su hogar del repo y registra los
+   entregados en el estado de la tienda, commiteando todo en la
+   misma corrida (procedimiento exacto: `puerta-arte-propuesta`
+   §«Entrega para aprobación del dueño»). No hay acción de entrega
+   sobre la vitrina: al abrir, el diseño entregado simplemente
+   **está**, derivado del estado.
+2. **Revisión (el dueño):** entra a la vitrina — la vista inicial es
+   **Pendientes** (no hay vista «todas»: la lista se va limpiando a
+   medida que decide; las demás vistas son aprobadas / rechazadas /
+   por mejorar, para consultar lo ya decidido y cambiar de opinión
+   cuando quiera) —, abre cada diseño, lee su porqué, alterna el
+   fondo con el control segmentado etiquetado «Fondo: Oscuro /
+   Claro» (estado activo inconfundible en ambos modos), inspecciona
+   el arte en el visor con zoom focal (acotado, sin cierre por
+   gestos) y decide en el detalle: **Aprobar**, **Rechazar** o
+   **Mejorar** (con nota de qué mejorar; la nota también es
+   bienvenida en un rechazo). Cada decisión se escribe al instante
+   en el repo (ver §Decisiones), con su estado de escritura visible:
+   escribiendo → guardada, o fallida con su causa (nunca dada por
+   guardada). Cuando quiere, pulsa **«Marcar listas para Jarvis»**
+   (visible solo si hay decisiones sin marcar, con su conteo): las
+   pasa a `lista` — una bandera, no un candado; todo sigue editable
+   y cambiar una decisión le quita la marca. Al marcar, la vitrina
+   muestra el recibo compacto («Listas para recoger — todavía no
+   fueron procesadas») con el mensaje exacto para avisar en un chat
+   y su botón **Copiar mensaje**; el recibo reaparece, discreto,
+   mientras haya decisiones listas sin aplicar.
+3. **Recogida-aplicación (Jarvis):** con el aviso del dueño en un
+   chat, sigue el procedimiento operativo exacto de
+   `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida-aplicación
+   de decisiones (vitrina en vivo)»): lee las decisiones `lista`
+   del repo, las aplica con sus validaciones e idempotencia sobre
+   el estado y el registro, y marca cada decisión `aplicada` con su
+   commit. La Fase B produce **solo** lo aprobado. Nada se produce
+   desde la vitrina.
+
+## Lectura — qué lee la instancia y cómo deriva la bandeja
+
+La instancia declara el conector de GitHub con lectura y escritura
+acotado **solo al repo de datos**. Por apertura:
+
+1. Fija el HEAD de la rama con `list_commits`.
+2. Lee, contra ese commit, SOLO estos archivos de SU tienda
+   (declarada en §Instalación): `config.json`,
+   `registro-listings.json`, `estado-propuestas.json` y
+   `vitrina/decisiones.json`. Lista blanca de campos por diseño:
+   `titulo`, `tema`, `track`/`tipo`, `fecha_propuesta`, el porqué
+   (que el servidor parte en sus secciones por sus marcadores
+   canónicos — «Tema y ángulo:», «Frase:», «Iconografía:», «Qué
+   mirar:» — sin reescribirlo), `nota_puerta`, `personalizable`,
+   `ficha_razon`, `dimensiones_px` y el bloque `vitrina` (rutas de
+   previas + `arte_ref`). Etiquetas y frase corta se derivan del
+   porqué/tema con la misma lógica determinista que usaba el
+   generador retirado. Nada más viaja.
+3. Deriva la bandeja desde el estado y las decisiones, en este
+   orden de verdad: un diseño está **en la bandeja** si el estado
+   lo lista como entregado y ninguna recogida lo ha movido a
+   aprobados/producidos/rechazados ni está en `mejorar` con su
+   mejora aún sin cumplir. Su vista: **Pendientes** si no tiene
+   decisión vigente; la vista de su decisión (aprobadas /
+   rechazadas / por mejorar) si la tiene; **«Esperando
+   regeneración»** si su decisión vigente es mejorar y ya fue
+   aplicada; **«Nueva versión»** (de vuelta en Pendientes, con la
+   nota de mejora anterior visible en su detalle) cuando su
+   entrada pasó a `mejoras_cumplidas` y el flujo entregó el arte
+   nuevo. Aprobados y rechazados aplicados **salen** de la
+   bandeja por derivación. El vacío es un estado terminal
+   legítimo: bandeja en cero = «todo decidido y aplicado», y la
+   vista muestra «Sin pendientes» — no falta ninguna siembra.
+4. Sirve las previas desde su hogar en el repo
+   (`propuestas/<slug>/previa-oscura.jpg` y `previa-clara.jpg`;
+   en personalizables también `simulacion-oscura.jpg` y
+   `simulacion-clara.jpg`), con caché de bytes por SHA de blob:
+   los bytes inmutables se cachean por contenido; los datos
+   derivados se leen en vivo en cada apertura, jamás se cachean.
+   La previa servida es siempre la declarada para el `arte_ref`
+   vigente de la entrada; si el archivo declarado no existe en el
+   repo, la tarjeta lo nombra como hueco («Previa no encontrada
+   en el repo») en vez de mostrar otra imagen.
+
+Presupuesto de lecturas por apertura: ~5 llamadas de texto +
+las previas que cambiaron de SHA. Las lecturas independientes se
+emiten en oleadas acotadas (una ráfaga grande recibe 429 del
+conector: el paralelismo tiene techo y se respeta).
+
+## Decisiones — la única escritura de la instancia
+
+El registro: `data/tiendas/<tienda-id>/vitrina/decisiones.json`,
+una lista append-only. Cada entrada:
+
+```json
+{"id": "p058-2026-10-26T15:04:11-04:00",
+ "fecha": "2026-10-26T15:04:11-04:00",
+ "slug": "p058",
+ "accion": "aprobado|rechazado|mejorar",
+ "nota": "texto libre del dueño o cadena vacía",
+ "estado": "sin-marcar",
+ "fecha_lista": null,
+ "commit_aplicacion": null}
+```
+
+- **Decidir = escribir al instante.** Al confirmar una decisión en
+  el detalle, la instancia lee el registro vigente (creándolo si
+  no existe), fusiona por `id` y escribe con **un solo commit**
+  por el conector. No hay bandeja de guardado ni escritura en
+  lote. Conflicto de SHA: relee, refusiona y reintenta **una**
+  vez; segundo choque: error con causa y la decisión **no queda
+  en pie** — la vista lo muestra fallido, nunca como guardado.
+  Ritmo medido del patrón (Centro de My Channels): la escritura
+  ronda los 13 s; la tarjeta muestra ese estado mientras tanto.
+  Sin confirmación por relectura, nada se da por guardado.
+- **Cambiar de opinión** escribe una decisión NUEVA para el mismo
+  slug (otro `id`): manda la última registrada; las anteriores
+  conservan su historia en el registro. Si la decisión anterior
+  estaba `lista`, la nueva nace `sin-marcar` (hay que volver a
+  marcarla — la marca era de aquella decisión, no del diseño).
+- **«Marcar listas para Jarvis»** escribe un commit que pasa a
+  `lista` (con su `fecha_lista`) las decisiones vigentes
+  `sin-marcar` del dueño. Es una señal, no una acción sobre la
+  tienda ni un envío: la vitrina no produce, no publica, no toca
+  Printify y **no notifica a nadie por sí sola**. La aplicación
+  ocurre cuando el dueño avisa en un chat (el recibo trae el
+  mensaje exacto, copiable: «Jarvis, recoge las decisiones de la
+  vitrina de My POD (<tienda>)»).
+- **La instancia jamás escribe otro archivo:** ni el registro de
+  listings, ni el estado, ni el config. Los cambios sobre esos
+  archivos los hace el flujo dueño (la recogida-aplicación), con
+  sus validaciones, y quedan en el mismo repo como commits del
+  sistema.
+
+## La entrega produce sus fuentes (contrato con el flujo)
+
+La vitrina no inventa ni completa nada: lo que muestra nace en el
+flujo que entrega, guardado en su lugar (`puerta-arte-propuesta`
+§«Entrega» ejecuta; esto declara el contrato):
+
+- **El porqué** vive en la entrada del registro, completo y con
+  sus marcadores. La vitrina lo parte y lo presenta; no lo
+  reescribe.
+- **Las previas** son un entregable del paso de entrega:
+  `scripts/producir-previas-vitrina.py` las compone desde el PNG
+  de producción y las deja en
+  `data/tiendas/<tienda-id>/propuestas/<slug>/`, declarando en la
+  entrada `dimensiones_px` y el bloque `vitrina` con sus rutas y
+  su `arte_ref`. Ese hogar es el único donde un medio se
+  versiona: excepción acotada del dueño (2026-10-26) al «nunca
+  medios en git», declarada igual en el `.gitignore` del repo de
+  datos y en la clasificación de `scripts/registros-datos.py`. El
+  PNG de producción sigue sin versionarse, como todo medio.
+- **Personalizables:** la entrada declara `personalizable: true`,
+  `simulacion` y `ficha_razon` completos (contrato de la puerta).
+  Sin simulación o sin ficha, la producción de previas FALLA y el
+  diseño no llega a la bandeja disfrazado de normal. El detalle
+  muestra arte real y simulación etiquetados («Arte real — zonas
+  vacías» / «Simulación — con el ejemplo») bajo el mismo
+  conmutador de fondo, y la sección «Ficha de personalización»
+  con la ficha completa.
+
+## Instalación — una instancia por tienda, multitienda por diseño
+
+La vitrina **no se crea por lote ni por día**: existe **una sola
+instancia por tienda**, y lo que cambia es lo que el repo trae.
+Crear instancias por corrida quemaría trabajo y multiplicaría
+superficies. Para dar de alta la vitrina de una tienda nueva:
+
+1. La tienda declara en su `config.json` el bloque `vitrina` con
+   el slug de su instancia (sin esa declaración, nadie inventa el
+   slug ni reutiliza el de otra tienda).
+2. Se crea la instancia — una aplicación web **sin estado propio**
+   (no guarda nada: lee y escribe el repo) — declarando el
+   conector de GitHub con lectura y escritura **solo sobre el
+   repo de datos**, y su tienda: `repo = my-pod-datos`,
+   `ruta_tienda = data/tiendas/<tienda-id>`. La instalación de la
+   app de GitHub selecciona solo ese repo.
+3. El hogar de previas y el registro de decisiones nacen con la
+   primera entrega y la primera decisión; ningún paso siembra
+   contenido inicial. Una bandeja en cero al nacer es correcta.
+
+**Costo por lote en este modelo:** la corrida del script de
+previas (local, determinista) + un commit del puente. La
+instancia no se edita por lote, no se siembra y no se confirma
+nada en ella tras la recogida.
+
+## Qué murió con este contrato (y dónde queda su historia)
+
+- `scripts/generar-datos-vitrina.py` y el paquete
+  `datos-vitrina.json` (contrato de entrada de la plantilla
+  sembrada).
+- Las acciones de la instancia sembrada: `seedlote`,
+  `leerdecisiones`, `confirmarrecogida`, `setdecision`,
+  `savenota`, `cleardecision`, `enviardecisiones`,
+  `leerestadorevision` — reemplazadas por la lectura derivada y
+  la escritura directa al repo.
+- Las previas horneadas en el código de la instancia y la regla
+  de siembra con su registro de retirados (la resurrección es
+  imposible por construcción: no hay copia que resucitar).
+- La historia completa del modelo anterior vive en
+  `docs/VITRINA-REVISION.md` (plantilla v2.3) y en el CHANGELOG
+  de `puerta-arte-propuesta`; este contrato conserva de aquella
+  plantilla solo su presentación y su gestión, que son el piso.

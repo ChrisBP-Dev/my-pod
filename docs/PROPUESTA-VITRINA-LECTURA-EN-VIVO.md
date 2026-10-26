@@ -7,11 +7,21 @@ intactos su aspecto visual y su gestión. Alcance de esta etapa: **solo la
 vitrina**. La migración mayor (gestión a nivel tienda, con la configuración
 de la tienda visible y sus flujos ahí) es etapa posterior; esta deja su base.
 
-**Estado:** auditoría ejecutada + plan. **Sin construir.** La construcción
-requiere el dale expreso del dueño sobre este plan. La vitrina viva no se
-ha tocado; su bandeja está en cero (verificado hoy por `getboard`:
-0 diseños, 0 decisiones), así que el corte no pone en riesgo ninguna
-decisión en curso.
+**Estado:** **F0 DADO por el dueño (2026-10-26, con las dos decisiones
+de §8 aceptadas como recomendadas)** y **F1 EJECUTADA** el mismo día en
+esta rama (verificación en el commit de F1): el puente
+`registros-datos.py` reclasificó `estado-propuestas.json` como
+registro y las previas del hogar declarado como entregable
+versionable; el repo de datos ya versiona el estado vivo y el
+registro de decisiones vacío (commit `7b79083` en su `main` — ese
+repo commitea sus registros a main por su propio flujo, y el cambio
+es inerte hasta que esta rama se fusione); `puerta-arte-propuesta`
+v0.9.0 trae la entrega y la recogida-aplicación nuevas; el contrato
+vive en `docs/VITRINA-VIVA.md`. La vitrina viva no se ha tocado; su
+bandeja está en cero (verificado hoy por `getboard`: 0 diseños, 0
+decisiones), así que el corte no pone en riesgo ninguna decisión en
+curso. Sigue F2 (construcción en ensayo) con la puerta de fase
+cumplida.
 
 ---
 

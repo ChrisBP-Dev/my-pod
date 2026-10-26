@@ -41,19 +41,25 @@ Toda mejora de este flujo se declara cerrada solo tras pasar `docs/PUERTA-CIERRE
   (canonizada el 2026-10-22; el mismo día el dueño retiró el
   chat como superficie de esta fase): el dueño aprueba, rechaza
   o pide ajuste ANTES de que se produzca nada, **en la vitrina
-  de revisión** de la tienda (plantilla y contratos en
-  `docs/VITRINA-REVISION.md`): el paquete del lote se genera con
-  `scripts/generar-datos-vitrina.py` y se siembra **aditivo** en
-  la instancia de la tienda (bandeja continua, una sola por
-  tienda, declarada en `vitrina` de su `config.json`). **El chat
+  de revisión** de la tienda (contrato en `docs/VITRINA-VIVA.md`;
+  la vitrina lee en vivo el repo de datos desde 2026-10-26, sin
+  siembra): la entrega produce las previas del lote en su hogar
+  del repo con `scripts/producir-previas-vitrina.py`, registra
+  los entregados en el estado de la tienda y commitea todo en
+  la misma corrida — con ese commit el lote ya está en la
+  bandeja (continua, una instancia sola por tienda, declarada
+  en `vitrina` de su `config.json`). **El chat
   solo avisa:** un aviso breve en el chat de entrega (qué lote,
   cuántos diseños, el acceso a la vitrina), sin artes adjuntos.
-  El dueño decide en la vitrina, marca las decisiones con
-  «Marcar listas para Jarvis» y avisa en un chat, y la recogida
-  al checkpoint sigue el procedimiento «Recogida de decisiones
-  (vitrina)» de `puerta-arte-propuesta`. Ninguna aprobación vale
+  El dueño decide en la vitrina (sus decisiones se escriben al
+  instante en el repo), marca las decisiones con
+  «Marcar listas para Jarvis» y avisa en un chat, y la
+  recogida-aplicación al checkpoint sigue el procedimiento
+  «Recogida-aplicación de decisiones (vitrina en vivo)» de
+  `puerta-arte-propuesta`. Ninguna aprobación vale
   hasta estar registrada en el checkpoint
-  (`data/tiendas/<tienda-id>/estado-propuestas.json`). Lo
+  (`data/tiendas/<tienda-id>/estado-propuestas.json`, registro
+  versionado de la tienda). Lo
   aprobado se enlista (la cola persiste entre días; no caduca).
   Lo rechazado no consume producción. Lo ajustado (mejorar)
   vuelve solo a esta etapa.
@@ -276,8 +282,8 @@ su ruta en el mismo cambio.**
 
 | Tarea / flujo | Lecturas mínimas gobernantes |
 |---|---|
-| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) · `docs/VITRINA-REVISION.md` (plantilla y contratos de la superficie única de entrega) + `scripts/generar-datos-vitrina.py` (paquete del lote para sembrar) |
-| **Recogida de decisiones de la vitrina** (el dueño avisa «recoge las decisiones de la vitrina de <tienda>») | `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida de decisiones (vitrina)»: procedimiento completo, validaciones e idempotencia) · `docs/VITRINA-REVISION.md` (contrato de salida) · `data/tiendas/<tienda-id>/config.json` (bloque `vitrina`: la instancia de ESA tienda) · `data/tiendas/<tienda-id>/estado-propuestas.json` (checkpoint destino) · `data/tiendas/<tienda-id>/registro-listings.json` (validación de slugs) |
+| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) · `docs/VITRINA-VIVA.md` (contrato de la superficie única de entrega, en vivo) + `scripts/producir-previas-vitrina.py` (previas del lote a su hogar en el repo de datos) |
+| **Recogida-aplicación de decisiones de la vitrina** (el dueño avisa «recoge las decisiones de la vitrina de <tienda>») | `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida-aplicación de decisiones (vitrina en vivo)»: procedimiento completo, validaciones e idempotencia) · `docs/VITRINA-VIVA.md` (contrato de decisiones) · `data/tiendas/<tienda-id>/config.json` (bloque `vitrina`: la instancia de ESA tienda) · `data/tiendas/<tienda-id>/vitrina/decisiones.json` (fuente: decisiones del dueño en el repo) · `data/tiendas/<tienda-id>/estado-propuestas.json` (destino) · `data/tiendas/<tienda-id>/registro-listings.json` (validación de slugs) |
 | **Producción — etapa 2: borradores de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen su MPL producido) · `data/tiendas/29222324/estado-propuestas.json` (los `aprobados` registrados que consume esta fase) |
 | **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` (§M5 algoritmo y manifiesto de mockups · §M6 escenarios y formato técnico de video, única fuente desde v0.11.0) |
 | **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/tiendas/29222324/registro-listings.json` (lo hereda el paquete) |
