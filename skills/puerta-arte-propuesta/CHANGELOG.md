@@ -1,5 +1,11 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.10.0 (2026-10-26) — recogida sin marca (U1 del brief de alineación)
+
+- **«Marcar listas» deja de ser puerta:** la decisión del dueño es vigente desde que la vitrina la escribe al instante en `vitrina/decisiones.json`; no hay botón, ni recibo copiable, ni estado `lista` como requisito. La recogida-aplicación (§ homónima) opera sobre las **decisiones vigentes** del repo: última entrada por slug, no `aplicada`/`devuelta`, `accion` ≠ `retirar` (una última entrada `retirar` = sin decisión vigente).
+- **Compatibilidad hacia atrás:** entradas históricas con `estado` `sin-marcar` o `lista` se leen como `vigente`; `fecha_lista` pasa a dato histórico ignorado. Las fechas de aprobación/decisión de la recogida salen ahora de `fecha` (el instante de la decisión), y `fecha_envio_dueno` del bloque `recogida_vitrina` conserva su nombre histórico con ese mismo valor.
+- **Disparador sin cambios de fondo:** cualquier aviso del dueño en un chat (regla libre de v0.8.4); sin aviso no hay aplicación. Motivo de U1: la marca era compensatoria de la vitrina sembrada — con lectura en vivo y escritura al instante, su contexto murió (decisión cerrada del dueño, 2026-10-26). Contrato alineado: `docs/VITRINA-VIVA.md` (Enmienda U1, §Acciones: `getboard`/`sello`/`guardardecision`, `marcarlistas` retirada).
+
 ## v0.9.0 (2026-10-26) — la entrega y la recogida se mudan a la vitrina en vivo (sin siembra)
 
 - **Entrega reescrita:** mueren el paquete (`datos-vitrina.json`) y la siembra. La entrega ahora es: porqué completo en el registro → previas producidas como entregable en su hogar del repo de datos con `scripts/producir-previas-vitrina.py` (que hereda la puerta mecánica de personalizables: sin simulación o sin ficha, falla) y declaradas en la entrada (`dimensiones_px` + bloque `vitrina`) → entregados registrados en `estado-propuestas.json` → un solo commit del puente. Con ese commit el diseño ya está en la vitrina: la instancia lo deriva del repo al abrir.

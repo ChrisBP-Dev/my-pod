@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.9.0"
+  version: "0.10.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.9.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.10.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -476,11 +476,11 @@ siembra; contratos en `docs/VITRINA-VIVA.md`):
    todo eso vive dentro de la vitrina y ahí se revisa.
 5. **El dueño decide en la vitrina** (sus decisiones se
    escriben al instante en el registro de decisiones de la
-   tienda, en el repo), marca las decisiones con «Marcar
-   listas para Jarvis» y avisa en un chat; la
-   recogida-aplicación al checkpoint sigue la sección
-   «Recogida-aplicación de decisiones (vitrina en vivo)» de
-   este skill.
+   tienda, en el repo — esa escritura ES la decisión vigente;
+   desde U1 2026-10-26 no hay marca posterior) y avisa en un
+   chat cuando quiere; la recogida-aplicación al checkpoint
+   sigue la sección «Recogida-aplicación de decisiones
+   (vitrina en vivo)» de este skill.
 
 El porqué se escribe al generar (sale de la directriz y del
 brief del diseño, no se inventa al entregar) y se guarda en el
@@ -539,7 +539,7 @@ su sección «Ficha de personalización» (contrato:
   contraste del dato sobre la prenda más clara, y si la composición
   sigue cerrando con el dato puesto.
 
-## Recogida-aplicación de decisiones (vitrina en vivo) — 2026-10-26
+## Recogida-aplicación de decisiones (vitrina en vivo) — 2026-10-26, sin marca desde U1 (2026-10-26)
 
 **Dónde vive y por qué.** Esta recogida es el cierre de ESTA
 puerta — la misma que entrega —, no un flujo nuevo: consume el
@@ -557,40 +557,48 @@ del dueño viven en el registro de decisiones de la tienda,
 la vitrina lo escribe al instante con el conector, un commit
 por decisión — ruta C del Centro de My Channels). Cada
 decisión trae `{id, fecha, slug, accion
-(aprobado|rechazado|mejorar), nota, estado
-(sin-marcar|lista|aplicada|devuelta), fecha_lista,
-commit_aplicacion}`. Recoger = **aplicar**: leer las decisiones
-en `lista`, mover el estado y el registro con las validaciones
-de esta sección, y marcar cada decisión `aplicada` (o
-`devuelta` si una validación la rechaza, con su causa en la
-nota de aplicación) con el `commit_aplicacion` del commit que
-la aplicó. No existe confirmación hacia la superficie: la
-bandeja se deriva del repo, así que lo aplicado deja de verse
-pendiente por derivación, no por purga.
+(aprobado|rechazado|mejorar|retirar), nota, estado
+(vigente|aplicada|devuelta), fecha_lista,
+commit_aplicacion}`. **Decisión vigente** = la última entrada
+registrada para un slug que no esté `aplicada` ni `devuelta`
+y cuya `accion` no sea `retirar` (si la última es `retirar`,
+no hay decisión vigente para ese slug). **Compatibilidad hacia
+atrás (U1):** las entradas históricas con `estado` `sin-marcar`
+o `lista` se leen e interpretan exactamente como `vigente`;
+`fecha_lista` es un dato histórico ignorado, no un error ni un
+requisito, y ninguna escritura nueva lo produce. Recoger =
+**aplicar**: leer las decisiones **vigentes**, mover el estado
+y el registro con las validaciones de esta sección, y marcar
+cada decisión `aplicada` (o `devuelta` si una validación la
+rechaza, con su causa en la nota de aplicación) con el
+`commit_aplicacion` del commit que la aplicó. No existe
+confirmación hacia la superficie: la bandeja se deriva del
+repo, así que lo aplicado deja de verse pendiente por
+derivación, no por purga.
 
-**Disparador.** El dueño avisa en un chat — «recoge las
-decisiones de la vitrina de <tienda>» (el recibo de la vitrina
-trae ese aviso como mensaje copiable: «Jarvis, recoge las
-decisiones de la vitrina de My POD (<tienda>)»). **No se exige
-la frase exacta:** cualquier mensaje suyo, en cualquier forma
-(texto o audio), que indique que ya decidió o marcó sus
-decisiones como listas en la vitrina ES el aviso y dispara la
-recogida (caso fundacional 2026-10-22: avisó por audio, sin
-pegar el mensaje copiable, y la recogida corrió). Sin aviso NO
-hay aplicación: la marca `lista` por sí sola no dispara nada
-y la vitrina no notifica a nadie.
+**Disparador.** El dueño avisa en un chat — cualquier aviso
+suyo basta (p. ej. «recoge las decisiones de la vitrina de
+<tienda>»). **No se exige la frase exacta:** cualquier mensaje
+suyo, en cualquier forma (texto o audio), que indique que ya
+decidió en la vitrina ES el aviso y dispara la recogida (regla
+del disparador libre, vigente desde v0.8.4; caso fundacional
+2026-10-22: avisó por audio y la recogida corrió). Sin aviso
+NO hay aplicación: una decisión vigente por sí sola no dispara
+nada y la vitrina no notifica a nadie. No existe botón de
+marca ni recibo copiable (retirados en U1, 2026-10-26: la
+marca era compensatoria de la vitrina sembrada; con la
+escritura al instante en el repo, su contexto murió).
 
 **Cruce obligatorio antes de reportar estados.** El checkpoint
-NO conoce las decisiones que el dueño ya marcó como `lista` y
-aún no se aplicaron. Antes de reportarle conteos de aprobados
-/ mejorar / rechazados de un lote, cruza con el registro de
-decisiones de la tienda (tras el `pull` del paso 1): lo
-decidido y marcado se reporta como «decidido en la vitrina,
-pendiente de aplicación» — nunca se le repiten los conteos
-viejos como si su decisión no existiera (mismo caso
-fundacional: el sistema le siguió diciendo «uno en mejorar»
-horas después de que él ya había aprobado la nueva versión en
-la vitrina).
+NO conoce las decisiones vigentes del dueño que aún no se
+aplicaron. Antes de reportarle conteos de aprobados / mejorar
+/ rechazados de un lote, cruza con el registro de decisiones
+de la tienda (tras el `pull` del paso 1): lo decidido se
+reporta como «decidido en la vitrina, pendiente de
+aplicación» — nunca se le repiten los conteos viejos como si
+su decisión no existiera (mismo caso fundacional: el sistema
+le siguió diciendo «uno en mejorar» horas después de que él
+ya había aprobado la nueva versión en la vitrina).
 
 **Instancia.** Una sola vitrina por tienda, declarada en el
 bloque `vitrina` del `config.json` de la tienda
@@ -608,15 +616,21 @@ propio config; ninguna instancia se comparte entre tiendas.)
    sus commits y los sincroniza al árbol físico), después
    leer `data/tiendas/<tienda-id>/vitrina/decisiones.json`.
    De cada decisión interesa: `slug`, `accion`
-   (`aprobado|rechazado|mejorar`), `nota`, `estado`,
-   `fecha` y `fecha_lista`. Un veredicto nuevo sobre el mismo
-   diseño y la misma acción **reemplaza** al anterior — manda
-   el último: el registro conserva todos (es append-only) y
-   se aplica solo el vigente, el último en `lista` para ese
-   slug.
-2. **Filtrar:** solo se aplican las decisiones vigentes con
-   `estado = lista`. Una decisión `sin-marcar` es un borrador
-   del dueño: no se toca ni se reporta como decisión.
+   (`aprobado|rechazado|mejorar|retirar`), `nota`, `estado` y
+   `fecha`. (`fecha_lista`, si una entrada histórica la trae,
+   se ignora.) Un veredicto nuevo sobre el mismo diseño
+   **reemplaza** al anterior — manda el último: el registro
+   conserva todos (es append-only) y se aplica solo el
+   vigente, el último no aplicado para ese slug.
+2. **Filtrar:** solo se aplican las decisiones **vigentes**
+   (definición arriba): la última entrada por slug, no
+   `aplicada` ni `devuelta`, con `accion` en
+   `aprobado|rechazado|mejorar`. Las entradas históricas con
+   `estado` `sin-marcar` o `lista` cuentan como vigentes en
+   igualdad de condiciones — ninguna decisión vigente se
+   descarta por no llevar marca. Una entrada `retirar` como
+   última de su slug significa «sin decisión vigente»: no se
+   aplica nada para ese slug.
 3. **Validar ANTES de escribir** — si algo falla, se detiene
    todo y se reporta; nunca se escribe a medias:
    - Cada slug filtrado existe en el registro de la tienda
@@ -637,7 +651,7 @@ propio config; ninguna instancia se comparte entre tiendas.)
      **Excepción — decisión sobre una nueva versión:** si la
      mejora ya se cumplió (su entrada se movió a
      `mejoras_cumplidas` al entregarse la regeneración, ver
-     §«Retorno de una mejora») y existe una decisión `lista`
+     §«Retorno de una mejora») y existe una decisión vigente
      posterior sobre ese slug, esa decisión es NUEVA: se
      procesa con normalidad y su entrada se escribe en el
      array que corresponda, sin que la historia en
@@ -649,22 +663,24 @@ propio config; ninguna instancia se comparte entre tiendas.)
    `scripts/registros-datos.py commit`):
    - `aprobado` → array `aprobados`, agregando
      `{slug, fecha_aprobacion}` — `fecha_aprobacion` = la
-     fecha en que el dueño marcó la decisión como lista
-     (`fecha_lista` de la decisión, en formato `YYYY-MM-DD`).
+     fecha en que el dueño decidió (`fecha` de la decisión,
+     en formato `YYYY-MM-DD`; la decisión se escribe al
+     instante, así que esa es su fecha real — no hay fecha de
+     marca).
    - `rechazado` → array `rechazados`, agregando
-     `{slug, fecha_decision, motivo}` — `fecha_decision`
-     con la misma regla de `fecha_lista`; `motivo` = la nota
-     del dueño si la dio, si no `null`. Un rechazado no entra
-     jamás a `aprobados`, `mejorar` ni `producidos`.
+     `{slug, fecha_decision, motivo}` — `fecha_decision` con
+     la misma regla de `fecha`; `motivo` = la nota del dueño
+     si la dio, si no `null`. Un rechazado no entra jamás a
+     `aprobados`, `mejorar` ni `producidos`.
    - `mejorar` → array `mejorar`, agregando
      `{slug, nota, fecha_decision, estado: "esperando_regeneracion"}`
-     — `fecha_decision` con la misma regla de `fecha_lista`.
+     — `fecha_decision` con la misma regla de `fecha`.
    - Bloque `recogida_vitrina` (reemplaza al anterior; es el
      registro de la ÚLTIMA recogida): `{fecha_recogida,
      fecha_envio_dueno, lote_fecha, tienda_id, total,
      aprobados, mejorar, rechazados, fuente}` — conteos de
-     ESTA recogida; `fecha_envio_dueno` = la mayor
-     `fecha_lista` de las decisiones aplicadas;
+     ESTA recogida; `fecha_envio_dueno` (nombre histórico del
+     campo) = la mayor `fecha` de las decisiones aplicadas;
      `fuente` = `vitrina/decisiones.json (repo de datos)`.
    - **Y en el mismo acto, el `estado` de cada diseño
      recogido en el registro** (`registro-listings.json` de

@@ -90,22 +90,23 @@ A estos se suma, propio del motor en vivo:
    bienvenida en un rechazo). Cada decisión se escribe al instante
    en el repo (ver §Decisiones), con su estado de escritura visible:
    escribiendo → guardada, o fallida con su causa (nunca dada por
-   guardada). Cuando quiere, pulsa **«Marcar listas para Jarvis»**
-   (visible solo si hay decisiones sin marcar, con su conteo): las
-   pasa a `lista` — una bandera, no un candado; todo sigue editable
-   y cambiar una decisión le quita la marca. Al marcar, la vitrina
-   muestra el recibo compacto («Listas para recoger — todavía no
-   fueron procesadas») con el mensaje exacto para avisar en un chat
-   y su botón **Copiar mensaje**; el recibo reaparece, discreto,
-   mientras haya decisiones listas sin aplicar.
-3. **Recogida-aplicación (Jarvis):** con el aviso del dueño en un
-   chat, sigue el procedimiento operativo exacto de
+   guardada). **No hay paso posterior de envío ni de marca**
+   (U1, 2026-10-26): la decisión escrita al instante YA es la
+   decisión vigente, lista para su recogida-aplicación en cuanto
+   el dueño avise en un chat — sin botón «Marcar listas», sin
+   recibo copiable y sin estado `lista` como requisito. Todo
+   sigue editable mientras no se aplique: cambiar de opinión
+   escribe una decisión nueva que reemplaza a la anterior como
+   vigente.
+3. **Recogida-aplicación (Jarvis):** con cualquier aviso del
+   dueño en un chat, sigue el procedimiento operativo exacto de
    `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida-aplicación
-   de decisiones (vitrina en vivo)»): lee las decisiones `lista`
-   del repo, las aplica con sus validaciones e idempotencia sobre
-   el estado y el registro, y marca cada decisión `aplicada` con su
-   commit. La Fase B produce **solo** lo aprobado. Nada se produce
-   desde la vitrina.
+   de decisiones (vitrina en vivo)»): lee las decisiones
+   **vigentes** del repo (ver §Decisiones), las aplica con sus
+   validaciones e idempotencia sobre el estado y el registro, y
+   marca cada decisión `aplicada` con su commit. La Fase B
+   produce **solo** lo aprobado. Nada se produce desde la
+   vitrina.
 
 ## Lectura — qué lee la instancia y cómo deriva la bandeja
 
@@ -167,10 +168,23 @@ una lista append-only. Cada entrada:
  "slug": "p058",
  "accion": "aprobado|rechazado|mejorar",
  "nota": "texto libre del dueño o cadena vacía",
- "estado": "sin-marcar",
+ "estado": "vigente",
  "fecha_lista": null,
  "commit_aplicacion": null}
 ```
+
+**Vocabulario de `estado` (U1, 2026-10-26).** Una decisión nueva
+nace `vigente`: escrita al instante, aún no aplicada. La
+recogida-aplicación la pasa a `aplicada` (o `devuelta` si una
+validación la rechaza, con su causa). **Compatibilidad hacia
+atrás:** las entradas históricas con `estado` `sin-marcar` o
+`lista` se leen e interpretan exactamente como `vigente` — la
+marca (`lista` / `fecha_lista`) es un dato histórico que se
+ignora, nunca un error ni un requisito; ninguna escritura nueva
+lo produce. **Decisión vigente de un diseño** = la última
+entrada registrada para su slug que no esté `aplicada` ni
+`devuelta` y cuya `accion` no sea `retirar`; si la última
+entrada es `retirar`, el diseño no tiene decisión vigente.
 
 - **Decidir = escribir al instante.** Al confirmar una decisión en
   el detalle, la instancia lee el registro vigente (creándolo si
@@ -183,23 +197,45 @@ una lista append-only. Cada entrada:
   ronda los 13 s; la tarjeta muestra ese estado mientras tanto.
   Sin confirmación por relectura, nada se da por guardado.
 - **Cambiar de opinión** escribe una decisión NUEVA para el mismo
-  slug (otro `id`): manda la última registrada; las anteriores
-  conservan su historia en el registro. Si la decisión anterior
-  estaba `lista`, la nueva nace `sin-marcar` (hay que volver a
-  marcarla — la marca era de aquella decisión, no del diseño).
-- **«Marcar listas para Jarvis»** escribe un commit que pasa a
-  `lista` (con su `fecha_lista`) las decisiones vigentes
-  `sin-marcar` del dueño. Es una señal, no una acción sobre la
-  tienda ni un envío: la vitrina no produce, no publica, no toca
-  Printify y **no notifica a nadie por sí sola**. La aplicación
-  ocurre cuando el dueño avisa en un chat (el recibo trae el
-  mensaje exacto, copiable: «Jarvis, recoge las decisiones de la
-  vitrina de My POD (<tienda>)»).
+  slug (otro `id`): manda la última registrada como vigente; las
+  anteriores conservan su historia en el registro. No hay marca
+  que rehacer: la nueva decisión vale desde que se escribe.
+- **Sin marca ni recibo (U1, 2026-10-26).** No existe botón
+  «Marcar listas», ni recibo copiable, ni acción `marcarlistas`:
+  las acciones de la instancia son exactamente `getboard`,
+  `sello` y `guardardecision` (ver §Acciones). La vitrina no
+  produce, no publica, no toca Printify y **no notifica a nadie
+  por sí sola**. La aplicación ocurre cuando el dueño avisa en
+  un chat — cualquier aviso suyo, sin frase exacta (regla del
+  disparador libre, `puerta-arte-propuesta` v0.8.4) — y la
+  recogida lee las decisiones vigentes del repo en ese momento.
+  Motivo: la marca era una decisión compensatoria de cuando las
+  decisiones vivían solo dentro de la vitrina sembrada; con la
+  lectura en vivo y la escritura al instante, su contexto murió.
 - **La instancia jamás escribe otro archivo:** ni el registro de
   listings, ni el estado, ni el config. Los cambios sobre esos
   archivos los hace el flujo dueño (la recogida-aplicación), con
   sus validaciones, y quedan en el mismo repo como commits del
   sistema.
+
+## Acciones de la instancia (contrato exacto, U1 2026-10-26)
+
+Toda instancia de vitrina en vivo expone **exactamente** estas
+tres acciones — ni una más:
+
+- **`getboard`** — deriva y devuelve la bandeja desde el HEAD
+  vigente del repo de datos (ver §Lectura).
+- **`sello`** — comprobación ligera de solo-HEAD: devuelve el
+  commit vigente sin releer la bandeja (ver §Pase de pulido).
+  Es el nombre canónico en todas las instancias.
+- **`guardardecision`** — escribe la decisión al instante en
+  `vitrina/decisiones.json` (un commit por decisión). Acepta
+  `aprobar` / `rechazar` / `mejorar` (con su nota) y `retirar`
+  (ver Enmienda F3).
+
+**Retirada en U1:** `marcarlistas` — sin botón en la UI, sin
+recibo y sin efecto sobre la recogida. Una instancia que aún la
+exponga está fuera de contrato.
 
 ## La entrega produce sus fuentes (contrato con el flujo)
 
@@ -267,6 +303,8 @@ nada en ella tras la recogida.
 - Las previas horneadas en el código de la instancia y la regla
   de siembra con su registro de retirados (la resurrección es
   imposible por construcción: no hay copia que resucitar).
+- La acción `marcarlistas`, el botón «Marcar listas para Jarvis»
+  y su recibo copiable (Enmienda U1, 2026-10-26).
 - La historia completa del modelo anterior vive en
   `docs/VITRINA-REVISION.md` (plantilla v2.3) y en el CHANGELOG
   de `puerta-arte-propuesta`; este contrato conserva de aquella
@@ -275,10 +313,12 @@ nada en ella tras la recogida.
 ## Enmienda F3 (2026-10-26) — lo que el ciclo de ensayo probó y corrigió
 
 - **Acción `retirar` (paridad «Quitar decisión»):** `guardardecision` acepta
-  `retirar`; se escribe al instante en `vitrina/decisiones.json` con estado
-  `sin-marcar`, manda sobre la decisión vigente no aplicada del mismo slug, y la
-  derivación la trata como «sin decisión vigente» (el diseño vuelve a
-  Pendientes). `marcarlistas` nunca la marca y la recogida-aplicación la ignora.
+  `retirar`; se escribe al instante en `vitrina/decisiones.json` (desde U1 con
+  estado `vigente`; en entradas históricas, `sin-marcar`), manda sobre la
+  decisión vigente no aplicada del mismo slug, y la derivación la trata como
+  «sin decisión vigente» (el diseño vuelve a Pendientes). La
+  recogida-aplicación ignora las entradas `retirar` — su efecto ya ocurrió al
+  escribirse: cancelan la decisión vigente anterior de ese slug.
 - **Tienda de ensayo permanente:** `data/tiendas/ensayo-vitrina/` en el repo de
   datos es el fixture declarado de pruebas de la vitrina (NO es una tienda
   real; ningún flujo de producción la opera). La instancia de ensayo lee esa
@@ -293,8 +333,9 @@ nada en ella tras la recogida.
   fusionado no hay corte (F4).**
 - **Timeouts de escritura:** una escritura puede agotar el presupuesto de
   respuesta y aun así aterrizar en el repo. Ante un timeout se verifica por
-  relectura (HEAD derivado) antes de reintentar; `marcarlistas` es idempotente
-  (un reintento sobre lo ya marcado marca 0).
+  relectura (HEAD derivado) antes de reintentar. (La nota histórica sobre la
+  idempotencia de `marcarlistas` quedó sin objeto en U1: esa acción ya no
+  existe.)
 - **`commit_aplicacion`:** la recogida lo escribe sobre la entrada aplicada
   aunque el campo exista en `null` (la vitrina crea las entradas con
   `commit_aplicacion: null`).
@@ -332,9 +373,34 @@ producción, con el dale del dueño. Cuatro piezas, sin tocar el contrato de dat
 
 El guardado instantáneo queda como estaba (decisión/retiro = un commit al
 instante, con estado escribiendo/fallida); la nota NO se auto-guarda por
-tecleo (viaja con la decisión o con «Guardar nota») y «Marcar listas» sigue
-siendo la puerta deliberada de recogida.
+tecleo (viaja con la decisión o con «Guardar nota»).
 
-**Deuda declarada:** el nombre de la acción de sello difiere entre instancias
-(ensayo: `gethead`; producción: `sello`). El nombre canónico es `sello`; la
-instancia de ensayo se unifica al próximo toque. Funcionalmente son idénticas.
+**Deuda del nombre del sello — CERRADA en U1 (2026-10-26):** ambas
+instancias exponen `sello` (verificado por acciones en ensayo y en
+producción durante la corrida U1); ya no difieren.
+
+## Enmienda U1 (2026-10-26) — vitrina sin marca
+
+Decisión cerrada del dueño (brief de alineación 2026-10-26, U1):
+
+- «Marcar listas» se retira como puerta: sin botón, sin recibo
+  copiable, sin estado `lista` como requisito de recogida y sin
+  acción `marcarlistas` en ninguna instancia.
+- Las decisiones son automáticas al instante: se escriben en
+  `vitrina/decisiones.json` al decidir (eso ya funcionaba) y esa
+  escritura ES la decisión vigente; la recogida-aplicación se
+  dispara con cualquier aviso del dueño en un chat y lee las
+  decisiones vigentes del repo.
+- Compatibilidad hacia atrás: entradas históricas con `estado`
+  `lista` o `sin-marcar` se siguen leyendo e interpretando igual
+  (como vigentes si no están aplicadas/devueltas); la marca y su
+  `fecha_lista` son datos históricos ignorados, no un error.
+- La regla del watchdog que alertaba por «decisiones marcadas
+  listas sin recoger por más de 24 h» se reformuló: la alerta, si
+  queda alguna, se basa en **decisiones vigentes sin aplicar**
+  (última entrada por slug, no aplicada/devuelta, no `retirar`)
+  con más de 24 h desde su `fecha` de decisión, leídas del repo
+  — nunca de marcas.
+- Qué murió también aquí: el recibo «Listas para recoger» y su
+  mensaje copiable como mecanismo (el aviso libre del dueño ya
+  era el disparador real desde `puerta-arte-propuesta` v0.8.4).
