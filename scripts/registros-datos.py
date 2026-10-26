@@ -27,11 +27,20 @@ el puente de versionado:
 
 Qué es «registro» (y qué no):
 - SÍ: todo archivo de TEXTO bajo `data/`.
-- NO (nunca se versiona en ningún repo): medios (las 18
+- SÍ también (excepciones declaradas, vitrina de lectura en vivo,
+  decisión del dueño 2026-10-26 — docs/PROPUESTA-VITRINA-LECTURA-
+  EN-VIVO.md §3): (a) `data/tiendas/*/estado-propuestas.json` —
+  es el registro de propuestas de la tienda (bandeja, aprobados,
+  mejoras), NO un checkpoint de corrida; (b) las PREVIAS de
+  revisión de la vitrina, `data/tiendas/*/propuestas/**/previa-*.jpg`
+  y `simulacion-*.jpg` — entregable ligero de la puerta creativa,
+  único medio que se versiona, y solo en ese hogar y con esos
+  nombres.
+- NO (nunca se versiona en ningún repo): los demás medios (las 18
   extensiones del chequeo 5 de Rameli: video/audio/ráster),
-  checkpoints locales `data/tiendas/*/estado-*.json`, CSV
-  crudos de `data/ventas-csv/` y el contenido transitorio de
-  `data/cola-pins/`.
+  checkpoints locales de corrida `estado-pinterest.json` y
+  `estado-publicacion.json`, CSV crudos de `data/ventas-csv/` y el
+  contenido transitorio de `data/cola-pins/`.
 - Los `.gitkeep` son **esqueleto**, no registros: cada repo
   trackea los suyos y el puente NO los sincroniza (ni los
   copia ni los retira en ningún sentido).
@@ -75,11 +84,22 @@ def es_registro(rel):
     nombre = partes[-1]
     if nombre == ".gitkeep":
         return False  # esqueleto: lo trackea cada repo, no se sincroniza
+    # Excepción vitrina (2026-10-26): las previas de revisión en su
+    # hogar declarado SÍ son registro (entregable de la puerta).
+    if (len(partes) >= 5 and partes[1] == "tiendas"
+            and partes[3] == "propuestas"
+            and (nombre.startswith("previa-")
+                 or nombre.startswith("simulacion-"))
+            and nombre.endswith(".jpg")):
+        return True
     if os.path.splitext(nombre)[1].lower() in MEDIA_EXTS:
         return False
     # Checkpoints locales de corrida: jamás versionados.
+    # (estado-propuestas.json NO está aquí a propósito: es registro
+    # de la tienda desde 2026-10-26, ver la cabecera.)
     if (len(partes) == 4 and partes[1] == "tiendas"
-            and nombre.startswith("estado-") and nombre.endswith(".json")):
+            and nombre in ("estado-pinterest.json",
+                           "estado-publicacion.json")):
         return False
     # CSV crudos de ventas: importación regenerable.
     if len(partes) == 3 and partes[1] == "ventas-csv" and nombre.endswith(".csv"):
