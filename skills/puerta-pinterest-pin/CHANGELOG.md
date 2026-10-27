@@ -1,5 +1,8 @@
 # Changelog — puerta-pinterest-pin
 
+## v0.4.3 (2026-10-27)
+- **Salud previa recalibrada (decisión del dueño):** nueva sección «Salud previa a publicar» — el `curl` anónimo a pinterest.com es solo una señal, nunca la puerta; ante un 403 se verifica en el navegador de publicación y la corrida continúa si la página carga. Solo una salud fallida verificada en el navegador consume reintentos (P3). Causa: 2026-10-24, 26 y 27 el curl dio 403 todo el día (bloqueo a la IP de salida, con google.com 200 de control) y las corridas se detenían sin intentar el canal real; el 2026-10-25, con curl 200, se publicó 5/5. Es la aplicación a Pinterest del mecanismo genérico P1-bis de `docs/PATRONES-RESILIENCIA.md` (el health-check debe ser representativo del canal real de trabajo). El cron diario de Pinterest queda como resumen operativo que apunta a esta sección.
+
 ## v0.4.2 (2026-10-23)
 - Fuente del `mapa_assets` alineada a `publicar-printify-etsy` v0.11.0: para listings del flujo nuevo, el mapa se deriva del manifiesto de selección de mockups (§M5) y la inspección visual queda como confirmación; los pins consumen el manifiesto, no una elección paralela.
 

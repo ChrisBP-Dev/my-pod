@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.4.2"
+  version: "0.4.3"
   framework_version: "0.19.0"
   regression_suite: "evals/"
   gate_script: "scripts/verificar-pin.py"
@@ -181,6 +181,30 @@ paralela ni de defaults de Printify.
   publica el cuadrado tal cual. Una versión rediseñada requiere su
   aprobación explícita.
 - Títulos keyword-rich, sin hashtags (formato Pinterest, no Instagram).
+
+## Salud previa a publicar (paso 0 — recalibrado 2026-10-27, decisión del dueño)
+
+Canon de aplicación de `docs/PATRONES-RESILIENCIA.md` P1-bis: el
+health-check debe ser representativo del canal real de trabajo. En
+Pinterest el canal real es el **navegador con sesión** (no hay API); el
+`curl` anónimo desde la terminal es solo una señal, **nunca la puerta**:
+
+1. `curl -s -o /dev/null -w '%{http_code}' --max-time 15 https://www.pinterest.com/`
+   → 200: seguir. → cualquier otro código (típico: 403): **no detenerse
+   ni consumir reintentos todavía**.
+2. Verificar en el navegador de publicación: abrir
+   `https://www.pinterest.com/` y comprobar que la página carga.
+   - Carga (aunque pida iniciar sesión) → Pinterest responde: continuar
+     el flujo completo y anotar en el reporte «salud: curl 403,
+     navegador OK». El inicio de sesión, si hace falta, es parte normal
+     de la publicación, no un fallo de salud.
+   - No carga (segunda carga de confirmación) → salud fallida real:
+     recién ahí corre la mecánica de reintentos acotados (P3 del doc de
+     patrones; el contador vive en el estado de la tienda).
+3. Evidencia del patrón (2026-10): curl 403 los días 24, 26 y 27
+   completos mientras google.com daba 200 (bloqueo a la IP de salida de
+   la máquina, no caída del servicio ni fallo de credenciales); el
+   2026-10-25 curl dio 200 y la corrida publicó 5/5.
 
 ## Publicación por navegador (2026-10-14)
 
