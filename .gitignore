@@ -28,3 +28,6 @@ data/**/*.jpeg
 data/**
 !data/**/
 !data/**/.gitkeep
+
+# Scratch local de trabajo (nunca canon): vive y muere fuera del repo
+tmp/
