@@ -3,14 +3,23 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.14.0"
+  version: "0.15.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Publicar en Printify + Etsy (Printify-First + MPL)
 
-**Versión 0.13.0** (2026-10-23, Programa Estándar F3: puerta de completitud de la ficha visual antes de §M5 — `verificar-ficha-visual.py` — y presupuesto de fotos leído de la ficha con techo de plataforma 20. Base: **Versión 0.12.0** (2026-10-23, Programa Estándar My POD F4: la puerta de conteo `verificar-variantes.py` ya no trae default de tienda — `--shop` explícito obligatorio en modo en vivo — y los ejemplos con precios/IDs reales de una tienda pasan a ficticios etiquetados o al config de la tienda activa. Base: **Versión 0.11.1** (2026-10-23: corrección de cobertura — la plana cubre el color sin representar antes de repetir el prioritario; hallazgo del piloto seco de p058 explicado al dueño el mismo día. Base: **Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
+**Versión 0.15.0** (2026-10-27: **la descripción se sincroniza con los
+colores finales antes de publicar** — §M7 exige reescribir las líneas
+«Colors:» de la descripción del MPL (y del paquete) desde los colores
+habilitados por API de cada componente, y §M8 lo verifica con la
+puerta mecánica nueva `scripts/verificar-descripcion-colores.py`.
+Incidente p046: en una actualización, los mockups se rehicieron desde
+los colores nuevos pero la descripción republicó la lista vieja —
+el riesgo ya estaba anotado desde 2026-10-23 sin volverse puerta.
+Base: **Versión 0.14.0** (2026-10-26: modelo de selección v2, pool
+primario rotativo en §M5). Base: **Versión 0.13.0** (2026-10-23, Programa Estándar F3: puerta de completitud de la ficha visual antes de §M5 — `verificar-ficha-visual.py` — y presupuesto de fotos leído de la ficha con techo de plataforma 20. Base: **Versión 0.12.0** (2026-10-23, Programa Estándar My POD F4: la puerta de conteo `verificar-variantes.py` ya no trae default de tienda — `--shop` explícito obligatorio en modo en vivo — y los ejemplos con precios/IDs reales de una tienda pasan a ficticios etiquetados o al config de la tienda activa. Base: **Versión 0.11.1** (2026-10-23: corrección de cobertura — la plana cubre el color sin representar antes de repetir el prioritario; hallazgo del piloto seco de p058 explicado al dueño el mismo día. Base: **Versión 0.11.0** (2026-10-23: **colores sin techo + mockups y
 videos con estándar** — consolidación de la propuesta aprobada
 por el dueño el 2026-10-23: (1) el tope de 4 colores por prenda
 de v0.10.0 queda **eliminado como techo**: 3–4 es la **guía de
@@ -735,6 +744,22 @@ de videos contradecía a este esquema):**
   válido y se regenera.)
 
 ### M7. Publicar el MPL
+- **Descripción sincronizada con los colores finales (OBLIGATORIO
+  antes de publicar — publicación nueva o actualización, 2026-10-27,
+  incidente p046):** las líneas «Colors: …» de la descripción son una
+  foto del momento en que se generó el paquete
+  (`paquete-listing-etsy` las llena por API al generar, y manda
+  regenerar si el borrador cambia). Pero entre la generación y el
+  clic puede mediar la revisión del dueño (§M2) o una actualización
+  de un listing vivo, y republicar la lista vieja lanza un error
+  visible al comprador (p046 salió anunciando Sport Grey y Athletic
+  Heather ya retirados). Antes del clic, el worker lee los colores
+  habilitados por API de cada componente (la misma lectura de §M5)
+  y reescribe con esa lista las líneas «Colors:» de la descripción
+  EN EL MPL y en el paquete del diseño. La descripción nunca se
+  republica desde una lista guardada: se republica desde la
+  realidad interna del MPL en ese momento. §M8 lo verifica con
+  puerta mecánica.
 - **Chequeo previo OBLIGATORIO (2026-10-26, causa raíz del
   bloqueo de p058): nombres internos de los componentes
   DISTINTOS.** Antes de abrir el editor, leer por API el
@@ -813,6 +838,11 @@ Nada se da por sentado. Verificar contra el listing vivo:
 - Videos: los 2 nuevos presentes y reproducibles (que no se hayan
   borrado en la conversión).
 - Título, descripción completa (con "CHOOSE YOUR STYLE"), 13 tags.
+- **Descripción ↔ colores (puerta mecánica):**
+  `scripts/verificar-descripcion-colores.py --diseno <id>` en PASS:
+  las líneas «Colors:» de la descripción viva listan exactamente
+  los colores habilitados por API de cada componente (la fuente
+  esperada escrita). Sin PASS, la publicación no cierra.
 - Materiales, atributos, políticas, perfil de envío, cantidades.
 - Caja de personalización: NO debe existir en un MPL
   (el MPL no la soporta; si aparece, es error).
