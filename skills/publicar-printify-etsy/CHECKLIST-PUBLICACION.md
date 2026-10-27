@@ -86,6 +86,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 
 - [ ] Descripción sincronizada: líneas «Colors:» del MPL (y del paquete) reescritas desde los colores habilitados por API de cada componente (§M7; la lista guardada del paquete no manda)
 - [ ] Publicar el MPL en Printify (no los componentes por separado)
+- [ ] ¿La fila quedó pegada en «Uploading images» por horas? → ruta de recuperación de §M7: diagnóstico por un componente («View Multi-Product Listings» → «View»), evidencia triple de trabajo muerto y UN clic desde el editor, con la palabra del dueño
 - [ ] Estado = "Published" (no "Publishing")
 - [ ] Verificar en "My Products" que el MPL aparece publicado
 
