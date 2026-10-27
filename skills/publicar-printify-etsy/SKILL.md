@@ -753,6 +753,18 @@ de videos contradecía a este esquema):**
   en p058 era un síntoma acompañante inconsistente con la
   calculadora del mismo MPL — no es la causa ni se «arregla»
   tocando precios.)
+- **Antes del clic: TODOS los grupos de «Details to publish»
+  marcados** (título, descripción, mockups, colores/tallas/
+  precios/SKUs, tags, perfil de envío, categoría y atributos).
+  Solo cruza a Etsy lo que esté marcado (verificado con p064,
+  2026-10-26/27: su adopción inicial empujó solo tags porque
+  era el grupo marcado; el anuncio adoptado quedó activo pero
+  con título/descripción/fotos/variantes viejos hasta
+  republicar con los 7 grupos marcados — la republicación
+  actualizó el MISMO listing, sin duplicar). En listings
+  nuevos el contenido es el del propio MPL y el descuido no
+  se nota; en adopciones es silencioso y parcial: la lista se
+  revisa grupo por grupo antes de publicar, siempre.
 - En Printify: publicar el MPL (los componentes ya están adentro).
 - Se sincroniza a Etsy automáticamente (canal conectado).
 - Verificar estado = "Published".
