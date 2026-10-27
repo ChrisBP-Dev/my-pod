@@ -1,7 +1,7 @@
 # Diseño — Mecanismo de decisiones estratégicas de tienda (F1)
 
 **Unidad:** Recalibración de My POD, F1 · **Fecha:** 2026-10-27 ·
-**Estado: DISEÑO PARA DALE DEL DUEÑO — no construido.**
+**Estado: SUPERSEDIDO el 2026-10-27 por `docs/AUDITORIA-ALINEACION-RAMELI-2026-10-27.md`** (pedido del dueño: auditar primero contra Rameli; el remedio aquí inventaba un registro paralelo a hogares que el framework y la app ya asignan). Se conserva como historia fechada; NO es el plan vigente.
 Rama: `recalibracion-decisiones-tienda` (nada fusiona sin su palabra).
 
 ## 1. El hueco, verificado hoy (no teórico)
