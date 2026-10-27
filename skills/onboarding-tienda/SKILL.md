@@ -3,7 +3,7 @@ name: "onboarding-tienda"
 description: "Puesta en marcha de una tienda POD nueva, de cero a operativa: descubrimiento, conexiones (Etsy API, Printify), activaciones de Etsy, calibración de productos y crons operativos con patrones de resiliencia."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.2.0"
+  version: "0.2.1"
   framework_version: "0.19.0"
 ---
 
@@ -239,7 +239,9 @@ el reintento lo relee, no lo duplica.
 ## Fase 6 — Verificación y cierre
 
 0. **Calibración visual verificada:** correr la puerta de
-   completitud (`publicar-printify-etsy/scripts/verificar-ficha-visual.py`)
+   completitud de `publicar-printify-etsy` (su script
+   `verificar-ficha-visual.py`, que vive en ese skill — es su
+   herramienta, este onboarding la invoca como puerta, no la copia)
    sobre el config y las fichas de producto del mix. Una tienda
    **no se declara operativa con la calibración visual sin
    hacer**: si queda pendiente, queda registrada como **hueco

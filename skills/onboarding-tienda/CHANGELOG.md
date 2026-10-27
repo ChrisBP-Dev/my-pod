@@ -1,5 +1,8 @@
 # CHANGELOG — onboarding-tienda
 
+## v0.2.1 (2026-10-27) — Saneamiento de validación (mandato del dueño)
+- **Fase 6, paso 0:** la referencia a la puerta de completitud visual ya no nombra la ruta `scripts/…` de otro skill (esa forma no resuelve en ninguna de las dos casas que reconoce `rameli validar`: los scripts del skill propio o los de la app). Ahora la invoca como lo que es — la puerta de `publicar-printify-etsy`, cuyo script `verificar-ficha-visual.py` vive en ese skill — sin copias. Con esto `rameli validar` sobre My POD queda en 0 fallos / 0 avisos.
+
 ## v0.2.0 (2026-10-23) — Calibración visual de la tienda (Programa Estándar My POD, F3)
 - **Nuevo bloque «Calibración visual de la tienda»:** la Fase 1 suma el descubrimiento visual (presupuesto de fotos ≤20, tablas de tallas, reparto, prioridad de cobertura, videos ≤2) y la Fase 4 suma la calibración por producto (catálogo de tomas elegido por el dueño DESDE las opciones reales de Printify, con muestras visuales; `tomas_a_evitar` con motivo). Son las 5 decisiones que el flujo de publicación consume: antes este paso NO existía y los valores se sembraban desde el historial sin pase del dueño (hueco detectado por el dueño el 2026-10-23).
 - **Registro de estado obligatorio:** cada valor visual vive en la ficha (config + fichas de producto) con `estado`/`fecha`/`decidido_por` — `configurado` solo con el pase del dueño; `provisional` = solo piloto declarado; `sin_configurar` = el flujo consumidor se detiene y lo reporta.
