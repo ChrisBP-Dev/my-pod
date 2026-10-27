@@ -435,7 +435,18 @@ conversión → items creados dentro del MPL.
   - **La validación del MPL exige nombres de producto distintos:**
     la playera lleva el título del diseño + " - T-Shirt" como
     nombre interno (no toca el título del listing ni los nombres
-    de variación "Sweatshirt"/"T-Shirt").
+    de variación "Sweatshirt"/"T-Shirt"). **Si un rescate o un
+    renombre deja los dos componentes con el mismo nombre, el
+    MPL queda IMPOSIBLE de guardar y publicar** — la firma del
+    fallo (verificada en vivo con p058, 2026-10-26): botones
+    «Save as draft» y «Publish» deshabilitados incluso en carga
+    fresca, «Failed to publish listing. Please try again.» al
+    publicar desde la lista, y el aviso al pasar el cursor
+    sobre Publish: «Each product in a Multi-Product Listing
+    must have a different name». El cierre de producción
+    verifica los nombres internos de los componentes como
+    parte de su lista (abajo), y la publicación los re-verifica
+    ANTES de abrir el editor (§M7, chequeo previo).
   - **El diálogo "Your products" puede no listar un producto
     recién creado** (índice desactualizado de Printify): si no
     aparece, se espera y se reintenta en otra corrida (patrón de
@@ -447,7 +458,10 @@ conversión → items creados dentro del MPL.
     quedó `inactive`, y anotar el incidente en el registro — la
     decisión de fondo (borrar el listing o adoptarlo al publicar
     el MPL, que conserva la URL del base) es del dueño.
-- Por cada item: verificar placement, colores/tallas, precios.
+- Por cada item: verificar placement, colores/tallas, precios
+  **y nombre interno** (la playera = título del diseño +
+  " - T-Shirt"; ningún MPL cierra producción con los dos
+  componentes homónimos — ver la firma del fallo arriba).
 - Al terminar: **guardar como borrador SIN publicar**. El resultado
   es UN borrador MPL por diseño, listo para la revisión de
   ubicación del dueño (§M2).
@@ -721,6 +735,24 @@ de videos contradecía a este esquema):**
   válido y se regenera.)
 
 ### M7. Publicar el MPL
+- **Chequeo previo OBLIGATORIO (2026-10-26, causa raíz del
+  bloqueo de p058): nombres internos de los componentes
+  DISTINTOS.** Antes de abrir el editor, leer por API el
+  `title` de cada componente del MPL: si coinciden, el MPL no
+  puede guardar ni publicar (firma: «Save as draft»/«Publish»
+  deshabilitados incluso en carga fresca; «Failed to publish
+  listing» al publicar desde la lista; aviso de Publish:
+  «Each product in a Multi-Product Listing must have a
+  different name»). El arreglo va ANTES del editor y por API:
+  renombrar la playera a «<título del diseño> - T-Shirt» con
+  el PUT de payload mínimo verificado (título nuevo +
+  descripción/tags actuales + variantes habilitadas con sus
+  precios) y re-leer para confirmar. Es nombre interno: no
+  toca el título del listing, precios ni mockups. (El Profit
+  USD 0.00 / «Critically low» que la vista de precios mostró
+  en p058 era un síntoma acompañante inconsistente con la
+  calculadora del mismo MPL — no es la causa ni se «arregla»
+  tocando precios.)
 - En Printify: publicar el MPL (los componentes ya están adentro).
 - Se sincroniza a Etsy automáticamente (canal conectado).
 - Verificar estado = "Published".

@@ -285,6 +285,13 @@ instancia del framework (`rameli/docs/DATOS-INSTANCIA.md`):
   publica el MPL tal cual, con verificación exhaustiva en Etsy
   (Fase C: variaciones, precios, SKUs, orden de imágenes, videos
   intactos, atributos, políticas, envío).
+- **Chequeo previo (2026-10-26):** antes de publicar, verificar
+  por API que los componentes del MPL tengan nombres internos
+  DISTINTOS (la playera = diseño + " - T-Shirt"). Con nombres
+  duplicados Printify bloquea guardar y publicar sin decir la
+  causa en el error (solo en el aviso del botón) — detalle y
+  arreglo en el skill, §M7. Producción ya lo verifica al
+  cerrar (etapa 2); esto es la segunda red, en el punto de uso.
 - **Track single:** publicar el draft → sincroniza a Etsy → completar
   (videos, caja de personalización si aplica).
 - Subir videos directo en Etsy.
