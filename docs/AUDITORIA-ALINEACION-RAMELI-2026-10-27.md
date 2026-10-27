@@ -195,6 +195,27 @@ Con esto, F2 (declarar los focos) se ejecuta sobre los puntos
 1–2, F3 (datos/investigación) sobre el 3, y F4 (estratega) cierra
 con el 4 corriendo. F5–F7 sin cambio.
 
+**EJECUCIÓN (2026-10-27, dale del dueño a esta ruta; rama
+`recalibracion-decisiones-tienda`, pendiente de su palabra para
+fusionar):** los 6 puntos ejecutados — (1) líneas en la ficha
+(commit de datos `a06705a`+corrección de formato `a1ac125`),
+CONTRATO enmendado, INVENTARIO corregido; (2) backfill del
+registro-flujo (commit de datos `bafd8c2`) y dueño de
+actualización declarado en `estratega-tienda` v0.8.0; (3) skill
+`investigacion-tienda` v1.0.0 con puerta
+`scripts/verificar-investigacion.py` (suite 7/7) y la agenda
+reducida a invocarlo (verificado por `cron.view`); inventario
+de agendas en `FLUJO-PIPELINE.md`; (4) helper
+`scripts/verificar-consumo-lineas-tienda.py` calibrado en ambos
+sentidos (FAIL contra el config real previo al arreglo, PASS
+contra el estado alineado; casos permanentes en la suite de la
+estratega) e integrado a su cierre y a la PUERTA-CIERRE;
+(5) ruta de lectura sin id en duro + declaración de tienda
+activa; (6) contribución documentada en
+`docs/CONTRIBUCION-RAMELI-CONSUMO-Y-LINEAS.md`, sin aplicar al
+framework. Verificación: lint VERDE (10 skills), regresión
+completa VERDE, `rameli validar` 0/0, helper en vivo PASS.
+
 ## 7. Veredicto en una línea por capa
 
 - **Framework:** sólido en colocación/formato/workers;

@@ -54,7 +54,9 @@ declarado · `sin configurar` = no decidido / pendiente.
 | Banco de keywords del nicho | `data/banco-keywords/<nicho>.md` | paquete-listing-etsy, estratega (reporte SEO) | **configurado** (de operación) | **SIN PASO** en onboarding (nace de la investigación del nicho) |
 | Productos aprobados del mix | config → `productos_aprobados` | publicar, onboarding | **configurado** | Fase 0/Fase 4 |
 | Fichas de producto (costos, precios, placement, `detalle_listing`) | `data/productos/<slug>.json` | publicar, paquete (`--producto`), puertas | **configurado** (`detalle_listing` agregado en F4 para los 2 productos del mix) | Fase 4 |
-| Personalización (si la tienda la opera) | config → `personalizacion.estado` | publicar (track Single-P), puerta-arte | **sin configurar** — `pendiente_investigacion`, declarado (decisión diferida a la vista, no silencio) | La investigación de tienda (no es paso de onboarding) |
+| Personalización (si la tienda la opera) | config → `lineas_vigentes.personalizacion` (estado canónico desde la recalibración 2026-10-27; el bloque `personalizacion` quedó como puntero) | publicar (track Single-P), puerta-arte, estratega (asignación semanal), investigacion-tienda | **configurado** — `piloto` (decisión del dueño 2026-10-20; piloto U3 decidido 2026-10-27, p070 como prueba punta a punta) | La decisión del dueño registrada en la ficha + registro-flujo; el onboarding la declara al abrir tienda si aplica |
+| Bordado (método) | config → `lineas_vigentes.bordado` | puerta-arte (fuente plana), publicar | **configurado** — `operativo` (doctrina del dueño 2026-10-26: fuente plana, máx. 6 hilos) | La decisión del dueño registrada en la ficha + registro-flujo |
+| Líneas vigentes de la tienda (registro de focos/métodos con estado) | config → `lineas_vigentes` | estratega (cierre: `scripts/verificar-consumo-lineas-tienda.py`), investigación, propuestas | **configurado** (2026-10-27) | Ficha (decisión del dueño); consumo verificado en el cierre semanal |
 
 ## 4. Estrategia visual (el frente F3)
 
@@ -98,7 +100,9 @@ declarado · `sin configurar` = no decidido / pendiente.
    como checklist de detección, no como supuestos).
 3. **`esquema_videos` sin campo `estado`** — hueco menor de
    registro dentro de la estrategia visual.
-4. **Personalización `pendiente_investigacion`** — diferida y
-   declarada; no es silencio.
+4. ~~**Personalización `pendiente_investigacion`**~~ — RESUELTO
+   2026-10-27 (recalibración de alineación): la línea vive en
+   `lineas_vigentes` con estado `piloto` y su consumo se verifica
+   en el cierre de la estratega.
 5. **Bloque legacy `config → mockups`** — remanente sin
    consumidores, pendiente de retiro con palabra del dueño.

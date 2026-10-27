@@ -19,7 +19,7 @@ Toda mejora de este flujo se declara cerrada solo tras pasar `docs/PUERTA-CIERRE
   (el MPL nativo NO soporta personalización). Producto individual.
 - **Diseño NO personalizable** → **track MPL**: sudadera Gildan 18000 +
   playera Bella+Canvas 3001 en un solo listing (composición default;
-  la estratega puede definir otra en `data/tiendas/29222324/config-propuestas.json`).
+  la estratega puede definir otra en `data/tiendas/<tienda-id>/config-propuestas.json`).
 - Detalle operativo: `skills/publicar-printify-etsy/SKILL.md`.
 - Contrato estratega → propuestas → publicación:
   `docs/CONTRATO-TIPO-PRODUCTO.md`.
@@ -99,7 +99,7 @@ Toda mejora de este flujo se declara cerrada solo tras pasar `docs/PUERTA-CIERRE
   automatizada, `publicar-printify-etsy` §Track Single-P). El diseño
   es siempre nuevo y único; nunca se convierte un diseño del MPL.
 - El tipo de lote (mpl/single/mixto) lo define la estratega en
-  `data/tiendas/29222324/config-propuestas.json` (dinámico por semana).
+  `data/tiendas/<tienda-id>/config-propuestas.json` (dinámico por semana).
 - Posición inicial (RECALIBRADA 2026-10-17): escala = min(92% del
   ancho del área, 95% del alto), centrada horizontal, borde
   superior al 8–12% del alto del área (sesgo arriba). El 78%/14%
@@ -296,7 +296,7 @@ instancia del framework (`rameli/docs/DATOS-INSTANCIA.md`):
   (videos, caja de personalización si aplica).
 - Subir videos directo en Etsy.
 - Verificar título, descripción, tags.
-- Registrar IDs en `data/tiendas/29222324/registro-listings.json` (con `tipo: "mpl"|"single"`).
+- Registrar IDs en `data/tiendas/<tienda-id>/registro-listings.json` (con `tipo: "mpl"|"single"`).
 
 ### 8. Publicidad (Pinterest)
 - Skill `puerta-pinterest-pin`: valida pins antes de publicar.
@@ -308,6 +308,39 @@ instancia del framework (`rameli/docs/DATOS-INSTANCIA.md`):
 - ❌ Traducir colocación nuestra → Printify
   → La colocación se hace directo en Printify
 - ❌ Predecir cómo se verá → Se ve directo en Printify
+
+## Tienda activa (declaración de instancia)
+
+Este documento es MECANISMO: nombra `data/tiendas/<tienda-id>/`
+en todas sus rutas (des-hardcodeado el 2026-10-27, recalibración
+de alineación). La tienda activa de esta instancia es
+**29222324 (MyNightShiftShop)**, la única bajo `data/tiendas/`;
+`<tienda-id>` se resuelve a ella. Si abre una segunda tienda, la
+resolución pasa a ser explícita por flujo (cada agenda y cada
+corrida nombra su tienda) y esta declaración se actualiza en la
+misma corrida — ninguna ruta vuelve a llevar un id en duro.
+
+## Inventario de agendas de la app (2026-10-27)
+
+Las agendas (crons) viven en el sistema de scheduling del
+entorno, fuera de este repo; esta tabla es su inventario
+declarado en la app: qué agenda existe, qué skill invoca y su
+estado. Una agenda **invoca un skill**; si su cuerpo duplica el
+método de un skill, manda el skill y la diferencia se reporta
+como hueco (caso B3, auditoría v0.11.0: el consumidor fuera del
+repo quedó atrás). Agenda sin skill = hueco declarado, no
+estilo.
+
+| Agenda | Invoca | Estado |
+|---|---|---|
+| `equipo-pod-investigacion-semanal` (lun) | `skills/investigacion-tienda` (desde 2026-10-27; antes era cuerpo con método propio y nicho en duro) | activa |
+| `pod-trend-scan` (lun/jue) | Sin skill propio: rastreo de tendencias de producto; su salida alimenta a `investigacion-tienda` y a la estratega vía `investigaciones/` — hueco menor declarado (candidato a skill si crece) | activa |
+| `equipo-pod-estratega-semanal` (lun) | `skills/estratega-tienda` | activa |
+| `equipo-pod-revision-viernes` (vie) | Ritual de revisión (ledger + Ads + acta en `revisiones/`); sin skill propio — declarado | activa |
+| `pod-ritual-lunes-h04` / `pod-ritual-viernes-h12` | Rituales de la instancia (verificación de bancos/ledger); sin skill propio — declarado | activas |
+| `equipo-pod-propuestas-diarias` (diario) | `skills/puerta-arte-propuesta` (Fase A) + Fase B de `publicar-printify-etsy` | **pausada por el dueño** |
+| `equipo-pod-pinterest-diario` (diario) | `skills/estratega-pinterest` + `skills/puerta-pinterest-pin` | activa |
+| `equipo-pod-watchdog` (30 min) | Vigilancia de la operación (cruza registro/checkpoint/decisiones) | activa |
 
 ## Ruta de lectura (adoptada 2026-10-19, fase de mejora post-migración v0.12.1)
 
@@ -324,27 +357,29 @@ su ruta en el mismo cambio.**
 
 | Tarea / flujo | Lecturas mínimas gobernantes |
 |---|---|
-| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/29222324/direccion-tienda.md` (directriz vigente) · `data/tiendas/29222324/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) · `docs/VITRINA-VIVA.md` (contrato de la superficie única de entrega, en vivo) + `scripts/producir-previas-vitrina.py` (previas del lote a su hogar en el repo de datos) |
+| **Propuestas — etapa 1: arte y aprobación** (F1 Fase A) | Este doc (§Flujo bifurcado, §Etapa 1) · `skills/puerta-arte-propuesta/SKILL.md` · `data/tiendas/<tienda-id>/direccion-tienda.md` (directriz vigente) · `data/tiendas/<tienda-id>/config-propuestas.json` (composición y tipo de lote) · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/<tienda-id>/config.json` (ficha de la tienda) · herramientas de procesamiento declaradas en el skill: `scripts/procesar-arte-propuesta.py` (crudos con fondo blanco) y `scripts/reparar-fondo-casi-blanco.py` (fondos casi-blancos) · `docs/VITRINA-VIVA.md` (contrato de la superficie única de entrega, en vivo) + `scripts/producir-previas-vitrina.py` (previas del lote a su hogar en el repo de datos) |
 | **Recogida-aplicación de decisiones de la vitrina** (el dueño avisa «recoge las decisiones de la vitrina de <tienda>») | `skills/puerta-arte-propuesta/SKILL.md` (§«Recogida-aplicación de decisiones (vitrina en vivo)»: procedimiento completo, validaciones e idempotencia) · `docs/VITRINA-VIVA.md` (contrato de decisiones) · `data/tiendas/<tienda-id>/config.json` (bloque `vitrina`: la instancia de ESA tienda) · `data/tiendas/<tienda-id>/vitrina/decisiones.json` (fuente: decisiones del dueño en el repo) · `data/tiendas/<tienda-id>/estado-propuestas.json` (destino) · `data/tiendas/<tienda-id>/registro-listings.json` (validación de slugs) |
-| **Producción — etapa 2: borradores de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/29222324/registro-listings.json` (qué diseños ya tienen su MPL producido) · `data/tiendas/29222324/estado-propuestas.json` (los `aprobados` registrados que consume esta fase) |
+| **Producción — etapa 2: borradores de aprobados** (F1 Fase B) | Este doc (§Etapa 2) · `skills/publicar-printify-etsy/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · `data/tiendas/<tienda-id>/registro-listings.json` (qué diseños ya tienen su MPL producido) · `data/tiendas/<tienda-id>/estado-propuestas.json` (los `aprobados` registrados que consume esta fase) |
 | **Revisión del dueño y producción** (mockups, videos) | Este doc (§§Etapa 3–5) · `skills/publicar-printify-etsy/SKILL.md` (§M5 algoritmo y manifiesto de mockups · §M6 escenarios y formato técnico de video, única fuente desde v0.11.0) |
-| **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/tiendas/29222324/registro-listings.json` (lo hereda el paquete) |
+| **Paquete comercial del listing** | `skills/paquete-listing-etsy/SKILL.md` · este doc (§Etapa 6) · el porqué guardado en `data/tiendas/<tienda-id>/registro-listings.json` (lo hereda el paquete) |
 | **Publicación por lote** (F2) | `skills/publicador-lote/SKILL.md` · `skills/publicar-printify-etsy/SKILL.md` (checklist de publicación) · este doc (§Etapa 7) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
-| **Pinterest diario** (F3) | `skills/estratega-pinterest/SKILL.md` (parrilla) · `skills/puerta-pinterest-pin/SKILL.md` (puerta del pin) · este doc (§Etapa 8) · `data/tiendas/29222324/config.json` (links rastreables Share & Save) |
-| **Dirección semanal** (F4: estratega e investigación) | `skills/estratega-tienda/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · insumos: la investigación y el trend-scan más recientes en `data/tiendas/29222324/investigaciones/` y el acta más reciente en `data/tiendas/29222324/revisiones/` · `scripts/reporte-seo.py` (cobertura SEO banco × ledger, entrada declarada en el skill de la estratega) · salidas que produce: `data/tiendas/29222324/direccion-tienda.md` y `data/tiendas/29222324/config-propuestas.json` (se commitean en la misma corrida) |
-| **Operación comercial** (F7: precios, ledger, ofertas) | `docs/DELIMITACIONES-ADOPCION.md` (§1: dueño y ruta completa del flujo, scripts incluidos) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` · `data/tiendas/29222324/config.json` (precios y calendario de descuentos) |
+| **Pinterest diario** (F3) | `skills/estratega-pinterest/SKILL.md` (parrilla) · `skills/puerta-pinterest-pin/SKILL.md` (puerta del pin) · este doc (§Etapa 8) · `data/tiendas/<tienda-id>/config.json` (links rastreables Share & Save) |
+| **Dirección semanal** (F4: investigación y estratega) | `skills/investigacion-tienda/SKILL.md` (produce la investigación: ficha → `investigaciones/<fecha>-investigacion.md`, con su puerta `scripts/verificar-investigacion.py`) · `skills/estratega-tienda/SKILL.md` · `docs/CONTRATO-TIPO-PRODUCTO.md` · insumos: la investigación y el trend-scan más recientes en `data/tiendas/<tienda-id>/investigaciones/` y el acta más reciente en `data/tiendas/<tienda-id>/revisiones/` · la ficha `data/tiendas/<tienda-id>/config.json` (líneas vigentes, entrada 11 de la estratega) · `scripts/reporte-seo.py` (cobertura SEO banco × ledger, entrada declarada en el skill de la estratega) · salidas que produce: `data/tiendas/<tienda-id>/direccion-tienda.md` y `data/tiendas/<tienda-id>/config-propuestas.json` (se commitean en la misma corrida, con el consumo de líneas verificado por `scripts/verificar-consumo-lineas-tienda.py`) |
+| **Operación comercial** (F7: precios, ledger, ofertas) | `docs/DELIMITACIONES-ADOPCION.md` (§1: dueño y ruta completa del flujo, scripts incluidos) · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` · `data/tiendas/<tienda-id>/config.json` (precios y calendario de descuentos) |
 | **Conectar Etsy API de una tienda** (F6) | `skills/conectar-etsy-api/SKILL.md` · `docs/ESTANDAR-ETSY-API-VS-NAVEGADOR.md` |
 | **Onboarding de tienda nueva** (F5) | `skills/onboarding-tienda/SKILL.md` · este doc (§Crear tienda desde cero) · `docs/PATRONES-RESILIENCIA.md` (cómo nacen sus crons) |
 | **Trabajos largos con dependencia externa** (cualquier flujo) | `docs/PATRONES-RESILIENCIA.md` (health-check, checkpoints con resume, reintentos acotados) · `docs/REGLA-DELIVERY-CHATS.md` (cómo se entrega el resultado) |
 | **Versionado de registros** (cualquier flujo que escriba bajo `data/`) | `ARQUITECTURA-DATOS.md` (mapa de repos D1: qué se commitea en cada repo) · `scripts/registros-datos.py` (el puente: `commit` sincroniza los registros físicos al repo privado `my-pod-datos`, commitea y pushea; `pull` restaura el árbol físico) |
-| **Mantenimiento del sistema** (F9: migraciones, fases de mejora, contribuciones) | `rameli.json` (pin vigente) · `../rameli/MIGRACIONES.md` y `../rameli/CHANGELOG.md` (proceso y delta) · `../rameli/docs/CONTRIBUCIONES.md` (si el trabajo sube al framework) · `docs/DELIMITACIONES-ADOPCION.md` (§§2–3: orquestación y capa de juicio) · `docs/EJECUCION-Y-RELEVO.md` (registro y relevo) · `data/tiendas/29222324/registro-flujo.md` (estado de los flujos de la tienda) |
+| **Mantenimiento del sistema** (F9: migraciones, fases de mejora, contribuciones) | `rameli.json` (pin vigente) · `../rameli/MIGRACIONES.md` y `../rameli/CHANGELOG.md` (proceso y delta) · `../rameli/docs/CONTRIBUCIONES.md` (si el trabajo sube al framework) · `docs/DELIMITACIONES-ADOPCION.md` (§§2–3: orquestación y capa de juicio) · `docs/EJECUCION-Y-RELEVO.md` (registro y relevo) · `data/tiendas/<tienda-id>/registro-flujo.md` (estado de los flujos de la tienda) |
 
 Cobertura verificada al adoptar (2026-10-19): los **9 skills
 vivos** aparecen en al menos una ruta — puerta-arte-propuesta,
 publicar-printify-etsy, paquete-listing-etsy, publicador-lote,
 estratega-pinterest, puerta-pinterest-pin, estratega-tienda,
 conectar-etsy-api, onboarding-tienda — y todo puntero de la
-tabla resuelve a un archivo existente.
+tabla resuelve a un archivo existente. (2026-10-27: el skill
+**investigacion-tienda** se suma en la ruta de Dirección
+semanal — 10 skills vivos.)
 
 
 ## Crear tienda desde cero (para nuevas tiendas/nichos)
@@ -366,7 +401,7 @@ Cada tienda tiene su propia configuración. Los criterios de una tienda no conta
 ## Selección de productos y tipo de lote (2026-10-15)
 
 **Principio:** el producto y el tipo de lote NO están hardcodeados.
-La estratega los decide cada semana en `data/tiendas/29222324/config-propuestas.json`
+La estratega los decide cada semana en `data/tiendas/<tienda-id>/config-propuestas.json`
 (contrato: `docs/CONTRATO-TIPO-PRODUCTO.md`).
 
 ### Cómo se agrega un producto
@@ -381,4 +416,4 @@ La estratega los decide cada semana en `data/tiendas/29222324/config-propuestas.
 - Etsy: caja nativa de personalización (gratis, fulfillment manual).
 - Automatización sin intervención (Teeinblue/Customily/HelloCustom) y
   flujo Canva (template + API): en investigación, spikes pendientes del
-  dale del dueño. Ver `data/tiendas/29222324/direccion-tienda.md`.
+  dale del dueño. Ver `data/tiendas/<tienda-id>/direccion-tienda.md`.

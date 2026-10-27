@@ -3,7 +3,7 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.7.0"
+  version: "0.8.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -73,6 +73,16 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
    listings no usan ninguna). Es insumo de la dirección cuando la
    semana toca decisiones de nicho o de SEO; sin datos de ventas,
    el reporte muestra cobertura y lo dice explícito.
+11. **Líneas vigentes de la tienda** (2026-10-27, recalibración de
+    alineación): `config.json → lineas_vigentes` — los focos y
+    métodos que el dueño tiene ABIERTOS, con su estado y su cupo
+    mínimo. La ficha manda: esta directriz **asigna contra** las
+    líneas, nunca declara su estado ni las abre/cierra. Una línea
+    en `operativa|piloto` debe recibir asignación en el
+    `config-propuestas` o una `asignacion_nota`/pausa declarada
+    con su dale — el cierre lo verifica el helper del paso de
+    Salida. Lo ya decidido en una línea NO se re-propone como
+    PROPUESTA: se ejecuta o se pide su cambio con motivo.
 10. **Estrategia visual de la tienda** (v0.7.0, 2026-10-23 —
     Programa Estándar My POD, F3): `config.json → mpl.esquema_mockups`
     y `mpl.esquema_videos` (con su `estado`) y los catálogos
@@ -175,8 +185,10 @@ NO-hacer; 3) emitir los dos archivos de la misma corrida
 
 ## Personalizados — doctrina de la razón (2026-10-20, estudio de criterios)
 
-Cuando la directriz pida personalizados (cupo en el config, bloque
-`personalizados`), cada propuesta nace con su **ficha de razón** — el
+Cuando la línea de personalización de la ficha
+(`lineas_vigentes.personalizacion`) esté abierta y la directriz le
+asigne cupo (bloque `personalizados` del config-propuestas, que es
+asignación semanal — el estado vive en la ficha), cada propuesta nace con su **ficha de razón** — el
 detalle de puerta vive en `puerta-arte-propuesta` ("Diseños
 personalizables — criterios"); aquí vive qué patrones proponer y por qué.
 
@@ -220,7 +232,18 @@ personalizables — criterios"); aquí vive qué patrones proponer y por qué.
    producto, reparto mixto, `flujo_bifurcado: true`, temas, precios,
    vigencia, notas (overrides del dueño). Los dos archivos deben decir
    lo mismo; el JSON es lo que el cron lee.
-3. **Commit en la misma corrida (regla 2026-10-19; re-apuntada por
+3. **Verificación de consumo y registro (2026-10-27,
+   recalibración de alineación):** antes de commitear, correr
+   `python3 scripts/verificar-consumo-lineas-tienda.py --shop
+   <tienda-id>` — si una línea vigente de la ficha quedó sin
+   asignación ni pausa declarada en el config emitido, la corrida
+   NO cierra: se corrige la asignación o se registra la pausa con
+   su dale. Y si en la semana hubo decisión o veredicto del
+   dueño, la misma corrida lo anota en el `registro-flujo.md` de
+   la tienda (sección Decisiones y veredictos, con fecha) y lo
+   commitea con la directriz: el registro es el hogar de las
+   decisiones (doctrina de workers de Rameli), no la conversación.
+4. **Commit en la misma corrida (regla 2026-10-19; re-apuntada por
    la separación D1, 2026-10-21):** la corrida que escribe la
    directriz y el config los **commitea y pushea en el acto**. La
    directriz y el config son **registros de la instancia**: el

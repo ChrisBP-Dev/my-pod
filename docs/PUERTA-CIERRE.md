@@ -48,7 +48,19 @@ no con la palabra de quien la ejecutó.
   consumidores quedaron alineados a la forma nueva (ningún
   consumidor operando con la forma vieja en silencio).
 
-### (c) Estados de los valores de ficha que toca
+### (c) Consumo de líneas vigentes y registros vivos (2026-10-27, recalibración de alineación)
+- [ ] Si la mejora toca la ficha, una directriz o un flujo de la
+  tienda: `scripts/verificar-consumo-lineas-tienda.py --shop
+  <id>` en PASS — toda línea vigente de la ficha llegó a su
+  asignación o declaró su pausa (el hueco fundacional: la
+  personalización decidida no llegó a ningún artefacto).
+- [ ] El `registro-flujo.md` de la tienda quedó actualizado en
+  esta corrida si hubo decisión/veredicto del dueño, y el
+  `INVENTARIO-VALORES-FICHA.md` refleja el estado real de los
+  valores tocados (ambos registros se abandonaron una vez —
+  2026-10-19→27 — sin que ninguna puerta lo midiera).
+
+### (c2) Estados de los valores de ficha que toca
 - [ ] Todo valor de ficha que la mejora crea, mueve o consume
   quedó con su **estado** declarado: `configurado` (decidido
   por el dueño en su flujo) / `provisional` (sembrado sin su

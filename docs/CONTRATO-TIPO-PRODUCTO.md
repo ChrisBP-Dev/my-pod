@@ -85,12 +85,19 @@ junto con `data/tiendas/29222324/direccion-tienda.md` en cada corrida semanal.
 - `flujo_bifurcado`: siempre `true`. Aunque `tipo_lote` sea `"mpl"`,
   un diseño marcado como **personalizable** va por track single
   (el MPL nativo no soporta personalización — orden del dueño).
-- `personalizados` (opcional, 2026-10-20): bloque de la tienda para el
-  flujo de personalizados — `estado` (piloto/en flujo/pausado),
-  `cupo_en_flujo_diario` (cuántas de las N propuestas del día pueden
-  ser personalizadas; cuentan dentro del reparto single) y, durante
-  un piloto, su tabla de listings con precios verificados y regla de
-  retiro. Los diseños personalizables son siempre **nuevos y únicos**
+- `personalizados` (opcional, 2026-10-20; **enmienda de colocación
+  2026-10-27, recalibración de alineación**): bloque de ASIGNACIÓN
+  SEMANAL del flujo de personalizados — `cupo_en_flujo_diario`
+  (cuántas de las N propuestas del día pueden ser personalizadas;
+  cuentan dentro del reparto single), `asignacion_nota` (obligatoria
+  cuando el cupo es 0: el motivo declarado de la pausa y su dale) y,
+  durante un piloto, su tabla de listings con precios verificados y
+  regla de retiro. **El ESTADO de la línea NO vive aquí**: vive en
+  la ficha (`config.json → lineas_vigentes.personalizacion`), que es
+  la capa que manda; este bloque solo asigna la semana contra esa
+  línea (antes de la enmienda, el `estado` canónico vivía en este
+  artefacto de 7 días — colocación corregida). Sin este bloque: no se
+  proponen personalizados esta semana. Los diseños personalizables son siempre **nuevos y únicos**
   (nunca un diseño que vive en un MPL) y se producen por la ruta
   automatizada (`publicar-printify-etsy` §Track Single-P) con los
   criterios de `puerta-arte-propuesta`. Sin este bloque: no se

@@ -68,5 +68,22 @@ if [[ $rc -ne 0 && "$out" == *"temas suman N"* ]]; then
 else
   fail=$((fail+1)); echo "FALLA: fixture inválida no falló nombrando 'temas suman N' (rc=$rc)"; echo "$out" | tail -4
 fi
+# --- Consumo de líneas vigentes (v0.8.0, 2026-10-27) ---
+# El helper de la app contra fixtures: línea de ficha con pausa
+# declarada → PASS; la misma asignación en 0 sin nota → FAIL
+# (el hueco real del 2026-10-26, calibrado también contra el
+# config real previo a la recalibración).
+APP="$(cd "$SKILL/../.." && pwd)"
+HELPER="$APP/scripts/verificar-consumo-lineas-tienda.py"
+if python3 "$HELPER" --shop ficticia --ficha "$FIX/ficha-ficticia-con-linea.json" --config-propuestas "$FIX/config-consumo-con-nota.json" >/dev/null 2>&1; then
+  ok=$((ok+1))
+else
+  fail=$((fail+1)); echo "FALLA: consumo con pausa declarada debía pasar"
+fi
+if python3 "$HELPER" --shop ficticia --ficha "$FIX/ficha-ficticia-con-linea.json" --config-propuestas "$FIX/config-consumo-sin-nota.json" >/dev/null 2>&1; then
+  fail=$((fail+1)); echo "FALLA: consumo con cupo 0 y sin nota debía fallar"
+else
+  ok=$((ok+1))
+fi
 echo "--- $ok ok, $fail fallas ---"
 [[ $fail -eq 0 ]]

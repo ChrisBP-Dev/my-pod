@@ -1,5 +1,10 @@
 # CHANGELOG — estratega-tienda
 
+## v0.8.0 (2026-10-27) — Recalibración de alineación a Rameli: líneas vigentes y consumo verificado
+- **Entrada 11 — líneas vigentes de la ficha:** la estratega lee `config.json → lineas_vigentes` y asigna contra ellas; nunca declara su estado ni re-propone lo ya decidido.
+- **Cierre con verificación de consumo:** la Salida gana el paso 3 — `scripts/verificar-consumo-lineas-tienda.py` antes de commitear (línea abierta sin asignación ni pausa declarada = la corrida no cierra) y actualización del `registro-flujo.md` de la tienda cuando hubo dale del dueño en la semana.
+- §Personalizados re-apuntado: el estado de la línea vive en la ficha; el bloque `personalizados` del config es asignación semanal.
+
 ## v0.7.0 (2026-10-23) — Programa Estándar My POD: evals desacoplados de la instancia + estrategia visual como insumo (F4/F3)
 - **Evals portables:** la suite de contrato ya no valida el `config-propuestas.json` REAL de una tienda concreta: corre contra fixtures neutros propios (`evals/fixtures/config-propuestas-ficticia-{valida,invalida}.json`, tienda ficticia) — válida pasa, inválida (temas no suman N) falla nombrando el criterio. Cualquier instancia puede correrla igual.
 - **Estrategia visual como insumo (F3):** nueva entrada 10 — `mpl.esquema_mockups`/`esquema_videos` y los catálogos `tomas_preferidas` con su `estado`. La estratega aporta evidencia a la Calibración visual de `onboarding-tienda`; si la estrategia visual no está `configurado`, la directriz lo señala como hueco declarado y nunca lo rellena por su cuenta.
