@@ -41,9 +41,25 @@ import urllib.request
 from datetime import datetime, timezone
 
 APP_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LEDGER_PATH = os.path.join(APP_ROOT, "data", "ledger-ventas.json")
-REGISTRO_PATH = os.path.join(APP_ROOT, "data", "registro-listings.json")
-CSV_DIR = os.path.join(APP_ROOT, "data", "ventas-csv")
+
+
+def resolve_tienda_dir():
+    """El directorio de la tienda sale de su config (MY_POD_TIENDA_CONFIG,
+    el mismo mecanismo que resolve_secrets_path). Antes las rutas apuntaban
+    al layout viejo data/*.json y el --pull no encontraba el ledger: esa es
+    la causa del watermark congelado el 2026-10-16 (corregido 2026-10-27)."""
+    cfg = os.path.expanduser(
+        os.environ.get("MY_POD_TIENDA_CONFIG",
+                       "~/workspace/my-pod/data/tiendas/29222324/config.json"))
+    if os.path.exists(cfg):
+        return os.path.dirname(cfg)
+    return os.path.join(APP_ROOT, "data")
+
+
+TIENDA_DIR = resolve_tienda_dir()
+LEDGER_PATH = os.path.join(TIENDA_DIR, "ledger-ventas.json")
+REGISTRO_PATH = os.path.join(TIENDA_DIR, "registro-listings.json")
+CSV_DIR = os.path.join(TIENDA_DIR, "ventas-csv")
 SECRETS_PATH = os.path.expanduser("~/.config/my-pod/etsy-api.json")
 
 
