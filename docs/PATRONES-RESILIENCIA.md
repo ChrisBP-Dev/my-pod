@@ -23,6 +23,31 @@ inútil es horas.
   (dominio caído/retirado, verificado 2026-10-16).
 - Anti-patrón: asumir sesión/red sanas porque "ayer funcionó".
 
+### P1-bis — El health-check debe ser representativo del canal real de trabajo (recalibrado 2026-10-27, decisión del dueño)
+
+La sonda y el trabajo no siempre viajan por el mismo canal: una petición
+anónima por terminal (sin sesión, desde la IP de un centro de datos) puede
+ser bloqueada por el servicio aunque el canal real de trabajo — el
+navegador con la sesión de la cuenta — funcione perfectamente. Una sonda
+así NO es una puerta: es solo una señal.
+
+- Sonda OK (código esperado) → se trabaja.
+- Sonda fallida → NO se detiene la corrida ni se consume reintento (P3)
+  todavía: se verifica por el **canal real de trabajo** (p. ej. abrir el
+  servicio en el navegador de publicación y comprobar que carga).
+- Canal real OK → se trabaja, y el reporte anota la divergencia
+  («sonda X falló, canal real OK»).
+- Canal real fallido (verificado con una segunda comprobación) → recién
+  ahí hay salud fallida: se detiene y corre P3.
+- Caso real (calibración de Pinterest en My POD, 2026-10-24/26/27):
+  `curl https://www.pinterest.com/` devolvió 403 días enteros mientras
+  google.com daba 200 y el 2026-10-25, con curl 200, la corrida publicó
+  5/5 — el 403 era bloqueo a la IP de salida, no caída del servicio ni
+  fallo de credenciales. La regla de ese servicio vive en
+  `skills/puerta-pinterest-pin/SKILL.md` (§ «Salud previa a publicar»).
+- Anti-patrón: convertir una sonda no representativa en puerta — la
+  corrida se detiene días enteros ante un servicio que sí responde.
+
 ## P2 — Checkpoints con resume
 
 El avance del lote vive en un archivo de estado versionado (JSON),
