@@ -84,6 +84,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 
 ## Track MPL — Fase B: publicar
 
+- [ ] Descripción sincronizada: líneas «Colors:» del MPL (y del paquete) reescritas desde los colores habilitados por API de cada componente (§M7; la lista guardada del paquete no manda)
 - [ ] Publicar el MPL en Printify (no los componentes por separado)
 - [ ] Estado = "Published" (no "Publishing")
 - [ ] Verificar en "My Products" que el MPL aparece publicado
@@ -102,6 +103,7 @@ está autorizado. El ojo del dueño es la puerta visual final.**
 - [ ] (Si el orden no se preservó del sync: reordenar en el editor de Etsy)
 - [ ] Video 1 y Video 2 presentes y reproducibles (no se borraron en la conversión)
 - [ ] Título, descripción completa, 13 tags
+- [ ] Descripción ↔ colores: `verificar-descripcion-colores.py --diseno <id>` = PASS (la descripción viva lista exactamente los colores habilitados por API de cada componente)
 - [ ] Materiales, atributos, categoría correctos
 - [ ] Production partner = Printify (declarado)
 - [ ] Perfil de envío asignado; política de devoluciones
