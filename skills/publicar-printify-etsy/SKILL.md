@@ -3,7 +3,7 @@ name: "publicar-printify-etsy"
 description: "Publica un diseño aprobado en Printify y Etsy (Printify-first): track MPL nativo (sudadera + playera en un listing) o single-product. Drafts, revisión del dueño, mockups, videos, publicación y verificación en Etsy."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.15.0"
+  version: "0.16.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -815,6 +815,36 @@ con costo, no un reintento gratis.** Reglas:
    inmediato, registrarlo en la entrada del diseño con el
    impacto en tarifa, y reportarlo como defecto del sistema, no
    como nota menor.
+
+**Fila pegada en «Uploading images» — ruta de recuperación
+(2026-10-27, incidente p046):** la fila de My Products NO es el
+estado del MPL. Está observado que un trabajo de publicación
+puede morir en silencio del lado de Printify tras un empuje
+parcial al canal (p046: 10 de 20 imágenes y variantes ya nuevas
+en Etsy) dejando la fila en «Uploading images» por horas, con
+el editor inaccesible desde la fila — el bloqueo es de la vista
+de la fila, no del MPL. **Diagnóstico por la puerta alterna:**
+entrar a un PRODUCTO COMPONENTE del MPL → «View Multi-Product
+Listings» → en el panel «Connected Multi-product listings»,
+«View» → editor del MPL, que muestra el estado real (salud del
+listing, banners, botones habilitados). **Evidencia de trabajo
+muerto — se exigen las tres:** (a) el editor carga completo
+sin ningún estado de publicación en curso y con «Publish»
+habilitado; (b) la selección y los datos del MPL están
+intactos; (c) el canal (API de Etsy) muestra CERO cambios
+desde el empuje parcial durante una ventana larga — una
+publicación sana tarda minutos, no horas. **Recuperación, con
+la palabra del dueño:** desde ese editor se corre el flujo
+normal previo al clic (sincronización de la descripción y los
+7 grupos marcados) y UN clic de «Publish». Es la excepción
+sancionada a la regla 3: no es un segundo clic a ciegas, es un
+clic nuevo sobre un estado verificado como inactivo por DOS
+superficies independientes (el editor y la API del canal). Si
+el editor muestra CUALQUIER estado en curso o algo ambiguo, no
+se toca nada: se sigue esperando o se escala a soporte de
+Printify. Tras el clic de recuperación la fila puede volver a
+mostrar «Uploading images»: es el transitorio normal (en p046
+duró ~5 minutos hasta «Published»).
 
 ### M8. Verificación en Etsy — FASE C (exhaustiva, 2026-10-15)
 Nada se da por sentado. Verificar contra el listing vivo:
