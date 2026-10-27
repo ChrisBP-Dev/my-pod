@@ -73,5 +73,14 @@ got=$(echo "$out" | python3 -c "import json,sys; print(json.load(sys.stdin)['ver
 if [[ "$got" == "PASS" ]]; then ok=$((ok+1));
 else fail=$((fail+1)); echo "FALLA: F10b limpieza de counters esperaba PASS tras limpiar, dio '$got'"; fi
 
+# Calibración 2026-10-27 (F5: la doctrina de fuente plana de bordado
+# pasó de prosa a puerta mecánica — gate 14 de verificar-arte.py):
+# la fuente plana sintética (4 colores) pasa como bordado; el canónico
+# DTG a todo color, medido como bordado, cae por no plano (448+
+# dominantes medidos en artes reales del registro; p070/p071 planos
+# reales miden 5 y 4 y pasan).
+run "P14 bordado fuente plana" PASS None --archivo "$K/arte-plano-bordado.png" --ancho-pulgadas 10.5 --metodo bordado
+run "F14 bordado fuente no plana" FAIL fuente_bordado_no_plana --archivo "$K/vitals-stable-print-300dpi.png" --ancho-pulgadas 10.5 --metodo bordado
+
 echo "--- $ok ok, $fail fallas ---"
 [[ $fail -eq 0 ]]

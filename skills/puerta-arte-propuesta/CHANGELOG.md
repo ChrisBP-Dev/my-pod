@@ -1,5 +1,12 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.13.0 (2026-10-27) — la doctrina de fuente plana de bordado se vuelve puerta mecánica
+
+- **Hueco que destapa la unidad F5 de la recalibración:** el `metodo` ya se declaraba en el registro y la puerta de entrega (`producir-previas-vitrina.py`) ya lo exigía, y el SKILL declaraba FAIL para la fuente bordada con textura/degradados/>6 colores — pero **ninguna medición lo verificaba**: `verificar-arte.py` no sabía qué era bordado. La doctrina vivía en prosa.
+- **Gate 14 `fuente_plana_bordado`** en `verificar-arte.py`, activo con `--metodo bordado`: cuenta los colores dominantes del contenido (reducción por vecino-más-cercano, cuantización a cubos de 16/canal, cobertura 99.5% — el resto es antialiasing) y falla con `fuente_bordado_no_plana` si superan 6.
+- **Calibración en ambos sentidos contra artes reales:** p070 (5 dominantes) y p071 (4) PASS; p058 a todo color medido como bordado: FAIL con 448 dominantes; p002: 596. Casos permanentes en la suite (P14/F14 con fixture plano sintético + canónico DTG).
+- La vista «resultado esperado» NO se reintroduce: sigue retirada por la corrección del dueño (v0.12.0). Lo que esta versión cierra es la medición de la FUENTE, no una previa nueva.
+
 ## v0.12.0 (2026-10-26) — presentación sin acabado fingido; estilo por diseño; tipografía declarada
 
 Tres correcciones del dueño sobre el piloto p068–p071, con su dale a recalibrar el canon y regenerar con worker frío:

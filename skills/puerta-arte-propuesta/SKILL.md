@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.12.0"
+  version: "0.13.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -348,7 +348,14 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   declara en la ficha, no se renderiza). El diseño declara su
   `metodo` (ver «Dónde vive en el sistema»). Un arte bordado cuya
   fuente lleve textura, degradados o más de 6 colores sólidos es
-  FAIL de esta puerta, no un estilo.
+  FAIL de esta puerta, no un estilo. **Puerta mecánica (desde
+  v0.13.0, 2026-10-27):** `scripts/verificar-arte.py --metodo
+  bordado` mide los colores dominantes del contenido (gate
+  `fuente_plana_bordado`: >6 dominantes al 99.5% de cobertura =
+  FAIL). Calibración: las fuentes planas reales p070/p071 miden
+  5 y 4 dominantes; un arte DTG a todo color mide cientos. La
+  verificación de todo arte bordado corre con `--metodo bordado`
+  además de los gates de siempre.
   **Contornos LISOS, tipo vector (corrección del dueño 2026-10-26):**
   plano no alcanza — la silueta debe ser la de un dibujo normal,
   con bordes limpios y suaves. **Aplanar/posterizar un arte

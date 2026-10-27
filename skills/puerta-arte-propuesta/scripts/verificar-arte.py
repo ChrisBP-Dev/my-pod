@@ -107,6 +107,19 @@ Gates mecánicos (código):
      (<1500px), tenues o de tono cálido NO los caza este gate —
      siguen en el gate humano de counters.
 
+ 14. fuente_plana_bordado (SOLO con --metodo bordado, 2026-10-27,
+     unidad F5 de la recalibración — la doctrina vivía en prosa en el
+     SKILL y ninguna puerta la medía): la fuente de un bordado es
+     PLANA, máx. 6 colores sólidos (doctrina del dueño 2026-10-26 en
+     la ficha de la tienda). Medición: sobre una reducción por
+     vecino-más-cercano (conserva la paleta exacta), píxeles con
+     alfa>=128 cuantizados a cubos de 16 por canal; se cuentan los
+     colores dominantes que cubren el 99.5% del contenido (el 0.5%
+     restante es el antialiasing de los bordes). Más de 6 dominantes
+     = la fuente trae degradados, textura o paleta de DTG: FAIL
+     «fuente_bordado_no_plana». Si el concepto nació texturizado, la
+     fuente se regenera plana (ver SKILL), no se posteriza.
+
 Reparación: --autotrim --salida <png> recorta al bbox SEGURO + 4px
 (antes: bbox por masa 0.05% — amputaba extremos de baja masa: hojas
 finas, guirnaldas, iconos; causa raíz del lote A 2026-10-18) y
@@ -156,6 +169,9 @@ DPI_MIN = 300
 BLANCO_UMBRAL = 225       # min(R,G,B) >= esto = "casi-blanco" (atrapa también
                            # el crema/beige del fondo sin limpiar, p022 2026-10-15)
 BLANCO_SPREAD_MAX = 45     # max-min <= esto (un color saturado no es "blanco")
+BORDADO_COLORES_MAX = 6      # colores sólidos dominantes (doctrina de la ficha)
+BORDADO_COBERTURA = 0.995    # cobertura de los dominantes (resto = antialiasing)
+BORDADO_CUBO = 16            # cuantización por canal para contar dominantes
 BLANCO_INTERIOR_MAX = 8.0  # % del bbox: más que esto = fondo sin limpiar (FAIL)
 BLANCO_ADJUDICAR = 2.0     # % del bbox: entre esto y el max = adjudicación visual
 # (ASPECTO_MAX eliminado 2026-10-15: el aspecto no bloquea — corrección suya)
@@ -384,6 +400,32 @@ def blancos_interiores(im, bbox):
         stack += [(y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)]
     pct_borde = 100.0 * visit.sum() / total if total else 0.0
     return round(pct, 2), round(pct_borde, 2)
+
+
+def colores_dominantes(im):
+    """Colores dominantes del contenido (alfa>=128): reduce por
+    vecino-más-cercano (la paleta se conserva exacta), cuantiza a
+    cubos de BORDADO_CUBO por canal y devuelve cuántos colores
+    hacen falta para cubrir BORDADO_COBERTURA del contenido."""
+    from collections import Counter
+    mini = im.copy()
+    mini.thumbnail((700, 700), Image.NEAREST)
+    conteo = Counter()
+    total = 0
+    for r, g, b, al in mini.getdata():
+        if al >= 128:
+            conteo[(r // BORDADO_CUBO, g // BORDADO_CUBO,
+                    b // BORDADO_CUBO)] += 1
+            total += 1
+    if total == 0:
+        return 0
+    acumulado, n = 0, 0
+    for _, c in conteo.most_common():
+        acumulado += c
+        n += 1
+        if acumulado / total >= BORDADO_COBERTURA:
+            break
+    return n
 
 
 def verificar(im, formato, a):
@@ -623,6 +665,17 @@ def verificar(im, formato, a):
         gates["dpi_al_zoom"] = {"pass": g9, "minimo": DPI_MIN,
                                  "headroom": ZOOM_HEADROOM}
         violado = violado or (None if g9 else "dpi_sin_margen_zoom")
+    # G14: fuente plana de bordado (SOLO con --metodo bordado): la
+    # doctrina de la ficha (máx. 6 colores sólidos, sin degradados ni
+    # textura) medida por colores dominantes del contenido.
+    if getattr(a, "metodo", None) == "bordado":
+        n_dom = colores_dominantes(im)
+        med["bordado_colores_dominantes"] = n_dom
+        g14 = n_dom <= BORDADO_COLORES_MAX
+        gates["fuente_plana_bordado"] = {
+            "pass": g14, "maximo_colores": BORDADO_COLORES_MAX,
+            "cobertura": BORDADO_COBERTURA}
+        violado = violado or (None if g14 else "fuente_bordado_no_plana")
     return gates, violado, med
 
 
@@ -643,6 +696,11 @@ def main():
                     help="crudo de origen: activa fidelidad_recorte "
                          "(el final debe contener todo el contenido "
                          "del crudo: aspecto + banda externa)")
+    ap.add_argument("--metodo", default=None, choices=["dtg", "bordado"],
+                    help="método declarado del diseño (el de su entrada "
+                         "en el registro): con 'bordado' activa la "
+                         "puerta fuente_plana_bordado (máx. 6 colores "
+                         "sólidos dominantes)")
     a = ap.parse_args()
 
     try:
