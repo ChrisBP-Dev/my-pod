@@ -87,12 +87,45 @@ def main():
             if not os.path.isdir(os.path.join(skills_dir, s)):
                 muertas.append(f"{corta}: skills/{s}/ NO existe")
 
-    if muertas:
-        for m in muertas:
+    # Invocación: el inventario de agendas del FLUJO declara qué
+    # skill invoca cada agenda; el cuerpo guardado de cada agenda
+    # recurrente debe NOMBRAR ese skill (invoca, no duplica: si el
+    # cuerpo no lo nombra, el método vive en el cuerpo y derivará).
+    # Las filas que declaran «sin skill propio» son la excepción
+    # declarada y se saltan.
+    fallos_inv = []
+    flujo_txt = ""
+    if os.path.exists(flujo):
+        flujo_txt = open(flujo, encoding="utf-8").read()
+    for m in re.finditer(r"\| `([a-z0-9\-]+)`[^|]*\|([^|]*)\|", flujo_txt):
+        agenda, invoca = m.group(1), m.group(2)
+        sm = re.search(r"skills/([A-Za-z0-9_.\-]+)", invoca)
+        if not sm:
+            continue
+        skill = sm.group(1)
+        cuerpos = []
+        for raiz, _, files in os.walk(a.agendas):
+            if "runonce" in raiz:
+                continue
+            for f in files:
+                if f.startswith(agenda + "__") and f.endswith(".md"):
+                    cuerpos.append(os.path.join(raiz, f))
+        if not cuerpos:
+            fallos_inv.append(f"agenda «{agenda}»: sin cuerpo guardado "
+                              f"en {a.agendas}")
+            continue
+        if not any(skill in open(p, encoding="utf-8").read()
+                   for p in cuerpos):
+            fallos_inv.append(f"agenda «{agenda}»: su cuerpo no nombra "
+                              f"el skill que invoca ({skill})")
+
+    if muertas or fallos_inv:
+        for m in muertas + fallos_inv:
             print(f"FAIL: {m}")
         return 1
     print(f"PASS: {len(textos)} textos con órdenes de trabajo, "
-          f"sin referencias muertas a scripts ni skills")
+          f"sin referencias muertas a scripts ni skills, y toda "
+          f"agenda recurrente nombra el skill que invoca")
     return 0
 
 

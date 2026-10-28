@@ -33,6 +33,23 @@ Resultado medido en My POD (dos casos reales):
 El mecanismo (despertar agentes por horario) es legítimo y
 necesario; lo que falta es su GOBIERNO dentro del sistema.
 
+## El principio general (sin vocabulario de dominio)
+
+Toda superficie que ORDENA trabajo de una aplicación y vive
+fuera de su repo — agendas del programador del entorno, hooks,
+disparadores — es una **capa declarada de la aplicación**, no un
+detalle del operador. Si el framework no la declara, esa
+superficie crece por acreción: cada operador la escribe a su
+manera, duplica el método de los skills y deriva en silencio,
+porque ninguna validación la alcanza. El anti-patrón tiene
+nombre propio para poder prohibirlo: **calibrar en la agenda**
+— ajustar el método donde se ejecuta en vez de donde el sistema
+lo declara. Junto con la contribución de consumo de líneas
+vigentes, esta propuesta cubre las dos fronteras que el
+framework hoy no gobierna: lo que entra a la aplicación (las
+líneas que la instancia declara y alguien debe consumir) y lo
+que la despierta desde fuera (las agendas que la operan).
+
 ## La propuesta (contrato de agendas para el framework)
 
 1. **La aplicación declara sus agendas** en su propio cuerpo
@@ -62,3 +79,34 @@ necesario; lo que falta es su GOBIERNO dentro del sistema.
   reales; FAIL ante una referencia sembrada).
 - Cuerpos recalibrados a invocar skills (propuestas diarias e
   investigación semanal, 2026-10-27).
+- Protocolo de gobierno en el FLUJO de la app: crear/modificar
+  una agenda exige método en el skill → cuerpo que invoca →
+  inventario actualizado → verificación en PASS → registro.
+- El verificador también exige que cada cuerpo recurrente
+  NOMBRE el skill que el inventario declara (la invocación es
+  mecánica, no una costumbre).
+
+## Cómo evolucionaría el framework si la adopta
+
+1. **Contrato escrito** (documentación del framework): la capa
+   de agendas queda nombrada entre las capas de una aplicación,
+   con las tres reglas y el anti-patrón prohibido — cualquier
+   aplicación nueva nace con la capa declarada.
+2. **Verificador de referencia en el framework:** la puerta
+   mecánica (existencia de referencias + invocación nombrada)
+   se ofrece como script de referencia parametrizable (dónde
+   viven las proyecciones de las agendas de ESA instalación),
+   para que cada aplicación no la reimplemente.
+3. **Extensión futura de `rameli validar`:** si una aplicación
+   declara en su repo un manifiesto de agendas (id, skill que
+   invoca, dónde se leen sus cuerpos), el validador puede
+   incluir la capa en su veredicto y cerrar el hueco de raíz:
+   ninguna superficie que ordena trabajo queda fuera del
+   veredicto del framework.
+
+El beneficio no es de una sola aplicación: toda aplicación
+construida con el framework que opere con agentes programados
+— esta tienda, el sistema de canales, cualquier otra — hereda
+la misma protección, porque el defecto no era del dominio: era
+de la frontera entre el repo y el entorno, que es exactamente
+el territorio del framework.

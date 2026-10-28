@@ -336,8 +336,28 @@ una agenda, y al cerrar cualquier unidad que toque cuerpos de
 agenda o scripts, se corre `python3 scripts/verificar-referencias.py`
 en PASS — comprueba que todo `scripts/*.py` y `skills/<s>` citado
 por los cuerpos de agenda, los SKILL.md y este FLUJO exista en el
-disco. `rameli validar` no cubre los cuerpos de agenda (viven
-fuera del repo); este chequeo es su puerta.
+disco, y que el cuerpo de cada agenda recurrente NOMBRE el skill
+que este inventario declara que invoca. `rameli validar` no
+cubre los cuerpos de agenda (viven fuera del repo); este chequeo
+es su puerta.
+
+**Protocolo de gobierno de agendas (2026-10-27, corrección del
+dueño):** la mala práctica que esta capa corrige tiene nombre —
+**calibrar en la agenda**: ajustar el método editando el cuerpo
+del cron en vez del skill, con lo que el sistema deja de ser la
+fuente y el cuerpo deriva en silencio. Queda PROHIBIDA en esta
+aplicación. Toda creación o modificación de una agenda sigue
+este orden, sin excepciones: (1) el MÉTODO se crea o se corrige
+en el skill (o en el canon que el skill referencia) — nunca en
+el cuerpo; (2) el cuerpo se limita a invocar el skill y a lo que
+el programador posee (horario, reintentos acotados, checkpoints,
+reglas de entrega); (3) el inventario de arriba se actualiza en
+el mismo acto (agenda nueva sin fila = no existe); (4) la
+verificación de integridad corre en PASS ANTES de activar la
+agenda; (5) el cambio se anota en el `registro-flujo.md` de la
+tienda cuando afecta su operación. Una agenda cuyo cuerpo
+contenga pasos de método es un defecto a migrar al skill en
+cuanto se detecta, no un estilo válido.
 
 | Agenda | Invoca | Estado |
 |---|---|---|
