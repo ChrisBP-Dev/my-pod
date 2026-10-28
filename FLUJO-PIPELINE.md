@@ -329,7 +329,15 @@ estado. Una agenda **invoca un skill**; si su cuerpo duplica el
 método de un skill, manda el skill y la diferencia se reporta
 como hueco (caso B3, auditoría v0.11.0: el consumidor fuera del
 repo quedó atrás). Agenda sin skill = hueco declarado, no
-estilo.
+estilo. **Verificación de integridad (2026-10-27, pedido del
+dueño tras reactivar propuestas con una referencia muerta en su
+cuerpo que ninguna puerta vio):** antes de ACTIVAR o REACTIVAR
+una agenda, y al cerrar cualquier unidad que toque cuerpos de
+agenda o scripts, se corre `python3 scripts/verificar-referencias.py`
+en PASS — comprueba que todo `scripts/*.py` y `skills/<s>` citado
+por los cuerpos de agenda, los SKILL.md y este FLUJO exista en el
+disco. `rameli validar` no cubre los cuerpos de agenda (viven
+fuera del repo); este chequeo es su puerta.
 
 | Agenda | Invoca | Estado |
 |---|---|---|
