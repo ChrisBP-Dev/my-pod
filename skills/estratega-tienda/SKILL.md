@@ -3,7 +3,7 @@ name: "estratega-tienda"
 description: "Estratega/administrador de la tienda POD: revisa investigación, tendencias, márgenes y estacionalidad, y emite la directriz semanal (foco, mix, precios, nichos) y el config de tipo de lote del cron de propuestas."
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.8.0"
+  version: "0.8.1"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -192,6 +192,19 @@ asignación semanal — el estado vive en la ficha), cada propuesta nace con su 
 detalle de puerta vive en `puerta-arte-propuesta` ("Diseños
 personalizables — criterios"); aquí vive qué patrones proponer y por qué.
 
+- **Dos ejes independientes (2026-10-27, pregunta del dueño e
+  investigación de reapertura):** personalización (¿lleva el dato
+  del comprador?) y método (`dtg` | `bordado`, la línea-método de
+  la ficha) NO son lo mismo ni se asignan mezclados. Hay 4 celdas:
+  DTG personalizado (Single-P con Live Preview), bordado
+  personalizado (Single-P sin preview), DTG fijo (MPL/singles) y
+  bordado fijo (single de fuente plana, sin dato del comprador).
+  El cupo de personalizables del config se declara **por celda**
+  (cuántos de cada combinación), y el bordado fijo NO consume
+  cupo de personalizables: entra como single por su método cuando
+  el concepto lo pide. Un cambio de cupo pedido por el dueño
+  REABRE el flujo (investigación → esta directriz), nunca se
+  aplica como número suelto.
 - **Las 5 razones** (una por propuesta, declarada en una frase):
   identidad (el nombre profesional con su credencial, en su formato
   real), relación (los nombres de SU gente: nietos, amigas, la mascota

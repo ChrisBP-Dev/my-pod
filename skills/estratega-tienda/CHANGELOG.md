@@ -1,5 +1,8 @@
 # CHANGELOG — estratega-tienda
 
+## v0.8.1 (2026-10-27) — Dos ejes: personalización × método; el cupo se declara por celda
+- §Personalizados gana la regla de los dos ejes (pregunta del dueño + investigación de reapertura 2026-10-27): personalización (dato del comprador) y método (dtg|bordado) son independientes; 4 celdas con ruta; el cupo de personalizables se declara por celda y el bordado fijo no consume ese cupo. Un cambio de cupo reabre el flujo (investigación → directriz), no se aplica como número suelto.
+
 ## v0.8.0 (2026-10-27) — Recalibración de alineación a Rameli: líneas vigentes y consumo verificado
 - **Entrada 11 — líneas vigentes de la ficha:** la estratega lee `config.json → lineas_vigentes` y asigna contra ellas; nunca declara su estado ni re-propone lo ya decidido.
 - **Cierre con verificación de consumo:** la Salida gana el paso 3 — `scripts/verificar-consumo-lineas-tienda.py` antes de commitear (línea abierta sin asignación ni pausa declarada = la corrida no cierra) y actualización del `registro-flujo.md` de la tienda cuando hubo dale del dueño en la semana.
