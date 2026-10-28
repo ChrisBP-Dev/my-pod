@@ -1,5 +1,10 @@
 # Changelog — puerta-arte-propuesta
 
+## v0.13.1 (2026-10-28) — Puerta de forma del estado al entregar + verificación sobre la superficie viva
+- **Hueco que destapa el incidente «vitrina en cero»:** la corrida de prueba entregó el lote p072–p081 escribiendo `lote_actual` SIN la clave `entregados`; la vitrina deriva su universo de esa clave y leyó cero con el lote íntegro en el repo. La §Entrega ya decía dónde debían quedar los slugs, pero ninguna medición verificaba la FORMA del estado escrito.
+- **§Entrega paso 3:** antes de commitear corre `scripts/verificar-estado-entrega.py --shop <id>` (nuevo en `scripts/` de la app): FAIL si `lote_actual.disenos` trae slugs y `entregados` falta, viene vacío o no nombra exactamente el lote, o si un entregado no trae su bloque `vitrina` completo. En FAIL la entrega no cierra. Calibrado el día de su nacimiento: PASS sobre el estado real reparado, FAIL sobre la forma exacta del incidente.
+- **Verificación sobre la superficie viva:** la entrega se verifica contra la bandeja que la instancia deriva de verdad, no solo contra el repo; si esa lectura no está disponible, la verificación se declara PARCIAL, nunca «OK».
+
 ## v0.13.0 (2026-10-27) — la doctrina de fuente plana de bordado se vuelve puerta mecánica
 
 - **Hueco que destapa la unidad F5 de la recalibración:** el `metodo` ya se declaraba en el registro y la puerta de entrega (`producir-previas-vitrina.py`) ya lo exigía, y el SKILL declaraba FAIL para la fuente bordada con textura/degradados/>6 colores — pero **ninguna medición lo verificaba**: `verificar-arte.py` no sabía qué era bordado. La doctrina vivía en prosa.
