@@ -207,6 +207,22 @@ def main() -> int:
                   f"`metodo` válido ('dtg'|'bordado'): "
                   f"{entrada.get('metodo')!r}.", file=sys.stderr)
             return 1
+        # Revisión de franja obligatoria en propuestas nuevas
+        # (regresión de limpieza 2026-10-30, puerta-arte-propuesta
+        # v0.14.0 paso 2d): el zoom de counters sobre fondo oscuro
+        # con veredicto registrado. Sin él no hay entrega, aunque la
+        # puerta mecánica del arte dé PASS — la franja casi-blanca
+        # teñida no la mide ningún gate.
+        if (entrada.get("fecha_propuesta") or "") >= "2026-10-31" \
+                and entrada.get("revision_franja") not in (
+                        "limpia", "corregida", "diseno"):
+            print(f"ERROR: {slug} es una propuesta nueva "
+                  f"({entrada.get('fecha_propuesta')}) y no registra "
+                  f"`revision_franja` válida ('limpia'|'corregida'|"
+                  f"'diseno'): {entrada.get('revision_franja')!r}. "
+                  "Sin el zoom de franja del paso 2d no hay entrega.",
+                  file=sys.stderr)
+            return 1
         arte_rel = entrada.get("arte", "")
         arte_path = repo / arte_rel
         if not arte_path.exists():

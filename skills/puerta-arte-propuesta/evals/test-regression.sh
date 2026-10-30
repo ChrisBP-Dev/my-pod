@@ -41,6 +41,19 @@ run "P3 composicion crudo completo" PASS None --archivo "$SKILL/evals/fixtures/c
 run "F7 composicion toca borde" FAIL composicion_toca_borde --archivo "$SKILL/evals/fixtures/crudo-toca-borde.png" --es-original
 run "P4 final fiel a su crudo" PASS None --archivo "$SKILL/evals/fixtures/final-fiel.png" --ancho-pulgadas 10.5 --original "$SKILL/evals/fixtures/crudo-completo.png"
 run "F8 final mutilado vs crudo" FAIL fidelidad_recorte_perdida --archivo "$SKILL/evals/fixtures/final-mutilado.png" --ancho-pulgadas 10.5 --original "$SKILL/evals/fixtures/crudo-completo.png"
+# Regresión 2026-10-30 (franja de limpieza, p087-p091): la salida de
+# la puerta exige SIEMPRE el zoom de franja sobre fondo oscuro (paso
+# 2d) y emite el resumen de zonas de adjudicación (paso 2c).
+out=$(python3 "$V" --archivo "$SKILL/evals/fixtures/arte-plano-bordado.png" --metodo bordado 2>/dev/null)
+if echo "$out" | python3 -c "
+import json, sys
+d = json.load(sys.stdin)
+assert 'FONDO OSCURO' in d['gate_humano_pendiente']
+za = d['mediciones']['zonas_adjudicacion']
+assert za['zoom_fondo_oscuro_siempre'] is True
+assert isinstance(za['duros'], int) and isinstance(za['sospechosos'], int)
+" 2>/dev/null; then ok=$((ok+1));
+else fail=$((fail+1)); echo "FALLA: REG-2026-10-30 gate_humano sin exigencia de zoom de franja o sin zonas_adjudicacion"; fi
 # F9: autotrim seguro conserva el extremo fino (barra 601x13 de baja
 # masa unida al bloque): con bbox seguro la salida mide 1409x809 y lo
 # declara; con el bbox por masa histórico saldría 1384 de ancho.
