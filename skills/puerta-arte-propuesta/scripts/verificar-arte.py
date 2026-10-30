@@ -132,6 +132,18 @@ Gate humano (lo que el código no cubre):
   - counters: los rellenos GRANDES acromáticos los caza el gate 13;
     quedan para el ojo los chicos, tenues o de tono cálido, y la
     adjudicación de cualquier mancha dudosa.
+  - FRANJA (2026-10-30, decisiones de mejora del dueño sobre
+    p087-p091): la franja casi-blanca TEÑIDA (media ~208-230,
+    spread ~20-40) que queda alrededor de counters y bordes en
+    letras sin contorno oscuro NO la mide ningún gate: no es
+    blanco puro (gate 8), su anillo tiene densidad ~0.1 (gate 13
+    exige >=0.25) y grosor <13 (cae, si acaso, en sospechosos).
+    Medido sobre 19 artes reales (2026-10-30): TODAS las métricas
+    de píxeles puntúan al bueno conocido p058 igual o peor que al
+    malo p091 — la clase es de adjudicación VISUAL, como el damero
+    de 2026-10-17. Por eso el gate_humano_pendiente exige SIEMPRE
+    el zoom de counters sobre fondo oscuro (paso 2d del SKILL):
+    un PASS sin ese zoom registrado NO es un arte verificado.
 
 Uso:
   verificar-arte.py --archivo crudo.png --es-original
@@ -595,6 +607,13 @@ def verificar(im, formato, a):
         "densidad_min": COUNTER_DENSIDAD_MIN,
         "radio_min_px": COUNTER_RADIO_MIN}
     violado = violado or (None if g13 else "counters_rellenos")
+    # Resumen de adjudicación (2026-10-30): las zonas que el paso
+    # 2c/2d del SKILL obliga a mirar con zoom y registrar veredicto
+    # ANTES de entregar. "Sospechosos no bloqueantes" NO cierra un
+    # arte: cada zona listada exige su veredicto en el registro.
+    med["zonas_adjudicacion"] = {
+        "duros": len(rellenos13), "sospechosos": len(sospechosos13),
+        "zoom_fondo_oscuro_siempre": True}
     # G11: contenido intacto — el bbox SEGURO del final no puede tocar
     # el borde del lienzo (flujo recorte-al-contenido + pad: tocar el
     # borde = algo fue rebanado). Calibración 2026-10-18: mutilados
@@ -739,7 +758,7 @@ def main():
     print(json.dumps({"veredicto": veredicto, "criterio_violado": violado,
                       "gates": gates, "mediciones": med,
                       "reparado": reparado, "autotrim_bbox": autotrim_bbox,
-                      "gate_humano_pendiente": "counters chicos/tenues o de tono calido (la puerta caza los rellenos grandes acromaticos); adjudicar cualquier relleno dudoso"},
+                      "gate_humano_pendiente": "SIEMPRE (cada arte, haya o no zonas): zoom de los counters de las letras y de los bordes sobre FONDO OSCURO + veredicto registrado (paso 2d del SKILL) — la franja casi-blanca tenida no la mide ningun gate; y adjudicar con zoom cada zona dura o sospechosa listada en zonas_adjudicacion (paso 2c)"},
                      ensure_ascii=False, indent=1))
     return 0 if veredicto == "PASS" else 1
 

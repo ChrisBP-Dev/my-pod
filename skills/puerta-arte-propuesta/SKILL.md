@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.13.1"
+  version: "0.14.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.12.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.14.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -24,6 +24,23 @@ después de 12 mockups.
 ## Procedimiento estándar (2026-10-15, endurecido 2026-10-18)
 
 1. **Generar** el PNG con el brief (fondo transparente, sin backdrop).
+1c. **Ruta de proceso del crudo opaco (OBLIGATORIA, 2026-10-30):**
+    si el crudo nace opaco sobre fondo blanco (el caso normal de
+    esta app), la ÚNICA vía de entrada es
+    `scripts/procesar-arte-propuesta.py` (flood-fill con tolerancia
+    desde las esquinas + borde suave + upscale FSRCNN), seguida de
+    los pasos 2–3 de abajo. Quedan PROHIBIDAS las cadenas
+    improvisadas (p. ej. «upscale premultiplicado → limpiar-fondo
+    global», o limpiezas manuales hueco a hueco como ruta): escalar
+    ANTES de quitar el fondo hornea la franja casi-blanca en
+    counters y bordes, y la llave estricta de blanco puro ya no la
+    alcanza después. Toda desviación de esta ruta se declara en la
+    `nota_puerta` del diseño con su causa; una nota que declare una
+    cadena distinta sin causa es defecto de la entrega. (Regresión
+    2026-10-28/29: los lotes p082–p101 se procesaron con cadenas
+    improvisadas y llegaron con la franja que el dueño cazó en
+    p087–p091; los lotes de la era buena — p058–p067 — pasaron
+    uniformes por `procesar-arte-propuesta.py`.)
 1b. **Composición sobre el CRUDO** SIEMPRE, antes de tocarlo:
     `scripts/verificar-arte.py --archivo CRUDO.png --es-original`.
     Si el contenido toca el borde del lienzo de generación
@@ -59,6 +76,31 @@ después de 12 mockups.
    COMPONENTES (ver Puertas mecánicas) y la limpieza crece solo
    dentro del contorno oscuro, sin tocar el diseño (verificable
    por diff: 0 cambios fuera de las zonas).
+   **Los SOSPECHOSOS se adjudican igual que los duros (2026-10-30):**
+   cada componente de `counters_sospechosos` recibe su zoom sobre
+   fondo oscuro y su veredicto registrado en el registro del diseño
+   (`adjudicacion_counters` cubre duros Y sospechosos, zona por
+   zona). La frase «sospechosos no bloqueantes» NO cierra un arte
+   ni aparece como conclusión en una nota de puerta: describe una
+   cola de adjudicación, no un resultado. Un arte con zonas sin
+   veredicto registrado no se entrega.
+2d. **Zoom de franja sobre fondo oscuro (SIEMPRE, cada arte,
+   2026-10-30):** componer el arte final sobre fondo NEGRO y mirar
+   con zoom (a) los counters de las letras del titular y (b) los
+   bordes del diseño, buscando la FRANJA: el anillo casi-blanco
+   teñido (media ~208–230, spread ~20–40) que queda pegado a un
+   counter o a un borde cuando la limpieza no lo alcanzó. Ningún
+   gate la mide (medido el 2026-10-30 sobre 19 artes: el bueno
+   conocido p058 puntúa igual o peor que el malo p091 en blanco
+   puro, blanco interior, componentes y franja fina — la clase es
+   visual, como el damero de 2026-10-17). El veredicto se registra
+   en la entrada del diseño: `revision_franja` = `limpia` |
+   `corregida` (qué se limpió y con qué) | `diseno` (qué se ve y
+   por qué es diseño). Sin `revision_franja` registrada, la
+   entrega está incompleta aunque la puerta mecánica dé PASS.
+   Si hay franja de fondo: se limpia por la ruta canónica (paso
+   1c + paso 2; si el residuo es un bolsillo encerrado, paso 2c
+   con `limpiar-counters.py`) y se REPITE el zoom hasta `limpia`.
 3. **Correr** `scripts/verificar-arte.py` (`--archivo`, `--ancho-pulgadas`,
    `--exigir-margen-zoom` en el flujo de propuestas) y, cuando exista
    el crudo, **`--original CRUDO.png`** para la fidelidad de recorte.
@@ -222,7 +264,12 @@ skill:
 - **Gate humano**: counters — los rellenos grandes acromáticos los caza
   el gate mecánico `sin_counters_rellenos` (2026-10-20); el ojo sigue
   revisando los agujeros de letras (a, e, o, P...) por rellenos chicos,
-  tenues o de tono cálido, y adjudica cualquier mancha dudosa.
+  tenues o de tono cálido, y adjudica cualquier mancha dudosa. Desde
+  v0.14.0 ese ojo es un paso numerado e ineludible (pasos 2c–2d):
+  duros y sospechosos con veredicto registrado zona por zona, y zoom
+  de franja sobre fondo oscuro en CADA arte con su `revision_franja`
+  en el registro. Un PASS mecánico sin esos registros no es un arte
+  verificado y no se entrega.
 
 ## Diseños personalizables — criterios (2026-10-20; razón primero, técnica después)
 
@@ -460,6 +507,45 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   artes no usa gris neutro (sus claros son crema cálido), remanente 0
   y diseño intacto. Candidato a gate automático cuando se calibre
   contra artes con gris de diseño legítimo (no bloquear por defecto).
+
+- (2026-10-30, decisiones de mejora del dueño sobre p087–p091:
+  «dentro del hueco de la R se nota mal quitado el fondo blanco»,
+  «fondo de algunas letras queda blanco») **Regresión de limpieza
+  de fondo con la puerta en PASS.** Causa medida, en tres patas:
+  (1) **Ruta:** los lotes recientes (p082–p101, 2026-10-28/29) se
+  procesaron con cadenas improvisadas («upscale premultiplicado →
+  limpiar-fondo global», limpiezas dirigidas hueco a hueco)
+  en vez de la vía canónica `procesar-arte-propuesta.py` de la
+  era buena (p058–p067, notas uniformes «PASS completo»); el
+  procedimiento numerado no nombraba esa vía como obligatoria
+  (vivía en una sección lateral) y la reescritura F1 de la
+  vitrina en vivo (v0.9.0) rehízo la entrega sin tocar el
+  proceso — la técnica no se borró de ningún archivo (limpiar-
+  fondo intacto desde 2026-10-15, gates de limpieza desde
+  2026-10-20, procesar desde 2026-10-17), se dejó de INVOCAR.
+  (2) **Adjudicación encogida:** el paso 2c se aplicó a los
+  componentes DUROS (veredictos registrados: diafragma de p098,
+  counters de p100), pero los SOSPECHOSOS de cada arte (2–11 por
+  arte) se cerraron en las notas como «no bloqueantes», sin zoom
+  ni veredicto — y ningún paso exigía el zoom de counters sobre
+  fondo oscuro por arte. (3) **La clase cambió de forma:** la
+  franja actual es teñida y fina (anillo media ~208/227/230 en
+  el counter de la R de p091, verificado en zoom contra el
+  counter limpio de p058): no es blanco puro (gate 8 no la ve),
+  su densidad de anillo es ~0.1 (gate 13 exige ≥0.25) y su
+  grosor <13 (sospechoso a lo sumo). Medición de descarte: sobre
+  19 artes reales, blanco puro / blanco interior / componentes
+  encerrados / franja fina puntúan al bueno p058 igual o peor
+  que a los malos — ninguna métrica de píxeles separa esta
+  clase en arte ilustrado (misma conclusión del barrido de
+  2026-10-20 para componentes). Corrección en v0.14.0: paso 1c
+  (ruta obligatoria), 2c extendido a sospechosos, 2d nuevo
+  (zoom de franja siempre, con `revision_franja` registrada) y
+  `zonas_adjudicacion` + `gate_humano_pendiente` endurecidos en
+  la salida de la puerta. Los artes ya entregados con la franja
+  (p082–p101 pendientes y los `mejorar` p087–p091) se corrigen
+  REGENERANDO/REPROCESANDO por la ruta canónica en su unidad de
+  recogida/regeneración — no se parchan en la vitrina.
 
 ## Entrega para aprobación del dueño (flujo v2, 2026-10-19; superficie ÚNICA: la vitrina, corrección del dueño 2026-10-22)
 
