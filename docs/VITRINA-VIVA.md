@@ -142,6 +142,22 @@ acotado **solo al repo de datos**. Por apertura:
    bandeja por derivación. El vacío es un estado terminal
    legítimo: bandeja en cero = «todo decidido y aplicado», y la
    vista muestra «Sin pendientes» — no falta ninguna siembra.
+
+   **Universo de la bandeja (endurecido 2026-10-30):** el universo
+   son **todos** los lotes estructurados del estado **más** las
+   entradas del registro marcadas como propuestas entregadas a la
+   vitrina — nunca solo el lote vigente o «actual». Incidente que
+   lo originó: la derivación tomaba solo el lote actual (p092–p101)
+   y los lotes anteriores entregados (p072–p091) desaparecían de la
+   superficie aunque seguían en el repo; la cola real llegó a 23
+   pendientes con solo 10 visibles. Corregido y verificado en vivo
+   el mismo día (bandeja completa: 30 diseños, 23 pendientes, 7
+   decisiones vigentes visibles).
+   **Puerta de conteo cruzado:** toda corrida automática que cuente
+   la cola de pendientes (p. ej. la corrida diaria de propuestas)
+   cruza su conteo contra los conteos de `getboard`; una diferencia
+   es un hallazgo que se reporta al dueño, nunca un dato que se
+   acepta en silencio.
 4. Sirve las previas desde su hogar en el repo
    (`propuestas/<slug>/previa-oscura.jpg` y `previa-clara.jpg`;
    en personalizables también `simulacion-oscura.jpg` y
