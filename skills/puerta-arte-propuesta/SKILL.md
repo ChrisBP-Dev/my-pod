@@ -5,7 +5,7 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.13.0"
+  version: "0.13.1"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
@@ -507,10 +507,25 @@ siembra; contratos en `docs/VITRINA-VIVA.md`):
    `data/tiendas/<tienda-id>/estado-propuestas.json`, y el
    ciclo escribir = commitear
    (`scripts/registros-datos.py commit`) sube al repo de datos,
-   en un solo commit, registro + estado + previas. Con ese
+   en un solo commit, registro + estado + previas. **Puerta de
+   forma (2026-10-28, incidente «vitrina en cero»):** ANTES de
+   commitear se corre
+   `python3 scripts/verificar-estado-entrega.py --shop <id>` —
+   comprueba que `lote_actual.entregados` nombre exactamente el
+   lote y que cada entregado traiga su bloque `vitrina`
+   completo; en FAIL la entrega NO cierra (la corrida que
+   entregó p072–p081 omitió `entregados` y la vitrina derivó
+   cero con el lote íntegro en el repo). Con ese
    commit el diseño **ya está en la vitrina**: la instancia
    (una por tienda, declarada en `vitrina` del `config.json`)
    lo deriva al abrir, sin siembra ni edición de la instancia.
+   **Verificación sobre la superficie viva:** tras el commit,
+   la entrega se verifica contra la bandeja que la instancia
+   deriva de verdad (su lectura/tab­lero), no solo contra el
+   repo; si esa lectura no está disponible para la corrida, la
+   verificación se declara PARCIAL en la entrega — nunca «OK»
+   (corrección del mismo incidente: verificar el dato no es
+   verificar la superficie).
    Si tras el commit la vitrina mostrara diseños que esta
    entrega no produjo — en particular diseños ya aplicados que
    reaparecieran como pendientes — sería un defecto de
