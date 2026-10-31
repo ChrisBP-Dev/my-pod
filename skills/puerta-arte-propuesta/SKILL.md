@@ -5,14 +5,14 @@ plantilla: false
 license: "Apache-2.0"
 compatibility: "framework >= 0.4.0"
 metadata:
-  version: "0.14.0"
+  version: "0.15.0"
   framework_version: "0.19.0"
   regression_suite: "evals/"
 ---
 
 # Puerta de Arte-Propuesta
 
-**Versión: v0.14.0** · Primera puerta del flujo POD: la propuesta se valida
+**Versión: v0.15.0** · Primera puerta del flujo POD: la propuesta se valida
 antes de generar ningún mockup. Un arte con fondo se rechaza aquí, no
 después de 12 mockups.
 
@@ -23,7 +23,27 @@ después de 12 mockups.
 
 ## Procedimiento estándar (2026-10-15, endurecido 2026-10-18)
 
-1. **Generar** el PNG con el brief (fondo transparente, sin backdrop).
+1. **Generar** el PNG con el brief COMPLETO (2026-10-30, corrección
+    generación-primero): el prompt de imagen lleva SIEMPRE, copiado
+    tal cual, el fragmento canónico de «Criterios de generación»
+    (abajo) y el brief declara los 6 criterios de nacimiento como
+    checklist del diseño (fondo, disciplina de color crema,
+    resolución al tamaño final, composición completa, texto, sin
+    halo ni franja). Un prompt sin el fragmento es defecto de la
+    corrida, no una variante de estilo. **Hecho de herramienta
+    declarado:** el generador de esta app entrega normalmente el
+    crudo OPACO sobre blanco — la transparencia real en origen
+    (criterio 1) NO se da por cumplida ni se compensa en silencio:
+    el nacimiento se mide y se registra en la entrada del diseño
+    (bloque `nacimiento`: {fondo_entregado:
+    transparente|opaco_blanco|otro, fragmento_prompt: true}) y el
+    crudo opaco entra por la ruta 1c. La desviación declarada es
+    válida; la silenciosa — procesar como si hubiera nacido
+    transparente o limpiar con cadenas improvisadas — es el
+    defecto que produjo la regresión de 2026-10-28/29. (Hasta
+    v0.14.0 este paso decía solo «con el brief» y el fragmento y
+    los criterios vivían en una sección lateral sin invocar: el
+    mismo modo de fallo que la ruta 1c.)
 1c. **Ruta de proceso del crudo opaco (OBLIGATORIA, 2026-10-30):**
     si el crudo nace opaco sobre fondo blanco (el caso normal de
     esta app), la ÚNICA vía de entrada es
@@ -49,7 +69,11 @@ después de 12 mockups.
     visualmente (un trazo que llega al borde ACABADO, p. ej. una línea
     EKG que cruza el diseño, es motivo, no truncamiento; lo decide el
     ojo, no la puerta — corrección del dueño 2026-10-18 tras el lote
-    de drafts mutilados p038-p057).
+    de drafts mutilados p038-p057). En el mismo acto se mide y se
+    registra el `nacimiento` del diseño (paso 1): el fondo que el
+    generador entregó de verdad (esquinas e interior del crudo:
+    transparente / opaco blanco / otro) — el criterio 1 de
+    generación se verifica AL NACER, no se presume.
 2. **Limpiar** SIEMPRE: `scripts/limpiar-fondo.py --archivo ARTE.png`
    (elimina blanco puro global — método canónico; no es opcional).
 2b. **Recortar** SIEMPRE: `scripts/verificar-arte.py --archivo ARTE.png
@@ -253,14 +277,20 @@ skill:
   4. **Composición completa**: el diseño entero visible, nada cortado en
      los bordes del PNG. Los diseños altos están permitidos.
   5. **Texto**: ortografía exacta, letras legibles, sin artefactos.
-  6. **Sin halo**: bordes del diseño limpios, sin resplandor blanco
-     alrededor de los elementos.
-  **Fragmento para el prompt de imagen** (copiar tal cual al generar):
+  6. **Sin halo ni franja**: bordes del diseño limpios, sin resplandor
+     blanco alrededor de los elementos ni anillo casi-blanco dentro
+     de counters. La franja de la regresión 2026-10-30 NACE aquí:
+     es el borde antialiased contra el blanco del crudo, que tras el
+     upscale ninguna limpieza alcanza del todo — se previene en el
+     prompt (bordes de corte limpio) y se caza en el paso 2d.
+  **Fragmento para el prompt de imagen** (copiar tal cual al generar;
+  obligatorio en TODO prompt desde v0.15.0 — ver paso 1):
   > "isolated on a fully transparent background, no backdrop, no paper,
-  > no vignette, no glow or halo around the design; light-colored areas
-  > in warm cream/off-white tones (never pure white); transparent inside
-  > letter counters and enclosed gaps; complete composition, nothing
-  > cropped at the edges"
+  > no vignette, no glow or halo around the design; sharp clean-cut
+  > edges, no white fringe inside letter counters or around elements;
+  > light-colored areas in warm cream/off-white tones (never pure
+  > white); transparent inside letter counters and enclosed gaps;
+  > complete composition, nothing cropped at the edges"
 - **Gate humano**: counters — los rellenos grandes acromáticos los caza
   el gate mecánico `sin_counters_rellenos` (2026-10-20); el ojo sigue
   revisando los agujeros de letras (a, e, o, P...) por rellenos chicos,
@@ -546,6 +576,30 @@ aquí") = **(c) no encaja por criterio**, aunque sea imprimible.
   (p082–p101 pendientes y los `mejorar` p087–p091) se corrigen
   REGENERANDO/REPROCESANDO por la ruta canónica en su unidad de
   recogida/regeneración — no se parchan en la vitrina.
+- (2026-10-30, ampliación del dueño: corrección generación-primero,
+  v0.15.0) **La pata de GENERACIÓN de la misma regresión.** La
+  auditoría de los criterios de nacimiento contra la evidencia
+  encontró que los criterios de generación (decididos el
+  2026-10-15) estaban completos en el papel pero DESCONECTADOS
+  del flujo: (1) el paso 1 numerado nunca invocó el fragmento de
+  prompt ni la checklist de nacimiento — vivían en la sección
+  lateral «Criterios de generación», el mismo modo de fallo que
+  la ruta de proceso antes de 1c; (2) el criterio 1 (transparencia
+  real en origen) nunca se midió al nacer: el generador entrega
+  opaco sobre blanco como caso normal y el sistema compensaba
+  aguas abajo sin declararlo, así que la franja nacía en cada
+  crudo y la limpieza cargaba con todo el peso; (3) la regla de
+  orden «resize antes de limpiar, con alfa premultiplicado»
+  vivía solo en la sección de personalizables, fuera del flujo
+  numerado general. Corrección: paso 1 con brief completo y
+  fragmento verbatim obligatorio (extendido anti-franja en el
+  criterio 6), medición y registro del `nacimiento` en 1b, y la
+  desviación «crudo opaco» declarada como hecho de herramienta
+  con su ruta (1c). **Cobertura honesta:** ningún criterio nuevo
+  — es cableado de los ya decididos; y la verificación mecánica
+  del nacimiento solo mide el fondo entregado: si un arte nace
+  con franja interna en counters, ninguna métrica la separa
+  (medido el 2026-10-30) — la caza el paso 2d, no la generación.
 
 ## Entrega para aprobación del dueño (flujo v2, 2026-10-19; superficie ÚNICA: la vitrina, corrección del dueño 2026-10-22)
 
